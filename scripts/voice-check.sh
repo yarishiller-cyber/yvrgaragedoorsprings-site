@@ -16,6 +16,7 @@ while IFS= read -r -d $'\0' f; do SCAN_TARGETS+=("$f"); done < <(
        -not -path "./.git/*" \
        -not -path "./scripts/*" \
        -not -path "./node_modules/*" \
+       -not -path "./docs/*" \
        -print0
 )
 
