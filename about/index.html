@@ -137,13 +137,24 @@
     <span class="eyebrow">Trust, in numbers</span>
     <h2>The boring proof.</h2>
     <ul class="tier-features mt-5" style="font-size:1.0625rem">
-      <li><strong>$5M general liability insurance</strong> — Certificate of insurance available on request.</li>
-      <li><strong>WorkSafeBC coverage</strong> on every technician. We don't subcontract.</li>
+      <li><strong>$5M general liability insurance</strong> — <a data-site-data="coiPdfUrl" data-site-data-hide-when-empty hidden>Download our Certificate of Insurance (PDF)</a><span data-coi-empty>Certificate of insurance available on request.</span></li>
+      <li><strong>WorkSafeBC coverage</strong> on every technician (Account <span data-site-data="wcbAccount">#__on file__</span>). We don't subcontract.</li>
+      <li><strong>BC business licence</strong> <span data-site-data="bcLicence">#__on file__</span>.</li>
       <li><strong>2-year labour warranty</strong> — if the work fails, we come back free.</li>
       <li><strong>5-year parts warranty</strong> on standard springs; 7-year on high-cycle.</li>
       <li><strong>Quoted price = paid price.</strong> No surcharges on-site for any reason. Ever.</li>
       <li><strong>Wrapped, marked vans</strong> with uniformed techs. You'll know who's at your door.</li>
     </ul>
+    <script>
+      // Hide the "available on request" line once the COI link is visible
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const link = document.querySelector('[data-site-data="coiPdfUrl"]');
+          const empty = document.querySelector('[data-coi-empty]');
+          if (link && !link.hasAttribute('hidden') && empty) empty.remove();
+        }, 50);
+      });
+    </script>
   </div>
 </section>
 

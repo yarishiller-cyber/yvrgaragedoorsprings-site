@@ -13,6 +13,20 @@
   const EMAIL         = 'info@yvrgaragedoorsprings.ca';
   const SMS_BODY      = 'Hi - my garage door spring broke. Can I send a photo?';
 
+  /* ---- Site data (verify and swap when real values exist) ----
+     null = not yet on file, JS hides the credential line.
+     Set the string to publish. Footer and About page both read from this. */
+  const SITE_DATA = {
+    wcbAccount: null,            // e.g. 'WS1234567'
+    bcLicence: null,             // e.g. 'BC123456789'
+    coiPdfUrl: null,             // e.g. '/assets/docs/coi-2026.pdf'
+    insuranceCarrier: null,      // e.g. 'Intact Insurance'
+    insuranceAmount: '$5M',      // already public
+    foundedYear: null,           // e.g. '2018'
+    googlePlaceId: null,         // for future reviews pull via Places API
+    jobsThisMonth: null          // manual update on 1st of month, e.g. '142'
+  };
+
   /* ---- Cities (display + slug + local-tech ETA when present) ----
      LOCAL_ETA = "your local tech, ~X min" for residents of that city.
      If TECH_STATUS[city].hiring === true, we don't have a local tech yet —
@@ -587,12 +601,67 @@
     });
   }
 
+  /* ---- 10b. Enhance footer with site-data credentials ----
+     Replaces the simple footer-meta line with a richer credentials line
+     that includes WCB, licence, and COI link when set. Until SITE_DATA
+     is populated, the footer reads the same as before. */
+  function enhanceFooter() {
+    const metas = qsa('.footer-meta');
+    if (!metas.length) return;
+    metas.forEach(meta => {
+      // Only enhance if at least one credential is set
+      const hasAny = SITE_DATA.wcbAccount || SITE_DATA.bcLicence || SITE_DATA.coiPdfUrl;
+      if (!hasAny) return;
+
+      const year = '<span data-year>' + new Date().getFullYear() + '</span>';
+      const parts = [
+        '© ' + year + ' YVR Garage Door Springs',
+        SITE_DATA.insuranceAmount + ' general liability' +
+          (SITE_DATA.insuranceCarrier ? ' (' + SITE_DATA.insuranceCarrier + ')' : ''),
+        SITE_DATA.coiPdfUrl
+          ? '<a href="' + SITE_DATA.coiPdfUrl + '" target="_blank" rel="noopener">COI PDF</a>'
+          : null,
+        SITE_DATA.wcbAccount ? 'WorkSafeBC #' + SITE_DATA.wcbAccount : 'WorkSafeBC',
+        SITE_DATA.bcLicence ? 'BC Lic #' + SITE_DATA.bcLicence : null,
+        '<a href="/privacy/">Privacy</a>'
+      ].filter(Boolean);
+
+      meta.innerHTML = parts.join(' · ');
+    });
+  }
+
+  /* ---- Site-data spans (data-site-data attribute) ---- */
+  function applySiteData() {
+    qsa('[data-site-data]').forEach(el => {
+      const key = el.getAttribute('data-site-data');
+      const val = SITE_DATA[key];
+      if (val) {
+        if (el.tagName === 'A') {
+          el.setAttribute('href', val);
+          if (!el.textContent.trim()) el.textContent = 'View document';
+          el.removeAttribute('hidden');
+        } else {
+          el.textContent = String(val);
+          el.removeAttribute('hidden');
+        }
+      } else {
+        // Keep static placeholder text visible (don't hide)
+        // unless the element opts in via data-site-data-hide-when-empty
+        if (el.hasAttribute('data-site-data-hide-when-empty')) {
+          el.setAttribute('hidden', '');
+        }
+      }
+    });
+  }
+
   /* ---- 11. Cold-snap banner (stub) ---- */
   function coldSnap() { /* See Section 2.1.4 — production reads /weather.json from cron */ }
 
   /* ---- Init ---- */
   function init() {
     wireContacts();
+    applySiteData();
+    enhanceFooter();
     wireCityPicker();
     applyDTR();          // URL param wins
     // If no URL param, try stored preference next
