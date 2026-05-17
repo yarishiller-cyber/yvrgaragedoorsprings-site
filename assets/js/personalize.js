@@ -710,8 +710,30 @@
     });
   }
 
-  /* ---- 11. Cold-snap banner (stub) ---- */
-  function coldSnap() { /* See Section 2.1.4 — production reads /weather.json from cron */ }
+  /* ---- 11. Cold-snap banner ----
+     Fetches /weather.php (which manages /weather.json + ECCC refresh on
+     a 2-hour cadence). Toggles the .cold-snap banner element if cold=true.
+     Banner copy comes from PHP so it includes the actual forecast low. */
+  function coldSnap() {
+    const banner = qs('.cold-snap');
+    if (!banner) return;
+    fetch('/weather.php', { cache: 'no-cache' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data || !data.cold) {
+          banner.classList.remove('active');
+          return;
+        }
+        const msg = data.message ||
+          'Cold snap on the South Coast. Springs break at 0°C. We\'re booking fast.';
+        banner.innerHTML = msg + ' <a data-tel style="color:inherit;text-decoration:underline;font-weight:700">Call now</a>';
+        banner.classList.add('active');
+        wireContacts(banner);
+      })
+      .catch(() => {
+        // Silent fail — banner stays hidden
+      });
+  }
 
   /* ---- Init ---- */
   function init() {

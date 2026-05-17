@@ -1,0 +1,13 @@
+{
+    "cold": false,
+    "current_c": null,
+    "forecast_low_c": null,
+    "yesterday_high_c": null,
+    "message": null,
+    "reason": null,
+    "station": "YVR (Vancouver Intl)",
+    "source": "Environment Canada citypage XML",
+    "updated": "2026-05-17T00:00:00+00:00",
+    "ttl_seconds": 7200,
+    "note": "Initial seed. /weather.php will refresh this on first hit (or via cron)."
+}
