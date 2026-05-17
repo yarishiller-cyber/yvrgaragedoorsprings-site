@@ -259,6 +259,7 @@
 
     if (intent) {
       document.body.setAttribute('data-intent', intent.replace(/[^a-z]/g, ''));
+      swapHeroImage();
     }
 
     const slug = citySlug(cityParam);
@@ -496,23 +497,28 @@
   }
   function applyAvailability() {
     const banner = qs('[data-availability]');
-    if (!banner) return;
     const now = new Date();
     const h = now.getHours();
     const isHoliday = isHolidayToday();
     const isOpen = !isHoliday && h >= 7 && h < 21;
 
-    if (isOpen) {
-      banner.classList.remove('closed');
-      banner.innerHTML = '<span class="dot"></span><span><strong>Open now.</strong> Live dispatch until 9 p.m. tonight. Average call back: under 90 seconds.</span>';
-    } else if (isHoliday) {
-      banner.classList.add('closed');
-      banner.innerHTML = '<span class="dot"></span><span><strong>Stat holiday.</strong> Text a photo for fastest response — on-call tech replies every 2 hours.</span>';
-    } else {
-      banner.classList.add('closed');
-      const nextOpen = h < 7 ? 'in the morning at 7 a.m.' : 'tomorrow at 7 a.m.';
-      banner.innerHTML = '<span class="dot"></span><span><strong>After hours.</strong> Voicemail now — text a photo and we\'ll reply ' + nextOpen + '</span>';
+    document.body.classList.toggle('state-after-hours', !isOpen && !isHoliday);
+    document.body.classList.toggle('state-holiday', isHoliday);
+
+    if (banner) {
+      if (isOpen) {
+        banner.classList.remove('closed');
+        banner.innerHTML = '<span class="dot"></span><span><strong>Open now.</strong> Live dispatch until 9 p.m. tonight. Average call back: under 90 seconds.</span>';
+      } else if (isHoliday) {
+        banner.classList.add('closed');
+        banner.innerHTML = '<span class="dot"></span><span><strong>Stat holiday.</strong> Text a photo for fastest response — on-call tech replies every 2 hours.</span>';
+      } else {
+        banner.classList.add('closed');
+        const nextOpen = h < 7 ? 'in the morning at 7 a.m.' : 'tomorrow at 7 a.m.';
+        banner.innerHTML = '<span class="dot"></span><span><strong>After hours.</strong> Voicemail now — text a photo and we\'ll reply ' + nextOpen + '</span>';
+      }
     }
+    swapHeroImage();
   }
 
   /* ---- 8. Sticky bottom call bar ---- */
@@ -710,6 +716,44 @@
     });
   }
 
+  /* ---- 10c. Image state-class manager + hero variant swap ----
+     Body classes:
+       - state-cold        when /weather.php reports cold:true
+       - state-after-hours when applyAvailability finds we're closed
+       - state-holiday     when applyAvailability finds it's a BC stat day
+     Hero image swaps based on these + the data-intent attribute. */
+  const HERO_VARIANTS = {
+    'default':    { webp: '/assets/img/hero/hero-emergency.webp',       jpg: '/assets/img/hero/hero-emergency.jpg',       alt: 'Broken garage door torsion spring close-up with visible coil gap' },
+    'cold':       { webp: '/assets/img/hero/hero-emergency-cold.webp',  jpg: '/assets/img/hero/hero-emergency-cold.jpg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
+    'night':      { webp: '/assets/img/hero/hero-emergency-night.webp', jpg: '/assets/img/hero/hero-emergency-night.jpg', alt: 'Garage door torsion spring under warm overhead garage light' },
+    'price':      { webp: '/assets/img/hero/hero-pricing.webp',         jpg: '/assets/img/hero/hero-pricing.jpg',         alt: 'Three garage door spring tiers shown as price cards on a workbench' },
+    'diagnostic': { webp: '/assets/img/hero/hero-diagnostic.webp',      jpg: '/assets/img/hero/hero-diagnostic.jpg',      alt: 'A garage door spring diagnostic checklist on a clipboard' }
+  };
+
+  function pickHeroVariant() {
+    const intent = document.body.getAttribute('data-intent');
+    if (intent === 'price') return 'price';
+    if (intent === 'diagnostic') return 'diagnostic';
+    if (document.body.classList.contains('state-cold')) return 'cold';
+    if (document.body.classList.contains('state-after-hours')) return 'night';
+    return 'default';
+  }
+
+  function swapHeroImage() {
+    const fig = qs('[data-hero-image]');
+    if (!fig) return;
+    const img = qs('img', fig);
+    const source = qs('source', fig);
+    if (!img || !source) return;
+    const v = HERO_VARIANTS[pickHeroVariant()];
+    if (!v) return;
+    if (source.getAttribute('srcset') !== v.webp) {
+      source.setAttribute('srcset', v.webp);
+      img.setAttribute('src', v.jpg);
+      img.setAttribute('alt', v.alt);
+    }
+  }
+
   /* ---- 11. Cold-snap banner ----
      Fetches /weather.php (which manages /weather.json + ECCC refresh on
      a 2-hour cadence). Toggles the .cold-snap banner element if cold=true.
@@ -722,13 +766,17 @@
       .then(data => {
         if (!data || !data.cold) {
           banner.classList.remove('active');
+          document.body.classList.remove('state-cold');
+          swapHeroImage();
           return;
         }
         const msg = data.message ||
           'Cold snap on the South Coast. Springs break at 0°C. We\'re booking fast.';
         banner.innerHTML = msg + ' <a data-tel style="color:inherit;text-decoration:underline;font-weight:700">Call now</a>';
         banner.classList.add('active');
+        document.body.classList.add('state-cold');
         wireContacts(banner);
+        swapHeroImage();
       })
       .catch(() => {
         // Silent fail — banner stays hidden

@@ -177,6 +177,58 @@ button { font: inherit; cursor: pointer; }
   border-radius: 50%; background: var(--green);
 }
 
+/* ---------- Hero image (desktop only) ---------- */
+.hero-figure {
+  margin: 0;
+  display: none;
+  border-radius: var(--r-3);
+  overflow: hidden;
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-2);
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+.hero-figure picture, .hero-figure img {
+  display: block; width: 100%; height: 100%;
+}
+.hero-figure img { object-fit: cover; }
+.hero-figure-empty { display: none !important; }
+
+/* State-driven subtle overlays on the hero figure */
+body.state-cold .hero-figure::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(120, 180, 220, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+body.state-after-hours .hero-figure::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15, 26, 31, 0.25) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@media (min-width: 960px) {
+  .hero-figure {
+    display: block;
+    margin-bottom: var(--s-4);
+  }
+}
+
+/* ---------- Tier card images ---------- */
+.tier-image {
+  margin: calc(var(--s-5) * -1) calc(var(--s-5) * -1) 0;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-warm);
+  border-radius: var(--r-3) var(--r-3) 0 0;
+  overflow: hidden;
+  position: relative;
+}
+.tier-image picture, .tier-image img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+.tier-image-empty { display: none; }
+
 /* ---------- Live availability strip ---------- */
 .availability {
   display: flex; align-items: center; gap: var(--s-3);

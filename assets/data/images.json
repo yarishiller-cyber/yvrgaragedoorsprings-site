@@ -1,0 +1,230 @@
+{
+  "manifest_version": 1,
+  "updated": "2026-05-17",
+  "notes": "Single source of truth for every image used on the site. Each image lists its filename, where it's rendered, intended alt text, dimensions in pixels (for the 1x version), an art-direction prompt for the photographer/illustrator, and any conditional variants. Variants are swapped at runtime by personalize.js based on body state classes.",
+
+  "formats": {
+    "primary": "WebP (quality 82 above the fold, 72 below)",
+    "fallback": "JPEG (same quality settings)",
+    "responsive_widths": [480, 960, 1600],
+    "explicit_dims_required": true,
+    "loading": "lazy below fold, eager + fetchpriority=high on hero"
+  },
+
+  "hero": {
+    "hero-emergency.webp": {
+      "use": "Homepage default hero, right side of hero on desktop",
+      "alt": "Broken garage door torsion spring close-up with visible coil gap, red arrow pointing to the failure",
+      "dimensions": [1600, 1200],
+      "prompt": "Close-up of a broken oil-tempered black torsion spring mounted on a steel shaft above a residential garage door. Clear 1-2 inch gap visible in the coil. Soft natural light from a window. No people. Realistic, slightly worn, not staged.",
+      "variants": {
+        "hero-emergency-cold.webp": {
+          "trigger": "body.state-cold",
+          "prompt": "Same spring shot, but with visible frost on the coil and a frosty cool tone (white-balance 5200K). Hint of breath fog in the air."
+        },
+        "hero-emergency-night.webp": {
+          "trigger": "body.state-after-hours",
+          "prompt": "Same spring shot, with garage interior lit by a single warm overhead bulb. Mood: nighttime call, low key lighting."
+        }
+      }
+    },
+    "hero-pricing.webp": {
+      "use": "Homepage hero when ?intent=price",
+      "alt": "Three garage door spring tiers shown as price cards on a workbench, hand-lettered tags",
+      "dimensions": [1600, 1200],
+      "prompt": "Workbench overhead shot. Three coiled torsion springs of different sizes laid out left-to-right with small hand-lettered price tags reading $784, $832 (★ 95% pick this), $1,193. Natural diffuse light. No people."
+    },
+    "hero-diagnostic.webp": {
+      "use": "Homepage hero when ?intent=diagnostic",
+      "alt": "A garage door spring diagnostic checklist on a clipboard with three checkbox items",
+      "dimensions": [1600, 1200],
+      "prompt": "Top-down shot of a clipboard on a steel workbench. Visible checklist with three items: 'Loud bang?', 'Gap in coil?', 'Opener strains?' with empty checkboxes. Wrapped van keys beside it. Natural light. No people."
+    }
+  },
+
+  "tiers": {
+    "tier-one-spring.webp": {
+      "use": "Pricing tier card — One Spring",
+      "alt": "A single torsion spring on a shaft, slight wear visible",
+      "dimensions": [800, 600],
+      "prompt": "Single oil-tempered torsion spring on its shaft, mounted in place above a residential door. Clean catalog-style product shot but warmer, less sterile. Soft light."
+    },
+    "tier-two-springs.webp": {
+      "use": "Pricing tier card — Two Springs (featured)",
+      "alt": "Two matching torsion springs on a single shaft, freshly installed",
+      "dimensions": [800, 600],
+      "prompt": "Two matching new oil-tempered torsion springs on the same shaft above a residential door, properly tensioned. The pair looks balanced, professional. Better lighting than the One Spring shot."
+    },
+    "tier-high-cycle.webp": {
+      "use": "Pricing tier card — High-Cycle",
+      "alt": "A pair of larger, heavier-gauge high-cycle springs with sealed bearings on the shaft",
+      "dimensions": [800, 600],
+      "prompt": "Two thicker-wire 25,000-cycle torsion springs on a residential shaft, with visible sealed-bearing end bearings. Slightly more dramatic lighting. Premium product feel without being sterile."
+    }
+  },
+
+  "diag": {
+    "diag-bang.svg": {
+      "use": "Diagnosis quiz step 1 illustration",
+      "alt": "Lightning-bolt-style icon representing a loud bang sound",
+      "format": "SVG, single-colour, no fill"
+    },
+    "diag-coil-gap.svg": {
+      "use": "Diagnosis quiz step 2 illustration",
+      "alt": "Spring coil cross-section with a clear gap in the middle",
+      "format": "SVG"
+    },
+    "diag-opener-strain.svg": {
+      "use": "Diagnosis quiz step 3 illustration",
+      "alt": "Garage door opener motor with strain lines around it",
+      "format": "SVG"
+    }
+  },
+
+  "trust": {
+    "badge-wcb.svg": {
+      "use": "Trust strip badge",
+      "alt": "WorkSafeBC coverage badge",
+      "format": "SVG"
+    },
+    "badge-insurance.svg": {
+      "use": "Trust strip badge",
+      "alt": "$5M general liability insurance badge",
+      "format": "SVG"
+    },
+    "badge-warranty.svg": {
+      "use": "Trust strip badge",
+      "alt": "Warranty: 2 years labour, 5 years parts (7 years high-cycle)",
+      "format": "SVG"
+    }
+  },
+
+  "byline": {
+    "byline-dale.webp": {
+      "use": "Dale McRae blog post bylines (replaces 'D' avatar)",
+      "alt": "Dale McRae's beat-up navy Toyota Tacoma parked at a Vancouver residential driveway",
+      "dimensions": [128, 128],
+      "prompt": "Square crop of a beat-up navy Toyota Tacoma with a faded YVR Garage Door Springs decal on the tailgate. Rear bumper held on by a single zip-tie. Parked at the edge of an East Vancouver driveway, late afternoon. No driver visible. Hand-written sticky-note on the dashboard reads 'DO IT NOW'."
+    },
+    "byline-madison.webp": {
+      "use": "Madison Lim blog post bylines (replaces 'M' avatar)",
+      "alt": "Madison Lim's wrapped Ford Transit Connect with Steveston harbour in the background",
+      "dimensions": [128, 128],
+      "prompt": "Square crop of a wrapped white Ford Transit Connect with YVR Garage Door Springs decal. Steveston harbour visible behind it (water + cannery silhouette). Golden hour. No driver visible. Clipboard with handwritten dispatch notes on the dashboard."
+    }
+  },
+
+  "blog": {
+    "heard-a-loud-bang.webp": {
+      "use": "Hero image for /blog/heard-a-loud-bang/",
+      "alt": "Sound-wave visualization of a spring snap at 80 milliseconds",
+      "dimensions": [1600, 900],
+      "prompt": "Editorial illustration: a single bold horizontal sound-wave spike against a calm flatline, suggesting a sudden bang. Minimal, navy and signal-orange palette."
+    },
+    "torsion-vs-extension.webp": {
+      "use": "Hero image for /blog/torsion-vs-extension/",
+      "alt": "Side-by-side technical drawing of a torsion spring above a door and an extension spring along a track",
+      "dimensions": [1600, 900],
+      "prompt": "Clean technical illustration in the style of an exploded-view diagram. Left: torsion spring above a garage door with arrow indicating twisting motion. Right: extension spring along a track with arrow indicating stretching. Labels. Cream background."
+    },
+    "how-long-springs-last.webp": {
+      "use": "Hero image for /blog/how-long-springs-last/",
+      "alt": "A garage door spring with growth rings like a tree, showing cycle age",
+      "dimensions": [1600, 900],
+      "prompt": "Conceptual illustration: cross-section of a torsion spring coil overlaid with concentric rings (like a tree trunk), each ring labelled with a year and cycle count. Editorial style."
+    },
+    "wayne-dalton-torquemaster.webp": {
+      "use": "Hero image for /blog/wayne-dalton-torquemaster/",
+      "alt": "Sealed Wayne Dalton TorqueMaster tube next to a converted standard torsion spring setup",
+      "dimensions": [1600, 900],
+      "prompt": "Photographic comparison: left side shows a sealed Wayne Dalton TorqueMaster steel tube above a residential garage door. Right side shows the same door with a standard exposed torsion spring on a shaft (the conversion result). Caption-able split."
+    },
+    "cold-weather-springs.webp": {
+      "use": "Hero image for /blog/cold-weather-springs/",
+      "alt": "Frost on a garage door torsion spring on a sub-zero Vancouver morning",
+      "dimensions": [1600, 900],
+      "prompt": "Macro photograph: ice crystals on the surface of a black oil-tempered torsion spring. Steam visible in the cold morning air. Cool 5200K white balance. Soft natural light from a garage window."
+    },
+    "coastal-spring-corrosion.webp": {
+      "use": "Hero image for /blog/coastal-spring-corrosion/",
+      "alt": "Salt-corroded garage door cable with visible fraying and rust pitting",
+      "dimensions": [1600, 900],
+      "prompt": "Macro photograph of a frayed and rusted garage door cable, with visible salt deposit at the strands. Background out of focus: Tsawwassen Boundary Bay shore. Warm late-afternoon light."
+    },
+    "opener-or-spring.webp": {
+      "use": "Hero image for /blog/opener-or-spring/",
+      "alt": "A hand pulling the red emergency-release cord on a garage door opener",
+      "dimensions": [1600, 900],
+      "prompt": "Close-up of a hand reaching up to pull the red emergency-release cord that hangs from a garage door opener carriage. Cord clearly red, photographed from below. Warm garage lighting."
+    },
+    "diy-garage-door-maintenance.webp": {
+      "use": "Hero image for /blog/diy-garage-door-maintenance/",
+      "alt": "White lithium grease cartridge, photo-eye sensor wipe cloth, and a 2x4 laid out as a DIY maintenance kit",
+      "dimensions": [1600, 900],
+      "prompt": "Top-down flat-lay of homeowner-friendly garage door maintenance items: a tube of white lithium grease, a soft microfibre cloth, a short piece of 2x4 lumber. Clean workbench surface. Natural light."
+    },
+    "three-generations-steveston-harbour.webp": {
+      "use": "Hero image for /blog/three-generations-lulu-island/",
+      "alt": "Steveston harbour at low tide, weathered cannery buildings and the wooden dock at golden hour",
+      "dimensions": [1600, 900],
+      "prompt": "Wide landscape shot of Steveston Village waterfront at golden hour. Wooden fishing dock, historic cannery building in the background, water in the foreground. No people in frame. Evokes generational continuity."
+    },
+    "openers-comparison.webp": {
+      "use": "Hero image for /blog/openers-we-recommend/",
+      "alt": "Three garage door opener motors mounted to ceiling brackets, side by side for visual comparison",
+      "dimensions": [1600, 900],
+      "prompt": "Three garage door opener units (chain drive, belt drive, wall-mount jackshaft) photographed side-by-side mounted on a workshop wall for comparison. Clear daylight. Editorial product comparison style."
+    },
+    "specialization-toolkit.webp": {
+      "use": "Hero image for /blog/why-we-dont-sell-doors/",
+      "alt": "A focused tool layout on a workbench — winding bars, vise grips, drum wrench — only the tools needed for spring work",
+      "dimensions": [1600, 900],
+      "prompt": "Top-down workbench shot showing only the eight tools needed for residential spring replacement: winding bars (pair), vise grips, drum wrench, socket set, cordless drill, level, gloves. Clean layout suggesting focused specialization. Natural light."
+    }
+  },
+
+  "about": {
+    "about-shop-workbench.webp": {
+      "use": "About page hero",
+      "alt": "Small trade-shop interior workbench with torsion spring inventory racked behind",
+      "dimensions": [1600, 1000],
+      "prompt": "Interior of a small trade shop. Workbench in foreground with tools laid out. Wall behind shows neatly organized torsion spring inventory on racks (various sizes labelled). Morning light from a high window. No people."
+    },
+    "about-truck-rear.webp": {
+      "use": "About page secondary image",
+      "alt": "Rear of a wrapped service van with doors open showing organized parts trays",
+      "dimensions": [1600, 1000],
+      "prompt": "Rear of a wrapped white service van with both back doors open. Inside: organized parts trays with springs, cables, drums, brackets sorted by size. Decal on door reads 'YVR Garage Door Springs'. Daylight, no people."
+    }
+  },
+
+  "contact": {
+    "contact-service-area-map.webp": {
+      "use": "Contact page service-area visualization",
+      "alt": "Stylized map of Greater Vancouver showing 16 served cities marked with navy pins",
+      "dimensions": [1600, 1200],
+      "prompt": "Clean stylized cartographic map of Greater Vancouver. 16 cities marked with small navy pins. Strait of Georgia and Burrard Inlet in soft blue. North Shore mountains in muted green. Tsawwassen pin marked with a small dashed amber outline (hiring). No Google Maps watermark, no street labels, abstract style.",
+      "alternative": "Could be an inline SVG to avoid loading a large image."
+    }
+  },
+
+  "page-404": {
+    "404-stuck-door.webp": {
+      "use": "404 page hero",
+      "alt": "Garage door stuck half-open, slightly askew",
+      "dimensions": [1600, 1000],
+      "prompt": "Photograph of a garage door stuck mid-open, sitting slightly crooked. Daylight visible underneath. No people. Metaphor for 'this didn't work' without text overlay."
+    }
+  },
+
+  "social": {
+    "og-card.webp": {
+      "use": "Open Graph card (shared on social/messaging)",
+      "alt": "YVR Garage Door Springs — Greater Vancouver spring repair, same day",
+      "dimensions": [1200, 630],
+      "prompt": "Landscape graphic card. Dominant navy background. Centered headline 'Garage door spring broke?' in bold white. Subline 'Your local Greater Vancouver tech, ~12 min away.' Signal-orange phone-icon glyph. Clean, no photo needed."
+    },
+    "favicon.ico": { "use": "Favicon", "alt": "Site icon", "format": "32x32 ICO" },
+    "apple-touch-icon.png": { "use": "Apple touch icon", "alt": "Site icon", "format": "180x180 PNG" }
+  }
+}
