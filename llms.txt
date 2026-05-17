@@ -32,6 +32,8 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 
 ### Conversion hub
 - [Home](https://yvrgaragedoorsprings.ca/): single-page conversion hub with pricing, diagnosis quiz, FAQ, and city links.
+- [About](https://yvrgaragedoorsprings.ca/about/): the company model (local techs, one service), Dale McRae (East/Burnaby/North/Surrey/Coquitlam) and Madison Lim (Richmond/Delta/Tsawwassen/White Rock/Steveston) bios.
+- [Contact](https://yvrgaragedoorsprings.ca/contact/): phone, email, SMS, hours, dispatch HQ, service area tiles.
 
 ### City landing pages
 - [Vancouver](https://yvrgaragedoorsprings.ca/cities/vancouver/): Kits to Renfrew, heritage carriage doors, laneway homes.
@@ -58,6 +60,7 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [How long do garage door springs really last in Vancouver?](https://yvrgaragedoorsprings.ca/blog/how-long-springs-last/): lifespan math, 5–10 yrs standard, 12–18 yrs high-cycle.
 - [Wayne Dalton TorqueMaster — yes, we fix these.](https://yvrgaragedoorsprings.ca/blog/wayne-dalton-torquemaster/): conversion guide for TorqueMaster and TorqueMaster Plus sealed-tube systems.
 - [Why cold snaps break springs — even mild Vancouver ones.](https://yvrgaragedoorsprings.ca/blog/cold-weather-springs/): ductile-to-brittle metallurgy, call-volume doubles after 0°C dips.
+- [Why coastal garage door springs fail early.](https://yvrgaragedoorsprings.ca/blog/coastal-spring-corrosion/): salt-air corrosion in Tsawwassen / Richmond / White Rock / Steveston; oil-tempered + stainless cable spec. Madison Lim byline.
 
 ## Trust
 
