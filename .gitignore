@@ -1,0 +1,33 @@
+# OS junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Backup / temp files
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.swp
+*.swo
+*~
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Env / local config
+.env
+.env.local
