@@ -277,6 +277,7 @@
     swap('[data-dtr="city"]', city.display);
     swap('[data-dtr="eta"]', String(city.localEta));
     renderCityGrid(slug);
+    renderCrossCityHint(slug);
     // Sync the picker UI if not already set
     const select = qs('#city-picker-select');
     if (select && select.value !== slug) select.value = slug;
@@ -360,6 +361,48 @@
         container.appendChild(a);
       });
     });
+  }
+
+  /* ---- 4b. Cross-city navigation hint ----
+     If user's origin (data-user-city) differs from the page they're on
+     (data-city, set in HTML on city pages), surface a small banner offering
+     to jump to their own city page. Dismissible per-session. */
+  function renderCrossCityHint(originSlug) {
+    if (!originSlug) return;
+    const pageCity = document.body.getAttribute('data-city');
+    if (!pageCity || !CITIES[pageCity]) return; // not a city page
+    if (pageCity === originSlug) return;        // already on user's city
+    if (sessionStorage.getItem('hint-dismissed-' + originSlug) === '1') return;
+
+    const main = qs('#main');
+    if (!main) return;
+
+    // Remove any prior banner
+    const prior = qs('.cross-city-hint');
+    if (prior) prior.remove();
+
+    const origin = CITIES[originSlug];
+    const page = CITIES[pageCity];
+    const banner = document.createElement('aside');
+    banner.className = 'cross-city-hint';
+    banner.setAttribute('role', 'note');
+    banner.innerHTML =
+      '<div class="wrap" style="display:flex;gap:var(--s-3);align-items:center;justify-content:space-between;flex-wrap:wrap">' +
+        '<div>' +
+          '<strong>Looking for ' + origin.display + '?</strong> You\'re reading the ' + page.display + ' page. ' +
+          '<a href="/cities/' + originSlug + '/">Open ' + origin.display + ' page →</a>' +
+        '</div>' +
+        '<button type="button" class="cross-city-hint-dismiss" aria-label="Dismiss">×</button>' +
+      '</div>';
+    main.insertBefore(banner, main.firstChild);
+
+    const dismissBtn = qs('.cross-city-hint-dismiss', banner);
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', () => {
+        try { sessionStorage.setItem('hint-dismissed-' + originSlug, '1'); } catch (e) {}
+        banner.remove();
+      });
+    }
   }
 
   /* ---- 5. Wire the city picker (dropdown + postal code input) ---- */

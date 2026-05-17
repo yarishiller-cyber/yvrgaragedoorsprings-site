@@ -649,6 +649,28 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
   .related-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ---------- Cross-city hint banner ---------- */
+.cross-city-hint {
+  background: var(--steel);
+  color: var(--paper);
+  padding: var(--s-3) 0;
+  font-size: var(--t-small);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.cross-city-hint a {
+  color: var(--paper);
+  font-weight: 700;
+  text-decoration: underline;
+}
+.cross-city-hint a:hover { color: var(--signal); }
+.cross-city-hint-dismiss {
+  background: none; border: 1px solid rgba(255,255,255,0.3);
+  color: var(--paper); width: 32px; height: 32px;
+  border-radius: 50%; font-size: 18px; line-height: 1;
+  cursor: pointer; flex: 0 0 auto;
+}
+.cross-city-hint-dismiss:hover { background: rgba(255,255,255,0.1); }
+
 /* ---------- Print ---------- */
 @media print {
   .sticky-cta, .site-header { display: none; }
