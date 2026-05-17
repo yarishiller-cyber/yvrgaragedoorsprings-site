@@ -601,6 +601,62 @@
     });
   }
 
+  /* ---- 10a. Reviews loader ----
+     Fetch /assets/data/reviews.json and render the 3 best for this visitor.
+     If user has an origin city, prefer reviews from that city. Otherwise
+     show the most recent. Falls back to static HTML if fetch fails. */
+  function loadReviews() {
+    const container = qs('[data-reviews]');
+    if (!container) return;
+
+    fetch('/assets/data/reviews.json', { cache: 'no-cache' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data || !data.reviews || !data.reviews.length) return;
+        const all = data.reviews.slice();
+        let chosen;
+        if (_originCity) {
+          // Prefer reviews from the user's city, then nearby cities
+          const localFirst = all.filter(r => r.city === _originCity);
+          const remainder = all.filter(r => r.city !== _originCity);
+          // Sort remainder by drive time from origin (if available)
+          if (DRIVE_TIMES[_originCity]) {
+            const times = DRIVE_TIMES[_originCity];
+            remainder.sort((a, b) => (times[a.city] || 99) - (times[b.city] || 99));
+          }
+          chosen = localFirst.concat(remainder).slice(0, 3);
+        } else {
+          // Most recent first
+          chosen = all.sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 3);
+        }
+        renderReviews(container, chosen, data);
+      })
+      .catch(() => { /* keep static fallback */ });
+  }
+
+  function renderReviews(container, reviews, meta) {
+    container.innerHTML = '';
+    reviews.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'review';
+      const stars = '★'.repeat(Math.max(1, Math.min(5, r.stars || 5)));
+      const flag = r.placeholder
+        ? '<span class="review-placeholder-flag">placeholder</span>'
+        : '';
+      const cityDisplay = (CITIES[r.city] && CITIES[r.city].display) || r.city || '';
+      const loc = [r.neighbourhood, cityDisplay].filter(Boolean).join(', ');
+      card.innerHTML =
+        '<div class="review-stars" aria-label="' + r.stars + ' stars">' + stars + '</div>' +
+        '<p class="review-quote">"' + escapeHtml(r.quote) + '"</p>' +
+        '<p class="review-author">— ' + escapeHtml(r.author) + (loc ? ', ' + escapeHtml(loc) : '') + ' ' + flag + '</p>';
+      container.appendChild(card);
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  }
+
   /* ---- 10b. Enhance footer with site-data credentials ----
      Replaces the simple footer-meta line with a richer credentials line
      that includes WCB, licence, and COI link when set. Until SITE_DATA
@@ -678,6 +734,7 @@
     diagnosis();
     quoteForm();
     coldSnap();
+    loadReviews();       // async — independent of geo
     detectGeo();         // async — last
   }
 

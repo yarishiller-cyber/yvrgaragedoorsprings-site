@@ -1,0 +1,72 @@
+{
+  "lastUpdated": "2026-05-17",
+  "source": "PLACEHOLDER — replace with Google Places API export when ready",
+  "reviews": [
+    {
+      "id": "ph-1",
+      "stars": 5,
+      "quote": "Called at 7:12 a.m. Tech was in my driveway at 7:31. Two springs in, balanced, done by 8:15. Coffee was still hot.",
+      "author": "Sample placeholder",
+      "city": "burnaby",
+      "neighbourhood": "Burnaby Heights",
+      "date": "2026-04-12",
+      "verified": false,
+      "placeholder": true
+    },
+    {
+      "id": "ph-2",
+      "stars": 5,
+      "quote": "Quoted me $832 over the phone. That's exactly what I paid. No 'oh, we'll need this too' once they got here.",
+      "author": "Sample placeholder",
+      "city": "vancouver",
+      "neighbourhood": "Kitsilano",
+      "date": "2026-04-03",
+      "verified": false,
+      "placeholder": true
+    },
+    {
+      "id": "ph-3",
+      "stars": 5,
+      "quote": "Convinced me to do both springs. Six months later the second one would have snapped anyway. Worth the $48.",
+      "author": "Sample placeholder",
+      "city": "north-vancouver",
+      "neighbourhood": "Lynn Valley",
+      "date": "2026-03-21",
+      "verified": false,
+      "placeholder": true
+    },
+    {
+      "id": "ph-4",
+      "stars": 5,
+      "quote": "Old TorqueMaster on our 1996 Westwood Plateau home finally let go. They converted it to standard torsion — no upsell pressure, clear quote on the phone, done in 90 minutes.",
+      "author": "Sample placeholder",
+      "city": "coquitlam",
+      "neighbourhood": "Westwood Plateau",
+      "date": "2026-03-08",
+      "verified": false,
+      "placeholder": true
+    },
+    {
+      "id": "ph-5",
+      "stars": 5,
+      "quote": "Salt spray ate my cables in five years. Madison swapped to stainless and explained why the previous guy used the wrong spec. No drama, just better parts.",
+      "author": "Sample placeholder",
+      "city": "tsawwassen",
+      "neighbourhood": "Beach Grove",
+      "date": "2026-02-14",
+      "verified": false,
+      "placeholder": true
+    },
+    {
+      "id": "ph-6",
+      "stars": 5,
+      "quote": "Heard the bang at 6:50 a.m. Called immediately. Dale was at the door before 7:30 with the parts on the truck. Same-day, no after-hours rate.",
+      "author": "Sample placeholder",
+      "city": "surrey",
+      "neighbourhood": "Fleetwood",
+      "date": "2026-01-28",
+      "verified": false,
+      "placeholder": true
+    }
+  ]
+}
