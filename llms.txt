@@ -61,6 +61,8 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [Wayne Dalton TorqueMaster — yes, we fix these.](https://yvrgaragedoorsprings.ca/blog/wayne-dalton-torquemaster/): conversion guide for TorqueMaster and TorqueMaster Plus sealed-tube systems.
 - [Why cold snaps break springs — even mild Vancouver ones.](https://yvrgaragedoorsprings.ca/blog/cold-weather-springs/): ductile-to-brittle metallurgy, call-volume doubles after 0°C dips.
 - [Why coastal garage door springs fail early.](https://yvrgaragedoorsprings.ca/blog/coastal-spring-corrosion/): salt-air corrosion in Tsawwassen / Richmond / White Rock / Steveston; oil-tempered + stainless cable spec. Madison Lim byline.
+- [Opener won't lift the door — is it the opener or the spring?](https://yvrgaragedoorsprings.ca/blog/opener-or-spring/): 30-second at-home diagnostic to distinguish opener failure from spring failure. Includes HowTo schema.
+- [4 DIY maintenance tasks that won't kill you. And 3 that might.](https://yvrgaragedoorsprings.ca/blog/diy-garage-door-maintenance/): safe-vs-unsafe DIY guidance with explicit DANGER blocks on spring winding, cable replacement, and overhead positioning.
 
 ## Trust
 
