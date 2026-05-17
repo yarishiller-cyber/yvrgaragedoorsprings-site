@@ -8,15 +8,15 @@ We replace broken residential garage door springs (torsion and extension). One s
 
 ## Service area
 
-We serve 16 Greater Vancouver cities: Vancouver, Burnaby, Richmond, Surrey, Coquitlam, Port Coquitlam, Port Moody, North Vancouver, West Vancouver, New Westminster, Delta, Langley, White Rock, Maple Ridge, Pitt Meadows, Tsawwassen.
+We serve 16 Greater Vancouver cities, with a local technician living in each one. Average drive time from call to your door: ~12 minutes (12–18 depending on city):
 
-Each city has a local technician living in that community. Average drive time to your door: ~12 minutes.
+Vancouver, Burnaby, Richmond, Surrey, Coquitlam, Port Coquitlam, Port Moody, North Vancouver, West Vancouver, New Westminster, Delta, Langley, White Rock, Maple Ridge, Pitt Meadows, Tsawwassen.
 
 ## Pricing (flat-rate, all-in, plus GST/PST)
 
-- One Spring — $784. Rare. Other spring stays old. Cables not replaced.
-- Two Springs (95% pick this) — $832. 5-year parts. 2-year labour. Cables included free. 10,000-cycle springs.
-- Two High-Cycle Springs — $1,193. 25,000-cycle springs. Sealed bearings. 7-year parts. 2-year labour.
+- **One Spring — $784.** Rare. Other spring stays old. Cables not replaced.
+- **Two Springs (95% pick this) — $832.** 5-year parts. 2-year labour. Cables included free. 10,000-cycle springs.
+- **Two High-Cycle Springs — $1,193.** 25,000-cycle springs (2.5× standard lifespan). Sealed bearings. 7-year parts. 2-year labour.
 
 Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnostic fee. No surcharges on-site.
 
@@ -30,9 +30,34 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 
 ## Key pages
 
+### Conversion hub
 - [Home](https://yvrgaragedoorsprings.ca/): single-page conversion hub with pricing, diagnosis quiz, FAQ, and city links.
-- [Blog](https://yvrgaragedoorsprings.ca/blog/): plain-English guides to spring failure, cold-weather impact, torsion vs. extension, Wayne Dalton TorqueMaster conversions.
-- City pages (one per service area): local technician, drive time, neighbourhood quirks, housing-stock context.
+
+### City landing pages
+- [Vancouver](https://yvrgaragedoorsprings.ca/cities/vancouver/): Kits to Renfrew, heritage carriage doors, laneway homes.
+- [Burnaby](https://yvrgaragedoorsprings.ca/cities/burnaby/): HQ home-court advantage, Burnaby Mountain freeze-thaw.
+- [Richmond](https://yvrgaragedoorsprings.ca/cities/richmond/): salt-air corrosion, Steveston partnership.
+- [Surrey](https://yvrgaragedoorsprings.ca/cities/surrey/): geography solved by living-here positioning.
+- [Coquitlam](https://yvrgaragedoorsprings.ca/cities/coquitlam/): Westwood Plateau 1990s springs at end of life.
+- [Port Coquitlam](https://yvrgaragedoorsprings.ca/cities/port-coquitlam/): 1980s split-levels, 7-foot doors.
+- [Port Moody](https://yvrgaragedoorsprings.ca/cities/port-moody/): Heritage Mountain + Inlet salt.
+- [North Vancouver](https://yvrgaragedoorsprings.ca/cities/north-vancouver/): 2,000mm rainfall, cedar carriage doors.
+- [West Vancouver](https://yvrgaragedoorsprings.ca/cities/west-vancouver/): oversized custom carriage, oceanfront salt.
+- [New Westminster](https://yvrgaragedoorsprings.ca/cities/new-westminster/): Queen's Park heritage, Sapperton laneway.
+- [Delta](https://yvrgaragedoorsprings.ca/cities/delta/): North Delta vs Ladner salt split.
+- [Langley](https://yvrgaragedoorsprings.ca/cities/langley/): inland freeze-thaw, 2010+ townhouse builds.
+- [White Rock](https://yvrgaragedoorsprings.ca/cities/white-rock/): oceanfront salt, hillside driveways.
+- [Maple Ridge](https://yvrgaragedoorsprings.ca/cities/maple-ridge/): Albion/Silver Valley 20-yr Clopay/Garaga at EOL.
+- [Pitt Meadows](https://yvrgaragedoorsprings.ca/cities/pitt-meadows/): floodplain humidity, master-planned communities.
+- [Tsawwassen](https://yvrgaragedoorsprings.ca/cities/tsawwassen/): unique salt + UV combo, retiree skew.
+
+### Blog
+- [Blog index](https://yvrgaragedoorsprings.ca/blog/): all posts.
+- [Heard a loud bang? Yeah, that was your spring.](https://yvrgaragedoorsprings.ca/blog/heard-a-loud-bang/): emergency-keyword response and what to do in the next 10 minutes.
+- [Torsion vs. extension springs — which one is on your door?](https://yvrgaragedoorsprings.ca/blog/torsion-vs-extension/): visual ID guide.
+- [How long do garage door springs really last in Vancouver?](https://yvrgaragedoorsprings.ca/blog/how-long-springs-last/): lifespan math, 5–10 yrs standard, 12–18 yrs high-cycle.
+- [Wayne Dalton TorqueMaster — yes, we fix these.](https://yvrgaragedoorsprings.ca/blog/wayne-dalton-torquemaster/): conversion guide for TorqueMaster and TorqueMaster Plus sealed-tube systems.
+- [Why cold snaps break springs — even mild Vancouver ones.](https://yvrgaragedoorsprings.ca/blog/cold-weather-springs/): ductile-to-brittle metallurgy, call-volume doubles after 0°C dips.
 
 ## Trust
 
