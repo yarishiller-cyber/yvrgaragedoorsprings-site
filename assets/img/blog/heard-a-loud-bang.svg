@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Sound-wave visualization of a spring snap at 80 milliseconds</title>
+  <desc id="desc">A single bold horizontal sound-wave spike against a calm flatline, suggesting a sudden bang. Navy and signal-orange palette.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f0e8"/>
+      <stop offset="1" stop-color="#e8e1d2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- Horizontal axis (time) -->
+  <line x1="80" y1="450" x2="1520" y2="450" stroke="#0f1a1f" stroke-width="2" opacity=".35"/>
+
+  <!-- Time tick marks -->
+  <g stroke="#0f1a1f" stroke-width="2" opacity=".35">
+    <line x1="240" y1="440" x2="240" y2="460"/>
+    <line x1="480" y1="440" x2="480" y2="460"/>
+    <line x1="720" y1="440" x2="720" y2="460"/>
+    <line x1="800" y1="440" x2="800" y2="460"/>
+    <line x1="880" y1="440" x2="880" y2="460"/>
+    <line x1="1120" y1="440" x2="1120" y2="460"/>
+    <line x1="1360" y1="440" x2="1360" y2="460"/>
+  </g>
+
+  <!-- Tick labels -->
+  <g fill="#0f1a1f" opacity=".55" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">
+    <text x="240" y="490" text-anchor="middle">0 ms</text>
+    <text x="480" y="490" text-anchor="middle">40</text>
+    <text x="800" y="490" text-anchor="middle">80</text>
+    <text x="1120" y="490" text-anchor="middle">160</text>
+    <text x="1360" y="490" text-anchor="middle">200</text>
+  </g>
+
+  <!-- Calm pre-flatline (left of spike) — very subtle ambient noise -->
+  <path d="M 80 450 L 220 450 L 230 448 L 245 451 L 260 450 L 280 452 L 300 449 L 340 450 L 380 451 L 420 450 L 460 449 L 500 450 L 540 451 L 580 450 L 620 449 L 660 451 L 700 450 L 740 449 L 770 451 L 785 450 L 792 449 L 795 451"
+        fill="none" stroke="#0f1a1f" stroke-width="2.5"/>
+
+  <!-- THE BANG: massive spike at 80ms -->
+  <!-- Lead-up tremor -->
+  <path d="M 795 451 L 798 446 L 800 458 L 798 442 L 800 466 L 798 432" fill="none" stroke="#0f1a1f" stroke-width="3"/>
+
+  <!-- Main spike up -->
+  <path d="M 800 432 L 802 100" fill="none" stroke="#d94a2b" stroke-width="10" stroke-linecap="round"/>
+  <!-- Main spike down -->
+  <path d="M 802 100 L 806 800" fill="none" stroke="#d94a2b" stroke-width="10" stroke-linecap="round"/>
+  <!-- Echo up -->
+  <path d="M 806 800 L 812 220" fill="none" stroke="#d94a2b" stroke-width="8" stroke-linecap="round"/>
+  <!-- Echo down -->
+  <path d="M 812 220 L 820 700" fill="none" stroke="#d94a2b" stroke-width="7" stroke-linecap="round"/>
+  <!-- Echo up smaller -->
+  <path d="M 820 700 L 832 320" fill="none" stroke="#d94a2b" stroke-width="6" stroke-linecap="round"/>
+  <!-- Echo down -->
+  <path d="M 832 320 L 850 580" fill="none" stroke="#d94a2b" stroke-width="5" stroke-linecap="round"/>
+  <!-- Decay -->
+  <path d="M 850 580 L 880 380 L 920 510 L 970 420 L 1030 470 L 1100 440 L 1180 455 L 1280 448 L 1400 451 L 1520 450"
+        fill="none" stroke="#0f1a1f" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Annotation at peak -->
+  <g transform="translate(640, 80)">
+    <line x1="160" y1="20" x2="160" y2="0" stroke="#d94a2b" stroke-width="2"/>
+    <rect width="320" height="48" rx="24" fill="#d94a2b"/>
+    <text x="160" y="32" text-anchor="middle" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="20" letter-spacing=".02em">80 ms · ~135 dB · the snap</text>
+  </g>
+
+  <!-- Top eyebrow label -->
+  <text x="80" y="60" fill="#0f1a1f" opacity=".6" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing=".2em">A SPRING FAILURE, IN SOUND</text>
+
+  <!-- Bottom subtitle -->
+  <text x="800" y="820" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="700">Faster than you can blink. Loud enough to wake the dog.</text>
+</svg>

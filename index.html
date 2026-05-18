@@ -41,7 +41,7 @@
   "telephone": "+1-604-XXX-XXXX",
   "email": "info@yvrgaragedoorsprings.ca",
   "priceRange": "$$",
-  "image": "https://yvrgaragedoorsprings.ca/assets/img/og-card.jpg",
+  "image": "https://yvrgaragedoorsprings.ca/assets/img/og-card.svg",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "4321 Still Creek Drive",
@@ -264,16 +264,12 @@
     </div>
 
     <div>
-      <!-- Image placeholder: hero swaps by intent / weather / time-of-day via JS body state class -->
+      <!-- Hero swaps src by intent / weather / time-of-day via personalize.js -->
       <figure class="hero-figure" data-hero-image>
-        <picture>
-          <source srcset="/assets/img/hero/hero-emergency.webp" type="image/webp">
-          <img src="/assets/img/hero/hero-emergency.jpg"
-               alt="Broken garage door torsion spring close-up with visible coil gap"
-               width="1600" height="1200"
-               loading="eager" fetchpriority="high"
-               onerror="this.parentElement.parentElement.parentElement.classList.add('hero-figure-empty')">
-        </picture>
+        <img src="/assets/img/hero/hero-emergency.svg"
+             alt="Broken garage door torsion spring close-up with visible coil gap"
+             width="1600" height="1200"
+             loading="eager" fetchpriority="high">
       </figure>
       <div class="availability" data-availability role="status" aria-live="polite">
         <span class="dot"></span>

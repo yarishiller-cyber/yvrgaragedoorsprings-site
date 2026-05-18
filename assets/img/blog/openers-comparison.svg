@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Three garage door opener motors mounted to ceiling brackets, side by side for visual comparison</title>
+  <desc id="desc">Side-by-side editorial product comparison of chain drive, belt drive, and wall-mount jackshaft openers.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f0e8"/>
+      <stop offset="1" stop-color="#e2dccf"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- Ceiling rail across top -->
+  <rect x="0" y="80" width="1600" height="10" fill="#0f1a1f"/>
+
+  <!-- ===== OPENER 1: CHAIN DRIVE ===== -->
+  <g transform="translate(80, 90)">
+    <!-- Hanging straps -->
+    <rect x="120" y="0" width="6" height="60" fill="#0f1a1f"/>
+    <rect x="320" y="0" width="6" height="60" fill="#0f1a1f"/>
+
+    <!-- Motor housing -->
+    <g transform="translate(60, 60)">
+      <rect width="320" height="120" rx="8" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+      <rect width="320" height="14" fill="#1f3a44"/>
+      <!-- Top vents -->
+      <g stroke="#0f1a1f" stroke-width="1.5" opacity=".6">
+        <line x1="30" y1="40" x2="290" y2="40"/>
+        <line x1="30" y1="60" x2="290" y2="60"/>
+        <line x1="30" y1="80" x2="290" y2="80"/>
+      </g>
+      <!-- Brand label -->
+      <rect x="20" y="100" width="120" height="14" fill="#0f1a1f"/>
+      <text x="80" y="112" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="9" font-weight="800">LIFTMASTER</text>
+      <!-- Light bulb cover -->
+      <rect x="160" y="105" width="60" height="9" rx="4" fill="#fafaf7" opacity=".5"/>
+    </g>
+
+    <!-- Long rail extending right -->
+    <rect x="380" y="118" width="120" height="20" fill="#a8b6bd"/>
+    <rect x="380" y="118" width="120" height="4" fill="#cfd6da"/>
+
+    <!-- Trolley on rail -->
+    <rect x="420" y="138" width="40" height="20" fill="#1f3a44"/>
+
+    <!-- CHAIN (visible) -->
+    <g stroke="#0f1a1f" stroke-width="2" fill="none">
+      <line x1="380" y1="128" x2="500" y2="128"/>
+    </g>
+    <g fill="#0f1a1f">
+      <rect x="384" y="124" width="4" height="8"/>
+      <rect x="394" y="124" width="4" height="8"/>
+      <rect x="404" y="124" width="4" height="8"/>
+      <rect x="414" y="124" width="4" height="8"/>
+      <rect x="424" y="124" width="4" height="8"/>
+      <rect x="434" y="124" width="4" height="8"/>
+      <rect x="444" y="124" width="4" height="8"/>
+      <rect x="454" y="124" width="4" height="8"/>
+      <rect x="464" y="124" width="4" height="8"/>
+      <rect x="474" y="124" width="4" height="8"/>
+      <rect x="484" y="124" width="4" height="8"/>
+      <rect x="494" y="124" width="4" height="8"/>
+    </g>
+
+    <!-- Label panel -->
+    <g transform="translate(0, 240)">
+      <text x="220" y="40" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".1em">CHAIN DRIVE</text>
+      <text x="220" y="68" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Workhorse · Loud · Cheapest</text>
+      <g transform="translate(40, 100)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Durable, easy to service</text>
+      </g>
+      <g transform="translate(40, 124)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Best for detached garages</text>
+      </g>
+      <g transform="translate(40, 148)">
+        <circle cx="0" cy="0" r="4" fill="#d94a2b"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Vibration · grease · noise</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ===== OPENER 2: BELT DRIVE ===== ✱ featured -->
+  <g transform="translate(640, 90)">
+    <rect x="120" y="0" width="6" height="60" fill="#0f1a1f"/>
+    <rect x="320" y="0" width="6" height="60" fill="#0f1a1f"/>
+
+    <g transform="translate(60, 60)">
+      <rect width="320" height="120" rx="8" fill="#0f1a1f" stroke="#d94a2b" stroke-width="4"/>
+      <rect width="320" height="14" fill="#1f3a44"/>
+      <g stroke="#fafaf7" stroke-width="1.5" opacity=".4">
+        <line x1="30" y1="40" x2="290" y2="40"/>
+        <line x1="30" y1="60" x2="290" y2="60"/>
+        <line x1="30" y1="80" x2="290" y2="80"/>
+      </g>
+      <rect x="20" y="100" width="120" height="14" fill="#fafaf7"/>
+      <text x="80" y="112" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" font-weight="800">LM 87504</text>
+      <rect x="160" y="105" width="60" height="9" rx="4" fill="#fafaf7" opacity=".5"/>
+    </g>
+
+    <rect x="380" y="118" width="120" height="20" fill="#a8b6bd"/>
+    <rect x="380" y="118" width="120" height="4" fill="#cfd6da"/>
+    <rect x="420" y="138" width="40" height="20" fill="#1f3a44"/>
+
+    <!-- BELT (solid black band) -->
+    <rect x="380" y="124" width="120" height="8" fill="#0f1a1f"/>
+
+    <!-- Featured badge -->
+    <g transform="translate(140, 220)">
+      <rect width="180" height="32" rx="16" fill="#d94a2b"/>
+      <text x="90" y="22" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em">★ OUR PICK</text>
+    </g>
+
+    <g transform="translate(0, 280)">
+      <text x="220" y="20" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".1em">BELT DRIVE</text>
+      <text x="220" y="48" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Quiet · Smooth · Bedroom-above-friendly</text>
+      <g transform="translate(40, 80)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Half the noise of chain</text>
+      </g>
+      <g transform="translate(40, 104)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">DC motor · slow start/stop</text>
+      </g>
+      <g transform="translate(40, 128)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Battery backup standard</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ===== OPENER 3: WALL-MOUNT JACKSHAFT ===== -->
+  <g transform="translate(1200, 90)">
+    <!-- Jackshaft is wall-mounted (not ceiling-hung) — show on the side -->
+    <!-- Vertical mounting bracket -->
+    <rect x="40" y="60" width="80" height="200" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+    <!-- Motor body (compact, square) -->
+    <g transform="translate(40, 100)">
+      <rect width="220" height="120" rx="6" fill="#1f3a44" stroke="#0f1a1f" stroke-width="3"/>
+      <rect width="220" height="14" fill="#0f1a1f"/>
+      <g stroke="#cfd6da" stroke-width="1.5" opacity=".5">
+        <line x1="20" y1="40" x2="200" y2="40"/>
+        <line x1="20" y1="60" x2="200" y2="60"/>
+        <line x1="20" y1="80" x2="200" y2="80"/>
+      </g>
+      <rect x="20" y="100" width="120" height="14" fill="#0f1a1f"/>
+      <text x="80" y="112" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="10" font-weight="800">LM 8500W</text>
+    </g>
+    <!-- Drive shaft going to door (right) -->
+    <rect x="260" y="155" width="80" height="10" fill="#a8b6bd"/>
+    <!-- Output to torsion shaft (cable to drum) -->
+    <circle cx="350" cy="160" r="14" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+
+    <g transform="translate(-80, 320)">
+      <text x="220" y="20" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".1em">JACKSHAFT</text>
+      <text x="220" y="48" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Wall-mount · No overhead rail</text>
+      <g transform="translate(40, 80)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Frees up ceiling space</text>
+      </g>
+      <g transform="translate(40, 104)">
+        <circle cx="0" cy="0" r="4" fill="#2f7a3e"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Vaulted ceilings, high-bay</text>
+      </g>
+      <g transform="translate(40, 128)">
+        <circle cx="0" cy="0" r="4" fill="#d94a2b"/>
+        <text x="14" y="4" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700">Needs torsion (not extension)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="80" y="50" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing=".25em" opacity=".55">THREE WE'D BUY · IF WE SOLD THEM</text>
+
+  <!-- Bottom caption -->
+  <text x="800" y="850" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" opacity=".65">We don't install openers — but we see hundreds a year. Here's what lasts.</text>
+</svg>

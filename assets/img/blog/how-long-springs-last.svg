@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">A garage door spring with growth rings like a tree, showing cycle age</title>
+  <desc id="desc">Conceptual illustration: cross-section of a torsion spring coil overlaid with concentric rings, each labelled with a year and cycle count.</desc>
+
+  <rect width="1600" height="900" fill="#f4f0e8"/>
+
+  <!-- Center axis line -->
+  <line x1="800" y1="60" x2="800" y2="840" stroke="#0f1a1f" stroke-width="1" opacity=".1"/>
+
+  <!-- Concentric rings (tree-ring metaphor) -->
+  <g transform="translate(800, 450)">
+    <!-- Outermost ring: failure zone -->
+    <circle cx="0" cy="0" r="380" fill="none" stroke="#d94a2b" stroke-width="3" stroke-dasharray="4 6" opacity=".8"/>
+    <!-- Ring 7: 15+ yr -->
+    <circle cx="0" cy="0" r="340" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Ring 6: 12 yr -->
+    <circle cx="0" cy="0" r="300" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Ring 5: 10 yr (typical avg life) -->
+    <circle cx="0" cy="0" r="260" fill="none" stroke="#0f1a1f" stroke-width="3"/>
+    <!-- Ring 4: 7 yr -->
+    <circle cx="0" cy="0" r="220" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Ring 3: 5 yr -->
+    <circle cx="0" cy="0" r="180" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Ring 2: 3 yr -->
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Ring 1: 1 yr -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#0f1a1f" stroke-width="2" opacity=".5"/>
+    <!-- Core: shaft cross-section -->
+    <circle cx="0" cy="0" r="60" fill="#1f3a44"/>
+    <circle cx="0" cy="0" r="22" fill="#0f1a1f"/>
+    <circle cx="0" cy="0" r="8" fill="#cfd6da"/>
+
+    <!-- Tick marks on each ring -->
+    <g stroke="#0f1a1f" stroke-width="2">
+      <line x1="100" y1="0" x2="110" y2="0"/>
+      <line x1="140" y1="0" x2="150" y2="0"/>
+      <line x1="180" y1="0" x2="190" y2="0"/>
+      <line x1="220" y1="0" x2="230" y2="0"/>
+      <line x1="260" y1="0" x2="270" y2="0"/>
+      <line x1="300" y1="0" x2="310" y2="0"/>
+      <line x1="340" y1="0" x2="350" y2="0"/>
+    </g>
+  </g>
+
+  <!-- Labels (radial, on right side) -->
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+    <g transform="translate(1180, 450)">
+      <line x1="-60" y1="0" x2="0" y2="0" stroke="#0f1a1f" stroke-width="1.5" opacity=".4"/>
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 1</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~1,000 cycles</text>
+    </g>
+    <g transform="translate(1180, 410)">
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 3</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~3,000 cycles</text>
+    </g>
+    <g transform="translate(1180, 370)">
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 5</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~5,000 cycles · standard 50%</text>
+    </g>
+    <g transform="translate(1180, 330)">
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 7</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~7,000 cycles</text>
+    </g>
+    <g transform="translate(1180, 290)">
+      <text x="10" y="-4" fill="#d94a2b" font-size="20" font-weight="800">Year 10</text>
+      <text x="10" y="22" fill="#d94a2b" font-size="14" font-weight="700">label rating · standard end-of-life</text>
+    </g>
+    <g transform="translate(1180, 250)">
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800" opacity=".7">Year 12</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".5">~12,000 · high-cycle territory</text>
+    </g>
+    <g transform="translate(1180, 210)">
+      <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800" opacity=".7">Year 15+</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".5">high-cycle pair, oil-tempered</text>
+    </g>
+    <g transform="translate(1180, 170)">
+      <text x="10" y="-4" fill="#d94a2b" font-size="18" font-weight="800">FAILURE</text>
+      <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".5">brittle steel + cold = bang</text>
+    </g>
+  </g>
+
+  <!-- Title eyebrow -->
+  <text x="80" y="100" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing=".2em" opacity=".6">SPRING AGE · READ THE RINGS</text>
+
+  <!-- Bottom-left annotation -->
+  <g transform="translate(80, 720)">
+    <text fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" opacity=".7">CORE = the shaft.</text>
+    <text y="22" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" opacity=".7">Each ring = one year of cycles.</text>
+    <text y="44" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" opacity=".7">Standard label: 10K cycles. Honest LM avg: 5–10 yrs.</text>
+  </g>
+</svg>

@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Torsion vs extension springs — side-by-side technical drawing</title>
+  <desc id="desc">Left: torsion spring above a garage door with a rotation arrow. Right: extension springs along the tracks with a stretch arrow.</desc>
+
+  <rect width="1600" height="900" fill="#f4f0e8"/>
+
+  <!-- Divider -->
+  <line x1="800" y1="80" x2="800" y2="820" stroke="#0f1a1f" stroke-width="2" stroke-dasharray="6 8" opacity=".4"/>
+
+  <!-- Section headers -->
+  <text x="400" y="80" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".15em">TORSION</text>
+  <text x="400" y="106" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing=".05em">above the door · twists to load</text>
+
+  <text x="1200" y="80" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".15em">EXTENSION</text>
+  <text x="1200" y="106" text-anchor="middle" fill="#0f1a1f" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing=".05em">along the tracks · stretches to load</text>
+
+  <!-- ===== LEFT (TORSION) ===== -->
+  <g transform="translate(80, 160)">
+    <!-- Header beam above door (where torsion sits) -->
+    <rect x="0" y="40" width="640" height="20" fill="#0f1a1f"/>
+
+    <!-- Brackets -->
+    <rect x="30" y="60" width="20" height="60" fill="#0f1a1f"/>
+    <rect x="610" y="60" width="20" height="60" fill="#0f1a1f"/>
+    <rect x="310" y="60" width="20" height="60" fill="#0f1a1f"/>
+
+    <!-- Shaft -->
+    <rect x="40" y="92" width="580" height="6" fill="#8d9aa1"/>
+
+    <!-- Torsion spring on shaft (horizontal) -->
+    <rect x="80" y="70" width="240" height="50" rx="4" fill="#0f1a1f"/>
+    <g stroke="#8d9aa1" stroke-width="2" opacity=".7">
+      <line x1="88" y1="70" x2="88" y2="120"/><line x1="96" y1="70" x2="96" y2="120"/><line x1="104" y1="70" x2="104" y2="120"/><line x1="112" y1="70" x2="112" y2="120"/><line x1="120" y1="70" x2="120" y2="120"/><line x1="128" y1="70" x2="128" y2="120"/><line x1="136" y1="70" x2="136" y2="120"/><line x1="144" y1="70" x2="144" y2="120"/><line x1="152" y1="70" x2="152" y2="120"/><line x1="160" y1="70" x2="160" y2="120"/><line x1="168" y1="70" x2="168" y2="120"/><line x1="176" y1="70" x2="176" y2="120"/><line x1="184" y1="70" x2="184" y2="120"/><line x1="192" y1="70" x2="192" y2="120"/><line x1="200" y1="70" x2="200" y2="120"/><line x1="208" y1="70" x2="208" y2="120"/><line x1="216" y1="70" x2="216" y2="120"/><line x1="224" y1="70" x2="224" y2="120"/><line x1="232" y1="70" x2="232" y2="120"/><line x1="240" y1="70" x2="240" y2="120"/><line x1="248" y1="70" x2="248" y2="120"/><line x1="256" y1="70" x2="256" y2="120"/><line x1="264" y1="70" x2="264" y2="120"/><line x1="272" y1="70" x2="272" y2="120"/><line x1="280" y1="70" x2="280" y2="120"/><line x1="288" y1="70" x2="288" y2="120"/><line x1="296" y1="70" x2="296" y2="120"/><line x1="304" y1="70" x2="304" y2="120"/><line x1="312" y1="70" x2="312" y2="120"/>
+    </g>
+    <rect x="340" y="70" width="240" height="50" rx="4" fill="#0f1a1f"/>
+    <g stroke="#8d9aa1" stroke-width="2" opacity=".7">
+      <line x1="348" y1="70" x2="348" y2="120"/><line x1="356" y1="70" x2="356" y2="120"/><line x1="364" y1="70" x2="364" y2="120"/><line x1="372" y1="70" x2="372" y2="120"/><line x1="380" y1="70" x2="380" y2="120"/><line x1="388" y1="70" x2="388" y2="120"/><line x1="396" y1="70" x2="396" y2="120"/><line x1="404" y1="70" x2="404" y2="120"/><line x1="412" y1="70" x2="412" y2="120"/><line x1="420" y1="70" x2="420" y2="120"/><line x1="428" y1="70" x2="428" y2="120"/><line x1="436" y1="70" x2="436" y2="120"/><line x1="444" y1="70" x2="444" y2="120"/><line x1="452" y1="70" x2="452" y2="120"/><line x1="460" y1="70" x2="460" y2="120"/><line x1="468" y1="70" x2="468" y2="120"/><line x1="476" y1="70" x2="476" y2="120"/><line x1="484" y1="70" x2="484" y2="120"/><line x1="492" y1="70" x2="492" y2="120"/><line x1="500" y1="70" x2="500" y2="120"/><line x1="508" y1="70" x2="508" y2="120"/><line x1="516" y1="70" x2="516" y2="120"/><line x1="524" y1="70" x2="524" y2="120"/><line x1="532" y1="70" x2="532" y2="120"/><line x1="540" y1="70" x2="540" y2="120"/><line x1="548" y1="70" x2="548" y2="120"/><line x1="556" y1="70" x2="556" y2="120"/><line x1="564" y1="70" x2="564" y2="120"/><line x1="572" y1="70" x2="572" y2="120"/>
+    </g>
+
+    <!-- Cable drums at ends -->
+    <circle cx="40" cy="98" r="22" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+    <circle cx="40" cy="98" r="10" fill="#0f1a1f"/>
+    <circle cx="620" cy="98" r="22" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+    <circle cx="620" cy="98" r="10" fill="#0f1a1f"/>
+
+    <!-- Rotation arrow (curved) — TWISTING motion -->
+    <g transform="translate(330, 220)">
+      <path d="M -80 0 A 80 80 0 1 1 80 0" fill="none" stroke="#d94a2b" stroke-width="6"/>
+      <polygon points="80,0 64,-14 64,14" fill="#d94a2b"/>
+      <text x="0" y="48" text-anchor="middle" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing=".05em">TWISTS</text>
+    </g>
+
+    <!-- Cables down -->
+    <line x1="40" y1="120" x2="40" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+    <line x1="620" y1="120" x2="620" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+
+    <!-- Door -->
+    <rect x="40" y="320" width="580" height="220" fill="none" stroke="#0f1a1f" stroke-width="4"/>
+    <line x1="40" y1="375" x2="620" y2="375" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="40" y1="430" x2="620" y2="430" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="40" y1="485" x2="620" y2="485" stroke="#0f1a1f" stroke-width="2"/>
+    <!-- Door panels with subtle insets -->
+    <g opacity=".25">
+      <rect x="60" y="335" width="120" height="30" fill="#0f1a1f"/>
+      <rect x="200" y="335" width="120" height="30" fill="#0f1a1f"/>
+      <rect x="340" y="335" width="120" height="30" fill="#0f1a1f"/>
+      <rect x="480" y="335" width="120" height="30" fill="#0f1a1f"/>
+    </g>
+
+    <!-- Floor -->
+    <line x1="0" y1="540" x2="640" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+  </g>
+
+  <!-- ===== RIGHT (EXTENSION) ===== -->
+  <g transform="translate(880, 160)">
+    <!-- Header beam -->
+    <rect x="0" y="40" width="640" height="14" fill="#0f1a1f"/>
+
+    <!-- Two long horizontal tracks above the door (where extension springs run) -->
+    <!-- Left track -->
+    <rect x="20" y="92" width="280" height="8" fill="#8d9aa1"/>
+    <!-- Right track -->
+    <rect x="340" y="92" width="280" height="8" fill="#8d9aa1"/>
+
+    <!-- Extension spring left (stretched coil along track) -->
+    <g transform="translate(40, 78)">
+      <rect x="0" y="0" width="240" height="36" fill="none"/>
+      <g stroke="#0f1a1f" stroke-width="4">
+        <line x1="0" y1="18" x2="240" y2="18"/>
+      </g>
+      <g stroke="#0f1a1f" stroke-width="3" fill="none">
+        <path d="M 8,18 Q 16,6 24,18 Q 32,30 40,18 Q 48,6 56,18 Q 64,30 72,18 Q 80,6 88,18 Q 96,30 104,18 Q 112,6 120,18 Q 128,30 136,18 Q 144,6 152,18 Q 160,30 168,18 Q 176,6 184,18 Q 192,30 200,18 Q 208,6 216,18 Q 224,30 232,18"/>
+      </g>
+      <!-- Anchors -->
+      <circle cx="0" cy="18" r="6" fill="#0f1a1f"/>
+      <circle cx="240" cy="18" r="6" fill="#0f1a1f"/>
+    </g>
+
+    <!-- Extension spring right -->
+    <g transform="translate(360, 78)">
+      <g stroke="#0f1a1f" stroke-width="4">
+        <line x1="0" y1="18" x2="240" y2="18"/>
+      </g>
+      <g stroke="#0f1a1f" stroke-width="3" fill="none">
+        <path d="M 8,18 Q 16,6 24,18 Q 32,30 40,18 Q 48,6 56,18 Q 64,30 72,18 Q 80,6 88,18 Q 96,30 104,18 Q 112,6 120,18 Q 128,30 136,18 Q 144,6 152,18 Q 160,30 168,18 Q 176,6 184,18 Q 192,30 200,18 Q 208,6 216,18 Q 224,30 232,18"/>
+      </g>
+      <circle cx="0" cy="18" r="6" fill="#0f1a1f"/>
+      <circle cx="240" cy="18" r="6" fill="#0f1a1f"/>
+    </g>
+
+    <!-- Safety cables through center (small) -->
+    <line x1="40" y1="96" x2="280" y2="96" stroke="#d94a2b" stroke-width="1" stroke-dasharray="2 4" opacity=".6"/>
+    <line x1="360" y1="96" x2="600" y2="96" stroke="#d94a2b" stroke-width="1" stroke-dasharray="2 4" opacity=".6"/>
+
+    <!-- Stretch arrow (horizontal, double-ended) -->
+    <g transform="translate(160, 220)">
+      <line x1="-80" y1="0" x2="80" y2="0" stroke="#d94a2b" stroke-width="6"/>
+      <polygon points="-80,0 -64,-14 -64,14" fill="#d94a2b"/>
+      <polygon points="80,0 64,-14 64,14" fill="#d94a2b"/>
+      <text x="0" y="36" text-anchor="middle" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing=".05em">STRETCHES</text>
+    </g>
+
+    <!-- Track returns -->
+    <line x1="40" y1="100" x2="40" y2="540" stroke="#8d9aa1" stroke-width="6"/>
+    <line x1="620" y1="100" x2="620" y2="540" stroke="#8d9aa1" stroke-width="6"/>
+
+    <!-- Door -->
+    <rect x="60" y="320" width="540" height="220" fill="none" stroke="#0f1a1f" stroke-width="4"/>
+    <line x1="60" y1="375" x2="600" y2="375" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="60" y1="430" x2="600" y2="430" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="60" y1="485" x2="600" y2="485" stroke="#0f1a1f" stroke-width="2"/>
+    <g opacity=".25">
+      <rect x="80" y="335" width="110" height="30" fill="#0f1a1f"/>
+      <rect x="210" y="335" width="110" height="30" fill="#0f1a1f"/>
+      <rect x="340" y="335" width="110" height="30" fill="#0f1a1f"/>
+      <rect x="470" y="335" width="110" height="30" fill="#0f1a1f"/>
+    </g>
+
+    <line x1="0" y1="540" x2="640" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+  </g>
+
+  <!-- Footer captions -->
+  <text x="400" y="780" text-anchor="middle" fill="#0f1a1f" opacity=".7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">Most newer Lower Mainland doors. Safer. The standard.</text>
+  <text x="1200" y="780" text-anchor="middle" fill="#0f1a1f" opacity=".7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">Older doors. Going away. Safety cables required.</text>
+</svg>

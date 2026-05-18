@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Frost on a garage door torsion spring on a sub-zero Vancouver morning</title>
+  <desc id="desc">Editorial illustration of a horizontal torsion spring covered with frost crystals, cool white-balance.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eef2"/>
+      <stop offset="1" stop-color="#cdd9df"/>
+    </linearGradient>
+    <linearGradient id="spring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a525c"/>
+      <stop offset=".5" stop-color="#1f3a44"/>
+      <stop offset="1" stop-color="#3a525c"/>
+    </linearGradient>
+    <linearGradient id="shaft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8b6bd"/>
+      <stop offset=".5" stop-color="#dde6ea"/>
+      <stop offset="1" stop-color="#8997a0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+
+  <!-- Cold breath fog band -->
+  <rect x="0" y="200" width="1600" height="220" fill="#ffffff" opacity=".4"/>
+
+  <!-- Bracket left -->
+  <g>
+    <rect x="80" y="520" width="80" height="220" fill="#0f1a1f"/>
+    <rect x="60" y="700" width="120" height="32" fill="#0f1a1f"/>
+  </g>
+  <!-- Bracket right -->
+  <g>
+    <rect x="1440" y="520" width="80" height="220" fill="#0f1a1f"/>
+    <rect x="1420" y="700" width="120" height="32" fill="#0f1a1f"/>
+  </g>
+  <rect x="780" y="540" width="40" height="200" fill="#0f1a1f" opacity=".9"/>
+
+  <!-- Shaft -->
+  <rect x="60" y="616" width="1480" height="36" fill="url(#shaft)"/>
+
+  <!-- LEFT coil -->
+  <g transform="translate(180, 528)">
+    <rect x="0" y="0" width="540" height="212" rx="6" fill="url(#spring)"/>
+    <g stroke="#cfd6da" stroke-width="2" opacity=".55" fill="none">
+      <line x1="14" y1="0" x2="14" y2="212"/><line x1="34" y1="0" x2="34" y2="212"/><line x1="54" y1="0" x2="54" y2="212"/><line x1="74" y1="0" x2="74" y2="212"/><line x1="94" y1="0" x2="94" y2="212"/><line x1="114" y1="0" x2="114" y2="212"/><line x1="134" y1="0" x2="134" y2="212"/><line x1="154" y1="0" x2="154" y2="212"/><line x1="174" y1="0" x2="174" y2="212"/><line x1="194" y1="0" x2="194" y2="212"/><line x1="214" y1="0" x2="214" y2="212"/><line x1="234" y1="0" x2="234" y2="212"/><line x1="254" y1="0" x2="254" y2="212"/><line x1="274" y1="0" x2="274" y2="212"/><line x1="294" y1="0" x2="294" y2="212"/><line x1="314" y1="0" x2="314" y2="212"/><line x1="334" y1="0" x2="334" y2="212"/><line x1="354" y1="0" x2="354" y2="212"/><line x1="374" y1="0" x2="374" y2="212"/><line x1="394" y1="0" x2="394" y2="212"/><line x1="414" y1="0" x2="414" y2="212"/><line x1="434" y1="0" x2="434" y2="212"/><line x1="454" y1="0" x2="454" y2="212"/><line x1="474" y1="0" x2="474" y2="212"/><line x1="494" y1="0" x2="494" y2="212"/><line x1="514" y1="0" x2="514" y2="212"/><line x1="528" y1="0" x2="528" y2="212"/>
+    </g>
+    <!-- Frost layer on top -->
+    <rect x="0" y="2" width="540" height="42" fill="#ffffff" opacity=".7"/>
+    <rect x="0" y="42" width="540" height="18" fill="#ffffff" opacity=".4"/>
+    <!-- Frost spikes -->
+    <g fill="#ffffff" opacity=".85">
+      <polygon points="40,0 44,-18 48,0"/>
+      <polygon points="90,0 96,-24 102,0"/>
+      <polygon points="160,0 166,-16 172,0"/>
+      <polygon points="220,0 224,-22 228,0"/>
+      <polygon points="280,0 288,-30 296,0"/>
+      <polygon points="340,0 346,-14 352,0"/>
+      <polygon points="400,0 404,-20 408,0"/>
+      <polygon points="460,0 466,-26 472,0"/>
+      <polygon points="510,0 516,-18 522,0"/>
+    </g>
+  </g>
+
+  <!-- RIGHT coil -->
+  <g transform="translate(880, 528)">
+    <rect x="0" y="0" width="540" height="212" rx="6" fill="url(#spring)"/>
+    <g stroke="#cfd6da" stroke-width="2" opacity=".55" fill="none">
+      <line x1="12" y1="0" x2="12" y2="212"/><line x1="32" y1="0" x2="32" y2="212"/><line x1="52" y1="0" x2="52" y2="212"/><line x1="72" y1="0" x2="72" y2="212"/><line x1="92" y1="0" x2="92" y2="212"/><line x1="112" y1="0" x2="112" y2="212"/><line x1="132" y1="0" x2="132" y2="212"/><line x1="152" y1="0" x2="152" y2="212"/><line x1="172" y1="0" x2="172" y2="212"/><line x1="192" y1="0" x2="192" y2="212"/><line x1="212" y1="0" x2="212" y2="212"/><line x1="232" y1="0" x2="232" y2="212"/><line x1="252" y1="0" x2="252" y2="212"/><line x1="272" y1="0" x2="272" y2="212"/><line x1="292" y1="0" x2="292" y2="212"/><line x1="312" y1="0" x2="312" y2="212"/><line x1="332" y1="0" x2="332" y2="212"/><line x1="352" y1="0" x2="352" y2="212"/><line x1="372" y1="0" x2="372" y2="212"/><line x1="392" y1="0" x2="392" y2="212"/><line x1="412" y1="0" x2="412" y2="212"/><line x1="432" y1="0" x2="432" y2="212"/><line x1="452" y1="0" x2="452" y2="212"/><line x1="472" y1="0" x2="472" y2="212"/><line x1="492" y1="0" x2="492" y2="212"/><line x1="512" y1="0" x2="512" y2="212"/><line x1="528" y1="0" x2="528" y2="212"/>
+    </g>
+    <rect x="0" y="2" width="540" height="42" fill="#ffffff" opacity=".7"/>
+    <rect x="0" y="42" width="540" height="18" fill="#ffffff" opacity=".4"/>
+    <g fill="#ffffff" opacity=".85">
+      <polygon points="30,0 36,-20 42,0"/>
+      <polygon points="100,0 106,-30 112,0"/>
+      <polygon points="170,0 174,-14 178,0"/>
+      <polygon points="240,0 246,-24 252,0"/>
+      <polygon points="310,0 316,-18 322,0"/>
+      <polygon points="380,0 386,-26 392,0"/>
+      <polygon points="450,0 456,-22 462,0"/>
+      <polygon points="510,0 514,-16 518,0"/>
+    </g>
+  </g>
+
+  <!-- Snowflake decorations floating -->
+  <g fill="#ffffff" opacity=".85">
+    <g transform="translate(300,180)">
+      <line x1="-16" y1="0" x2="16" y2="0" stroke="#ffffff" stroke-width="3"/>
+      <line x1="0" y1="-16" x2="0" y2="16" stroke="#ffffff" stroke-width="3"/>
+      <line x1="-12" y1="-12" x2="12" y2="12" stroke="#ffffff" stroke-width="2"/>
+      <line x1="-12" y1="12" x2="12" y2="-12" stroke="#ffffff" stroke-width="2"/>
+    </g>
+    <g transform="translate(1280,140) scale(0.7)">
+      <line x1="-16" y1="0" x2="16" y2="0" stroke="#ffffff" stroke-width="3"/>
+      <line x1="0" y1="-16" x2="0" y2="16" stroke="#ffffff" stroke-width="3"/>
+      <line x1="-12" y1="-12" x2="12" y2="12" stroke="#ffffff" stroke-width="2"/>
+      <line x1="-12" y1="12" x2="12" y2="-12" stroke="#ffffff" stroke-width="2"/>
+    </g>
+    <g transform="translate(900,100) scale(0.5)">
+      <line x1="-16" y1="0" x2="16" y2="0" stroke="#ffffff" stroke-width="3"/>
+      <line x1="0" y1="-16" x2="0" y2="16" stroke="#ffffff" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- Cold-snap callout -->
+  <g transform="translate(560, 200)">
+    <rect width="480" height="64" rx="32" fill="#1f3a44"/>
+    <text x="240" y="42" text-anchor="middle" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="24" letter-spacing=".05em">COLD SNAP · STEEL BRITTLES AT 0°C</text>
+  </g>
+
+  <!-- Shadow -->
+  <ellipse cx="800" cy="780" rx="700" ry="20" fill="#0f1a1f" opacity=".12"/>
+
+  <!-- Implied door below -->
+  <g opacity=".18">
+    <rect x="0" y="820" width="1600" height="380" fill="#1f3a44"/>
+    <line x1="0" y1="890" x2="1600" y2="890" stroke="#fafaf7" stroke-width="2"/>
+    <line x1="0" y1="970" x2="1600" y2="970" stroke="#fafaf7" stroke-width="2"/>
+    <line x1="0" y1="1050" x2="1600" y2="1050" stroke="#fafaf7" stroke-width="2"/>
+    <line x1="0" y1="1130" x2="1600" y2="1130" stroke="#fafaf7" stroke-width="2"/>
+  </g>
+</svg>

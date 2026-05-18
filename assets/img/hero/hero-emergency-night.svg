@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Broken garage door spring under a single warm overhead bulb at night</title>
+  <desc id="desc">Editorial illustration of a horizontal torsion spring lit dramatically by a single warm bulb, low-key after-hours mood.</desc>
+  <defs>
+    <radialGradient id="bulb" cx="0.5" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#ffe7a3"/>
+      <stop offset=".25" stop-color="#c8932a" stop-opacity=".55"/>
+      <stop offset=".7" stop-color="#1a1410" stop-opacity=".0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1410"/>
+      <stop offset="1" stop-color="#0a0807"/>
+    </linearGradient>
+    <linearGradient id="spring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2a18"/>
+      <stop offset=".5" stop-color="#1a1006"/>
+      <stop offset="1" stop-color="#3a2a18"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect width="1600" height="1200" fill="url(#bulb)"/>
+
+  <!-- Bulb itself -->
+  <g>
+    <line x1="800" y1="0" x2="800" y2="80" stroke="#3a2a18" stroke-width="4"/>
+    <circle cx="800" cy="120" r="36" fill="#ffe7a3"/>
+    <circle cx="800" cy="120" r="46" fill="#ffe7a3" opacity=".35"/>
+    <circle cx="800" cy="120" r="60" fill="#ffe7a3" opacity=".18"/>
+  </g>
+
+  <!-- Brackets -->
+  <rect x="80" y="520" width="80" height="220" fill="#0a0807"/>
+  <rect x="1440" y="520" width="80" height="220" fill="#0a0807"/>
+  <rect x="780" y="540" width="40" height="200" fill="#0a0807"/>
+
+  <!-- Shaft -->
+  <rect x="60" y="616" width="1480" height="36" fill="#5a4630"/>
+  <rect x="60" y="618" width="1480" height="8" fill="#ffe7a3" opacity=".25"/>
+
+  <!-- LEFT coil -->
+  <g transform="translate(180, 528)">
+    <rect x="0" y="0" width="540" height="212" rx="6" fill="url(#spring)"/>
+    <g stroke="#c8932a" stroke-width="2" opacity=".4" fill="none">
+      <line x1="14" y1="0" x2="14" y2="212"/><line x1="34" y1="0" x2="34" y2="212"/><line x1="54" y1="0" x2="54" y2="212"/><line x1="74" y1="0" x2="74" y2="212"/><line x1="94" y1="0" x2="94" y2="212"/><line x1="114" y1="0" x2="114" y2="212"/><line x1="134" y1="0" x2="134" y2="212"/><line x1="154" y1="0" x2="154" y2="212"/><line x1="174" y1="0" x2="174" y2="212"/><line x1="194" y1="0" x2="194" y2="212"/><line x1="214" y1="0" x2="214" y2="212"/><line x1="234" y1="0" x2="234" y2="212"/><line x1="254" y1="0" x2="254" y2="212"/><line x1="274" y1="0" x2="274" y2="212"/><line x1="294" y1="0" x2="294" y2="212"/><line x1="314" y1="0" x2="314" y2="212"/><line x1="334" y1="0" x2="334" y2="212"/><line x1="354" y1="0" x2="354" y2="212"/><line x1="374" y1="0" x2="374" y2="212"/><line x1="394" y1="0" x2="394" y2="212"/><line x1="414" y1="0" x2="414" y2="212"/><line x1="434" y1="0" x2="434" y2="212"/><line x1="454" y1="0" x2="454" y2="212"/><line x1="474" y1="0" x2="474" y2="212"/><line x1="494" y1="0" x2="494" y2="212"/><line x1="514" y1="0" x2="514" y2="212"/><line x1="528" y1="0" x2="528" y2="212"/>
+    </g>
+    <rect x="0" y="2" width="540" height="18" fill="#ffe7a3" opacity=".25"/>
+  </g>
+
+  <!-- RIGHT coil -->
+  <g transform="translate(880, 528)">
+    <rect x="0" y="0" width="540" height="212" rx="6" fill="url(#spring)"/>
+    <g stroke="#c8932a" stroke-width="2" opacity=".4" fill="none">
+      <line x1="12" y1="0" x2="12" y2="212"/><line x1="32" y1="0" x2="32" y2="212"/><line x1="52" y1="0" x2="52" y2="212"/><line x1="72" y1="0" x2="72" y2="212"/><line x1="92" y1="0" x2="92" y2="212"/><line x1="112" y1="0" x2="112" y2="212"/><line x1="132" y1="0" x2="132" y2="212"/><line x1="152" y1="0" x2="152" y2="212"/><line x1="172" y1="0" x2="172" y2="212"/><line x1="192" y1="0" x2="192" y2="212"/><line x1="212" y1="0" x2="212" y2="212"/><line x1="232" y1="0" x2="232" y2="212"/><line x1="252" y1="0" x2="252" y2="212"/><line x1="272" y1="0" x2="272" y2="212"/><line x1="292" y1="0" x2="292" y2="212"/><line x1="312" y1="0" x2="312" y2="212"/><line x1="332" y1="0" x2="332" y2="212"/><line x1="352" y1="0" x2="352" y2="212"/><line x1="372" y1="0" x2="372" y2="212"/><line x1="392" y1="0" x2="392" y2="212"/><line x1="412" y1="0" x2="412" y2="212"/><line x1="432" y1="0" x2="432" y2="212"/><line x1="452" y1="0" x2="452" y2="212"/><line x1="472" y1="0" x2="472" y2="212"/><line x1="492" y1="0" x2="492" y2="212"/><line x1="512" y1="0" x2="512" y2="212"/><line x1="528" y1="0" x2="528" y2="212"/>
+    </g>
+    <rect x="0" y="2" width="540" height="18" fill="#ffe7a3" opacity=".25"/>
+  </g>
+
+  <!-- Gap end fittings -->
+  <polygon points="720,528 720,740 740,634" fill="#0a0807"/>
+  <polygon points="880,528 880,740 860,634" fill="#0a0807"/>
+
+  <!-- After-hours callout -->
+  <g transform="translate(580, 300)">
+    <rect width="440" height="64" rx="32" fill="#d94a2b"/>
+    <text x="220" y="42" text-anchor="middle" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="24" letter-spacing=".05em">SAME PRICE · 7 A.M. OR 9 P.M.</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title">
+  <title id="title">YVR Garage Door Springs — Greater Vancouver spring repair, same day</title>
+  <rect width="1200" height="630" fill="#0f1a1f"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(80, 80)">
+    <rect width="64" height="64" rx="14" fill="#fafaf7"/>
+    <text x="32" y="46" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="800">Y</text>
+  </g>
+  <text x="170" y="124" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing=".05em">YVR Garage Door Springs</text>
+
+  <!-- Headline -->
+  <text x="80" y="280" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-.02em">Garage door spring broke?</text>
+
+  <!-- Subline -->
+  <text x="80" y="360" fill="#cbd5d8" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="500">Your local Greater Vancouver tech, ~12 min away.</text>
+
+  <!-- Phone-icon CTA chip -->
+  <g transform="translate(80, 440)">
+    <rect width="420" height="84" rx="42" fill="#d94a2b"/>
+    <g transform="translate(36, 26) scale(1.4)">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" fill="none" stroke="#fafaf7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="100" y="55" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="800">Call · same price 7–9</text>
+  </g>
+
+  <!-- Right-side spring graphic -->
+  <g transform="translate(820, 300)">
+    <rect x="0" y="0" width="320" height="60" rx="8" fill="#1f3a44"/>
+    <g stroke="#8d9aa1" stroke-width="2" opacity=".7">
+      <line x1="14" y1="0" x2="14" y2="60"/><line x1="28" y1="0" x2="28" y2="60"/><line x1="42" y1="0" x2="42" y2="60"/><line x1="56" y1="0" x2="56" y2="60"/><line x1="70" y1="0" x2="70" y2="60"/><line x1="84" y1="0" x2="84" y2="60"/><line x1="98" y1="0" x2="98" y2="60"/><line x1="112" y1="0" x2="112" y2="60"/><line x1="126" y1="0" x2="126" y2="60"/><line x1="140" y1="0" x2="140" y2="60"/><line x1="180" y1="0" x2="180" y2="60"/><line x1="194" y1="0" x2="194" y2="60"/><line x1="208" y1="0" x2="208" y2="60"/><line x1="222" y1="0" x2="222" y2="60"/><line x1="236" y1="0" x2="236" y2="60"/><line x1="250" y1="0" x2="250" y2="60"/><line x1="264" y1="0" x2="264" y2="60"/><line x1="278" y1="0" x2="278" y2="60"/><line x1="292" y1="0" x2="292" y2="60"/><line x1="306" y1="0" x2="306" y2="60"/>
+    </g>
+    <!-- The gap -->
+    <rect x="150" y="0" width="20" height="60" fill="#0f1a1f"/>
+    <!-- Arrow -->
+    <path d="M 160 -80 L 160 -10" stroke="#d94a2b" stroke-width="6"/>
+    <polygon points="160,0 148,-22 172,-22" fill="#d94a2b"/>
+  </g>
+
+  <!-- Footer -->
+  <rect x="0" y="586" width="1200" height="44" fill="#1f3a44"/>
+  <text x="80" y="615" fill="#cbd5d8" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing=".15em">SIXTEEN CITIES · ONE TECH IN EACH · QUOTED = PAID</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Sealed Wayne Dalton TorqueMaster tube next to a converted standard torsion spring setup</title>
+  <desc id="desc">Split image: left shows the sealed steel tube above a residential door; right shows the same door with a standard exposed torsion spring conversion.</desc>
+
+  <rect width="1600" height="900" fill="#f4f0e8"/>
+
+  <!-- Divider -->
+  <line x1="800" y1="40" x2="800" y2="860" stroke="#0f1a1f" stroke-width="2" stroke-dasharray="6 8" opacity=".4"/>
+
+  <!-- Eyebrows -->
+  <text x="400" y="80" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing=".2em">BEFORE · TORQUEMASTER</text>
+  <text x="1200" y="80" text-anchor="middle" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing=".2em">AFTER · STANDARD CONVERSION</text>
+
+  <!-- ===== LEFT: Sealed TorqueMaster tube ===== -->
+  <g transform="translate(80, 140)">
+    <!-- Header beam -->
+    <rect x="0" y="40" width="640" height="14" fill="#0f1a1f"/>
+    <!-- Brackets -->
+    <rect x="30" y="54" width="20" height="56" fill="#0f1a1f"/>
+    <rect x="610" y="54" width="20" height="56" fill="#0f1a1f"/>
+
+    <!-- Sealed steel tube (one solid piece) -->
+    <g transform="translate(50, 64)">
+      <rect x="0" y="0" width="580" height="60" rx="12" fill="#a8b6bd" stroke="#0f1a1f" stroke-width="3"/>
+      <!-- Tube highlight -->
+      <rect x="10" y="6" width="560" height="10" fill="#ffffff" opacity=".4"/>
+      <rect x="10" y="48" width="560" height="8" fill="#0f1a1f" opacity=".25"/>
+      <!-- WD branding stripe -->
+      <rect x="0" y="20" width="580" height="20" fill="#3a525c"/>
+      <text x="290" y="36" text-anchor="middle" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing=".25em">WAYNE DALTON · SEALED</text>
+      <!-- Plastic gear end cap (the part that fails) -->
+      <circle cx="0" cy="30" r="22" fill="#c8932a" stroke="#0f1a1f" stroke-width="3"/>
+      <text x="-30" y="80" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="800">plastic gear ↑</text>
+      <circle cx="580" cy="30" r="22" fill="#c8932a" stroke="#0f1a1f" stroke-width="3"/>
+    </g>
+
+    <!-- Down cables hidden inside (dashed to show concealed) -->
+    <line x1="50" y1="124" x2="50" y2="540" stroke="#0f1a1f" stroke-width="2" stroke-dasharray="3 5" opacity=".5"/>
+    <line x1="630" y1="124" x2="630" y2="540" stroke="#0f1a1f" stroke-width="2" stroke-dasharray="3 5" opacity=".5"/>
+
+    <!-- Door -->
+    <rect x="50" y="320" width="580" height="220" fill="none" stroke="#0f1a1f" stroke-width="4"/>
+    <line x1="50" y1="375" x2="630" y2="375" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="50" y1="430" x2="630" y2="430" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="50" y1="485" x2="630" y2="485" stroke="#0f1a1f" stroke-width="2"/>
+
+    <!-- Floor -->
+    <line x1="0" y1="540" x2="640" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+
+    <!-- Annotation -->
+    <g transform="translate(80, 580)">
+      <text fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">— Sealed steel tube. Spring + cable hidden inside.</text>
+      <text y="26" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">— Plastic gear ends fail (TorqueMaster Plus).</text>
+      <text y="52" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">— Original parts: discontinued.</text>
+    </g>
+  </g>
+
+  <!-- ===== RIGHT: Standard conversion ===== -->
+  <g transform="translate(880, 140)">
+    <!-- Header beam -->
+    <rect x="0" y="40" width="640" height="14" fill="#0f1a1f"/>
+    <!-- Brackets -->
+    <rect x="30" y="54" width="20" height="56" fill="#0f1a1f"/>
+    <rect x="610" y="54" width="20" height="56" fill="#0f1a1f"/>
+    <rect x="310" y="54" width="20" height="56" fill="#0f1a1f"/>
+
+    <!-- Exposed shaft -->
+    <rect x="50" y="92" width="580" height="6" fill="#8d9aa1"/>
+
+    <!-- Two visible torsion springs -->
+    <rect x="80" y="72" width="220" height="46" rx="4" fill="#0f1a1f"/>
+    <g stroke="#8d9aa1" stroke-width="2" opacity=".7">
+      <line x1="86" y1="72" x2="86" y2="118"/><line x1="94" y1="72" x2="94" y2="118"/><line x1="102" y1="72" x2="102" y2="118"/><line x1="110" y1="72" x2="110" y2="118"/><line x1="118" y1="72" x2="118" y2="118"/><line x1="126" y1="72" x2="126" y2="118"/><line x1="134" y1="72" x2="134" y2="118"/><line x1="142" y1="72" x2="142" y2="118"/><line x1="150" y1="72" x2="150" y2="118"/><line x1="158" y1="72" x2="158" y2="118"/><line x1="166" y1="72" x2="166" y2="118"/><line x1="174" y1="72" x2="174" y2="118"/><line x1="182" y1="72" x2="182" y2="118"/><line x1="190" y1="72" x2="190" y2="118"/><line x1="198" y1="72" x2="198" y2="118"/><line x1="206" y1="72" x2="206" y2="118"/><line x1="214" y1="72" x2="214" y2="118"/><line x1="222" y1="72" x2="222" y2="118"/><line x1="230" y1="72" x2="230" y2="118"/><line x1="238" y1="72" x2="238" y2="118"/><line x1="246" y1="72" x2="246" y2="118"/><line x1="254" y1="72" x2="254" y2="118"/><line x1="262" y1="72" x2="262" y2="118"/><line x1="270" y1="72" x2="270" y2="118"/><line x1="278" y1="72" x2="278" y2="118"/><line x1="286" y1="72" x2="286" y2="118"/><line x1="294" y1="72" x2="294" y2="118"/>
+    </g>
+    <rect x="340" y="72" width="220" height="46" rx="4" fill="#0f1a1f"/>
+    <g stroke="#8d9aa1" stroke-width="2" opacity=".7">
+      <line x1="346" y1="72" x2="346" y2="118"/><line x1="354" y1="72" x2="354" y2="118"/><line x1="362" y1="72" x2="362" y2="118"/><line x1="370" y1="72" x2="370" y2="118"/><line x1="378" y1="72" x2="378" y2="118"/><line x1="386" y1="72" x2="386" y2="118"/><line x1="394" y1="72" x2="394" y2="118"/><line x1="402" y1="72" x2="402" y2="118"/><line x1="410" y1="72" x2="410" y2="118"/><line x1="418" y1="72" x2="418" y2="118"/><line x1="426" y1="72" x2="426" y2="118"/><line x1="434" y1="72" x2="434" y2="118"/><line x1="442" y1="72" x2="442" y2="118"/><line x1="450" y1="72" x2="450" y2="118"/><line x1="458" y1="72" x2="458" y2="118"/><line x1="466" y1="72" x2="466" y2="118"/><line x1="474" y1="72" x2="474" y2="118"/><line x1="482" y1="72" x2="482" y2="118"/><line x1="490" y1="72" x2="490" y2="118"/><line x1="498" y1="72" x2="498" y2="118"/><line x1="506" y1="72" x2="506" y2="118"/><line x1="514" y1="72" x2="514" y2="118"/><line x1="522" y1="72" x2="522" y2="118"/><line x1="530" y1="72" x2="530" y2="118"/><line x1="538" y1="72" x2="538" y2="118"/><line x1="546" y1="72" x2="546" y2="118"/><line x1="554" y1="72" x2="554" y2="118"/>
+    </g>
+
+    <!-- Cable drums (exposed) -->
+    <circle cx="50" cy="98" r="22" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+    <circle cx="50" cy="98" r="10" fill="#0f1a1f"/>
+    <circle cx="630" cy="98" r="22" fill="#3a525c" stroke="#0f1a1f" stroke-width="3"/>
+    <circle cx="630" cy="98" r="10" fill="#0f1a1f"/>
+
+    <!-- Cables down -->
+    <line x1="50" y1="120" x2="50" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+    <line x1="630" y1="120" x2="630" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+
+    <!-- Door (same door, conversion result) -->
+    <rect x="50" y="320" width="580" height="220" fill="none" stroke="#0f1a1f" stroke-width="4"/>
+    <line x1="50" y1="375" x2="630" y2="375" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="50" y1="430" x2="630" y2="430" stroke="#0f1a1f" stroke-width="2"/>
+    <line x1="50" y1="485" x2="630" y2="485" stroke="#0f1a1f" stroke-width="2"/>
+
+    <line x1="0" y1="540" x2="640" y2="540" stroke="#0f1a1f" stroke-width="3"/>
+
+    <!-- Annotation -->
+    <g transform="translate(80, 580)">
+      <text fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">— Standard oil-tempered springs. Visible on shaft.</text>
+      <text y="26" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">— Industry-standard parts, available anywhere.</text>
+      <text y="52" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800">— One-time fix. We almost always recommend it.</text>
+    </g>
+  </g>
+
+  <!-- Bottom arrow showing conversion -->
+  <g transform="translate(800, 470)">
+    <polygon points="-30,-30 30,0 -30,30" fill="#d94a2b"/>
+  </g>
+</svg>

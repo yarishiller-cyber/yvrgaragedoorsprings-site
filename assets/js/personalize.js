@@ -723,11 +723,11 @@
        - state-holiday     when applyAvailability finds it's a BC stat day
      Hero image swaps based on these + the data-intent attribute. */
   const HERO_VARIANTS = {
-    'default':    { webp: '/assets/img/hero/hero-emergency.webp',       jpg: '/assets/img/hero/hero-emergency.jpg',       alt: 'Broken garage door torsion spring close-up with visible coil gap' },
-    'cold':       { webp: '/assets/img/hero/hero-emergency-cold.webp',  jpg: '/assets/img/hero/hero-emergency-cold.jpg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
-    'night':      { webp: '/assets/img/hero/hero-emergency-night.webp', jpg: '/assets/img/hero/hero-emergency-night.jpg', alt: 'Garage door torsion spring under warm overhead garage light' },
-    'price':      { webp: '/assets/img/hero/hero-pricing.webp',         jpg: '/assets/img/hero/hero-pricing.jpg',         alt: 'Three garage door spring tiers shown as price cards on a workbench' },
-    'diagnostic': { webp: '/assets/img/hero/hero-diagnostic.webp',      jpg: '/assets/img/hero/hero-diagnostic.jpg',      alt: 'A garage door spring diagnostic checklist on a clipboard' }
+    'default':    { src: '/assets/img/hero/hero-emergency.svg',       alt: 'Broken garage door torsion spring close-up with visible coil gap' },
+    'cold':       { src: '/assets/img/hero/hero-emergency-cold.svg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
+    'night':      { src: '/assets/img/hero/hero-emergency-night.svg', alt: 'Garage door torsion spring under warm overhead garage light' },
+    'price':      { src: '/assets/img/hero/hero-pricing.svg',         alt: 'Three garage door spring tiers shown as price cards on a workbench' },
+    'diagnostic': { src: '/assets/img/hero/hero-diagnostic.svg',      alt: 'A garage door spring diagnostic checklist on a clipboard' }
   };
 
   function pickHeroVariant() {
@@ -743,13 +743,11 @@
     const fig = qs('[data-hero-image]');
     if (!fig) return;
     const img = qs('img', fig);
-    const source = qs('source', fig);
-    if (!img || !source) return;
+    if (!img) return;
     const v = HERO_VARIANTS[pickHeroVariant()];
     if (!v) return;
-    if (source.getAttribute('srcset') !== v.webp) {
-      source.setAttribute('srcset', v.webp);
-      img.setAttribute('src', v.jpg);
+    if (img.getAttribute('src') !== v.src) {
+      img.setAttribute('src', v.src);
       img.setAttribute('alt', v.alt);
     }
   }

@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Focused tool layout on a workbench — only the tools needed for spring work</title>
+  <desc id="desc">Top-down workbench shot showing the eight tools needed for residential spring replacement, suggesting focused specialization.</desc>
+  <defs>
+    <linearGradient id="bench" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d674a"/>
+      <stop offset="1" stop-color="#5a4830"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bench)"/>
+
+  <!-- Wood plank seams -->
+  <g stroke="#3a2818" stroke-width="2" opacity=".5">
+    <line x1="0" y1="180" x2="1600" y2="180"/>
+    <line x1="0" y1="380" x2="1600" y2="380"/>
+    <line x1="0" y1="580" x2="1600" y2="580"/>
+    <line x1="0" y1="780" x2="1600" y2="780"/>
+  </g>
+  <!-- Grain -->
+  <g stroke="#3a2818" stroke-width="1" opacity=".25" fill="none">
+    <path d="M0,90 Q400,82 800,92 Q1200,85 1600,95"/>
+    <path d="M0,290 Q400,280 800,294 Q1200,286 1600,300"/>
+    <path d="M0,490 Q400,484 800,496 Q1200,490 1600,500"/>
+    <path d="M0,690 Q400,684 800,696 Q1200,688 1600,700"/>
+    <path d="M0,860 Q400,852 800,866 Q1200,856 1600,868"/>
+  </g>
+
+  <!-- ===== Tool 1: Winding bar A (left, horizontal) ===== -->
+  <g transform="translate(120, 180)">
+    <rect width="360" height="20" rx="4" fill="#0f1a1f"/>
+    <rect width="360" height="6" fill="#3a525c" opacity=".5"/>
+    <circle cx="0" cy="10" r="14" fill="#1f3a44"/>
+    <text x="180" y="50" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">WINDING BAR · 1/2" × 18"</text>
+  </g>
+
+  <!-- ===== Tool 2: Winding bar B (parallel below) ===== -->
+  <g transform="translate(120, 260)">
+    <rect width="360" height="20" rx="4" fill="#0f1a1f"/>
+    <rect width="360" height="6" fill="#3a525c" opacity=".5"/>
+    <circle cx="0" cy="10" r="14" fill="#1f3a44"/>
+    <text x="180" y="50" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">WINDING BAR · 1/2" × 18"</text>
+  </g>
+
+  <!-- ===== Tool 3: Vise grips ===== -->
+  <g transform="translate(600, 200) rotate(-10)">
+    <!-- Jaws -->
+    <rect x="0" y="0" width="60" height="20" fill="#0f1a1f"/>
+    <rect x="60" y="-6" width="30" height="32" rx="6" fill="#0f1a1f"/>
+    <!-- Handle (yellow Irwin-style) -->
+    <rect x="60" y="2" width="180" height="16" rx="3" fill="#c8932a"/>
+    <rect x="60" y="2" width="180" height="4" fill="#e6b860"/>
+    <!-- Lower handle -->
+    <rect x="40" y="-14" width="40" height="14" rx="2" fill="#c8932a"/>
+    <text x="120" y="48" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">VISE GRIPS · 10WR</text>
+  </g>
+
+  <!-- ===== Tool 4: Drum wrench / box-end wrench ===== -->
+  <g transform="translate(900, 200) rotate(8)">
+    <rect width="220" height="18" fill="#1f3a44"/>
+    <rect width="220" height="4" fill="#3a525c"/>
+    <!-- Hex end left -->
+    <polygon points="0,9 -10,0 -10,18" fill="#1f3a44"/>
+    <circle cx="-4" cy="9" r="5" fill="#cfd6da"/>
+    <!-- Hex end right -->
+    <polygon points="220,9 230,0 230,18" fill="#1f3a44"/>
+    <circle cx="224" cy="9" r="5" fill="#cfd6da"/>
+    <text x="110" y="50" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">DRUM WRENCH · 7/16"</text>
+  </g>
+
+  <!-- ===== Tool 5: Socket set (compact tray) ===== -->
+  <g transform="translate(1240, 180)">
+    <rect width="280" height="100" rx="6" fill="#0f1a1f"/>
+    <!-- Sockets in tray -->
+    <g fill="#3a525c">
+      <circle cx="36" cy="34" r="20"/>
+      <circle cx="86" cy="34" r="18"/>
+      <circle cx="134" cy="34" r="16"/>
+      <circle cx="180" cy="34" r="14"/>
+      <circle cx="222" cy="34" r="12"/>
+      <circle cx="260" cy="34" r="10"/>
+    </g>
+    <g fill="#0f1a1f">
+      <circle cx="36" cy="34" r="10"/>
+      <circle cx="86" cy="34" r="9"/>
+      <circle cx="134" cy="34" r="8"/>
+      <circle cx="180" cy="34" r="7"/>
+      <circle cx="222" cy="34" r="6"/>
+      <circle cx="260" cy="34" r="5"/>
+    </g>
+    <!-- Ratchet handle below -->
+    <rect x="20" y="68" width="180" height="14" rx="3" fill="#cfd6da"/>
+    <rect x="200" y="64" width="32" height="22" rx="4" fill="#1f3a44"/>
+    <text x="140" y="130" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">SOCKET SET · 7/16 – 1/2"</text>
+  </g>
+
+  <!-- ===== Tool 6: Cordless drill ===== -->
+  <g transform="translate(180, 480) rotate(-6)">
+    <!-- Body -->
+    <rect x="0" y="0" width="200" height="80" rx="14" fill="#d94a2b"/>
+    <rect x="0" y="0" width="200" height="14" fill="#b73d22"/>
+    <!-- Grip -->
+    <rect x="70" y="80" width="50" height="100" rx="8" fill="#d94a2b"/>
+    <rect x="70" y="80" width="50" height="14" fill="#b73d22"/>
+    <!-- Battery pack -->
+    <rect x="60" y="180" width="70" height="20" rx="4" fill="#0f1a1f"/>
+    <!-- Chuck -->
+    <circle cx="200" cy="40" r="22" fill="#0f1a1f"/>
+    <circle cx="208" cy="40" r="10" fill="#cfd6da"/>
+    <!-- Bit -->
+    <rect x="218" y="36" width="60" height="8" fill="#3a525c"/>
+    <text x="100" y="240" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">DRILL · 18V</text>
+  </g>
+
+  <!-- ===== Tool 7: Level ===== -->
+  <g transform="translate(540, 540) rotate(4)">
+    <rect x="0" y="0" width="500" height="40" rx="4" fill="#c8932a"/>
+    <rect x="0" y="0" width="500" height="6" fill="#e6b860"/>
+    <rect x="0" y="34" width="500" height="6" fill="#9e7218"/>
+    <!-- Vial -->
+    <rect x="230" y="10" width="60" height="20" rx="10" fill="#3a525c"/>
+    <rect x="230" y="10" width="60" height="6" fill="#1f3a44"/>
+    <circle cx="260" cy="20" r="7" fill="#a8d8a8"/>
+    <!-- Side vials -->
+    <rect x="60" y="10" width="40" height="20" rx="10" fill="#3a525c"/>
+    <circle cx="80" cy="20" r="6" fill="#a8d8a8"/>
+    <rect x="400" y="10" width="40" height="20" rx="10" fill="#3a525c"/>
+    <circle cx="420" cy="20" r="6" fill="#a8d8a8"/>
+    <text x="250" y="68" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">24" LEVEL</text>
+  </g>
+
+  <!-- ===== Tool 8: Gloves ===== -->
+  <g transform="translate(1180, 520) rotate(-12)">
+    <!-- Glove 1 -->
+    <rect width="180" height="90" rx="20" fill="#3a2818"/>
+    <rect width="180" height="14" fill="#2a1d10"/>
+    <!-- Fingers -->
+    <rect x="160" y="8" width="30" height="20" rx="10" fill="#3a2818"/>
+    <rect x="160" y="32" width="30" height="20" rx="10" fill="#3a2818"/>
+    <rect x="160" y="56" width="30" height="20" rx="10" fill="#3a2818"/>
+    <rect x="156" y="80" width="24" height="16" rx="8" fill="#3a2818"/>
+    <!-- Glove 2 (slightly behind) -->
+    <g transform="translate(50, 70)">
+      <rect width="180" height="90" rx="20" fill="#5a4528"/>
+      <rect width="180" height="14" fill="#3a2818"/>
+      <rect x="160" y="8" width="30" height="20" rx="10" fill="#5a4528"/>
+      <rect x="160" y="32" width="30" height="20" rx="10" fill="#5a4528"/>
+      <rect x="160" y="56" width="30" height="20" rx="10" fill="#5a4528"/>
+    </g>
+    <text x="100" y="200" fill="#fafaf7" opacity=".55" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".15em" text-anchor="middle">LEATHER · LINED</text>
+  </g>
+
+  <!-- Title eyebrow -->
+  <text x="80" y="60" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing=".25em" opacity=".75">EIGHT TOOLS · ONE JOB</text>
+  <text x="80" y="100" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="42" font-weight="800" letter-spacing="-.01em">That's it. Specialization is the whole pitch.</text>
+
+  <!-- Bottom caption -->
+  <text x="800" y="860" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" opacity=".7">No oak panel showroom. No opener catalog. No upsell.</text>
+</svg>

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Salt-corroded garage door cable with visible fraying and rust pitting</title>
+  <desc id="desc">Macro illustration of a frayed and rusted garage door cable transitioning from intact to badly corroded. Tsawwassen shore softly out of focus behind.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1d9b8"/>
+      <stop offset="1" stop-color="#e8b88f"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fa6b1"/>
+      <stop offset="1" stop-color="#5a8590"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: golden-hour Tsawwassen -->
+  <rect x="0" y="0" width="1600" height="500" fill="url(#sky)"/>
+  <!-- Distant horizon mountains -->
+  <path d="M0,440 L160,400 L260,420 L380,390 L520,420 L660,400 L800,430 L940,395 L1100,425 L1260,410 L1400,420 L1600,400 L1600,500 L0,500 Z" fill="#5a6a78" opacity=".7"/>
+  <!-- Water -->
+  <rect x="0" y="500" width="1600" height="400" fill="url(#water)"/>
+  <!-- Water reflections -->
+  <g stroke="#ffffff" stroke-width="2" opacity=".25">
+    <line x1="0" y1="540" x2="1600" y2="540"/>
+    <line x1="0" y1="580" x2="1600" y2="580"/>
+    <line x1="0" y1="640" x2="1600" y2="640"/>
+    <line x1="0" y1="710" x2="1600" y2="710"/>
+    <line x1="0" y1="790" x2="1600" y2="790"/>
+  </g>
+
+  <!-- Background slightly blurred via opacity overlay -->
+  <rect width="1600" height="900" fill="#f4f0e8" opacity=".55"/>
+
+  <!-- Cable: horizontal, transitioning from intact on left to frayed/rusted on right -->
+  <g transform="translate(0, 420)">
+    <!-- INTACT LEFT SECTION -->
+    <g transform="translate(0, 0)">
+      <!-- Cable strands (twisted) -->
+      <g stroke="#cfd6da" stroke-width="6" fill="none">
+        <path d="M 0,40 Q 40,30 80,40 Q 120,50 160,40 Q 200,30 240,40 Q 280,50 320,40 Q 360,30 400,40 Q 440,50 480,40 Q 520,30 560,40"/>
+        <path d="M 0,50 Q 40,40 80,50 Q 120,60 160,50 Q 200,40 240,50 Q 280,60 320,50 Q 360,40 400,50 Q 440,60 480,50 Q 520,40 560,50"/>
+        <path d="M 0,60 Q 40,50 80,60 Q 120,70 160,60 Q 200,50 240,60 Q 280,70 320,60 Q 360,50 400,60 Q 440,70 480,60 Q 520,50 560,60"/>
+      </g>
+      <!-- Outer cable body -->
+      <rect x="0" y="32" width="560" height="40" rx="20" fill="#8d9aa1"/>
+      <g stroke="#cfd6da" stroke-width="2" opacity=".7" fill="none">
+        <path d="M0,42 Q20,36 40,42 Q60,48 80,42 Q100,36 120,42 Q140,48 160,42 Q180,36 200,42 Q220,48 240,42 Q260,36 280,42 Q300,48 320,42 Q340,36 360,42 Q380,48 400,42 Q420,36 440,42 Q460,48 480,42 Q500,36 520,42 Q540,48 560,42"/>
+        <path d="M0,62 Q20,56 40,62 Q60,68 80,62 Q100,56 120,62 Q140,68 160,62 Q180,56 200,62 Q220,68 240,62 Q260,56 280,62 Q300,68 320,62 Q340,56 360,62 Q380,68 400,62 Q420,56 440,62 Q460,68 480,62 Q500,56 520,62 Q540,68 560,62"/>
+      </g>
+      <!-- Slight rust starting -->
+      <circle cx="380" cy="44" r="6" fill="#c8932a" opacity=".5"/>
+      <circle cx="460" cy="58" r="4" fill="#c8932a" opacity=".4"/>
+    </g>
+
+    <!-- TRANSITION ZONE (rust growing) -->
+    <g transform="translate(560, 0)">
+      <rect x="0" y="32" width="320" height="40" rx="20" fill="#a8806a"/>
+      <!-- Rust mottle -->
+      <g fill="#8a4a28" opacity=".6">
+        <circle cx="20" cy="48" r="10"/>
+        <circle cx="50" cy="40" r="8"/>
+        <circle cx="80" cy="56" r="12"/>
+        <circle cx="110" cy="42" r="14"/>
+        <circle cx="140" cy="58" r="10"/>
+        <circle cx="170" cy="46" r="13"/>
+        <circle cx="200" cy="54" r="11"/>
+        <circle cx="230" cy="44" r="15"/>
+        <circle cx="260" cy="58" r="13"/>
+        <circle cx="290" cy="48" r="16"/>
+      </g>
+      <!-- Salt crystals (white specks) -->
+      <g fill="#ffffff" opacity=".75">
+        <circle cx="20" cy="56" r="2"/>
+        <circle cx="50" cy="46" r="2"/>
+        <circle cx="80" cy="38" r="2"/>
+        <circle cx="110" cy="56" r="2"/>
+        <circle cx="140" cy="42" r="2"/>
+        <circle cx="180" cy="60" r="2"/>
+        <circle cx="210" cy="44" r="2"/>
+        <circle cx="240" cy="56" r="2"/>
+        <circle cx="270" cy="42" r="2"/>
+        <circle cx="300" cy="58" r="2"/>
+      </g>
+    </g>
+
+    <!-- BADLY CORRODED + FRAYING SECTION -->
+    <g transform="translate(880, 0)">
+      <!-- Main rusted cable section -->
+      <rect x="0" y="32" width="280" height="40" rx="18" fill="#7a3818"/>
+      <!-- Deep rust pitting -->
+      <g fill="#3a1a08">
+        <circle cx="20" cy="40" r="6"/>
+        <circle cx="40" cy="56" r="8"/>
+        <circle cx="60" cy="44" r="5"/>
+        <circle cx="80" cy="58" r="7"/>
+        <circle cx="100" cy="40" r="9"/>
+        <circle cx="130" cy="54" r="6"/>
+        <circle cx="160" cy="42" r="8"/>
+        <circle cx="190" cy="56" r="7"/>
+        <circle cx="220" cy="44" r="9"/>
+        <circle cx="250" cy="60" r="6"/>
+      </g>
+      <!-- Rust highlights -->
+      <g fill="#c8602a" opacity=".5">
+        <circle cx="30" cy="50" r="4"/>
+        <circle cx="70" cy="46" r="5"/>
+        <circle cx="120" cy="50" r="4"/>
+        <circle cx="170" cy="48" r="5"/>
+        <circle cx="230" cy="50" r="4"/>
+      </g>
+
+      <!-- FRAYING STRANDS at the end -->
+      <g stroke="#7a3818" stroke-width="3" fill="none" stroke-linecap="round">
+        <!-- Splayed strands -->
+        <path d="M 280,52 Q 320,40 360,30"/>
+        <path d="M 280,48 Q 320,50 380,46"/>
+        <path d="M 280,56 Q 320,60 380,72"/>
+        <path d="M 280,44 Q 320,32 360,20"/>
+        <path d="M 280,60 Q 320,72 350,90"/>
+        <path d="M 280,50 Q 330,46 400,52"/>
+        <path d="M 280,46 Q 340,38 410,30"/>
+        <path d="M 280,54 Q 330,66 400,84"/>
+        <!-- Broken strands -->
+        <path d="M 280,42 Q 300,30 320,28 L 310,18"/>
+        <path d="M 280,62 Q 300,76 320,80 L 330,90"/>
+      </g>
+
+      <!-- Salt deposits clustered at frayed end -->
+      <g fill="#ffffff" opacity=".85">
+        <circle cx="200" cy="38" r="3"/>
+        <circle cx="210" cy="62" r="2"/>
+        <circle cx="220" cy="46" r="2"/>
+        <circle cx="230" cy="56" r="3"/>
+        <circle cx="240" cy="40" r="2"/>
+        <circle cx="250" cy="50" r="2"/>
+        <circle cx="260" cy="58" r="2"/>
+        <circle cx="270" cy="42" r="3"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="80" y="80" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing=".2em" opacity=".75">COASTAL · 4 KM FROM THE STRAIT</text>
+
+  <!-- Annotation arrow to frayed end -->
+  <g transform="translate(1340, 200)">
+    <rect x="-160" y="0" width="240" height="48" rx="24" fill="#d94a2b"/>
+    <text x="-40" y="32" text-anchor="middle" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="800">CABLE FAILED</text>
+    <path d="M -40 60 L -40 240" stroke="#d94a2b" stroke-width="4"/>
+    <polygon points="-40,260 -54,232 -26,232" fill="#d94a2b"/>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="800" y="820" text-anchor="middle" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" opacity=".75">Tsawwassen · Steveston · oceanfront White Rock — the cables go first.</text>
+</svg>
