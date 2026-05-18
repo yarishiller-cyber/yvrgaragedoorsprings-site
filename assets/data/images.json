@@ -1,6 +1,6 @@
 {
-  "manifest_version": 1,
-  "updated": "2026-05-17",
+  "manifest_version": 2,
+  "updated": "2026-05-18",
   "notes": "Single source of truth for every image used on the site. Each image lists its filename, where it's rendered, intended alt text, dimensions in pixels (for the 1x version), an art-direction prompt for the photographer/illustrator, and any conditional variants. Variants are swapped at runtime by personalize.js based on body state classes.",
 
   "formats": {
@@ -206,6 +206,25 @@
       "prompt": "Clean stylized cartographic map of Greater Vancouver. 16 cities marked with small navy pins. Strait of Georgia and Burrard Inlet in soft blue. North Shore mountains in muted green. Tsawwassen pin marked with a small dashed amber outline (hiring). No Google Maps watermark, no street labels, abstract style.",
       "alternative": "Could be an inline SVG to avoid loading a large image."
     }
+  },
+
+  "city": {
+    "burnaby.jpg":         { "use": "Burnaby city page hero", "dimensions": [1600, 896], "alt": "Quiet Burnaby residential street with split-level homes and Burnaby Mountain in the background" },
+    "coquitlam.jpg":       { "use": "Coquitlam city page hero", "dimensions": [1600, 896], "alt": "Coquitlam home on Burke Mountain with a forested west-coast backdrop" },
+    "delta.jpg":           { "use": "Delta city page hero", "dimensions": [1600, 896], "alt": "Suburban Delta home on a flat Fraser delta lot" },
+    "langley.jpg":         { "use": "Langley city page hero", "dimensions": [1600, 896], "alt": "Semi-rural Langley property with a three-car garage and long paved driveway" },
+    "maple-ridge.jpg":     { "use": "Maple Ridge city page hero", "dimensions": [1600, 896], "alt": "Maple Ridge home with forested Coast Mountain foothills behind" },
+    "new-westminster.jpg": { "use": "New Westminster city page hero", "dimensions": [1600, 896], "alt": "New Westminster heritage home on a steep hillside street near the Fraser River" },
+    "north-vancouver.jpg": { "use": "North Vancouver city page hero", "dimensions": [1600, 896], "alt": "North Vancouver hillside home with cedar trees and a glimpse of Burrard Inlet" },
+    "pitt-meadows.jpg":    { "use": "Pitt Meadows city page hero", "dimensions": [1600, 896], "alt": "Pitt Meadows home on a flat Fraser Valley lot with the Golden Ears in the distance" },
+    "port-coquitlam.jpg":  { "use": "Port Coquitlam city page hero", "dimensions": [1600, 896], "alt": "Older Port Coquitlam suburban street with established landscaping" },
+    "port-moody.jpg":      { "use": "Port Moody city page hero", "dimensions": [1600, 896], "alt": "West-coast Port Moody home with a view of the calm Burrard Inlet" },
+    "richmond.jpg":        { "use": "Richmond city page hero", "dimensions": [1600, 896], "alt": "Suburban Richmond home near Steveston with a wide flat driveway" },
+    "surrey.jpg":          { "use": "Surrey city page hero", "dimensions": [1600, 896], "alt": "Newer Surrey subdivision home with a three-car garage and wide driveway" },
+    "tsawwassen.jpg":      { "use": "Tsawwassen city page hero", "dimensions": [1600, 896], "alt": "Coastal Tsawwassen home one block from the Strait of Georgia" },
+    "vancouver.jpg":       { "use": "Vancouver city page hero", "dimensions": [1600, 896], "alt": "East Vancouver heritage character home on a tree-lined street with the North Shore mountains in the distance" },
+    "west-vancouver.jpg":  { "use": "West Vancouver city page hero", "dimensions": [1600, 896], "alt": "Upscale West Vancouver contemporary home with English Bay visible through the trees" },
+    "white-rock.jpg":      { "use": "White Rock city page hero", "dimensions": [1600, 896], "alt": "White Rock hillside home overlooking Semiahmoo Bay and the pier" }
   },
 
   "page-404": {

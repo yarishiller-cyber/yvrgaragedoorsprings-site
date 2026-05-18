@@ -723,11 +723,11 @@
        - state-holiday     when applyAvailability finds it's a BC stat day
      Hero image swaps based on these + the data-intent attribute. */
   const HERO_VARIANTS = {
-    'default':    { src: '/assets/img/hero/hero-emergency.svg',       alt: 'Broken garage door torsion spring close-up with visible coil gap' },
-    'cold':       { src: '/assets/img/hero/hero-emergency-cold.svg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
-    'night':      { src: '/assets/img/hero/hero-emergency-night.svg', alt: 'Garage door torsion spring under warm overhead garage light' },
-    'price':      { src: '/assets/img/hero/hero-pricing.svg',         alt: 'Three garage door spring tiers shown as price cards on a workbench' },
-    'diagnostic': { src: '/assets/img/hero/hero-diagnostic.svg',      alt: 'A garage door spring diagnostic checklist on a clipboard' }
+    'default':    { src: '/assets/img/hero/hero-emergency.jpg',       alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
+    'cold':       { src: '/assets/img/hero/hero-emergency-cold.jpg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
+    'night':      { src: '/assets/img/hero/hero-emergency-night.jpg', alt: 'Residential garage door torsion spring under a warm overhead garage light, after hours' },
+    'price':      { src: '/assets/img/hero/hero-pricing.jpg',         alt: 'Three sizes of garage door torsion spring laid out on a workbench, each tagged with its flat-rate price' },
+    'diagnostic': { src: '/assets/img/hero/hero-diagnostic.jpg',      alt: 'A garage door spring diagnostic checklist on a clipboard with three checkbox items' }
   };
 
   function pickHeroVariant() {
