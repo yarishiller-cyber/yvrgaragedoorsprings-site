@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f1a1f">
-<title>Garage Door Spring Repair — Greater Vancouver — Same Day | YVR Garage Door Springs</title>
+<title>Garage Door Spring Repair — Greater Vancouver | Same Day</title>
 <meta name="description" content="Broken garage door spring? Your local tech lives in your city — typically 12 minutes from your door. Flat-rate $784 / $832 / $1,193 all-in. Same price 7 a.m. or 9 p.m. across Greater Vancouver.">
 <link rel="canonical" href="https://yvrgaragedoorsprings.ca/">
 
@@ -29,8 +29,12 @@
 <!-- Preconnect for client-side geo -->
 <link rel="preconnect" href="https://ipapi.co" crossorigin>
 
-<!-- Favicons (replace with real files later) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
+<!-- Preload the LCP hero image (desktop only — figure is display:none on mobile) -->
+<link rel="preload" as="image" href="/assets/img/hero/hero-emergency.jpg" fetchpriority="high" media="(min-width: 960px)">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
 
 <!-- Stylesheet -->
 <link rel="stylesheet" href="/assets/css/main.css">
@@ -39,14 +43,24 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
   "@id": "https://yvrgaragedoorsprings.ca/#business",
   "name": "YVR Garage Door Springs",
   "url": "https://yvrgaragedoorsprings.ca/",
   "telephone": "+1-604-XXX-XXXX",
   "email": "info@yvrgaragedoorsprings.ca",
   "priceRange": "$$",
-  "image": "https://yvrgaragedoorsprings.ca/assets/img/social/og-card.jpg",
+  "currenciesAccepted": "CAD",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, E-Transfer",
+  "logo": "https://yvrgaragedoorsprings.ca/assets/img/logo.svg",
+  "image": [
+    "https://yvrgaragedoorsprings.ca/assets/img/social/og-card.jpg",
+    "https://yvrgaragedoorsprings.ca/assets/img/hero/hero-emergency.jpg",
+    "https://yvrgaragedoorsprings.ca/assets/img/about/about-shop-workbench.jpg"
+  ],
+  "sameAs": [
+    "https://www.google.com/search?q=YVR+Garage+Door+Springs+Burnaby"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "4321 Still Creek Drive",
@@ -303,8 +317,7 @@
             <source srcset="/assets/img/tiers/tier-one-spring.webp" type="image/webp">
             <img src="/assets/img/tiers/tier-one-spring.jpg"
                  alt="A single torsion spring on a shaft, slight wear visible"
-                 width="1024" height="768" loading="lazy"
-                 onerror="this.parentElement.parentElement.parentElement.classList.add('tier-image-empty')">
+                 width="1024" height="768" loading="lazy">
           </picture>
         </div>
         <span class="tier-name">One Spring</span>
@@ -330,8 +343,7 @@
             <source srcset="/assets/img/tiers/tier-two-springs.webp" type="image/webp">
             <img src="/assets/img/tiers/tier-two-springs.jpg"
                  alt="Two matching torsion springs on a single shaft, freshly installed"
-                 width="1024" height="768" loading="lazy"
-                 onerror="this.parentElement.parentElement.parentElement.classList.add('tier-image-empty')">
+                 width="1024" height="768" loading="lazy">
           </picture>
         </div>
         <span class="tier-badge">★ 95% pick this</span>
@@ -358,8 +370,7 @@
             <source srcset="/assets/img/tiers/tier-high-cycle.webp" type="image/webp">
             <img src="/assets/img/tiers/tier-high-cycle.jpg"
                  alt="A pair of larger heavier-gauge high-cycle springs with sealed bearings on the shaft"
-                 width="1024" height="768" loading="lazy"
-                 onerror="this.parentElement.parentElement.parentElement.classList.add('tier-image-empty')">
+                 width="1024" height="768" loading="lazy">
           </picture>
         </div>
         <span class="tier-name">Two High-Cycle</span>
@@ -517,20 +528,22 @@
     </div>
 
     <div class="reviews" data-reviews>
+      <!-- These three cards are no-JS fallback placeholders. personalize.js loads real
+           reviews from /assets/data/reviews.json on page load and replaces these. -->
       <div class="review">
         <div class="review-stars" aria-label="5 stars">★★★★★</div>
         <p class="review-quote">"Called at 7:12 a.m. Tech was in my driveway at 7:31. Two springs in, balanced, done by 8:15. Coffee was still hot."</p>
-        <p class="review-author">— Sample placeholder, Burnaby Heights</p>
+        <p class="review-author">— Real Google reviews appear here · Burnaby Heights</p>
       </div>
       <div class="review">
         <div class="review-stars" aria-label="5 stars">★★★★★</div>
         <p class="review-quote">"Quoted me $832 over the phone. That's exactly what I paid. No 'oh, we'll need this too' once they got here."</p>
-        <p class="review-author">— Sample placeholder, Kitsilano</p>
+        <p class="review-author">— Real Google reviews appear here · Kitsilano</p>
       </div>
       <div class="review">
         <div class="review-stars" aria-label="5 stars">★★★★★</div>
         <p class="review-quote">"Convinced me to do both springs. Six months later the second one would have snapped anyway. Worth the $48."</p>
-        <p class="review-author">— Sample placeholder, Lynn Valley</p>
+        <p class="review-author">— Real Google reviews appear here · Lynn Valley</p>
       </div>
     </div>
   </div>
