@@ -251,11 +251,54 @@
     qsa('[data-sms]', scope).forEach(el => el.setAttribute('href', 'sms:' + PHONE_TEL + '?body=' + encodeURIComponent(SMS_BODY)));
   }
 
-  /* ---- 2. URL-param DTR ---- */
+  /* ---- 2. URL-param DTR ----
+     Infers intent from explicit ?intent= param OR from the search query that
+     brought the user here. We sniff both Google's q= (in document.referrer) and
+     our own canonical ?q= override. Anything we can't classify falls through and
+     the hero stays in default mode. */
+  const INTENT_KEYWORDS = {
+    // Hot, emergency-leaning queries
+    emergency:  ['broken', 'broke', 'snapped', 'snap', 'bang', 'loud', 'wont open', "won't open", 'wont close', "won't close", 'stuck', 'emergency'],
+    // Cost/research queries
+    price:      ['cost', 'price', 'how much', 'quote', 'estimate', 'cheap', 'cheapest'],
+    // How-it-works / diagnostic
+    diagnostic: ['vs', 'difference', 'which', 'diagnose', 'diagnos', 'why', 'symptom', 'how do i know'],
+    // Cold/weather
+    cold:       ['cold', 'frozen', 'frost', 'winter', 'snow'],
+    // Coastal
+    coastal:    ['salt', 'rust', 'corroded', 'corrosion', 'coastal', 'oceanfront'],
+  };
+  function inferIntentFromQuery(qs) {
+    if (!qs) return null;
+    const lower = qs.toLowerCase();
+    for (const intent in INTENT_KEYWORDS) {
+      for (const kw of INTENT_KEYWORDS[intent]) {
+        if (lower.indexOf(kw) !== -1) return intent;
+      }
+    }
+    return null;
+  }
+  function inferIntentFromReferrer() {
+    try {
+      if (!document.referrer) return null;
+      const ref = new URL(document.referrer);
+      // Google / Bing / DuckDuckGo all use q=
+      const q = ref.searchParams.get('q');
+      return inferIntentFromQuery(q);
+    } catch (e) { return null; }
+  }
+
   function applyDTR() {
     const params = new URLSearchParams(location.search);
-    const intent = (params.get('intent') || '').toLowerCase();
+    const intentParam = (params.get('intent') || '').toLowerCase();
+    const qParam = params.get('q');
     const cityParam = params.get('city');
+
+    // Explicit ?intent= wins. Then ?q=. Then the search-engine referrer.
+    const intent =
+      intentParam ||
+      inferIntentFromQuery(qParam) ||
+      inferIntentFromReferrer();
 
     if (intent) {
       document.body.setAttribute('data-intent', intent.replace(/[^a-z]/g, ''));
@@ -301,6 +344,8 @@
     if (source !== 'geo' && source !== 'geo-postal') {
       writeStoredCity(slug);
     }
+    // Hero moment may want to mention the new city / new eta
+    try { renderHeroMoment(); } catch (e) {}
     // Reflect in URL (no reload) for shareability — but only if source isn't already URL
     if (source !== 'url' && 'URLSearchParams' in window) {
       try {
@@ -327,7 +372,7 @@
         const tb = (b === originSlug) ? -1 : (times[b] || 99);
         return ta - tb;
       });
-      formatForOther = (slug) => '~' + (times[slug] || '?') + ' min to ' + CITIES[originSlug].display;
+      formatForOther = (slug) => 'Tech ~' + (times[slug] || '?') + ' min from you';
     } else {
       // Default order — alphabetical-ish by our CITIES definition
       order = cities;
@@ -355,20 +400,20 @@
 
         if (isOrigin) {
           if (status.hiring) {
-            meta.innerHTML = '<strong>Your area</strong> · hiring tech · Delta crew covers, ~' + status.coverEta + ' min';
+            meta.innerHTML = '<strong>You’re here</strong> &middot; hiring local tech &middot; Delta crew covers, ~' + status.coverEta + ' min';
           } else {
-            meta.innerHTML = '<strong>Your area</strong> · local tech, ~' + city.localEta + ' min';
+            meta.innerHTML = '<strong>You’re here</strong> &middot; local tech ~' + city.localEta + ' min away';
           }
         } else if (status.hiring) {
           if (formatForOther) {
-            meta.innerHTML = formatForOther(slug) + ' · <em>hiring local tech</em>';
+            meta.innerHTML = formatForOther(slug) + ' &middot; <em>hiring local tech</em>';
           } else {
-            meta.textContent = 'Currently hiring · Delta crew covers';
+            meta.textContent = 'Currently hiring — Delta crew covers';
           }
         } else if (formatForOther) {
           meta.textContent = formatForOther(slug);
         } else {
-          meta.textContent = '~' + city.localEta + ' min';
+          meta.textContent = 'Local tech ~' + city.localEta + ' min from your door';
         }
 
         a.appendChild(name);
@@ -519,6 +564,7 @@
       }
     }
     swapHeroImage();
+    try { renderHeroMoment(); } catch (e) {}
   }
 
   /* ---- 8. Sticky bottom call bar ---- */
@@ -766,6 +812,7 @@
           banner.classList.remove('active');
           document.body.classList.remove('state-cold');
           swapHeroImage();
+          try { renderHeroMoment(); } catch (e) {}
           return;
         }
         const msg = data.message ||
@@ -775,10 +822,133 @@
         document.body.classList.add('state-cold');
         wireContacts(banner);
         swapHeroImage();
+        try { renderHeroMoment(); } catch (e) {}
       })
       .catch(() => {
         // Silent fail — banner stays hidden
       });
+  }
+
+  /* ---- 12. Dynamic hero "moment" ----
+     Picks a one-line, time/day/weather/intent/city-aware copy variant and renders
+     it into [data-hero-moment]. Re-renders every time origin city, intent, or
+     weather/availability state changes. Designed to feel like the page knows what
+     time it is and where the user is. */
+
+  function formatTime(d) {
+    let h = d.getHours();
+    const m = d.getMinutes();
+    const ampm = h >= 12 ? 'p.m.' : 'a.m.';
+    h = h % 12; if (h === 0) h = 12;
+    return h + ':' + String(m).padStart(2, '0') + ' ' + ampm;
+  }
+  function timeBucket(h) {
+    if (h < 7)  return 'predawn';        // 12am–6:59am
+    if (h < 9)  return 'morning-rush';   // 7–8:59am
+    if (h < 12) return 'late-morning';   // 9–11:59am
+    if (h < 15) return 'midday';         // 12–2:59pm
+    if (h < 18) return 'afternoon';      // 3–5:59pm
+    if (h < 21) return 'evening';        // 6–8:59pm
+    return 'late';                       // 9pm+
+  }
+  function dayLabel(d) {
+    return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()];
+  }
+
+  // Each moment is {when:fn, copy:str|fn(ctx)} — first matching variant wins.
+  // Use {city}, {time}, {day} placeholders.
+  const MOMENTS = [
+    // --- Search-intent overrides (URL param ?intent=...) ---
+    { when: ctx => ctx.intent === 'emergency',
+      copy: '<strong>Stay back from the spring.</strong> A wound torsion stores 200–400 lb of force. If it just snapped: leave the door closed, pull the red opener cord, then call us.' },
+    { when: ctx => ctx.intent === 'price',
+      copy: 'You came in looking for a number. <strong>$784 / $832 / $1,193</strong>, all-in, plus GST. The middle tier is what 95% of customers pick.' },
+    { when: ctx => ctx.intent === 'diagnostic',
+      copy: 'Run the 30-second test: pull the red opener cord, lift the door by hand to about 3 feet. Heavy in your hand = spring. Light = opener.' },
+    { when: ctx => ctx.intent === 'coastal',
+      copy: 'Within four km of the Strait? Cables go first. We carry stainless on the Richmond, Delta, Tsawwassen and White Rock vans by default — same flat-rate.' },
+    { when: ctx => ctx.intent === 'cold' && !ctx.cold,
+      copy: 'Cold-weather springs aren\'t a Vancouver myth. Steel goes brittle near freezing — and one bad night is what finishes a spring that\'s already at end-of-life.' },
+
+    // --- "urgent" is the default body data-intent — only fires when we have NO other strong signal ---
+    // (kept as a no-op so the time-bucket variants below get to run instead)
+    { when: ctx => ctx.intent === 'urgent' && false, copy: '' },
+
+    // --- Cold-snap overrides (state-cold body class) ---
+    { when: ctx => ctx.cold && ctx.bucket === 'predawn',
+      copy: ctx => 'It\'s ' + ctx.timeStr + ' and the steel is brittle. Cold snaps are when we get the bang calls. <strong>Book now;</strong> first crew rolls at 7 a.m.' },
+    { when: ctx => ctx.cold,
+      copy: ctx => 'Cold snap on the South Coast. The metallurgy doesn\'t lie — call volume roughly doubles for 3–5 days after every dip below 0°C. Pre-book to skip the queue.' },
+
+    // --- After-hours / late-night ---
+    { when: ctx => ctx.afterHours && ctx.bucket === 'late',
+      copy: ctx => 'It\'s ' + ctx.timeStr + ' and we\'re technically closed. <strong>Text a photo</strong> — on-call tech replies inside 2 hours and we\'re back on the road at 7 a.m.' },
+    { when: ctx => ctx.afterHours,
+      copy: ctx => 'It\'s ' + ctx.timeStr + ', after-hours. Voicemail right now. Text a photo and we\'ll reply tomorrow at 7 a.m. — <strong>same price as any other hour.</strong>' },
+
+    // --- Friday late / weekend setup ---
+    { when: ctx => ctx.day === 5 && ctx.bucket === 'evening',
+      copy: ctx => 'Friday ' + ctx.timeStr + ' Don\'t let a busted spring eat your weekend — last dispatch slot tonight, then we\'re back Saturday at 7 a.m. (<strong>same price as Tuesday</strong>).' },
+    { when: ctx => ctx.day === 5 && (ctx.bucket === 'afternoon' || ctx.bucket === 'midday'),
+      copy: ctx => 'Friday ' + ctx.timeStr + ' If you want this fixed before the weekend, call before 4 — that\'s when the road clogs up.' },
+
+    // --- Saturday / Sunday ---
+    { when: ctx => ctx.day === 6 && (ctx.bucket === 'morning-rush' || ctx.bucket === 'late-morning'),
+      copy: ctx => 'Saturday morning, ' + ctx.timeStr + ' Yes we work Saturdays. <strong>Same price as Tuesday morning.</strong> Coffee\'s on us when we get there. (No it\'s not.)' },
+    { when: ctx => ctx.day === 0,
+      copy: ctx => 'Sunday ' + ctx.timeStr + ' We work Sundays too. Same price. No "weekend rate," no diagnostic fee, no surprises.' },
+
+    // --- Weekday time-buckets ---
+    { when: ctx => ctx.bucket === 'predawn',
+      copy: ctx => 'It\'s ' + ctx.timeStr + ' on a ' + ctx.dayStr + ' and we\'re already loaded up. If the bang was just now, call — first crew rolls at 7 a.m.' },
+    { when: ctx => ctx.bucket === 'morning-rush',
+      copy: ctx => ctx.dayStr + ' ' + ctx.timeStr + ' 40% of our calls land between 6:30 and 8:30 a.m. — heading out, hitting the button, hearing the bang, freezing. You\'re not alone.' },
+    { when: ctx => ctx.bucket === 'late-morning',
+      copy: ctx => ctx.dayStr + ' ' + ctx.timeStr + ' Mid-morning is quiet on the road. Call now if you want a same-day slot.' },
+    { when: ctx => ctx.bucket === 'midday',
+      copy: ctx => ctx.dayStr + ' ' + ctx.timeStr + ' Lunch-hour calls usually mean the spring went overnight and you\'ve been driving around the issue. Two-spring fix takes us ~45 min in the driveway.' },
+    { when: ctx => ctx.bucket === 'afternoon',
+      copy: ctx => ctx.dayStr + ' ' + ctx.timeStr + ' School pickup\'s coming. We can be in the driveway before the bus is.' },
+    { when: ctx => ctx.bucket === 'evening',
+      copy: ctx => ctx.dayStr + ' ' + ctx.timeStr + ' Live dispatch until 9 p.m. — <strong>same price as 7 a.m.</strong> No "after-hours" line on the invoice.' },
+
+    // --- Fallback ---
+    { when: () => true,
+      copy: ctx => 'Live dispatch in ' + ctx.cityDisplay + '. Local tech, ~' + ctx.eta + ' minutes from your driveway.' }
+  ];
+
+  function renderHeroMoment() {
+    const el = qs('[data-hero-moment]');
+    if (!el) return;
+    const now = new Date();
+    const hour = now.getHours();
+    const ctx = {
+      now: now,
+      hour: hour,
+      day: now.getDay(),
+      bucket: timeBucket(hour),
+      timeStr: formatTime(now),
+      dayStr: dayLabel(now),
+      cold: document.body.classList.contains('state-cold'),
+      afterHours: document.body.classList.contains('state-after-hours'),
+      holiday: document.body.classList.contains('state-holiday'),
+      intent: (document.body.getAttribute('data-intent') || '').toLowerCase(),
+      cityDisplay: _originCity ? CITIES[_originCity].display : 'Greater Vancouver',
+      eta: _originCity ? (CITIES[_originCity].localEta || 12) : 12
+    };
+    let copy;
+    for (const m of MOMENTS) {
+      if (m.when(ctx)) {
+        copy = typeof m.copy === 'function' ? m.copy(ctx) : m.copy;
+        break;
+      }
+    }
+    if (!copy) return;
+    el.innerHTML = copy
+      .replace(/\{city\}/g, ctx.cityDisplay)
+      .replace(/\{time\}/g, ctx.timeStr)
+      .replace(/\{day\}/g, ctx.dayStr);
+    el.removeAttribute('hidden');
   }
 
   /* ---- Init ---- */
@@ -802,8 +972,11 @@
     diagnosis();
     quoteForm();
     coldSnap();
-    loadReviews();       // async — independent of geo
-    detectGeo();         // async — last
+    renderHeroMoment();   // first pass — uses whatever state we have synchronously
+    loadReviews();        // async — independent of geo
+    detectGeo();          // async — last
+    // Re-render the moment line every minute so the clock advances live
+    setInterval(renderHeroMoment, 60 * 1000);
   }
 
   if (document.readyState === 'loading') {
