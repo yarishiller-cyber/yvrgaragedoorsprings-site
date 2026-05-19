@@ -406,14 +406,21 @@
     const now = Date.now();
     const hour = new Date().getHours();
     const target = _busyTargetCount(hour);
+    // Drop any prior busy assignment on the user's origin city — their tile
+    // stays gold ("your city") no matter what the carousel says.
+    if (_originCity && schedule[_originCity]) {
+      delete schedule[_originCity];
+      _busySave(schedule);
+    }
     const current = Object.keys(schedule).filter(s => schedule[s] > now);
 
     if (current.length >= target) { _busySave(schedule); return schedule; }
 
     // Pick more cities to make busy. Tsawwassen is already flagged "hiring local tech"
     // and the Delta crew can't be in two places, so we keep Tsawwassen+Delta off the busy roster.
+    // Also exclude the user's own origin city — their tile stays gold no matter what.
     const eligible = Object.keys(CITIES)
-      .filter(s => s !== 'tsawwassen' && s !== 'delta')
+      .filter(s => s !== 'tsawwassen' && s !== 'delta' && s !== _originCity)
       .filter(s => !schedule[s] || schedule[s] <= now);
 
     // Fisher-Yates shuffle
@@ -466,19 +473,61 @@
     const busy = manageBusySchedule();
     const now = Date.now();
 
-    // Small SVG van glyph used inside every tile. Defined here so the markup is
-    // identical to what's in /assets/img/tech-van.svg (server-fetch would also work
-    // but keeping it inline saves a request and lets the SVG inherit currentColor).
-    const VAN_SVG = '<svg viewBox="0 0 64 40" aria-hidden="true" focusable="false">'
-      + '<circle cx="14" cy="32" r="5" fill="#0f1a1f"/><circle cx="14" cy="32" r="2" fill="#cfd6da"/>'
-      + '<circle cx="50" cy="32" r="5" fill="#0f1a1f"/><circle cx="50" cy="32" r="2" fill="#cfd6da"/>'
-      + '<path d="M 3 30 L 3 17 Q 3 13 7 13 L 28 13 L 33 6 Q 35 5 38 5 L 56 5 Q 60 5 60 9 L 60 30 Z" fill="currentColor" stroke="#0f1a1f" stroke-width="1.5" stroke-linejoin="round"/>'
-      + '<path d="M 30 13 L 34 8 Q 35 7 37 7 L 44 7 L 44 13 Z" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>'
-      + '<rect x="46" y="8" width="11" height="5" rx="0.5" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>'
-      + '<rect x="7" y="18" width="20" height="7" rx="0.5" fill="#fafaf7" stroke="#0f1a1f" stroke-width="0.5"/>'
-      + '<text x="17" y="23.5" text-anchor="middle" fill="#d94a2b" font-family="system-ui,sans-serif" font-weight="800" font-size="4.5" letter-spacing="0.05em">YVR · SPRINGS</text>'
-      + '<circle cx="58" cy="22" r="1.5" fill="#ffd97a"/>'
-      + '<ellipse cx="32" cy="37" rx="28" ry="1.5" fill="#0f1a1f" opacity="0.18"/>'
+    // Inline panel-van SVG (Ford Transit / Mercedes Sprinter silhouette).
+    // currentColor on the body so each tile state recolours the van via CSS:
+    //   AVAILABLE → green, BUSY → red, ORIGIN → gold, HIRING → faded steel-blue.
+    // Mirror /assets/img/tech-van.svg — keeping it inline saves a fetch and lets
+    // it inherit currentColor cleanly.
+    const VAN_SVG =
+      '<svg viewBox="0 0 84 44" aria-hidden="true" focusable="false">'
+      + '<defs><linearGradient id="vanBodyGrad" x1="0" y1="0" x2="0" y2="1">'
+      +   '<stop offset="0" stop-color="white" stop-opacity="0.22"/>'
+      +   '<stop offset="1" stop-color="black" stop-opacity="0.14"/>'
+      + '</linearGradient></defs>'
+      // Wheels
+      + '<circle cx="18" cy="34" r="6.5" fill="#0f1a1f"/>'
+      + '<circle cx="18" cy="34" r="2.6" fill="#cfd6da"/>'
+      + '<circle cx="18" cy="34" r="1.1" fill="#0f1a1f"/>'
+      + '<circle cx="68" cy="34" r="6.5" fill="#0f1a1f"/>'
+      + '<circle cx="68" cy="34" r="2.6" fill="#cfd6da"/>'
+      + '<circle cx="68" cy="34" r="1.1" fill="#0f1a1f"/>'
+      // Body
+      + '<path d="M 2 32 L 2 13 Q 2 10 5 10 L 13 10 L 17 4 Q 18 3 20 3 L 78 3 Q 82 3 82 7 L 82 32 Z" fill="currentColor" stroke="#0f1a1f" stroke-width="1.5" stroke-linejoin="round"/>'
+      + '<path d="M 2 32 L 2 13 Q 2 10 5 10 L 13 10 L 17 4 Q 18 3 20 3 L 78 3 Q 82 3 82 7 L 82 32 Z" fill="url(#vanBodyGrad)"/>'
+      // Windshield
+      + '<path d="M 14 10 L 18 4.5 Q 19 4 21 4 L 26 4 L 26 10 Z" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.7"/>'
+      // Cab door window
+      + '<rect x="28" y="6" width="9" height="4.2" rx="0.4" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.5"/>'
+      // Cargo window
+      + '<rect x="40" y="6.2" width="14" height="3.8" rx="0.4" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.5"/>'
+      // Door seams
+      + '<line x1="40" y1="10" x2="40" y2="32" stroke="#0f1a1f" stroke-width="0.9" opacity="0.45"/>'
+      + '<rect x="42" y="22" width="3" height="0.9" fill="#0f1a1f" opacity="0.7"/>'
+      + '<line x1="69" y1="10" x2="69" y2="32" stroke="#0f1a1f" stroke-width="0.9" opacity="0.45"/>'
+      // Wheel arches
+      + '<path d="M 11 32 A 7 7 0 0 1 25 32 L 25 33 L 11 33 Z" fill="#0f1a1f"/>'
+      + '<path d="M 61 32 A 7 7 0 0 1 75 32 L 75 33 L 61 33 Z" fill="#0f1a1f"/>'
+      // Decal
+      + '<rect x="42" y="14" width="22" height="6.4" rx="0.5" fill="#fafaf7" stroke="#0f1a1f" stroke-width="0.4"/>'
+      + '<text x="53" y="19" text-anchor="middle" fill="#d94a2b" font-family="system-ui, sans-serif" font-weight="800" font-size="4.4" letter-spacing="0.04em">YVR · SPRINGS</text>'
+      // Body trim
+      + '<line x1="5" y1="28" x2="80" y2="28" stroke="#0f1a1f" stroke-width="0.4" opacity="0.35"/>'
+      // Front lights
+      + '<rect x="3.2" y="19" width="2.8" height="3.4" rx="0.6" fill="#ffd97a" stroke="#0f1a1f" stroke-width="0.4"/>'
+      + '<rect x="3.2" y="23.5" width="2" height="1.2" rx="0.3" fill="#e8a23b" stroke="#0f1a1f" stroke-width="0.3"/>'
+      // Grille hint
+      + '<rect x="6.5" y="20" width="6" height="2.6" rx="0.4" fill="#0f1a1f" opacity="0.18"/>'
+      + '<line x1="7" y1="21" x2="12" y2="21" stroke="#0f1a1f" stroke-width="0.4" opacity="0.55"/>'
+      + '<line x1="7" y1="22" x2="12" y2="22" stroke="#0f1a1f" stroke-width="0.4" opacity="0.55"/>'
+      // Side mirror
+      + '<path d="M 17 8 L 14.5 8 L 13.5 10" fill="none" stroke="#0f1a1f" stroke-width="0.9"/>'
+      + '<rect x="13" y="8.3" width="1.6" height="2" fill="#0f1a1f"/>'
+      // Door handle
+      + '<rect x="30" y="9" width="3" height="0.8" fill="#0f1a1f" opacity="0.7"/>'
+      // Rear bumper
+      + '<rect x="78" y="29" width="4.5" height="1.8" rx="0.4" fill="#0f1a1f" opacity="0.55"/>'
+      // Ground shadow
+      + '<ellipse cx="42" cy="40.5" rx="40" ry="1.5" fill="#0f1a1f" opacity="0.18"/>'
       + '</svg>';
 
     containers.forEach(container => {
@@ -521,14 +570,24 @@
         const meta = document.createElement('span');
         meta.className = 'city-tile-meta';
 
-        // Hiring city always shows its own "HIRING LOCAL TECH" badge (uppercase, blue)
-        // regardless of whether the user is the origin. Distinct visual from the
-        // amber BUSY badge so the two states never get confused.
+        // Status badge — colour-coded per state so the badge reinforces the van colour.
+        // Priority order: hiring > origin > (busy applied later) > available.
+        const isBusyCandidate = busy[slug] && busy[slug] > now && !status.hiring;
         if (status.hiring) {
           const hb = document.createElement('span');
           hb.className = 'city-tile-hiring-badge';
           hb.textContent = 'Hiring local tech';
           a.appendChild(hb);
+        } else if (isOrigin && !isBusyCandidate) {
+          const ob = document.createElement('span');
+          ob.className = 'city-tile-origin-badge';
+          ob.textContent = '★ Your city';
+          a.appendChild(ob);
+        } else if (!isBusyCandidate) {
+          const ab = document.createElement('span');
+          ab.className = 'city-tile-available-badge';
+          ab.textContent = '● Available';
+          a.appendChild(ab);
         }
 
         if (isOrigin) {
@@ -549,11 +608,12 @@
           meta.textContent = '~' + city.localEta + ' min local tech';
         }
 
-        // Busy indicator — applies ONLY to non-hiring cities. The hiring state is
-        // permanent (no resident tech yet) and uses its own blue treatment, while
-        // the busy state is temporary (tech is on a job right now) and uses amber.
+        // Busy indicator — applies ONLY to non-hiring, non-origin cities. Origin
+        // always wears gold ("your city") even if its local tech is technically
+        // mid-job, because nobody wants the homepage screaming 'your tech is busy
+        // right now' at them. Hiring has its own steel-blue treatment.
         const busyUntil = busy[slug];
-        if (busyUntil && busyUntil > now && !status.hiring) {
+        if (busyUntil && busyUntil > now && !status.hiring && !isOrigin) {
           a.classList.add('city-tile-busy');
           const dot = document.createElement('span');
           dot.className = 'city-tile-busy-dot';
