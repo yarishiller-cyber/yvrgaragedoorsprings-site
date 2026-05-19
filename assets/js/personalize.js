@@ -922,6 +922,8 @@
     if (!el) return;
     const now = new Date();
     const hour = now.getHours();
+    const pageCity = document.body.getAttribute('data-city'); // set on city pages only
+    const onCityPage = pageCity && CITIES[pageCity];
     const ctx = {
       now: now,
       hour: hour,
@@ -933,9 +935,25 @@
       afterHours: document.body.classList.contains('state-after-hours'),
       holiday: document.body.classList.contains('state-holiday'),
       intent: (document.body.getAttribute('data-intent') || '').toLowerCase(),
-      cityDisplay: _originCity ? CITIES[_originCity].display : 'Greater Vancouver',
-      eta: _originCity ? (CITIES[_originCity].localEta || 12) : 12
+      cityDisplay: _originCity ? CITIES[_originCity].display : (onCityPage ? CITIES[pageCity].display : 'Greater Vancouver'),
+      eta: _originCity ? (CITIES[_originCity].localEta || 12) : (onCityPage ? (CITIES[pageCity].localEta || 12) : 12),
+      pageCity: pageCity,
+      pageCityDisplay: onCityPage ? CITIES[pageCity].display : null,
+      // If we know both origin and page city, calculate drive time between them
+      crossCity: (onCityPage && _originCity && _originCity !== pageCity && DRIVE_TIMES[_originCity])
+        ? { eta: DRIVE_TIMES[_originCity][pageCity], from: CITIES[_originCity].display, to: CITIES[pageCity].display }
+        : null
     };
+
+    // City-page cross-context override: user is reading a different city's page than the one they're in
+    if (ctx.crossCity) {
+      el.innerHTML = 'You\'re in <strong>' + ctx.crossCity.from + '</strong>, reading the <strong>' + ctx.crossCity.to + '</strong> page. '
+        + (ctx.crossCity.eta ? 'About ' + ctx.crossCity.eta + ' min apart in normal traffic — ' : '')
+        + 'pricing\'s identical on both sides of the bridge.';
+      el.removeAttribute('hidden');
+      return;
+    }
+
     let copy;
     for (const m of MOMENTS) {
       if (m.when(ctx)) {
