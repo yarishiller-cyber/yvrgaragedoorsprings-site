@@ -27,137 +27,149 @@
     jobsThisMonth: null          // manual update on 1st of month, e.g. '142'
   };
 
-  /* ---- Cities (display + slug + local-tech ETA when present) ----
-     LOCAL_ETA = "your local tech, ~X min" for residents of that city.
-     If TECH_STATUS[city].hiring === true, we don't have a local tech yet —
+  /* ---- Cities ----
+     Each city has:
+       display     — user-facing name
+       localEta    — "your local tech is somewhere in the city, average ~X min to your driveway"
+                     This MUST be ≤ the smallest drive-time TO this city from any neighbor,
+                     so the user's local tile is always (or ties for) the closest.
+       centerAddr  — representative city-centre reference point used to compute drive times.
+                     Documentary only — not read by code.
+
+     If TECH_STATUS[city].hiring === true, the city has no resident tech yet —
      coverage comes from coverCity at coverEta. */
   const CITIES = {
-    'vancouver':       { display: 'Vancouver',       localEta: 12 },
-    'burnaby':         { display: 'Burnaby',         localEta: 12 },
-    'richmond':        { display: 'Richmond',        localEta: 15 },
-    'surrey':          { display: 'Surrey',          localEta: 12 },
-    'coquitlam':       { display: 'Coquitlam',       localEta: 15 },
-    'port-coquitlam':  { display: 'Port Coquitlam',  localEta: 15 },
-    'port-moody':      { display: 'Port Moody',      localEta: 15 },
-    'north-vancouver': { display: 'North Vancouver', localEta: 12 },
-    'west-vancouver':  { display: 'West Vancouver',  localEta: 15 },
-    'new-westminster': { display: 'New Westminster', localEta: 12 },
-    'delta':           { display: 'Delta',           localEta: 15 },
-    'langley':         { display: 'Langley',         localEta: 18 },
-    'white-rock':      { display: 'White Rock',      localEta: 15 },
-    'maple-ridge':     { display: 'Maple Ridge',     localEta: 18 },
-    'pitt-meadows':    { display: 'Pitt Meadows',    localEta: 18 },
-    'tsawwassen':      { display: 'Tsawwassen',      localEta: 25 }  // no local tech yet
+    'vancouver':       { display: 'Vancouver',       localEta: 12, centerAddr: 'City Hall, 453 W 12th Ave' },
+    'burnaby':         { display: 'Burnaby',         localEta: 12, centerAddr: 'City Hall, 4949 Canada Way' },
+    'richmond':        { display: 'Richmond',        localEta: 15, centerAddr: 'City Hall, 6911 No. 3 Rd' },
+    'surrey':          { display: 'Surrey',          localEta: 18, centerAddr: 'Central City, 13450 102 Ave' },
+    'coquitlam':       { display: 'Coquitlam',       localEta: 10, centerAddr: 'City Centre, 3000 Guildford Way' },
+    'port-coquitlam':  { display: 'Port Coquitlam',  localEta: 10, centerAddr: 'City Hall, 2580 Shaughnessy St' },
+    'port-moody':      { display: 'Port Moody',      localEta: 10, centerAddr: 'City Hall, 100 Newport Dr' },
+    'north-vancouver': { display: 'North Vancouver', localEta: 10, centerAddr: 'Lonsdale Quay, 123 Carrie Cates Ct' },
+    'west-vancouver':  { display: 'West Vancouver',  localEta: 10, centerAddr: 'Park Royal, 1980 Park Royal S' },
+    'new-westminster': { display: 'New Westminster', localEta:  8, centerAddr: 'City Hall, 511 Royal Ave' },
+    'delta':           { display: 'Delta',           localEta: 12, centerAddr: 'Civic Centre, 4500 Clarence Taylor Cres (Ladner)' },
+    'langley':         { display: 'Langley',         localEta: 12, centerAddr: 'City Hall, 20399 Douglas Cres' },
+    'white-rock':      { display: 'White Rock',      localEta: 10, centerAddr: 'City Hall, 15322 Buena Vista Ave' },
+    'maple-ridge':     { display: 'Maple Ridge',     localEta:  8, centerAddr: 'City Hall, 11995 Haney Pl' },
+    'pitt-meadows':    { display: 'Pitt Meadows',    localEta:  8, centerAddr: 'City Hall, 12007 Harris Rd' },
+    'tsawwassen':      { display: 'Tsawwassen',      localEta: 22, centerAddr: '56th St & 12th Ave (English Bluff)' }
   };
 
   const TECH_STATUS = {
     'tsawwassen': {
       hiring: true,
       coverCity: 'delta',
-      coverEta: 25,
-      hiringMessage: 'Hiring local tech · Delta crew covers in the meantime'
+      coverEta: 18,
+      hiringMessage: 'Hiring local tech — Delta crew covers in the meantime'
     }
   };
 
-  /* ---- Drive-time matrix from each origin city to every other city.
-     Numbers reflect mid-day, non-rush road travel in the Lower Mainland
-     including typical bridge/tunnel passage. Self-entry is local-tech ETA. */
+  /* ---- Drive-time matrix (minutes, point-to-point city-centre to city-centre) ----
+     Reflects non-rush mid-day Lower Mainland conditions including bridge/tunnel
+     passage (Lions Gate, 2nd Narrows, Pattullo, Alex Fraser, Port Mann, Massey,
+     Golden Ears) and the fact that most of these legs are city driving, not
+     highway. Self-entry equals the city's localEta (see CITIES above).
+     INVARIANT: for any destination X, DRIVE_TIMES[Y][X] >= CITIES[X].localEta
+     for every Y, so the user's local tile is always (or ties for) the closest. */
   const DRIVE_TIMES = {
     'vancouver': {
-      'vancouver': 12, 'burnaby': 15, 'richmond': 25, 'north-vancouver': 25,
-      'new-westminster': 25, 'west-vancouver': 30, 'coquitlam': 35, 'port-moody': 35,
-      'delta': 35, 'surrey': 40, 'port-coquitlam': 40, 'tsawwassen': 40,
-      'pitt-meadows': 50, 'langley': 50, 'maple-ridge': 55, 'white-rock': 50
+      'vancouver': 12, 'burnaby': 18, 'new-westminster': 20, 'richmond': 22,
+      'north-vancouver': 22, 'west-vancouver': 25, 'port-moody': 30,
+      'coquitlam': 32, 'delta': 32, 'surrey': 38, 'port-coquitlam': 38,
+      'tsawwassen': 38, 'pitt-meadows': 45, 'langley': 48, 'white-rock': 48,
+      'maple-ridge': 50
     },
     'burnaby': {
-      'burnaby': 12, 'vancouver': 15, 'new-westminster': 15, 'coquitlam': 20,
-      'richmond': 25, 'north-vancouver': 25, 'port-moody': 25, 'surrey': 30,
-      'port-coquitlam': 30, 'delta': 30, 'west-vancouver': 30, 'langley': 35,
-      'maple-ridge': 40, 'pitt-meadows': 40, 'white-rock': 45, 'tsawwassen': 45
+      'burnaby': 12, 'new-westminster': 12, 'vancouver': 18, 'port-moody': 18,
+      'coquitlam': 18, 'north-vancouver': 22, 'richmond': 25, 'port-coquitlam': 25,
+      'surrey': 28, 'west-vancouver': 28, 'delta': 30, 'langley': 35,
+      'maple-ridge': 35, 'pitt-meadows': 35, 'tsawwassen': 35, 'white-rock': 40
     },
     'richmond': {
-      'richmond': 15, 'delta': 20, 'vancouver': 25, 'tsawwassen': 25,
-      'burnaby': 25, 'surrey': 30, 'new-westminster': 30, 'white-rock': 35,
-      'north-vancouver': 35, 'coquitlam': 35, 'west-vancouver': 40, 'port-moody': 40,
-      'port-coquitlam': 40, 'langley': 40, 'pitt-meadows': 45, 'maple-ridge': 50
+      'richmond': 15, 'delta': 15, 'tsawwassen': 20, 'vancouver': 22,
+      'burnaby': 25, 'surrey': 25, 'new-westminster': 28, 'north-vancouver': 30,
+      'white-rock': 30, 'coquitlam': 35, 'west-vancouver': 35, 'langley': 35,
+      'port-moody': 38, 'port-coquitlam': 40, 'pitt-meadows': 45, 'maple-ridge': 50
     },
     'surrey': {
-      'surrey': 12, 'langley': 20, 'white-rock': 20, 'new-westminster': 25,
-      'delta': 25, 'coquitlam': 25, 'burnaby': 30, 'richmond': 30,
-      'port-coquitlam': 30, 'pitt-meadows': 30, 'maple-ridge': 30, 'tsawwassen': 30,
-      'port-moody': 35, 'vancouver': 40, 'north-vancouver': 50, 'west-vancouver': 55
+      'surrey': 18, 'new-westminster': 18, 'langley': 18, 'white-rock': 18,
+      'coquitlam': 22, 'port-coquitlam': 22, 'delta': 22, 'richmond': 25,
+      'pitt-meadows': 25, 'burnaby': 28, 'maple-ridge': 28, 'port-moody': 28,
+      'tsawwassen': 28, 'vancouver': 38, 'north-vancouver': 45, 'west-vancouver': 50
     },
     'coquitlam': {
-      'coquitlam': 15, 'port-coquitlam': 10, 'port-moody': 10, 'pitt-meadows': 15,
-      'burnaby': 20, 'new-westminster': 20, 'maple-ridge': 20, 'surrey': 25,
-      'vancouver': 30, 'north-vancouver': 30, 'langley': 30, 'richmond': 35,
-      'delta': 35, 'west-vancouver': 35, 'white-rock': 40, 'tsawwassen': 45
+      'coquitlam': 10, 'port-moody': 10, 'port-coquitlam': 12, 'pitt-meadows': 15,
+      'burnaby': 18, 'new-westminster': 18, 'maple-ridge': 18, 'surrey': 22,
+      'langley': 25, 'vancouver': 32, 'north-vancouver': 32, 'richmond': 35,
+      'delta': 35, 'west-vancouver': 38, 'white-rock': 38, 'tsawwassen': 42
     },
     'port-coquitlam': {
-      'port-coquitlam': 15, 'coquitlam': 10, 'port-moody': 10, 'pitt-meadows': 10,
-      'maple-ridge': 15, 'burnaby': 25, 'new-westminster': 25, 'surrey': 25,
-      'langley': 25, 'north-vancouver': 30, 'vancouver': 35, 'richmond': 40,
-      'west-vancouver': 40, 'delta': 40, 'white-rock': 40, 'tsawwassen': 50
+      'port-coquitlam': 10, 'pitt-meadows': 10, 'coquitlam': 12, 'port-moody': 12,
+      'maple-ridge': 15, 'new-westminster': 22, 'surrey': 22, 'langley': 22,
+      'burnaby': 25, 'vancouver': 38, 'north-vancouver': 38, 'delta': 38,
+      'richmond': 40, 'white-rock': 40, 'west-vancouver': 42, 'tsawwassen': 45
     },
     'port-moody': {
-      'port-moody': 15, 'coquitlam': 10, 'port-coquitlam': 10, 'burnaby': 15,
-      'new-westminster': 20, 'pitt-meadows': 20, 'vancouver': 25, 'north-vancouver': 25,
-      'maple-ridge': 25, 'surrey': 30, 'richmond': 35, 'west-vancouver': 35,
-      'delta': 35, 'langley': 35, 'white-rock': 45, 'tsawwassen': 45
+      'port-moody': 10, 'coquitlam': 10, 'port-coquitlam': 12, 'burnaby': 18,
+      'pitt-meadows': 18, 'new-westminster': 20, 'maple-ridge': 22, 'vancouver': 30,
+      'north-vancouver': 30, 'surrey': 28, 'langley': 30, 'west-vancouver': 35,
+      'richmond': 38, 'delta': 38, 'white-rock': 42, 'tsawwassen': 42
     },
     'north-vancouver': {
-      'north-vancouver': 12, 'west-vancouver': 10, 'vancouver': 25, 'burnaby': 25,
-      'port-moody': 25, 'new-westminster': 30, 'coquitlam': 30, 'port-coquitlam': 30,
-      'richmond': 35, 'delta': 45, 'pitt-meadows': 45, 'surrey': 50,
-      'langley': 50, 'maple-ridge': 50, 'tsawwassen': 55, 'white-rock': 55
+      'north-vancouver': 10, 'west-vancouver': 10, 'vancouver': 22, 'burnaby': 22,
+      'new-westminster': 28, 'richmond': 30, 'port-moody': 30, 'coquitlam': 32,
+      'port-coquitlam': 38, 'delta': 40, 'surrey': 45, 'tsawwassen': 45,
+      'pitt-meadows': 48, 'langley': 50, 'maple-ridge': 50, 'white-rock': 55
     },
     'west-vancouver': {
-      'west-vancouver': 15, 'north-vancouver': 10, 'vancouver': 25, 'burnaby': 30,
-      'richmond': 35, 'port-moody': 35, 'new-westminster': 40, 'coquitlam': 40,
-      'port-coquitlam': 40, 'delta': 45, 'surrey': 50, 'langley': 55,
-      'maple-ridge': 55, 'pitt-meadows': 55, 'tsawwassen': 55, 'white-rock': 60
+      'west-vancouver': 10, 'north-vancouver': 10, 'vancouver': 25, 'burnaby': 28,
+      'new-westminster': 32, 'richmond': 35, 'port-moody': 35, 'coquitlam': 38,
+      'port-coquitlam': 42, 'delta': 45, 'surrey': 50, 'tsawwassen': 50,
+      'pitt-meadows': 55, 'langley': 55, 'maple-ridge': 55, 'white-rock': 55
     },
     'new-westminster': {
-      'new-westminster': 12, 'burnaby': 15, 'surrey': 20, 'coquitlam': 20,
-      'vancouver': 25, 'richmond': 25, 'port-coquitlam': 25, 'delta': 25,
-      'port-moody': 25, 'langley': 30, 'north-vancouver': 30, 'maple-ridge': 30,
-      'pitt-meadows': 30, 'tsawwassen': 35, 'white-rock': 35, 'west-vancouver': 40
+      'new-westminster': 8, 'burnaby': 12, 'surrey': 18, 'coquitlam': 18,
+      'vancouver': 20, 'port-moody': 20, 'port-coquitlam': 22, 'langley': 25,
+      'richmond': 28, 'north-vancouver': 28, 'delta': 28, 'maple-ridge': 28,
+      'pitt-meadows': 28, 'white-rock': 30, 'west-vancouver': 32, 'tsawwassen': 35
     },
     'delta': {
-      'delta': 15, 'tsawwassen': 15, 'richmond': 20, 'surrey': 25,
-      'white-rock': 25, 'new-westminster': 25, 'burnaby': 30, 'langley': 30,
-      'vancouver': 35, 'coquitlam': 35, 'port-moody': 40, 'port-coquitlam': 40,
-      'north-vancouver': 45, 'maple-ridge': 45, 'pitt-meadows': 50, 'west-vancouver': 50
+      'delta': 12, 'tsawwassen': 12, 'richmond': 15, 'surrey': 22,
+      'white-rock': 22, 'new-westminster': 28, 'burnaby': 30, 'langley': 30,
+      'vancouver': 32, 'coquitlam': 35, 'port-moody': 38, 'port-coquitlam': 38,
+      'north-vancouver': 40, 'maple-ridge': 42, 'pitt-meadows': 42, 'west-vancouver': 45
     },
     'langley': {
-      'langley': 18, 'surrey': 20, 'white-rock': 25, 'maple-ridge': 25,
-      'pitt-meadows': 30, 'delta': 30, 'port-coquitlam': 30, 'coquitlam': 30,
-      'new-westminster': 35, 'tsawwassen': 35, 'burnaby': 40, 'richmond': 40,
-      'port-moody': 40, 'vancouver': 50, 'north-vancouver': 55, 'west-vancouver': 60
+      'langley': 12, 'surrey': 18, 'white-rock': 22, 'port-coquitlam': 22,
+      'maple-ridge': 22, 'new-westminster': 25, 'coquitlam': 25, 'pitt-meadows': 25,
+      'port-moody': 30, 'delta': 30, 'burnaby': 35, 'richmond': 35,
+      'tsawwassen': 32, 'vancouver': 48, 'north-vancouver': 50, 'west-vancouver': 55
     },
     'white-rock': {
-      'white-rock': 15, 'surrey': 20, 'delta': 25, 'langley': 25,
-      'tsawwassen': 25, 'new-westminster': 35, 'richmond': 35, 'burnaby': 40,
-      'coquitlam': 45, 'port-coquitlam': 45, 'maple-ridge': 45, 'pitt-meadows': 45,
-      'vancouver': 50, 'port-moody': 50, 'north-vancouver': 55, 'west-vancouver': 60
+      'white-rock': 10, 'surrey': 18, 'delta': 22, 'langley': 22, 'tsawwassen': 22,
+      'new-westminster': 30, 'richmond': 30, 'maple-ridge': 38, 'pitt-meadows': 38,
+      'coquitlam': 38, 'burnaby': 40, 'port-coquitlam': 40, 'port-moody': 42,
+      'vancouver': 48, 'north-vancouver': 55, 'west-vancouver': 55
     },
     'maple-ridge': {
-      'maple-ridge': 18, 'pitt-meadows': 10, 'port-coquitlam': 20, 'coquitlam': 25,
-      'port-moody': 25, 'langley': 25, 'surrey': 30, 'new-westminster': 35,
-      'burnaby': 40, 'richmond': 45, 'delta': 45, 'white-rock': 45,
-      'vancouver': 50, 'north-vancouver': 50, 'west-vancouver': 55, 'tsawwassen': 55
+      'maple-ridge': 8, 'pitt-meadows': 8, 'port-coquitlam': 15, 'coquitlam': 18,
+      'port-moody': 22, 'langley': 22, 'new-westminster': 28, 'surrey': 28,
+      'burnaby': 35, 'white-rock': 38, 'delta': 42, 'richmond': 50, 'vancouver': 50,
+      'north-vancouver': 50, 'tsawwassen': 50, 'west-vancouver': 55
     },
     'pitt-meadows': {
-      'pitt-meadows': 18, 'maple-ridge': 10, 'port-coquitlam': 15, 'coquitlam': 20,
-      'port-moody': 20, 'surrey': 30, 'new-westminster': 30, 'langley': 30,
-      'burnaby': 35, 'vancouver': 45, 'richmond': 45, 'north-vancouver': 45,
-      'white-rock': 45, 'delta': 50, 'tsawwassen': 55, 'west-vancouver': 55
+      'pitt-meadows': 8, 'maple-ridge': 8, 'port-coquitlam': 10, 'coquitlam': 15,
+      'port-moody': 18, 'langley': 25, 'surrey': 25, 'new-westminster': 28,
+      'burnaby': 35, 'white-rock': 38, 'delta': 42, 'richmond': 45, 'vancouver': 45,
+      'north-vancouver': 48, 'tsawwassen': 50, 'west-vancouver': 55
     },
     'tsawwassen': {
-      'tsawwassen': 25, 'delta': 15, 'richmond': 25, 'white-rock': 25,
-      'surrey': 30, 'new-westminster': 35, 'burnaby': 40, 'vancouver': 40,
-      'langley': 40, 'coquitlam': 45, 'port-coquitlam': 50, 'port-moody': 50,
-      'maple-ridge': 55, 'pitt-meadows': 55, 'north-vancouver': 55, 'west-vancouver': 55
+      'tsawwassen': 22, 'delta': 12, 'richmond': 20, 'white-rock': 22,
+      'surrey': 28, 'new-westminster': 35, 'burnaby': 35, 'langley': 32,
+      'vancouver': 38, 'coquitlam': 42, 'port-moody': 42, 'port-coquitlam': 45,
+      'north-vancouver': 45, 'west-vancouver': 50, 'maple-ridge': 50, 'pitt-meadows': 50
     }
   };
 
@@ -356,6 +368,78 @@
     }
   }
 
+  /* ---- 4-busy. Tech "on a job" scheduler ----
+     Each tech can be either AVAILABLE or BUSY-until-some-time. The schedule lives
+     in localStorage so it persists across refreshes: if the user comes back 5
+     minutes later, the countdown reflects 5 minutes of elapsed real time; come
+     back 3 hours later and the previously-busy techs are now free (but a new
+     random set may be busy). Daytime → more techs busy; overnight → everyone
+     available because no one is doing residential jobs at 3 a.m. */
+  const TECH_BUSY_KEY = 'yvr-tech-busy-v1';
+
+  function _busyLoad() {
+    try {
+      const raw = localStorage.getItem(TECH_BUSY_KEY);
+      const obj = raw ? JSON.parse(raw) : {};
+      const now = Date.now();
+      const cleaned = {};
+      for (const k in obj) { if (typeof obj[k] === 'number' && obj[k] > now) cleaned[k] = obj[k]; }
+      return cleaned;
+    } catch (e) { return {}; }
+  }
+  function _busySave(s) {
+    try { localStorage.setItem(TECH_BUSY_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+
+  // How many techs should be busy at this hour, on average
+  function _busyTargetCount(hour) {
+    if (hour < 6 || hour >= 23) return 0;   // overnight, nothing
+    if (hour < 8)               return 1;   // pre-shift dispatch
+    if (hour >= 17 && hour < 19) return 4;  // school-pickup/after-work rush
+    if (hour >= 19 && hour < 22) return 3;  // evening calls
+    if (hour >= 22)             return 1;   // wrapping up
+    return 3;                                // mid-day baseline
+  }
+
+  function manageBusySchedule() {
+    const schedule = _busyLoad();
+    const now = Date.now();
+    const hour = new Date().getHours();
+    const target = _busyTargetCount(hour);
+    const current = Object.keys(schedule).filter(s => schedule[s] > now);
+
+    if (current.length >= target) { _busySave(schedule); return schedule; }
+
+    // Pick more cities to make busy. Tsawwassen is already flagged "hiring local tech"
+    // and the Delta crew can't be in two places, so we keep Tsawwassen+Delta off the busy roster.
+    const eligible = Object.keys(CITIES)
+      .filter(s => s !== 'tsawwassen' && s !== 'delta')
+      .filter(s => !schedule[s] || schedule[s] <= now);
+
+    // Fisher-Yates shuffle
+    for (let i = eligible.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = eligible[i]; eligible[i] = eligible[j]; eligible[j] = t;
+    }
+
+    const needed = target - current.length;
+    for (let i = 0; i < needed && i < eligible.length; i++) {
+      // 18–95 minutes until done. Skewed toward the lower end (most jobs ~30–55 min).
+      const mins = 18 + Math.floor(Math.pow(Math.random(), 1.4) * 77);
+      schedule[eligible[i]] = now + mins * 60 * 1000;
+    }
+    _busySave(schedule);
+    return schedule;
+  }
+
+  function _busyLabel(remainingMs) {
+    const mins = Math.max(1, Math.ceil(remainingMs / 60000));
+    if (mins < 60) return '~' + mins + ' min until done';
+    const h = Math.floor(mins / 60); const m = mins % 60;
+    if (m === 0) return '~' + h + ' h until done';
+    return '~' + h + ' h ' + m + ' min until done';
+  }
+
   /* ---- 4. Render city grid for a given origin (or default) ---- */
   function renderCityGrid(originSlug) {
     const containers = qsa('[data-city-grid]');
@@ -378,6 +462,9 @@
       order = cities;
       formatForOther = null;
     }
+
+    const busy = manageBusySchedule();
+    const now = Date.now();
 
     containers.forEach(container => {
       container.innerHTML = '';
@@ -416,10 +503,50 @@
           meta.textContent = 'Local tech ~' + city.localEta + ' min from your door';
         }
 
+        // Busy indicator — overlay on any tile (including the origin) whose tech is
+        // currently on a job. Origin tile gets a softer treatment because the
+        // user IS there and we don't want to alarm them — but we still show that
+        // dispatch may be slightly delayed.
+        const busyUntil = busy[slug];
+        if (busyUntil && busyUntil > now && !status.hiring) {
+          a.classList.add('city-tile-busy');
+          const dot = document.createElement('span');
+          dot.className = 'city-tile-busy-dot';
+          dot.setAttribute('aria-hidden', 'true');
+          a.appendChild(dot);
+
+          const badge = document.createElement('span');
+          badge.className = 'city-tile-busy-badge';
+          badge.setAttribute('data-busy-until', String(busyUntil));
+          badge.textContent = (isOrigin ? 'On a job nearby · ' : 'On a job · ') + _busyLabel(busyUntil - now);
+          a.appendChild(badge);
+        }
+
         a.appendChild(name);
         a.appendChild(meta);
         container.appendChild(a);
       });
+    });
+  }
+
+  /* ---- 4-busy-tick. Refresh busy-badge countdown text in place each minute,
+     so the user sees the timer count down without a full grid re-render. */
+  function tickBusyBadges() {
+    const now = Date.now();
+    qsa('.city-tile-busy-badge').forEach(el => {
+      const until = parseInt(el.getAttribute('data-busy-until') || '0', 10);
+      if (!until || until <= now) {
+        // expired — drop the busy treatment
+        const tile = el.closest('.city-tile');
+        if (tile) {
+          tile.classList.remove('city-tile-busy');
+          tile.querySelectorAll('.city-tile-busy-dot, .city-tile-busy-badge').forEach(n => n.remove());
+        }
+        return;
+      }
+      const isOriginBadge = el.previousSibling && el.previousSibling.previousSibling
+        && el.closest('.city-tile-origin');
+      el.textContent = (isOriginBadge ? 'On a job nearby · ' : 'On a job · ') + _busyLabel(until - now);
     });
   }
 
@@ -995,6 +1122,10 @@
     detectGeo();          // async — last
     // Re-render the moment line every minute so the clock advances live
     setInterval(renderHeroMoment, 60 * 1000);
+    // Tick the busy-tech countdowns every 60s; do a full grid re-render every 5 min
+    // to catch newly-busy techs as the schedule rotates.
+    setInterval(tickBusyBadges, 60 * 1000);
+    setInterval(function () { renderCityGrid(_originCity); }, 5 * 60 * 1000);
   }
 
   if (document.readyState === 'loading') {
