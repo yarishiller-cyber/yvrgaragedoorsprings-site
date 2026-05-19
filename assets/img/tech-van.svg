@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 40" aria-hidden="true" focusable="false">
+  <!-- Wheels first (behind body) -->
+  <circle cx="14" cy="32" r="5" fill="#0f1a1f"/>
+  <circle cx="14" cy="32" r="2" fill="#cfd6da"/>
+  <circle cx="50" cy="32" r="5" fill="#0f1a1f"/>
+  <circle cx="50" cy="32" r="2" fill="#cfd6da"/>
+  <!-- Van body -->
+  <path d="M 3 30 L 3 17 Q 3 13 7 13 L 28 13 L 33 6 Q 35 5 38 5 L 56 5 Q 60 5 60 9 L 60 30 Z"
+        fill="currentColor" stroke="#0f1a1f" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Windshield -->
+  <path d="M 30 13 L 34 8 Q 35 7 37 7 L 44 7 L 44 13 Z" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>
+  <!-- Side window -->
+  <rect x="46" y="8" width="11" height="5" rx="0.5" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>
+  <!-- Side panel decal -->
+  <rect x="7" y="18" width="20" height="7" rx="0.5" fill="#fafaf7" stroke="#0f1a1f" stroke-width="0.5"/>
+  <text x="17" y="23.5" text-anchor="middle" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="4.5" letter-spacing="0.05em">YVR · SPRINGS</text>
+  <!-- Headlight -->
+  <circle cx="58" cy="22" r="1.5" fill="#ffd97a"/>
+  <!-- Ground shadow -->
+  <ellipse cx="32" cy="37" rx="28" ry="1.5" fill="#0f1a1f" opacity="0.18"/>
+</svg>

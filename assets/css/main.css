@@ -105,12 +105,35 @@ address { font-style: normal; }
   margin-top: 2px;
 }
 
+/* ---------- Background doodle pattern ----------
+   Faint, monochrome, garage-door-themed line-art (springs, rollers, hinges,
+   winding bars, doors, wrenches, openers, bolts, screws, cables). Tiles
+   seamlessly. Lives behind every "warm" or "neutral" band so the empty white
+   areas feel like a tradesman's clipboard rather than a blank page. Opacity is
+   tuned conservatively — noticeable but not in your face. */
+body {
+  background-color: var(--paper);
+  background-image: url('/assets/img/doodles-bg.svg');
+  background-repeat: repeat;
+  background-size: 480px 480px;
+  background-attachment: scroll;       /* fixed has known mobile / iOS issues */
+}
+/* The SVG is already very low opacity (0.045). The bands ride on top with a
+   thin translucent wash so the doodle whispers through evenly. */
+.band-warm   { background: rgba(244, 240, 232, 0.78); }
+.band-dark   { background: rgba(15, 26, 31, 0.97); }
+.site-header { background: rgba(250, 250, 247, 0.86); }
+.site-footer { background: var(--ink); }
+/* Plain "section" with no band uses the paper background colour at high alpha
+   so default sections still read clean while permitting the doodle through. */
+.section, .section-tight { position: relative; }
+
 /* ---------- Layout primitives ---------- */
 .wrap { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--s-4); }
 .wrap-narrow { max-width: var(--max-w-text); margin-inline: auto; }
 .section { padding-block: var(--s-7); }
 .section-tight { padding-block: var(--s-6); }
-.band-warm { background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.band-warm { background: rgba(244, 240, 232, 0.93); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .band-dark { background: var(--ink); color: var(--paper); }
 .band-dark a { color: var(--paper); }
 .band-dark a:hover { color: var(--signal); }
@@ -212,22 +235,31 @@ address { font-style: normal; }
   border-radius: 50%; background: var(--green);
 }
 
-/* ---------- Hero image (desktop only) ---------- */
+/* ---------- Hero image ---------- */
 .hero-figure {
-  margin: 0;
-  display: none;
+  margin: 0 0 var(--s-5);
+  display: block;                  /* visible on mobile too — was hidden before */
   border-radius: var(--r-3);
   overflow: hidden;
   background: var(--paper-warm);
   box-shadow: var(--shadow-2);
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;            /* mobile crop — desktop overrides below */
 }
 .hero-figure picture, .hero-figure img {
   display: block; width: 100%; height: 100%;
 }
 .hero-figure img { object-fit: cover; }
 .hero-figure-empty { display: none !important; }
+/* On mobile, the hero is a flex column; the image card (second div) is reordered
+   to sit ABOVE the headline so visitors see a real photo first. Desktop falls
+   back to the regular grid (handled by the 960px breakpoint elsewhere). */
+.hero .wrap { display: flex; flex-direction: column; }
+.hero .wrap > div:last-child { order: -1; margin-bottom: var(--s-5); }
+@media (min-width: 960px) {
+  .hero .wrap > div:last-child { order: 0; margin-bottom: 0; }
+  .hero-figure { aspect-ratio: 4 / 3; margin-bottom: var(--s-4); }
+}
 
 /* State-driven subtle overlays on the hero figure */
 body.state-cold .hero-figure::after {
@@ -241,13 +273,6 @@ body.state-after-hours .hero-figure::after {
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(15, 26, 31, 0.25) 0%, transparent 50%);
   pointer-events: none;
-}
-
-@media (min-width: 960px) {
-  .hero-figure {
-    display: block;
-    margin-bottom: var(--s-4);
-  }
 }
 
 /* ---------- Tier card images ---------- */
@@ -369,52 +394,124 @@ body.state-after-hours .hero-figure::after {
 .faq details[open] summary::after { content: "−"; }
 .faq details > *:not(summary) { padding-top: var(--s-2); color: var(--ink-soft); }
 
-/* ---------- City tiles ---------- */
+/* ============================================================
+   CITY TILES — square card layout with a small tech-van glyph,
+   distinct visual state for AVAILABLE / BUSY (temporary, amber) /
+   HIRING (permanent, blue) / ORIGIN (user's own city).
+   ============================================================ */
 .cities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--s-3);
 }
+@media (min-width: 480px) { .cities-grid { grid-template-columns: repeat(3, 1fr); gap: var(--s-3); } }
+@media (min-width: 760px) { .cities-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px){ .cities-grid { grid-template-columns: repeat(5, 1fr); gap: var(--s-4); } }
+
 .city-tile {
-  display: flex; flex-direction: column; gap: 4px;
-  padding: var(--s-4); background: white;
-  border: 1px solid var(--line); border-radius: var(--r-2);
-  text-decoration: none; color: var(--ink);
-  min-height: 88px;
-  transition: all 0.12s ease;
+  position: relative;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-3) var(--s-3);
+  background: linear-gradient(180deg, #ffffff 0%, var(--paper-warm) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  text-decoration: none;
+  color: var(--ink);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.city-tile::before {
+  /* Faint diagonal sweep behind the van */
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(255,255,255,0.6), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(15,26,31,0.04), transparent 50%);
+  pointer-events: none;
 }
 .city-tile:hover {
-  border-color: var(--ink); transform: translateY(-2px);
-  box-shadow: var(--shadow-2); color: var(--ink);
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+  color: var(--ink);
 }
-.city-tile-name { font-weight: 700; font-size: 1rem; }
-.city-tile-meta { font-size: var(--t-tiny); color: var(--ink-muted); line-height: 1.4; }
-.city-tile-meta strong { color: var(--ink); }
-.city-tile-meta em { font-style: normal; color: var(--amber); }
+.city-tile:hover .city-tile-van { transform: translateX(6px); }
 
-/* Tech-busy tile state: tech is currently on a job, with a live countdown */
-.city-tile-busy {
+/* The small van glyph sitting on its own ground line */
+.city-tile-van {
   position: relative;
-  background: linear-gradient(180deg, var(--amber-soft) 0%, white 70%);
+  height: 36px;
+  display: block;
+  color: var(--steel);              /* tinted via currentColor inside the SVG */
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.city-tile-van svg { height: 100%; width: auto; display: block; }
+.city-tile-van::after {
+  content: "";
+  position: absolute; left: 0; right: -8px; bottom: -2px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line) 20%, var(--line) 80%, transparent);
+}
+
+.city-tile-name {
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+.city-tile-meta {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  line-height: 1.3;
+}
+.city-tile-meta strong { color: var(--ink); }
+
+/* ---- State: ORIGIN (your city) — signal red treatment ---- */
+.city-tile-origin {
+  border-color: var(--signal);
+  border-width: 2px;
+  background: linear-gradient(180deg, var(--signal-soft) 0%, #fff 75%);
+  box-shadow: 0 6px 20px rgba(217, 74, 43, 0.18);
+}
+.city-tile-origin .city-tile-name { color: var(--signal); }
+.city-tile-origin .city-tile-van  { color: var(--signal); }
+.city-tile-origin::before { background: radial-gradient(circle at 70% 10%, rgba(255,255,255,0.7), transparent 60%); }
+.city-tile-origin .city-tile-marker {
+  position: absolute; top: 8px; right: 8px;
+  width: 22px; height: 22px;
+  background: var(--signal);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff;
+  font-size: 12px;
+  box-shadow: 0 2px 6px rgba(217,74,43,0.45);
+}
+
+/* ---- State: BUSY (temporary — tech on a job, amber, pulsing) ---- */
+.city-tile-busy {
+  background: linear-gradient(180deg, var(--amber-soft) 0%, #fff 80%);
   border-color: var(--amber);
 }
-.city-tile-busy .city-tile-name { color: var(--ink); }
+.city-tile-busy .city-tile-van { color: var(--amber); }
 .city-tile-busy-dot {
-  position: absolute; top: 10px; right: 10px;
-  width: 8px; height: 8px;
-  background: var(--amber);
-  border-radius: 50%;
+  position: absolute; top: 9px; right: 9px;
+  width: 9px; height: 9px;
+  background: var(--amber); border-radius: 50%;
   box-shadow: 0 0 0 0 var(--amber);
   animation: cityBusyPulse 2.4s cubic-bezier(0.66, 0, 0, 1) infinite;
 }
 .city-tile-busy-badge {
-  font-size: var(--t-tiny);
-  font-weight: 700;
+  font-size: 0.66rem;
+  font-weight: 800;
   color: var(--amber);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
   order: -1;
-  margin-bottom: 2px;
 }
 @keyframes cityBusyPulse {
   0%   { box-shadow: 0 0 0 0 rgba(178, 122, 0, 0.55); }
@@ -425,29 +522,45 @@ body.state-after-hours .hero-figure::after {
   .city-tile-busy-dot { animation: none; }
 }
 
-/* Origin tile (the user's detected/selected city) */
-.city-tile-origin {
-  border-color: var(--ink); border-width: 2px;
-  background: linear-gradient(180deg, var(--signal-soft) 0%, white 60%);
-  box-shadow: var(--shadow-2);
+/* ---- State: HIRING (permanent — no resident tech yet, slate-blue) ---- */
+.city-tile-hiring {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(31, 58, 68, 0.06) 0px,
+      rgba(31, 58, 68, 0.06) 6px,
+      transparent 6px,
+      transparent 14px
+    ),
+    linear-gradient(180deg, #eaf1f5 0%, #fff 85%);
+  border-color: var(--steel);
+  border-style: dashed;
+}
+.city-tile-hiring .city-tile-name { color: var(--steel); }
+.city-tile-hiring .city-tile-van  { color: var(--steel); opacity: 0.6; }
+.city-tile-hiring-badge {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
   order: -1;
 }
-.city-tile-origin .city-tile-name { color: var(--signal); }
-.city-tile-origin::before {
-  content: "📍";
-  position: absolute;
-  font-size: 18px;
+.city-tile-hiring-pin {
+  position: absolute; top: 8px; right: 8px;
+  width: 22px; height: 22px;
+  background: var(--steel);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 11px;
 }
-.city-tile-origin { position: relative; padding-top: calc(var(--s-4) + 4px); }
-.city-tile-origin::before { top: 8px; right: 10px; }
 
-/* Hiring tile */
-.city-tile-hiring {
-  border-style: dashed;
-  border-color: var(--amber);
-  background: var(--amber-soft);
-}
-.city-tile-hiring .city-tile-name { color: var(--amber); }
+/* If a tile is BOTH origin AND hiring (Tsawwassen + you), origin wins visually */
+.city-tile-origin.city-tile-hiring { border-style: solid; }
+.city-tile-origin.city-tile-hiring .city-tile-van { color: var(--signal); opacity: 1; }
 
 /* ---------- City picker (above the grid) ---------- */
 .city-picker {

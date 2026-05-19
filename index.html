@@ -37,7 +37,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="/assets/css/main.css?v=20260518f">
+<link rel="stylesheet" href="/assets/css/main.css?v=20260519a">
 
 <!-- JSON-LD: LocalBusiness -->
 <script type="application/ld+json">
@@ -399,6 +399,57 @@
   </div>
 </section>
 
+<!-- ============================== CITY TILES ============================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="text-center" style="margin-bottom:var(--s-5)">
+      <span class="eyebrow">16 cities · 15 with a local tech</span>
+      <h2>Where do you live?</h2>
+      <p class="lede" style="margin-inline:auto;margin-top:var(--s-3)">
+        Pick your city or drop a postal code — we'll reorder the list by drive time and tell you who's closest.
+      </p>
+    </div>
+
+    <div class="city-picker" aria-label="Find your nearest tech">
+      <div class="city-picker-row">
+        <div>
+          <label for="city-picker-select">Your city</label>
+          <select id="city-picker-select" aria-label="Pick your city">
+            <option value="">Pick your city...</option>
+          </select>
+        </div>
+        <div class="city-picker-or" aria-hidden="true">or</div>
+        <div>
+          <label for="city-picker-postal">Postal code</label>
+          <input id="city-picker-postal" type="text" inputmode="text" autocomplete="postal-code" placeholder="V5C 6C6" maxlength="7" aria-label="Postal code">
+        </div>
+      </div>
+      <div id="city-picker-status" class="city-picker-status" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="cities-grid" data-city-grid>
+      <!-- Static fallback for no-JS / pre-hydration. JS replaces this with the
+           proximity-sorted version once an origin city is set. -->
+      <a class="city-tile" href="/cities/vancouver/"><span class="city-tile-name">Vancouver</span><span class="city-tile-meta">~12 min</span></a>
+      <a class="city-tile" href="/cities/burnaby/"><span class="city-tile-name">Burnaby</span><span class="city-tile-meta">~12 min</span></a>
+      <a class="city-tile" href="/cities/richmond/"><span class="city-tile-name">Richmond</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/surrey/"><span class="city-tile-name">Surrey</span><span class="city-tile-meta">~12 min</span></a>
+      <a class="city-tile" href="/cities/coquitlam/"><span class="city-tile-name">Coquitlam</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/port-coquitlam/"><span class="city-tile-name">Port Coquitlam</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/port-moody/"><span class="city-tile-name">Port Moody</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/north-vancouver/"><span class="city-tile-name">North Vancouver</span><span class="city-tile-meta">~12 min</span></a>
+      <a class="city-tile" href="/cities/west-vancouver/"><span class="city-tile-name">West Vancouver</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/new-westminster/"><span class="city-tile-name">New Westminster</span><span class="city-tile-meta">~12 min</span></a>
+      <a class="city-tile" href="/cities/delta/"><span class="city-tile-name">Delta</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/langley/"><span class="city-tile-name">Langley</span><span class="city-tile-meta">~18 min</span></a>
+      <a class="city-tile" href="/cities/white-rock/"><span class="city-tile-name">White Rock</span><span class="city-tile-meta">~15 min</span></a>
+      <a class="city-tile" href="/cities/maple-ridge/"><span class="city-tile-name">Maple Ridge</span><span class="city-tile-meta">~18 min</span></a>
+      <a class="city-tile" href="/cities/pitt-meadows/"><span class="city-tile-name">Pitt Meadows</span><span class="city-tile-meta">~18 min</span></a>
+      <a class="city-tile city-tile-hiring" href="/cities/tsawwassen/"><span class="city-tile-name">Tsawwassen</span><span class="city-tile-meta"><em>Hiring local tech</em> · Delta crew covers</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============================== DIAGNOSIS ============================== -->
 <section class="section band-warm">
   <div class="wrap wrap-narrow">
@@ -607,56 +658,6 @@
   </div>
 </section>
 
-<!-- ============================== CITY TILES ============================== -->
-<section class="section">
-  <div class="wrap">
-    <div class="text-center" style="margin-bottom:var(--s-5)">
-      <span class="eyebrow">16 cities · 15 with a local tech</span>
-      <h2>Where do you live?</h2>
-      <p class="lede" style="margin-inline:auto;margin-top:var(--s-3)">
-        Pick your city or drop a postal code — we'll reorder the list by drive time and tell you who's closest.
-      </p>
-    </div>
-
-    <div class="city-picker" aria-label="Find your nearest tech">
-      <div class="city-picker-row">
-        <div>
-          <label for="city-picker-select">Your city</label>
-          <select id="city-picker-select" aria-label="Pick your city">
-            <option value="">Pick your city...</option>
-          </select>
-        </div>
-        <div class="city-picker-or" aria-hidden="true">or</div>
-        <div>
-          <label for="city-picker-postal">Postal code</label>
-          <input id="city-picker-postal" type="text" inputmode="text" autocomplete="postal-code" placeholder="V5C 6C6" maxlength="7" aria-label="Postal code">
-        </div>
-      </div>
-      <div id="city-picker-status" class="city-picker-status" role="status" aria-live="polite"></div>
-    </div>
-
-    <div class="cities-grid" data-city-grid>
-      <!-- Static fallback for no-JS / pre-hydration. JS replaces this with the
-           proximity-sorted version once an origin city is set. -->
-      <a class="city-tile" href="/cities/vancouver/"><span class="city-tile-name">Vancouver</span><span class="city-tile-meta">~12 min</span></a>
-      <a class="city-tile" href="/cities/burnaby/"><span class="city-tile-name">Burnaby</span><span class="city-tile-meta">~12 min</span></a>
-      <a class="city-tile" href="/cities/richmond/"><span class="city-tile-name">Richmond</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/surrey/"><span class="city-tile-name">Surrey</span><span class="city-tile-meta">~12 min</span></a>
-      <a class="city-tile" href="/cities/coquitlam/"><span class="city-tile-name">Coquitlam</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/port-coquitlam/"><span class="city-tile-name">Port Coquitlam</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/port-moody/"><span class="city-tile-name">Port Moody</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/north-vancouver/"><span class="city-tile-name">North Vancouver</span><span class="city-tile-meta">~12 min</span></a>
-      <a class="city-tile" href="/cities/west-vancouver/"><span class="city-tile-name">West Vancouver</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/new-westminster/"><span class="city-tile-name">New Westminster</span><span class="city-tile-meta">~12 min</span></a>
-      <a class="city-tile" href="/cities/delta/"><span class="city-tile-name">Delta</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/langley/"><span class="city-tile-name">Langley</span><span class="city-tile-meta">~18 min</span></a>
-      <a class="city-tile" href="/cities/white-rock/"><span class="city-tile-name">White Rock</span><span class="city-tile-meta">~15 min</span></a>
-      <a class="city-tile" href="/cities/maple-ridge/"><span class="city-tile-name">Maple Ridge</span><span class="city-tile-meta">~18 min</span></a>
-      <a class="city-tile" href="/cities/pitt-meadows/"><span class="city-tile-name">Pitt Meadows</span><span class="city-tile-meta">~18 min</span></a>
-      <a class="city-tile city-tile-hiring" href="/cities/tsawwassen/"><span class="city-tile-name">Tsawwassen</span><span class="city-tile-meta"><em>Hiring local tech</em> · Delta crew covers</span></a>
-    </div>
-  </div>
-</section>
 
 <!-- ============================== QUOTE FORM ============================== -->
 <section class="section band-warm">
@@ -758,7 +759,7 @@
 </div>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="/assets/js/personalize.js?v=20260518f" defer></script>
+<script src="/assets/js/personalize.js?v=20260519a" defer></script>
 
 </body>
 </html>

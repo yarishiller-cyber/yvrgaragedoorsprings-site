@@ -466,6 +466,21 @@
     const busy = manageBusySchedule();
     const now = Date.now();
 
+    // Small SVG van glyph used inside every tile. Defined here so the markup is
+    // identical to what's in /assets/img/tech-van.svg (server-fetch would also work
+    // but keeping it inline saves a request and lets the SVG inherit currentColor).
+    const VAN_SVG = '<svg viewBox="0 0 64 40" aria-hidden="true" focusable="false">'
+      + '<circle cx="14" cy="32" r="5" fill="#0f1a1f"/><circle cx="14" cy="32" r="2" fill="#cfd6da"/>'
+      + '<circle cx="50" cy="32" r="5" fill="#0f1a1f"/><circle cx="50" cy="32" r="2" fill="#cfd6da"/>'
+      + '<path d="M 3 30 L 3 17 Q 3 13 7 13 L 28 13 L 33 6 Q 35 5 38 5 L 56 5 Q 60 5 60 9 L 60 30 Z" fill="currentColor" stroke="#0f1a1f" stroke-width="1.5" stroke-linejoin="round"/>'
+      + '<path d="M 30 13 L 34 8 Q 35 7 37 7 L 44 7 L 44 13 Z" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>'
+      + '<rect x="46" y="8" width="11" height="5" rx="0.5" fill="#e8eef2" stroke="#0f1a1f" stroke-width="1"/>'
+      + '<rect x="7" y="18" width="20" height="7" rx="0.5" fill="#fafaf7" stroke="#0f1a1f" stroke-width="0.5"/>'
+      + '<text x="17" y="23.5" text-anchor="middle" fill="#d94a2b" font-family="system-ui,sans-serif" font-weight="800" font-size="4.5" letter-spacing="0.05em">YVR · SPRINGS</text>'
+      + '<circle cx="58" cy="22" r="1.5" fill="#ffd97a"/>'
+      + '<ellipse cx="32" cy="37" rx="28" ry="1.5" fill="#0f1a1f" opacity="0.18"/>'
+      + '</svg>';
+
     containers.forEach(container => {
       container.innerHTML = '';
       order.forEach(slug => {
@@ -478,6 +493,27 @@
         if (isOrigin) a.classList.add('city-tile-origin');
         if (status.hiring) a.classList.add('city-tile-hiring');
 
+        // Van glyph
+        const van = document.createElement('span');
+        van.className = 'city-tile-van';
+        van.innerHTML = VAN_SVG;
+        a.appendChild(van);
+
+        // Origin corner marker (pin) takes priority over the hiring badge
+        if (isOrigin) {
+          const marker = document.createElement('span');
+          marker.className = 'city-tile-marker';
+          marker.setAttribute('aria-label', 'Your city');
+          marker.innerHTML = '★';   // ★
+          a.appendChild(marker);
+        } else if (status.hiring) {
+          const pin = document.createElement('span');
+          pin.className = 'city-tile-hiring-pin';
+          pin.setAttribute('aria-label', 'Hiring local tech');
+          pin.textContent = '+';
+          a.appendChild(pin);
+        }
+
         const name = document.createElement('span');
         name.className = 'city-tile-name';
         name.textContent = city.display;
@@ -485,28 +521,37 @@
         const meta = document.createElement('span');
         meta.className = 'city-tile-meta';
 
+        // Hiring city always shows its own "HIRING LOCAL TECH" badge (uppercase, blue)
+        // regardless of whether the user is the origin. Distinct visual from the
+        // amber BUSY badge so the two states never get confused.
+        if (status.hiring) {
+          const hb = document.createElement('span');
+          hb.className = 'city-tile-hiring-badge';
+          hb.textContent = 'Hiring local tech';
+          a.appendChild(hb);
+        }
+
         if (isOrigin) {
           if (status.hiring) {
-            meta.innerHTML = '<strong>You’re here</strong> &middot; hiring local tech &middot; Delta crew covers, ~' + status.coverEta + ' min';
+            meta.innerHTML = '<strong>You’re here</strong> · Delta crew covers, ~' + status.coverEta + ' min';
           } else {
-            meta.innerHTML = '<strong>You’re here</strong> &middot; local tech ~' + city.localEta + ' min away';
+            meta.innerHTML = '<strong>You’re here</strong> · local tech ~' + city.localEta + ' min away';
           }
         } else if (status.hiring) {
           if (formatForOther) {
-            meta.innerHTML = formatForOther(slug) + ' &middot; <em>hiring local tech</em>';
+            meta.innerHTML = formatForOther(slug);
           } else {
-            meta.textContent = 'Currently hiring — Delta crew covers';
+            meta.textContent = 'Delta crew covers';
           }
         } else if (formatForOther) {
           meta.textContent = formatForOther(slug);
         } else {
-          meta.textContent = 'Local tech ~' + city.localEta + ' min from your door';
+          meta.textContent = '~' + city.localEta + ' min local tech';
         }
 
-        // Busy indicator — overlay on any tile (including the origin) whose tech is
-        // currently on a job. Origin tile gets a softer treatment because the
-        // user IS there and we don't want to alarm them — but we still show that
-        // dispatch may be slightly delayed.
+        // Busy indicator — applies ONLY to non-hiring cities. The hiring state is
+        // permanent (no resident tech yet) and uses its own blue treatment, while
+        // the busy state is temporary (tech is on a job right now) and uses amber.
         const busyUntil = busy[slug];
         if (busyUntil && busyUntil > now && !status.hiring) {
           a.classList.add('city-tile-busy');
@@ -518,7 +563,7 @@
           const badge = document.createElement('span');
           badge.className = 'city-tile-busy-badge';
           badge.setAttribute('data-busy-until', String(busyUntil));
-          badge.textContent = (isOrigin ? 'On a job nearby · ' : 'On a job · ') + _busyLabel(busyUntil - now);
+          badge.textContent = 'On a job · ' + _busyLabel(busyUntil - now);
           a.appendChild(badge);
         }
 
