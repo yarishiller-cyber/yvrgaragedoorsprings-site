@@ -321,8 +321,29 @@ body.state-after-hours .hero-figure::after {
   display: flex; flex-direction: column; gap: var(--s-3);
 }
 .tier.featured {
-  border-color: var(--ink); border-width: 2px;
-  box-shadow: var(--shadow-2);
+  border-color: var(--signal); border-width: 2px;
+  box-shadow:
+    0 0 0 4px rgba(217, 74, 43, 0.10),
+    0 0 24px rgba(217, 74, 43, 0.18),
+    0 8px 28px rgba(15, 26, 31, 0.10);
+  animation: tierFeaturedGlow 4.2s ease-in-out infinite;
+}
+@keyframes tierFeaturedGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(217, 74, 43, 0.10),
+      0 0 24px rgba(217, 74, 43, 0.18),
+      0 8px 28px rgba(15, 26, 31, 0.10);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(217, 74, 43, 0.16),
+      0 0 36px rgba(217, 74, 43, 0.30),
+      0 12px 36px rgba(15, 26, 31, 0.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tier.featured { animation: none; }
 }
 .tier-badge {
   position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -445,18 +466,29 @@ body.state-after-hours .hero-figure::after {
 }
 .city-tile:hover .city-tile-van { transform: translateX(6px); }
 
-/* Default (AVAILABLE) van — forest green */
+/* Photoreal branded tech-truck image — used in place of the prior SVG glyph.
+   Per-state visual cues come from the tile border/badge plus a small CSS filter
+   on the image itself (subtle saturation/brightness shift). */
 .city-tile-van {
   position: relative;
-  height: 40px;
   display: block;
-  color: var(--green);
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--s-1);
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.city-tile-van svg { height: 100%; width: auto; display: block; }
+.city-tile-truck-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 480 / 180;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(15,26,31,0.18));
+  transition: filter 0.25s ease;
+}
 .city-tile-van::after {
   content: "";
-  position: absolute; left: 0; right: -8px; bottom: -2px;
+  position: absolute; left: 6%; right: 6%; bottom: -2px;
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(15,26,31,0.18) 20%, rgba(15,26,31,0.18) 80%, transparent);
 }
@@ -493,7 +525,8 @@ body.state-after-hours .hero-figure::after {
   box-shadow: 0 6px 20px rgba(200, 147, 42, 0.28);
 }
 .city-tile-origin .city-tile-name { color: #8a6500; }
-.city-tile-origin .city-tile-van  { color: var(--gold); }
+/* Origin = full-colour truck, no filter — your city looks crisp */
+.city-tile-origin .city-tile-truck-img { filter: drop-shadow(0 3px 4px rgba(200, 147, 42, 0.35)) saturate(1.05); }
 .city-tile-origin::before { background: radial-gradient(circle at 70% 10%, rgba(255,255,255,0.75), transparent 60%); }
 .city-tile-origin .city-tile-marker {
   position: absolute; top: 8px; right: 8px;
@@ -521,7 +554,8 @@ body.state-after-hours .hero-figure::after {
   border-color: var(--signal);
 }
 .city-tile-busy .city-tile-name { color: var(--signal-hover); }
-.city-tile-busy .city-tile-van  { color: var(--signal); }
+/* Busy = slightly dimmed truck with a warm red cast */
+.city-tile-busy .city-tile-truck-img { filter: drop-shadow(0 2px 3px rgba(217,74,43,0.30)) saturate(0.85) brightness(0.95); }
 .city-tile-busy-dot {
   position: absolute; top: 9px; right: 9px;
   width: 9px; height: 9px;
@@ -562,7 +596,8 @@ body.state-after-hours .hero-figure::after {
   border-style: dashed;
 }
 .city-tile-hiring .city-tile-name { color: var(--steel); }
-.city-tile-hiring .city-tile-van  { color: var(--steel); opacity: 0.55; }
+/* Hiring = heavily desaturated + dimmed truck — visually 'parked / not yet on roster' */
+.city-tile-hiring .city-tile-truck-img { filter: grayscale(0.7) brightness(0.92) opacity(0.65); }
 .city-tile-hiring-badge {
   font-size: 0.62rem;
   font-weight: 800;
@@ -585,7 +620,7 @@ body.state-after-hours .hero-figure::after {
 
 /* If a tile is BOTH origin AND hiring (Tsawwassen + you), origin wins visually */
 .city-tile-origin.city-tile-hiring { border-style: solid; background: linear-gradient(180deg, #fff7e0 0%, #fff 80%); }
-.city-tile-origin.city-tile-hiring .city-tile-van { color: var(--gold); opacity: 1; }
+.city-tile-origin.city-tile-hiring .city-tile-truck-img { filter: drop-shadow(0 3px 4px rgba(200, 147, 42, 0.35)) saturate(1.05); opacity: 1; }
 
 /* ---------- City picker (above the grid) ---------- */
 .city-picker {

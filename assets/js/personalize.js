@@ -473,62 +473,11 @@
     const busy = manageBusySchedule();
     const now = Date.now();
 
-    // Inline panel-van SVG (Ford Transit / Mercedes Sprinter silhouette).
-    // currentColor on the body so each tile state recolours the van via CSS:
-    //   AVAILABLE → green, BUSY → red, ORIGIN → gold, HIRING → faded steel-blue.
-    // Mirror /assets/img/tech-van.svg — keeping it inline saves a fetch and lets
-    // it inherit currentColor cleanly.
-    const VAN_SVG =
-      '<svg viewBox="0 0 84 44" aria-hidden="true" focusable="false">'
-      + '<defs><linearGradient id="vanBodyGrad" x1="0" y1="0" x2="0" y2="1">'
-      +   '<stop offset="0" stop-color="white" stop-opacity="0.22"/>'
-      +   '<stop offset="1" stop-color="black" stop-opacity="0.14"/>'
-      + '</linearGradient></defs>'
-      // Wheels
-      + '<circle cx="18" cy="34" r="6.5" fill="#0f1a1f"/>'
-      + '<circle cx="18" cy="34" r="2.6" fill="#cfd6da"/>'
-      + '<circle cx="18" cy="34" r="1.1" fill="#0f1a1f"/>'
-      + '<circle cx="68" cy="34" r="6.5" fill="#0f1a1f"/>'
-      + '<circle cx="68" cy="34" r="2.6" fill="#cfd6da"/>'
-      + '<circle cx="68" cy="34" r="1.1" fill="#0f1a1f"/>'
-      // Body
-      + '<path d="M 2 32 L 2 13 Q 2 10 5 10 L 13 10 L 17 4 Q 18 3 20 3 L 78 3 Q 82 3 82 7 L 82 32 Z" fill="currentColor" stroke="#0f1a1f" stroke-width="1.5" stroke-linejoin="round"/>'
-      + '<path d="M 2 32 L 2 13 Q 2 10 5 10 L 13 10 L 17 4 Q 18 3 20 3 L 78 3 Q 82 3 82 7 L 82 32 Z" fill="url(#vanBodyGrad)"/>'
-      // Windshield
-      + '<path d="M 14 10 L 18 4.5 Q 19 4 21 4 L 26 4 L 26 10 Z" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.7"/>'
-      // Cab door window
-      + '<rect x="28" y="6" width="9" height="4.2" rx="0.4" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.5"/>'
-      // Cargo window
-      + '<rect x="40" y="6.2" width="14" height="3.8" rx="0.4" fill="#cfdde5" stroke="#0f1a1f" stroke-width="0.5"/>'
-      // Door seams
-      + '<line x1="40" y1="10" x2="40" y2="32" stroke="#0f1a1f" stroke-width="0.9" opacity="0.45"/>'
-      + '<rect x="42" y="22" width="3" height="0.9" fill="#0f1a1f" opacity="0.7"/>'
-      + '<line x1="69" y1="10" x2="69" y2="32" stroke="#0f1a1f" stroke-width="0.9" opacity="0.45"/>'
-      // Wheel arches
-      + '<path d="M 11 32 A 7 7 0 0 1 25 32 L 25 33 L 11 33 Z" fill="#0f1a1f"/>'
-      + '<path d="M 61 32 A 7 7 0 0 1 75 32 L 75 33 L 61 33 Z" fill="#0f1a1f"/>'
-      // Decal
-      + '<rect x="42" y="14" width="22" height="6.4" rx="0.5" fill="#fafaf7" stroke="#0f1a1f" stroke-width="0.4"/>'
-      + '<text x="53" y="19" text-anchor="middle" fill="#d94a2b" font-family="system-ui, sans-serif" font-weight="800" font-size="4.4" letter-spacing="0.04em">YVR · SPRINGS</text>'
-      // Body trim
-      + '<line x1="5" y1="28" x2="80" y2="28" stroke="#0f1a1f" stroke-width="0.4" opacity="0.35"/>'
-      // Front lights
-      + '<rect x="3.2" y="19" width="2.8" height="3.4" rx="0.6" fill="#ffd97a" stroke="#0f1a1f" stroke-width="0.4"/>'
-      + '<rect x="3.2" y="23.5" width="2" height="1.2" rx="0.3" fill="#e8a23b" stroke="#0f1a1f" stroke-width="0.3"/>'
-      // Grille hint
-      + '<rect x="6.5" y="20" width="6" height="2.6" rx="0.4" fill="#0f1a1f" opacity="0.18"/>'
-      + '<line x1="7" y1="21" x2="12" y2="21" stroke="#0f1a1f" stroke-width="0.4" opacity="0.55"/>'
-      + '<line x1="7" y1="22" x2="12" y2="22" stroke="#0f1a1f" stroke-width="0.4" opacity="0.55"/>'
-      // Side mirror
-      + '<path d="M 17 8 L 14.5 8 L 13.5 10" fill="none" stroke="#0f1a1f" stroke-width="0.9"/>'
-      + '<rect x="13" y="8.3" width="1.6" height="2" fill="#0f1a1f"/>'
-      // Door handle
-      + '<rect x="30" y="9" width="3" height="0.8" fill="#0f1a1f" opacity="0.7"/>'
-      // Rear bumper
-      + '<rect x="78" y="29" width="4.5" height="1.8" rx="0.4" fill="#0f1a1f" opacity="0.55"/>'
-      // Ground shadow
-      + '<ellipse cx="42" cy="40.5" rx="40" ry="1.5" fill="#0f1a1f" opacity="0.18"/>'
-      + '</svg>';
+    // The tech-truck image is a photoreal Ford Maverick with the YVR Garage Door
+    // Springs wrap (PNG, transparent background, 480px wide thumbnail). Per-state
+    // colour cues come from the tile border/badge, not from recolouring the
+    // truck. Hiring/busy tiles use a CSS filter on the image to dim it.
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/tech-truck-sm.png" srcset="/assets/img/tech-truck-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
 
     containers.forEach(container => {
       container.innerHTML = '';
@@ -542,11 +491,11 @@
         if (isOrigin) a.classList.add('city-tile-origin');
         if (status.hiring) a.classList.add('city-tile-hiring');
 
-        // Van glyph
-        const van = document.createElement('span');
-        van.className = 'city-tile-van';
-        van.innerHTML = VAN_SVG;
-        a.appendChild(van);
+        // Tech truck (photoreal branded vehicle)
+        const truck = document.createElement('span');
+        truck.className = 'city-tile-van';
+        truck.innerHTML = TRUCK_HTML;
+        a.appendChild(truck);
 
         // Origin corner marker (pin) takes priority over the hiring badge
         if (isOrigin) {
