@@ -1238,6 +1238,237 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
 .article-cta strong { color: var(--paper); }
 .article-cta .btn { margin-top: var(--s-3); }
 
+/* ============================================================
+   JOB POSTING CARD — structured recruiting layout used on city
+   pages that have a current opening (Tsawwassen for now).
+   ============================================================ */
+.job-posting {
+  background: linear-gradient(180deg, #fffaf0 0%, #fff 60%);
+  border: 2px solid var(--gold);
+  border-radius: var(--r-3);
+  box-shadow: 0 10px 32px rgba(200, 147, 42, 0.18);
+  padding: var(--s-6) var(--s-5);
+  scroll-margin-top: 80px;
+}
+@media (min-width: 760px) {
+  .job-posting { padding: var(--s-7) var(--s-7); }
+}
+
+.job-posting-header { border-bottom: 1px solid var(--line); padding-bottom: var(--s-5); margin-bottom: var(--s-5); }
+.job-posting-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.74rem; font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--s-3);
+}
+.job-posting-pulse {
+  width: 9px; height: 9px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 var(--gold);
+  animation: jobPostingPulse 2.4s cubic-bezier(0.66, 0, 0, 1) infinite;
+}
+@keyframes jobPostingPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(200, 147, 42, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(200, 147, 42, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 147, 42, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .job-posting-pulse { animation: none; } }
+
+.job-posting-title {
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.2rem);
+  line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;
+  color: var(--ink);
+  margin-bottom: var(--s-3);
+}
+.job-posting-sub {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin-bottom: var(--s-5);
+}
+
+.job-posting-meta {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: var(--s-3);
+}
+@media (min-width: 760px) {
+  .job-posting-meta { grid-template-columns: 1fr 1fr; }
+}
+.job-posting-meta li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--s-3);
+  font-size: 0.95rem;
+  align-items: start;
+}
+.job-posting-meta-key {
+  font-weight: 800;
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+.job-posting-meta-val { color: var(--ink-soft); line-height: 1.5; }
+.job-posting-meta-val strong { color: var(--ink); }
+
+.job-posting-grid { display: grid; gap: var(--s-6); }
+@media (min-width: 880px) {
+  .job-posting-grid { grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+}
+.job-col h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-top: var(--s-5);
+  margin-bottom: var(--s-3);
+  color: var(--ink);
+}
+.job-col h3:first-child { margin-top: 0; }
+.job-col h3::before {
+  content: "";
+  display: inline-block;
+  width: 32px; height: 3px;
+  background: var(--signal);
+  vertical-align: middle;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+.job-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.job-list li {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  padding-left: 26px;
+  position: relative;
+}
+.job-list li::before {
+  content: "→";
+  position: absolute; left: 4px; top: 0;
+  color: var(--signal); font-weight: 800;
+}
+.job-list-checked li::before { content: "✓"; color: var(--green); }
+.job-list-muted li {
+  color: var(--ink-muted);
+  font-style: italic;
+  padding-left: 22px;
+}
+.job-list-muted li::before {
+  content: "–";
+  color: var(--ink-muted);
+  font-weight: 800;
+}
+.job-list li strong { color: var(--ink); font-weight: 700; font-style: normal; }
+
+.job-posting-quote {
+  margin: var(--s-7) 0;
+  padding: var(--s-5);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r-3);
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--s-4);
+  align-items: start;
+}
+.job-posting-quote-avatar img {
+  width: 64px; height: 64px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--gold);
+  display: block;
+}
+.job-posting-quote blockquote {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  background: transparent;
+  border: 0;
+  color: var(--paper);
+}
+.job-posting-quote blockquote p {
+  font-size: 1.1rem;
+  line-height: 1.55;
+  margin-bottom: var(--s-3);
+}
+.job-posting-quote figcaption {
+  font-size: var(--t-small);
+  color: rgba(250, 250, 247, 0.78);
+}
+.job-posting-quote figcaption strong { color: var(--paper); }
+
+.job-posting-apply {
+  background: var(--signal-soft);
+  border: 1px solid var(--signal);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  margin-top: var(--s-6);
+  text-align: center;
+}
+.job-posting-apply h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: var(--s-4);
+  color: var(--ink);
+}
+.job-posting-apply-ctas {
+  display: grid; gap: var(--s-3);
+  max-width: 580px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .job-posting-apply-ctas { grid-template-columns: 1fr 1fr; }
+}
+.job-posting-apply-note {
+  margin-top: var(--s-4);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin-left: auto; margin-right: auto;
+}
+
+.job-posting-faq {
+  margin-top: var(--s-7);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+.job-posting-faq h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-4);
+}
+.job-posting-faq details {
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-3) 0;
+}
+.job-posting-faq summary {
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: var(--s-5);
+  color: var(--ink);
+}
+.job-posting-faq summary::-webkit-details-marker { display: none; }
+.job-posting-faq summary::after {
+  content: "+";
+  position: absolute; right: 0; top: 0;
+  font-size: 1.3rem;
+  color: var(--signal);
+  font-weight: 800;
+}
+.job-posting-faq details[open] summary::after { content: "–"; }
+.job-posting-faq details p {
+  margin-top: var(--s-3);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .related {
   border-top: 1px solid var(--line);
   padding-block: var(--s-6);
