@@ -347,6 +347,7 @@
     swap('[data-dtr="city"]', city.display);
     swap('[data-dtr="eta"]', String(city.localEta));
     renderCityGrid(slug);
+    enhanceCityTiles(slug);
     renderCrossCityHint(slug);
     // Sync the picker UI if not already set
     const select = qs('#city-picker-select');
@@ -579,6 +580,92 @@
         a.appendChild(name);
         a.appendChild(meta);
         container.appendChild(a);
+      });
+    });
+  }
+
+  /* ---- 4a. Enhance static .city-tile markup on city pages ----
+     City pages ship a curated short list of nearby cities as plain HTML
+     (name + drive-time). This function injects the same truck image and
+     status badge that the homepage grid uses, without replacing the
+     page-specific selection. Idempotent — safe to call repeatedly. */
+  function enhanceCityTiles(originSlug) {
+    const grids = qsa('.cities-grid:not([data-city-grid])');
+    if (!grids.length) return;
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/tech-truck-sm.png" srcset="/assets/img/tech-truck-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
+    const busy = manageBusySchedule();
+    const now = Date.now();
+
+    grids.forEach(grid => {
+      qsa('.city-tile', grid).forEach(tile => {
+        const href = tile.getAttribute('href') || '';
+        const m = href.match(/\/cities\/([^/]+)\//);
+        if (!m) return;
+        const slug = m[1];
+        const status = TECH_STATUS[slug] || {};
+        const isOrigin = (slug === originSlug);
+
+        // Reset prior enhancements so re-runs are clean
+        qsa('.city-tile-van, .city-tile-marker, .city-tile-hiring-pin, .city-tile-available-badge, .city-tile-hiring-badge, .city-tile-origin-badge, .city-tile-busy-dot, .city-tile-busy-badge', tile).forEach(n => n.remove());
+        tile.classList.remove('city-tile-busy', 'city-tile-origin', 'city-tile-hiring');
+
+        // Class flags
+        if (isOrigin) tile.classList.add('city-tile-origin');
+        if (status.hiring) tile.classList.add('city-tile-hiring');
+
+        // Truck — sits in normal flex flow above name/meta
+        const truck = document.createElement('span');
+        truck.className = 'city-tile-van';
+        truck.innerHTML = TRUCK_HTML;
+        tile.insertBefore(truck, tile.firstChild);
+
+        // Corner marker/pin
+        if (isOrigin) {
+          const marker = document.createElement('span');
+          marker.className = 'city-tile-marker';
+          marker.setAttribute('aria-label', 'Your city');
+          marker.innerHTML = '★';
+          tile.appendChild(marker);
+        } else if (status.hiring) {
+          const pin = document.createElement('span');
+          pin.className = 'city-tile-hiring-pin';
+          pin.setAttribute('aria-label', 'Hiring local tech');
+          pin.textContent = '+';
+          tile.appendChild(pin);
+        }
+
+        // Status badge (uses CSS order:-1 to float to the top of the flex column)
+        const isBusyCandidate = busy[slug] && busy[slug] > now && !status.hiring && !isOrigin;
+        if (status.hiring) {
+          const hb = document.createElement('span');
+          hb.className = 'city-tile-hiring-badge';
+          hb.textContent = 'Hiring local tech';
+          tile.appendChild(hb);
+        } else if (isOrigin && !isBusyCandidate) {
+          const ob = document.createElement('span');
+          ob.className = 'city-tile-origin-badge';
+          ob.textContent = '★ Your city';
+          tile.appendChild(ob);
+        } else if (!isBusyCandidate) {
+          const ab = document.createElement('span');
+          ab.className = 'city-tile-available-badge';
+          ab.textContent = '● Available';
+          tile.appendChild(ab);
+        }
+
+        if (isBusyCandidate) {
+          const busyUntil = busy[slug];
+          tile.classList.add('city-tile-busy');
+          const dot = document.createElement('span');
+          dot.className = 'city-tile-busy-dot';
+          dot.setAttribute('aria-hidden', 'true');
+          tile.appendChild(dot);
+          const badge = document.createElement('span');
+          badge.className = 'city-tile-busy-badge';
+          badge.setAttribute('data-busy-until', String(busyUntil));
+          badge.textContent = 'On a job · ' + _busyLabel(busyUntil - now);
+          tile.appendChild(badge);
+        }
       });
     });
   }
@@ -1490,6 +1577,8 @@
     }
     // Still no origin? Render default grid and let geo decide
     if (!_originCity) renderCityGrid(null);
+    // Enhance any static .city-tile markup (city-page nearby grids)
+    enhanceCityTiles(_originCity || null);
     applyAvailability();
     stickyBar();
     diagnosis();
@@ -1509,7 +1598,7 @@
     // Tick the busy-tech countdowns every 60s; do a full grid re-render every 5 min
     // to catch newly-busy techs as the schedule rotates.
     setInterval(tickBusyBadges, 60 * 1000);
-    setInterval(function () { renderCityGrid(_originCity); }, 5 * 60 * 1000);
+    setInterval(function () { renderCityGrid(_originCity); enhanceCityTiles(_originCity); }, 5 * 60 * 1000);
   }
 
   if (document.readyState === 'loading') {
