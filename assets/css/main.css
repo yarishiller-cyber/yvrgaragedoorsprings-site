@@ -417,9 +417,18 @@ img.brand-mark {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
-/* On mobile, shrink the hero photo so the sky shows around it */
+/* On mobile, the hero photo goes edge-to-edge and sits flush against whatever
+   block precedes the hero (cross-city banner, header). */
 @media (max-width: 959px) {
-  .hero-figure { max-width: 78%; margin-left: auto; margin-right: auto; }
+  .hero { padding-top: 0; }
+  .hero-figure {
+    max-width: none;
+    margin-left: calc(var(--s-4) * -1);
+    margin-right: calc(var(--s-4) * -1);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .hero .wrap > div:last-child { margin-bottom: var(--s-4); }
 }
 
 
