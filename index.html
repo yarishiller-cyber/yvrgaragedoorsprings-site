@@ -37,7 +37,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="/assets/css/main.css?v=20260520d">
+<link rel="stylesheet" href="/assets/css/main.css?v=20260520f">
 
 <!-- JSON-LD: LocalBusiness -->
 <script type="application/ld+json">
@@ -240,7 +240,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/" aria-label="YVR Garage Door Springs home">
-      <img class="brand-mark" src="/assets/img/logo-anim-96.gif" alt="" width="36" height="36" aria-hidden="true">
+      <img class="brand-mark" src="/assets/img/logo-anim-96.gif?v=20260520f" alt="" width="36" height="36" aria-hidden="true">
       <span>YVR Garage Door Springs</span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -367,9 +367,9 @@
         <circle cx="1145" cy="194" r="1.0" class="star s2"/>
       </g>
 
-      <!-- SUN (day/dawn/dusk only) — positioned at viewBox centre-x so it stays
-           visible whether the SVG is sliced wide (desktop) or tall (mobile). -->
-      <g class="sky-sun" transform="translate(600 110)">
+      <!-- SUN (day/dawn/dusk only) — sits in the upper portion of the viewBox so
+           it's above the hero photo on mobile and visible on desktop too. -->
+      <g class="sky-sun" transform="translate(600 80)">
         <circle r="90" fill="url(#sun-glow)" class="sun-glow"/>
         <g class="sun-rays">
           <g stroke="#ffd97a" stroke-width="2.5" stroke-linecap="round" opacity="0.55">
@@ -387,15 +387,12 @@
       </g>
 
       <!-- MOON (night only) — phase computed by JS, .moon-lit path replaced.
-           Centred horizontally in the viewBox (x=600) so it stays in frame on
-           both wide-desktop and tall-mobile slices. Disk radius bumped to 52. -->
-      <g class="sky-moon" transform="translate(600 115)">
+           Sits in the upper portion of the viewBox (y=85) so it floats ABOVE
+           the hero photo on mobile and stays visible at any aspect ratio. -->
+      <g class="sky-moon" transform="translate(600 85)">
         <circle r="92" fill="url(#moon-glow)"/>
-        <!-- Full disk in dim base (the "dark side") — darker now so the lit crescent reads -->
         <circle r="52" fill="#1c2a40" opacity="0.96"/>
-        <!-- Lit portion — d attribute set by JS based on phase, radius 52 -->
         <path class="sky-moon-lit" d="" fill="#fffce5"/>
-        <!-- Subtle craters on the lit side -->
         <circle cx="-12" cy="-14" r="4"   fill="rgba(15,26,31,0.10)"/>
         <circle cx="10"  cy="12"  r="2.8" fill="rgba(15,26,31,0.10)"/>
         <circle cx="-3"  cy="22"  r="2"   fill="rgba(15,26,31,0.10)"/>
@@ -980,7 +977,7 @@
 </div>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="/assets/js/personalize.js?v=20260520d" defer></script>
+<script src="/assets/js/personalize.js?v=20260520f" defer></script>
 
 </body>
 </html>

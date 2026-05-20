@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">The 5-minute lubrication routine — four points to hit</title>
+  <desc id="desc">Editorial illustration. A garage door cross-section showing the four hardware points that need lithium grease: hinges, rollers, springs, and the top of the track. A white lithium grease cartridge sits on the workbench below.</desc>
+
+  <rect width="1600" height="900" fill="#f4f0e8"/>
+
+  <text x="80" y="64" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing=".2em">FOUR POINTS · WHITE LITHIUM GREASE · NO WD-40</text>
+  <line x1="80" y1="80" x2="1520" y2="80" stroke="#d9d4c8" stroke-width="2"/>
+
+  <!-- Garage door cross section -->
+  <g transform="translate(220, 140)">
+    <!-- Ceiling beam -->
+    <rect x="0" y="0" width="800" height="14" fill="#0f1a1f"/>
+    <!-- Spring assembly (top, point #3) -->
+    <rect x="20" y="14" width="760" height="8" fill="#8d9aa1"/>
+    <rect x="100" y="-6" width="280" height="22" fill="#0f1a1f" rx="3"/>
+    <g stroke="#cfd6da" stroke-width="1.5" opacity=".55">
+      <line x1="108" y1="-6" x2="108" y2="16"/>
+      <line x1="118" y1="-6" x2="118" y2="16"/>
+      <line x1="128" y1="-6" x2="128" y2="16"/>
+      <line x1="138" y1="-6" x2="138" y2="16"/>
+      <line x1="148" y1="-6" x2="148" y2="16"/>
+      <line x1="158" y1="-6" x2="158" y2="16"/>
+      <line x1="168" y1="-6" x2="168" y2="16"/>
+      <line x1="178" y1="-6" x2="178" y2="16"/>
+      <line x1="188" y1="-6" x2="188" y2="16"/>
+      <line x1="198" y1="-6" x2="198" y2="16"/>
+      <line x1="208" y1="-6" x2="208" y2="16"/>
+      <line x1="218" y1="-6" x2="218" y2="16"/>
+      <line x1="228" y1="-6" x2="228" y2="16"/>
+      <line x1="238" y1="-6" x2="238" y2="16"/>
+      <line x1="248" y1="-6" x2="248" y2="16"/>
+      <line x1="258" y1="-6" x2="258" y2="16"/>
+      <line x1="268" y1="-6" x2="268" y2="16"/>
+      <line x1="278" y1="-6" x2="278" y2="16"/>
+      <line x1="288" y1="-6" x2="288" y2="16"/>
+      <line x1="298" y1="-6" x2="298" y2="16"/>
+      <line x1="308" y1="-6" x2="308" y2="16"/>
+      <line x1="318" y1="-6" x2="318" y2="16"/>
+      <line x1="328" y1="-6" x2="328" y2="16"/>
+      <line x1="338" y1="-6" x2="338" y2="16"/>
+      <line x1="348" y1="-6" x2="348" y2="16"/>
+      <line x1="358" y1="-6" x2="358" y2="16"/>
+      <line x1="368" y1="-6" x2="368" y2="16"/>
+    </g>
+    <rect x="420" y="-6" width="280" height="22" fill="#0f1a1f" rx="3"/>
+    <g stroke="#cfd6da" stroke-width="1.5" opacity=".55">
+      <line x1="428" y1="-6" x2="428" y2="16"/>
+      <line x1="438" y1="-6" x2="438" y2="16"/>
+      <line x1="448" y1="-6" x2="448" y2="16"/>
+      <line x1="458" y1="-6" x2="458" y2="16"/>
+      <line x1="468" y1="-6" x2="468" y2="16"/>
+      <line x1="478" y1="-6" x2="478" y2="16"/>
+      <line x1="488" y1="-6" x2="488" y2="16"/>
+      <line x1="498" y1="-6" x2="498" y2="16"/>
+      <line x1="508" y1="-6" x2="508" y2="16"/>
+      <line x1="518" y1="-6" x2="518" y2="16"/>
+      <line x1="528" y1="-6" x2="528" y2="16"/>
+      <line x1="538" y1="-6" x2="538" y2="16"/>
+      <line x1="548" y1="-6" x2="548" y2="16"/>
+      <line x1="558" y1="-6" x2="558" y2="16"/>
+      <line x1="568" y1="-6" x2="568" y2="16"/>
+      <line x1="578" y1="-6" x2="578" y2="16"/>
+      <line x1="588" y1="-6" x2="588" y2="16"/>
+      <line x1="598" y1="-6" x2="598" y2="16"/>
+      <line x1="608" y1="-6" x2="608" y2="16"/>
+      <line x1="618" y1="-6" x2="618" y2="16"/>
+      <line x1="628" y1="-6" x2="628" y2="16"/>
+      <line x1="638" y1="-6" x2="638" y2="16"/>
+      <line x1="648" y1="-6" x2="648" y2="16"/>
+      <line x1="658" y1="-6" x2="658" y2="16"/>
+      <line x1="668" y1="-6" x2="668" y2="16"/>
+      <line x1="678" y1="-6" x2="678" y2="16"/>
+    </g>
+
+    <!-- Tracks (point #4 — top curve only) -->
+    <path d="M 20 22 L 20 200 Q 20 220 40 220" stroke="#5a6a78" stroke-width="10" fill="none"/>
+    <path d="M 780 22 L 780 200 Q 780 220 760 220" stroke="#5a6a78" stroke-width="10" fill="none"/>
+
+    <!-- Door panels with hinges -->
+    <rect x="40" y="220" width="720" height="320" fill="#fafaf7" stroke="#0f1a1f" stroke-width="3"/>
+    <line x1="40" y1="296" x2="760" y2="296" stroke="#0f1a1f" stroke-width="1.5"/>
+    <line x1="40" y1="372" x2="760" y2="372" stroke="#0f1a1f" stroke-width="1.5"/>
+    <line x1="40" y1="448" x2="760" y2="448" stroke="#0f1a1f" stroke-width="1.5"/>
+
+    <!-- Hinges on the seams (point #1) -->
+    <rect x="60" y="288" width="34" height="20" rx="2" fill="#1f3a44"/>
+    <rect x="700" y="288" width="34" height="20" rx="2" fill="#1f3a44"/>
+    <rect x="60" y="364" width="34" height="20" rx="2" fill="#1f3a44"/>
+    <rect x="700" y="364" width="34" height="20" rx="2" fill="#1f3a44"/>
+    <rect x="60" y="440" width="34" height="20" rx="2" fill="#1f3a44"/>
+    <rect x="700" y="440" width="34" height="20" rx="2" fill="#1f3a44"/>
+
+    <!-- Rollers in tracks (point #2) -->
+    <circle cx="35" cy="240" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="35" cy="316" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="35" cy="392" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="35" cy="468" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="765" cy="240" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="765" cy="316" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="765" cy="392" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+    <circle cx="765" cy="468" r="10" fill="#cfd6da" stroke="#0f1a1f" stroke-width="2"/>
+
+    <!-- Labels with numbered callouts -->
+    <!-- 1 Hinges -->
+    <g transform="translate(94, 296)">
+      <circle r="14" fill="#d94a2b"/>
+      <text x="0" y="5" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800">1</text>
+    </g>
+    <g transform="translate(580, 296)">
+      <line x1="-470" y1="0" x2="-30" y2="0" stroke="#d94a2b" stroke-width="2" stroke-dasharray="4 4"/>
+      <rect x="-26" y="-14" width="148" height="28" rx="14" fill="#d94a2b"/>
+      <text x="48" y="5" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing=".06em">HINGES (3 pairs)</text>
+    </g>
+    <!-- 2 Rollers -->
+    <g transform="translate(35, 502)">
+      <circle r="14" fill="#d94a2b"/>
+      <text x="0" y="5" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800">2</text>
+    </g>
+    <g transform="translate(35, 540)">
+      <rect x="-70" y="0" width="140" height="22" rx="11" fill="#d94a2b"/>
+      <text x="0" y="16" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".06em">ROLLERS (4 each side)</text>
+    </g>
+    <!-- 3 Springs -->
+    <g transform="translate(260, -32)">
+      <circle r="14" fill="#d94a2b"/>
+      <text x="0" y="5" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800">3</text>
+    </g>
+    <g transform="translate(400, -56)">
+      <rect x="-60" y="-12" width="120" height="22" rx="11" fill="#d94a2b"/>
+      <text x="0" y="4" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".06em">SPRING COILS</text>
+    </g>
+    <!-- 4 Top of track curve -->
+    <g transform="translate(20, 200)">
+      <circle r="14" fill="#d94a2b"/>
+      <text x="0" y="5" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800">4</text>
+    </g>
+    <g transform="translate(-70, 168)">
+      <rect x="-58" y="0" width="118" height="22" rx="11" fill="#d94a2b"/>
+      <text x="0" y="16" text-anchor="middle" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".06em">TRACK CURVE</text>
+    </g>
+
+    <!-- Floor -->
+    <line x1="0" y1="600" x2="800" y2="600" stroke="#0f1a1f" stroke-width="3"/>
+  </g>
+
+  <!-- Right column: tool + don't list -->
+  <g transform="translate(1090, 200)">
+    <text x="0" y="0" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800">Use this</text>
+    <!-- white lithium grease cartridge -->
+    <g transform="translate(0, 28)">
+      <rect width="380" height="60" rx="4" fill="#fafaf7" stroke="#0f1a1f" stroke-width="2"/>
+      <rect width="380" height="10" fill="#ffffff"/>
+      <rect y="50" width="380" height="10" fill="#d9d4c8"/>
+      <rect x="40" y="0" width="240" height="60" fill="#1f3a44"/>
+      <text x="160" y="22" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing=".1em">WHITE LITHIUM</text>
+      <text x="160" y="38" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing=".08em">MULTI-PURPOSE GREASE · NLGI #2</text>
+      <text x="160" y="52" text-anchor="middle" fill="#d94a2b" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="10" font-weight="800">~$8 at Lordco or Canadian Tire</text>
+      <rect x="280" y="22" width="40" height="16" fill="#1f3a44"/>
+      <polygon points="320,22 360,30 320,38" fill="#3a525c"/>
+    </g>
+
+    <text x="0" y="140" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800">NOT this</text>
+    <g transform="translate(0, 160)">
+      <g>
+        <rect width="380" height="36" rx="4" fill="#fbf1d8" stroke="#b27a00" stroke-width="1.5"/>
+        <line x1="14" y1="6" x2="30" y2="22" stroke="#d94a2b" stroke-width="3"/>
+        <line x1="14" y1="22" x2="30" y2="6" stroke="#d94a2b" stroke-width="3"/>
+        <text x="44" y="24" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">WD-40 (it's a solvent, not a lube)</text>
+      </g>
+      <g transform="translate(0, 46)">
+        <rect width="380" height="36" rx="4" fill="#fbf1d8" stroke="#b27a00" stroke-width="1.5"/>
+        <line x1="14" y1="6" x2="30" y2="22" stroke="#d94a2b" stroke-width="3"/>
+        <line x1="14" y1="22" x2="30" y2="6" stroke="#d94a2b" stroke-width="3"/>
+        <text x="44" y="24" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Engine oil (drips, dust magnet)</text>
+      </g>
+      <g transform="translate(0, 92)">
+        <rect width="380" height="36" rx="4" fill="#fbf1d8" stroke="#b27a00" stroke-width="1.5"/>
+        <line x1="14" y1="6" x2="30" y2="22" stroke="#d94a2b" stroke-width="3"/>
+        <line x1="14" y1="22" x2="30" y2="6" stroke="#d94a2b" stroke-width="3"/>
+        <text x="44" y="24" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Grease on the tracks themselves</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom note -->
+  <g transform="translate(80, 800)">
+    <rect width="1440" height="64" rx="8" fill="#1f3a44"/>
+    <text x="40" y="40" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">Twice a year. Spring (the season, not the part) and fall. Five minutes. Skip the tracks themselves — the rollers are what need grease, not the rails.</text>
+  </g>
+</svg>

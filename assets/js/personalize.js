@@ -1389,6 +1389,91 @@
     if (timeEl) timeEl.textContent = formatClockVancouver();
   }
 
+  /* ============================================================
+     BLOG FILTER + SEARCH
+     Activates on /blog/ where the filter bar and category buttons exist.
+     Reads ?cat= and ?q= from the URL on load so links can deep-link to a
+     filtered view. Updates the URL without reloading as filters change.
+     ============================================================ */
+  function initBlogFilter() {
+    const list = qs('.post-list');
+    const filter = qs('.blog-filter');
+    if (!list || !filter) return;
+    const items = qsa('.post-item', list);
+    const buttons = qsa('.blog-cat-btn', filter);
+    const search = qs('#blog-search');
+    const countEl = qs('[data-blog-count]');
+    let activeCat = 'all';
+    let activeQ = '';
+
+    function apply() {
+      const q = activeQ.toLowerCase().trim();
+      let visible = 0;
+      items.forEach(function (item) {
+        const cat = (item.getAttribute('data-cat') || '').toLowerCase();
+        const kw = (item.getAttribute('data-keywords') || '').toLowerCase();
+        const text = item.textContent.toLowerCase();
+        const matchCat = (activeCat === 'all') || (cat === activeCat);
+        const matchQ = !q || kw.indexOf(q) !== -1 || text.indexOf(q) !== -1;
+        if (matchCat && matchQ) {
+          item.classList.remove('is-hidden');
+          visible++;
+        } else {
+          item.classList.add('is-hidden');
+        }
+      });
+      if (countEl) {
+        countEl.textContent = visible === items.length
+          ? items.length + ' posts'
+          : visible + ' of ' + items.length;
+      }
+      // Update URL so the filtered view is shareable
+      try {
+        const url = new URL(location.href);
+        if (activeCat === 'all') url.searchParams.delete('cat');
+        else url.searchParams.set('cat', activeCat);
+        if (q) url.searchParams.set('q', q);
+        else url.searchParams.delete('q');
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        buttons.forEach(function (bb) { bb.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        activeCat = b.getAttribute('data-cat') || 'all';
+        apply();
+      });
+    });
+
+    if (search) {
+      search.addEventListener('input', function () {
+        activeQ = search.value;
+        apply();
+      });
+    }
+
+    // Honour deep-links: ?cat=diy&q=spring
+    try {
+      const p = new URLSearchParams(location.search);
+      const cat = p.get('cat');
+      const q = p.get('q');
+      if (cat) {
+        const target = buttons.find ? buttons.find(function (b) { return b.getAttribute('data-cat') === cat; })
+                                    : null;
+        if (target) {
+          buttons.forEach(function (bb) { bb.setAttribute('aria-pressed', 'false'); });
+          target.setAttribute('aria-pressed', 'true');
+          activeCat = cat;
+        }
+      }
+      if (q && search) { search.value = q; activeQ = q; }
+    } catch (e) {}
+
+    apply();
+  }
+
   /* ---- Init ---- */
   function init() {
     wireContacts();
@@ -1420,6 +1505,7 @@
     setInterval(updateSky, 10 * 60 * 1000);
     // Tick the sky-readout clock every minute so the time stays current.
     setInterval(tickSkyReadoutClock, 60 * 1000);
+    initBlogFilter();         // no-op on non-blog pages
     // Tick the busy-tech countdowns every 60s; do a full grid re-render every 5 min
     // to catch newly-busy techs as the schedule rotates.
     setInterval(tickBusyBadges, 60 * 1000);
