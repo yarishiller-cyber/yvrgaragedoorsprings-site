@@ -1251,16 +1251,89 @@
     if (fresh) return Promise.resolve(cached.data);
     const url =
       'https://api.open-meteo.com/v1/forecast?latitude=49.2827&longitude=-123.1207'
-      + '&current=weather_code,is_day&timezone=America%2FVancouver';
+      + '&current=weather_code,is_day,temperature_2m&timezone=America%2FVancouver';
     return fetch(url, { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
         if (!j || !j.current) return cached ? cached.data : null;
-        const data = { code: j.current.weather_code, isDay: j.current.is_day };
+        const data = {
+          code:  j.current.weather_code,
+          isDay: j.current.is_day,
+          tempC: typeof j.current.temperature_2m === 'number' ? j.current.temperature_2m : null
+        };
         saveCachedWeather({ t: Date.now(), data: data });
         return data;
       })
       .catch(function () { return cached ? cached.data : null; });
+  }
+
+  // Human-readable text for a WMO weather code
+  function weatherCodeToText(code) {
+    if (code === 0) return 'Clear sky';
+    if (code === 1) return 'Mainly clear';
+    if (code === 2) return 'Partly cloudy';
+    if (code === 3) return 'Overcast';
+    if (code === 45 || code === 48) return 'Foggy';
+    if (code === 51 || code === 53 || code === 55) return 'Drizzle';
+    if (code === 56 || code === 57) return 'Freezing drizzle';
+    if (code === 61) return 'Light rain';
+    if (code === 63) return 'Rain';
+    if (code === 65) return 'Heavy rain';
+    if (code === 66 || code === 67) return 'Freezing rain';
+    if (code === 71) return 'Light snow';
+    if (code === 73) return 'Snow';
+    if (code === 75) return 'Heavy snow';
+    if (code === 77) return 'Snow grains';
+    if (code === 80) return 'Rain showers';
+    if (code === 81 || code === 82) return 'Heavy showers';
+    if (code === 85) return 'Snow showers';
+    if (code === 86) return 'Heavy snow showers';
+    if (code === 95) return 'Thunderstorm';
+    if (code === 96 || code === 99) return 'Storm + hail';
+    return '—';
+  }
+
+  // Emoji glyph for the readout badge. Day/night-aware for clear/partly-cloudy.
+  function weatherCodeToIcon(code, isDay) {
+    if (code === 0)                                   return isDay ? '☀' : '🌙';
+    if (code === 1 || code === 2)                     return isDay ? '⛅' : '☁';
+    if (code === 3)                                   return '☁';
+    if (code === 45 || code === 48)                   return '🌫';
+    if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return '🌧';
+    if ((code >= 71 && code <= 77) || code === 85 || code === 86) return '❄';
+    if (code === 95 || code === 96 || code === 99)    return '⛈';
+    return isDay ? '☀' : '🌙';
+  }
+
+  function formatClockVancouver(date) {
+    try {
+      return new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Vancouver',
+        hour: 'numeric', minute: '2-digit', hour12: true
+      }).format(date || new Date());
+    } catch (e) { return (date || new Date()).toLocaleTimeString(); }
+  }
+
+  // Update the sky-readout badge: city, time, temp, conditions
+  function updateSkyReadout(weather, isDay) {
+    const root  = qs('[data-sky-readout]');
+    if (!root) return;
+    const timeEl = qs('[data-sky-readout-time]', root);
+    const tempEl = qs('[data-sky-readout-temp]', root);
+    const condEl = qs('[data-sky-readout-cond]', root);
+    const iconEl = qs('[data-sky-readout-icon]', root);
+    if (timeEl) timeEl.textContent = formatClockVancouver();
+    if (weather) {
+      if (tempEl) tempEl.textContent =
+        (typeof weather.tempC === 'number') ? (Math.round(weather.tempC) + '°C') : '—';
+      if (condEl) condEl.textContent = weatherCodeToText(weather.code);
+      if (iconEl) iconEl.textContent = weatherCodeToIcon(weather.code, !!weather.isDay);
+    } else {
+      // No weather data yet — show a tasteful placeholder
+      if (tempEl) tempEl.textContent = '—';
+      if (condEl) condEl.textContent = 'checking…';
+      if (iconEl) iconEl.textContent = isDay ? '☀' : '🌙';
+    }
   }
 
   // Apply state to the [data-hero-sky] element. Called twice: once with
@@ -1293,8 +1366,10 @@
     const phase = moonPhase(now);
     // First, render synchronously with what we know
     const hour0 = vancouverHour(now);
-    const time0 = timeOfDay(hour0 >= 7 && hour0 < 19 ? 1 : 0, hour0);
+    const isDay0 = hour0 >= 7 && hour0 < 19 ? 1 : 0;
+    const time0 = timeOfDay(isDay0, hour0);
     applySkyState({ time: time0, weather: 'clear', moon: phase });
+    updateSkyReadout(null, isDay0);
     // Then refine with real weather data
     fetchVancouverWeather().then(function (w) {
       if (!w) return;
@@ -1304,7 +1379,14 @@
         weather: weatherCodeToState(w.code),
         moon: moonPhase()
       });
+      updateSkyReadout(w, w.isDay);
     });
+  }
+  // Tick the readout's clock minute by minute so the time stays current
+  // without requeueing the whole sky update.
+  function tickSkyReadoutClock() {
+    const timeEl = qs('[data-sky-readout-time]');
+    if (timeEl) timeEl.textContent = formatClockVancouver();
   }
 
   /* ---- Init ---- */
@@ -1336,6 +1418,8 @@
     setInterval(renderHeroMoment, 60 * 1000);
     // Refresh the sky every 10 min (catches day → night transitions and weather changes)
     setInterval(updateSky, 10 * 60 * 1000);
+    // Tick the sky-readout clock every minute so the time stays current.
+    setInterval(tickSkyReadoutClock, 60 * 1000);
     // Tick the busy-tech countdowns every 60s; do a full grid re-render every 5 min
     // to catch newly-busy techs as the schedule rotates.
     setInterval(tickBusyBadges, 60 * 1000);

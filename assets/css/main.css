@@ -330,8 +330,54 @@ img.brand-mark {
 
 /* Honest accessibility: knock out all animation if the user asked for less motion */
 @media (prefers-reduced-motion: reduce) {
-  .sun-rays, .cloud-a, .cloud-b, .cloud-c,
+  .sun-rays, .cloud-a, .cloud-b, .cloud-c, .cloud-d, .cloud-e,
   .rain, .snow, .star.s1, .star.s2, .star.s3 { animation: none !important; }
+}
+
+/* Live Vancouver readout badge — sits on top of the sky in the upper-right.
+   Background adapts to the sky's data-time so it reads on light & dark skies. */
+.sky-readout {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--s-4);
+  z-index: 3;                          /* above sky, below sticky CTA */
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: 8px var(--s-3);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(15, 26, 31, 0.12);
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: var(--ink);
+  pointer-events: none;
+  max-width: calc(100% - var(--s-5));
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.hero[data-hero-mode="dark"] .sky-readout {
+  background: rgba(15, 26, 31, 0.62);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+.sky-readout-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18));
+}
+.sky-readout-text { display: flex; flex-direction: column; }
+.sky-readout-city {
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+.sky-readout-line { font-weight: 700; }
+
+@media (max-width: 480px) {
+  .sky-readout { padding: 6px 10px; font-size: 0.78rem; gap: 8px; }
+  .sky-readout-icon { font-size: 1.2rem; }
 }
 
 /* Readability scrim — translucent so the sky shows through behind text, but
@@ -673,12 +719,27 @@ body.state-after-hours .hero-figure::after {
   order: -1;
 }
 
-/* ---- State: ORIGIN (your city) — gold treatment ---- */
+/* ---- State: ORIGIN (your city) — gold treatment + periodic wiggle ---- */
 .city-tile-origin {
   border-color: var(--gold);
   border-width: 2px;
   background: linear-gradient(180deg, #fff7e0 0%, #fff 80%);
   box-shadow: 0 6px 20px rgba(200, 147, 42, 0.28);
+  transform-origin: center center;
+  animation: originWiggle 4s ease-in-out infinite;
+}
+/* Every ~4s the gold tile does two gentle ±1.5° shakes to keep the eye on it. */
+@keyframes originWiggle {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  91%           { transform: rotate(-1.5deg); }
+  94%           { transform: rotate(1.5deg); }
+  97%           { transform: rotate(-0.8deg); }
+}
+/* Pause the wiggle when the user is hovering / focusing the tile so the hover
+   translateY can take over cleanly. */
+.city-tile-origin:hover, .city-tile-origin:focus-visible { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .city-tile-origin { animation: none; }
 }
 .city-tile-origin .city-tile-name { color: #8a6500; }
 /* Origin = full-colour truck, no filter — your city looks crisp */
