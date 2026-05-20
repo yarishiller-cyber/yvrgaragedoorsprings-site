@@ -1150,6 +1150,163 @@
     el.removeAttribute('hidden');
   }
 
+  /* ============================================================
+     LIVE VANCOUVER SKY — time-of-day + weather + moon phase
+     Builds the scene behind the hero. Always Vancouver, regardless of which
+     city the user is in (per product spec).
+     ============================================================ */
+
+  // Reference new moon (2000-01-06 18:14 UTC) and mean synodic month in ms.
+  const MOON_REF_MS  = Date.UTC(2000, 0, 6, 18, 14);
+  const SYNODIC_MS   = 29.530588853 * 86400000;
+
+  // Returns moon phase as fraction [0, 1).
+  // 0 = new, 0.25 = first quarter, 0.5 = full, 0.75 = last quarter.
+  function moonPhase(date) {
+    const t = (date || new Date()).getTime();
+    return (((t - MOON_REF_MS) % SYNODIC_MS) / SYNODIC_MS + 1) % 1;
+  }
+
+  // Builds the SVG path 'd' attribute for the LIT portion of the moon disk.
+  // Math credit: standard "limb arc + terminator ellipse" approach.
+  function moonLitPath(phase, cx, cy, r) {
+    // New moon — nothing lit
+    if (phase < 0.005 || phase > 0.995) return '';
+    // Full moon — full disk as a two-arc path
+    if (Math.abs(phase - 0.5) < 0.005) {
+      return 'M ' + cx + ' ' + (cy - r)
+        + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r)
+        + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z';
+    }
+    const rx = r * Math.abs(Math.cos(2 * Math.PI * phase));
+    const waxing  = phase < 0.5;
+    const gibbous = phase > 0.25 && phase < 0.75;
+    const limbSweep = waxing ? 1 : 0;
+    // Crescent: terminator bows AWAY from lit side (sweep opposite of limb)
+    // Gibbous : terminator bows TOWARD lit side (sweep same as limb)
+    const termSweep = gibbous ? limbSweep : (1 - limbSweep);
+    return 'M ' + cx + ' ' + (cy - r)
+      + ' A ' + r + ' ' + r + ' 0 0 ' + limbSweep + ' ' + cx + ' ' + (cy + r)
+      + ' A ' + rx + ' ' + r + ' 0 0 ' + termSweep + ' ' + cx + ' ' + (cy - r) + ' Z';
+  }
+
+  // Map a WMO weather_code → our reduced scene state
+  function weatherCodeToState(code) {
+    if (code === 0) return 'clear';
+    if (code === 1 || code === 2 || code === 3) return 'cloudy';
+    if (code === 45 || code === 48) return 'fog';
+    if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return 'rain';
+    if ((code >= 71 && code <= 77) || code === 85 || code === 86) return 'snow';
+    if (code === 95 || code === 96 || code === 99) return 'storm';
+    return 'clear';
+  }
+
+  // Hour in Vancouver's local timezone — works regardless of the visitor's TZ.
+  function vancouverHour(date) {
+    try {
+      return parseInt(
+        new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'America/Vancouver', hour: 'numeric', hour12: false
+        }).format(date || new Date()),
+        10
+      );
+    } catch (e) {
+      return (date || new Date()).getHours();
+    }
+  }
+
+  // Convert (isDay flag from Open-Meteo, Vancouver hour) → dawn / day / dusk / night
+  // is_day is ground truth (real sunrise/sunset). Hour-of-day separates the
+  // twilight windows into dawn (before day) and dusk (after day).
+  function timeOfDay(isDay, hour) {
+    if (isDay === 1 || isDay === true) {
+      if (hour < 8) return 'dawn';
+      if (hour >= 19) return 'dusk';     // late summer evenings still "day" by the sun, but visually dusky
+      return 'day';
+    }
+    if (hour >= 16 && hour < 22) return 'dusk';
+    return 'night';
+  }
+
+  const SKY_WEATHER_CACHE_KEY = 'yvr-vancouver-weather-v1';
+  const SKY_WEATHER_TTL_MS    = 15 * 60 * 1000;
+
+  function loadCachedWeather() {
+    try {
+      const raw = localStorage.getItem(SKY_WEATHER_CACHE_KEY);
+      if (!raw) return null;
+      const o = JSON.parse(raw);
+      if (!o || typeof o.t !== 'number') return null;
+      return o;
+    } catch (e) { return null; }
+  }
+  function saveCachedWeather(data) {
+    try { localStorage.setItem(SKY_WEATHER_CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+  }
+
+  // Fetch Vancouver's current weather. Resolves to {code, isDay} or null.
+  function fetchVancouverWeather() {
+    const cached = loadCachedWeather();
+    const fresh = cached && (Date.now() - cached.t) < SKY_WEATHER_TTL_MS;
+    if (fresh) return Promise.resolve(cached.data);
+    const url =
+      'https://api.open-meteo.com/v1/forecast?latitude=49.2827&longitude=-123.1207'
+      + '&current=weather_code,is_day&timezone=America%2FVancouver';
+    return fetch(url, { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.current) return cached ? cached.data : null;
+        const data = { code: j.current.weather_code, isDay: j.current.is_day };
+        saveCachedWeather({ t: Date.now(), data: data });
+        return data;
+      })
+      .catch(function () { return cached ? cached.data : null; });
+  }
+
+  // Apply state to the [data-hero-sky] element. Called twice: once with
+  // synchronously-known values (just time + moon, weather defaults to clear),
+  // and again after the weather fetch resolves.
+  function applySkyState(state) {
+    const sky = qs('[data-hero-sky]');
+    if (!sky) return;
+    if (state.time)    sky.setAttribute('data-time', state.time);
+    if (state.weather) sky.setAttribute('data-weather', state.weather);
+    if (typeof state.moon === 'number') {
+      sky.setAttribute('data-moon', state.moon.toFixed(3));
+      const lit = qs('.sky-moon-lit', sky);
+      if (lit) lit.setAttribute('d', moonLitPath(state.moon, 0, 0, 36));
+    }
+    // Toggle a parent flag for dark-mode readability scrim on the headline column.
+    // Triggers on any sky state where the backdrop is darker than the headline text:
+    // night, dusk, plus daytime rain/storm/snow (heavy cloud cover = dim backdrop).
+    const hero = sky.closest('.hero');
+    if (hero) {
+      const darkTime = state.time === 'night' || state.time === 'dusk';
+      const darkWx   = state.weather === 'rain' || state.weather === 'storm' || state.weather === 'snow';
+      hero.setAttribute('data-hero-mode', (darkTime || darkWx) ? 'dark' : 'light');
+    }
+  }
+
+  function updateSky() {
+    if (!qs('[data-hero-sky]')) return;
+    const now = new Date();
+    const phase = moonPhase(now);
+    // First, render synchronously with what we know
+    const hour0 = vancouverHour(now);
+    const time0 = timeOfDay(hour0 >= 7 && hour0 < 19 ? 1 : 0, hour0);
+    applySkyState({ time: time0, weather: 'clear', moon: phase });
+    // Then refine with real weather data
+    fetchVancouverWeather().then(function (w) {
+      if (!w) return;
+      const hour = vancouverHour();
+      applySkyState({
+        time: timeOfDay(w.isDay, hour),
+        weather: weatherCodeToState(w.code),
+        moon: moonPhase()
+      });
+    });
+  }
+
   /* ---- Init ---- */
   function init() {
     wireContacts();
@@ -1172,10 +1329,13 @@
     quoteForm();
     coldSnap();
     renderHeroMoment();   // first pass — uses whatever state we have synchronously
+    updateSky();          // live Vancouver sky behind the hero
     loadReviews();        // async — independent of geo
     detectGeo();          // async — last
     // Re-render the moment line every minute so the clock advances live
     setInterval(renderHeroMoment, 60 * 1000);
+    // Refresh the sky every 10 min (catches day → night transitions and weather changes)
+    setInterval(updateSky, 10 * 60 * 1000);
     // Tick the busy-tech countdowns every 60s; do a full grid re-render every 5 min
     // to catch newly-busy techs as the schedule rotates.
     setInterval(tickBusyBadges, 60 * 1000);

@@ -193,7 +193,156 @@ body {
 /* ---------- Hero ---------- */
 .hero {
   padding-block: var(--s-6) var(--s-7);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
+.hero.band-warm { background: transparent; border-top: 0; border-bottom: 0; }
+.hero > .wrap { position: relative; z-index: 2; }
+
+/* ============================================================
+   LIVE VANCOUVER SKY — sits as a backdrop behind the hero content.
+   JS sets [data-time] = day | dawn | dusk | night
+        [data-weather] = clear | cloudy | fog | rain | snow | storm
+        [data-moon] = 0..1 (moon phase fraction — moon path computed in JS)
+   CSS toggles the right layers based on those attributes.
+   ============================================================ */
+.hero-sky {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #7cb8e6 0%, #dfeaf3 100%); /* fallback day */
+}
+.hero-sky-svg {
+  display: block;
+  width: 100%; height: 100%;
+}
+
+/* Background-rect layer toggling — only one shows at a time */
+.sky-bg { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-time="day"]   .sky-bg-day,
+.hero-sky[data-time="dawn"]  .sky-bg-dawn,
+.hero-sky[data-time="dusk"]  .sky-bg-dusk,
+.hero-sky[data-time="night"] .sky-bg-night { opacity: 1; }
+/* Cloudy and rainy weather override the day backdrop with a more muted blue-grey */
+.hero-sky[data-time="day"][data-weather="cloudy"] .sky-bg-day,
+.hero-sky[data-time="day"][data-weather="fog"]    .sky-bg-day,
+.hero-sky[data-time="day"][data-weather="rain"]   .sky-bg-day,
+.hero-sky[data-time="day"][data-weather="storm"]  .sky-bg-day,
+.hero-sky[data-time="day"][data-weather="snow"]   .sky-bg-day { opacity: 0; }
+.hero-sky[data-time="day"][data-weather="cloudy"] .sky-bg-cloudy,
+.hero-sky[data-time="day"][data-weather="fog"]    .sky-bg-cloudy,
+.hero-sky[data-time="day"][data-weather="snow"]   .sky-bg-cloudy { opacity: 1; }
+.hero-sky[data-time="day"][data-weather="rain"]   .sky-bg-rain,
+.hero-sky[data-time="day"][data-weather="storm"]  .sky-bg-rain { opacity: 1; }
+
+/* Mountain silhouette: lighter on light skies, deeper on dark */
+.sky-mountains { transition: fill 0.6s ease; }
+.hero-sky[data-time="night"] .sky-mountains { fill: rgba(15, 26, 31, 0.55); }
+.hero-sky[data-time="dusk"]  .sky-mountains { fill: rgba(15, 26, 31, 0.40); }
+.hero-sky[data-time="dawn"]  .sky-mountains { fill: rgba(15, 26, 31, 0.40); }
+
+/* STARS — visible only at night */
+.sky-stars { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-time="night"] .sky-stars { opacity: 1; }
+.star { fill: #fffce5; }
+.star.s1 { animation: starTwinkleA 3.5s ease-in-out infinite; }
+.star.s2 { animation: starTwinkleB 4.5s ease-in-out infinite; }
+.star.s3 { animation: starTwinkleA 6s   ease-in-out infinite; }
+@keyframes starTwinkleA { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes starTwinkleB { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.3; } }
+
+/* SUN — visible during day/dawn/dusk (NOT during heavy rain/storm) */
+.sky-sun { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-time="day"]  .sky-sun,
+.hero-sky[data-time="dawn"] .sky-sun,
+.hero-sky[data-time="dusk"] .sky-sun { opacity: 1; }
+.hero-sky[data-time="day"][data-weather="rain"]   .sky-sun,
+.hero-sky[data-time="day"][data-weather="storm"]  .sky-sun,
+.hero-sky[data-time="day"][data-weather="snow"]   .sky-sun { opacity: 0.35; }
+.hero-sky[data-time="dawn"] .sky-sun { transform: translate(900px, 180px); }
+.hero-sky[data-time="dusk"] .sky-sun { transform: translate(1080px, 180px); }
+.sun-rays { transform-origin: center; animation: sunRaysSpin 60s linear infinite; }
+@keyframes sunRaysSpin { to { transform: rotate(360deg); } }
+
+/* MOON — visible only at night */
+.sky-moon { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-time="night"] .sky-moon { opacity: 1; }
+.sky-moon-lit { transition: d 0.6s ease; }
+
+/* CLOUDS — visible for cloudy/fog/rain/snow/storm */
+.sky-clouds { opacity: 0; transition: opacity 0.6s ease; }
+.cloud-fill { fill: #fafaf7; opacity: 0.92; }
+.hero-sky[data-time="night"] .cloud-fill { fill: #4a5a68; opacity: 0.78; }
+.hero-sky[data-weather="cloudy"] .sky-clouds,
+.hero-sky[data-weather="rain"]   .sky-clouds,
+.hero-sky[data-weather="snow"]   .sky-clouds,
+.hero-sky[data-weather="storm"]  .sky-clouds { opacity: 1; }
+.hero-sky[data-weather="fog"]    .sky-clouds { opacity: 0.45; }
+.cloud-a { animation: cloudDrift 80s linear infinite; }
+.cloud-b { animation: cloudDrift 110s linear infinite; animation-delay: -30s; }
+.cloud-c { animation: cloudDrift 140s linear infinite; animation-delay: -70s; }
+@keyframes cloudDrift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-1300px); }
+}
+
+/* RAIN — visible for rain/storm */
+.sky-rain { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-weather="rain"]  .sky-rain,
+.hero-sky[data-weather="storm"] .sky-rain { opacity: 0.85; }
+.rain { animation: rainFall 0.9s linear infinite; }
+.r1 { animation-delay: -0.1s; } .r2 { animation-delay: -0.3s; }
+.r3 { animation-delay: -0.5s; } .r4 { animation-delay: -0.2s; }
+.r5 { animation-delay: -0.6s; } .r6 { animation-delay: -0.4s; }
+.r7 { animation-delay: -0.7s; } .r8 { animation-delay: -0.1s; }
+.r9 { animation-delay: -0.5s; }
+@keyframes rainFall {
+  0%   { transform: translateY(-60px); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(220px); opacity: 0; }
+}
+
+/* SNOW — visible for snow */
+.sky-snow { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-weather="snow"] .sky-snow { opacity: 1; }
+.snow { animation: snowFall 9s linear infinite; }
+.sn1 { animation-delay: -1s; } .sn2 { animation-delay: -3s; }
+.sn3 { animation-delay: -5s; } .sn4 { animation-delay: -7s; }
+.sn5 { animation-delay: -2s; } .sn6 { animation-delay: -6s; }
+.sn7 { animation-delay: -8s; } .sn8 { animation-delay: -4s; }
+@keyframes snowFall {
+  0%   { transform: translate(0, -40px); opacity: 0; }
+  15%  { opacity: 0.9; }
+  100% { transform: translate(-30px, 280px); opacity: 0.2; }
+}
+
+/* FOG */
+.sky-fog { opacity: 0; transition: opacity 0.6s ease; }
+.hero-sky[data-weather="fog"] .sky-fog { opacity: 0.55; }
+
+/* Honest accessibility: knock out all animation if the user asked for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .sun-rays, .cloud-a, .cloud-b, .cloud-c,
+  .rain, .snow, .star.s1, .star.s2, .star.s3 { animation: none !important; }
+}
+
+/* Readability scrim — translucent so the sky shows through behind text, but
+   solid enough that the headline stays legible against a navy/dusk backdrop. */
+.hero[data-hero-mode="dark"] .wrap > div:first-child {
+  background: linear-gradient(180deg, rgba(250, 250, 247, 0.82) 0%, rgba(250, 250, 247, 0.74) 100%);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  box-shadow: 0 6px 24px rgba(15, 26, 31, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+/* On mobile, shrink the hero photo so the sky shows around it */
+@media (max-width: 959px) {
+  .hero-figure { max-width: 78%; margin-left: auto; margin-right: auto; }
+}
+
+
 .hero h1 {
   font-size: var(--t-display);
   line-height: 1.05;
