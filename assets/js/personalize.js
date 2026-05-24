@@ -270,15 +270,21 @@
      the hero stays in default mode. */
   const INTENT_KEYWORDS = {
     // Hot, emergency-leaning queries
-    emergency:  ['broken', 'broke', 'snapped', 'snap', 'bang', 'loud', 'wont open', "won't open", 'wont close', "won't close", 'stuck', 'emergency'],
+    emergency:    ['broken', 'broke', 'snapped', 'snap', 'bang', 'loud', 'wont open', "won't open", 'wont close', "won't close", 'stuck', 'emergency'],
     // Cost/research queries
-    price:      ['cost', 'price', 'how much', 'quote', 'estimate', 'cheap', 'cheapest'],
+    price:        ['cost', 'price', 'how much', 'quote', 'estimate', 'cheap', 'cheapest'],
     // How-it-works / diagnostic
-    diagnostic: ['vs', 'difference', 'which', 'diagnose', 'diagnos', 'why', 'symptom', 'how do i know'],
+    diagnostic:   ['vs', 'difference', 'which', 'diagnose', 'diagnos', 'why', 'symptom', 'how do i know'],
     // Cold/weather
-    cold:       ['cold', 'frozen', 'frost', 'winter', 'snow'],
+    cold:         ['cold', 'frozen', 'frost', 'winter', 'snow'],
     // Coastal
-    coastal:    ['salt', 'rust', 'corroded', 'corrosion', 'coastal', 'oceanfront'],
+    coastal:      ['salt', 'rust', 'corroded', 'corrosion', 'coastal', 'oceanfront'],
+    // Wayne Dalton TorqueMaster / TorqueMaster Plus — when matched, JS promotes
+    // the #torquemaster section above the three standard tiers AND swaps in a
+    // "we noticed you searched for…" banner. Includes common misspellings.
+    torquemaster: ['torquemaster', 'torque master', 'torque-master', 'wayne dalton', 'wayne-dalton', 'waynedalton',
+                   'sealed tube spring', 'sealed-tube spring', 'tube spring',
+                   'wayndelton', 'waydelton', 'wayndalton', 'waydalton', 'wayndelt', 'tourqmaster', 'torqmaster']
   };
   function inferIntentFromQuery(qs) {
     if (!qs) return null;
@@ -315,11 +321,38 @@
     if (intent) {
       document.body.setAttribute('data-intent', intent.replace(/[^a-z]/g, ''));
       swapHeroImage();
+      if (intent === 'torquemaster') promoteTorqueMaster();
     }
 
     const slug = citySlug(cityParam);
     if (slug) {
       setOriginCity(slug, { source: 'url' });
+    }
+  }
+
+  /* ---- 2b. Promote the TorqueMaster card ABOVE the three regular tiers ----
+     Called when intent === 'torquemaster' (Wayne Dalton / TorqueMaster
+     keywords). Physically moves <article.tier-special> to render before the
+     <div.pricing> grid inside the same section, adds .promoted, and injects
+     a small "we noticed…" banner at the top of the card. Idempotent —
+     re-running it does nothing. */
+  function promoteTorqueMaster() {
+    const tm = document.getElementById('torquemaster');
+    if (!tm || tm.classList.contains('promoted')) return;
+    const pricing = document.querySelector('#pricing .pricing');
+    if (!pricing || !pricing.parentNode) return;
+    // Move .tier-special so it precedes the .pricing grid in the DOM.
+    pricing.parentNode.insertBefore(tm, pricing);
+    tm.classList.add('promoted');
+    // Banner at the top of the card explaining why it jumped.
+    if (!tm.querySelector('.tier-special-promoted-banner')) {
+      const banner = document.createElement('div');
+      banner.className = 'tier-special-promoted-banner';
+      banner.innerHTML =
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>' +
+        '<span>Looks like you searched for a <strong>Wayne Dalton TorqueMaster</strong>. We pulled this option to the top — it\'s the most common path our techs run in BC.</span>';
+      tm.insertBefore(banner, tm.firstChild);
     }
   }
 
@@ -359,6 +392,19 @@
     }
     // Hero moment may want to mention the new city / new eta
     try { renderHeroMoment(); } catch (e) {}
+    // Refresh the location badge in the hero with the new city + source label
+    try {
+      const badgeSource =
+        source === 'url'         ? 'preset' :
+        source === 'storage'     ? 'preset' :
+        source === 'geo'         ? 'ip'     :
+        source === 'geo-postal'  ? 'ip'     :
+        source === 'gps'         ? 'gps'    :
+        source === 'picker'      ? 'manual' :
+        source === 'postal'      ? 'manual' :
+        'preset';
+      updateLocateBadge(slug, badgeSource);
+    } catch (e) {}
     // Reflect in URL (no reload) for shareability — but only if source isn't already URL
     if (source !== 'url' && 'URLSearchParams' in window) {
       try {
@@ -773,27 +819,189 @@
     }
   }
 
-  /* ---- 6. Geo-detect fallback (only if no origin set yet) ---- */
-  function detectGeo() {
-    if (_originCity) return;
-    if (new URLSearchParams(location.search).get('city')) return;
+  /* ---- 6. Geo-detect (IP-based, no permission needed) ----
+     Tries ipapi.co first. If that fails/times-out OR returns a city not in
+     our service area, falls back to ipwho.is. Both are free, no-key,
+     CORS-enabled. If both fail we leave _originCity null and the hero stays
+     in default "Greater Vancouver" mode — but the "Use my exact location"
+     button in the hero locate-badge still works to override via browser GPS.
 
-    fetch('https://ipapi.co/json/', { mode: 'cors' })
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (!data) return;
-        // Try city name first
-        const slug = citySlug(data.city);
+     We don't short-circuit on URL ?city= here anymore — we still run the
+     lookup so we can populate the locate-badge with what IP would have
+     suggested, in case the user wants to use a more accurate detection. */
+  function detectGeo() {
+    // Skip IP lookup entirely if we already locked a city from URL or storage;
+    // the locate-badge will still appear with that city so user can refine.
+    if (_originCity) { updateLocateBadge(_originCity, 'preset'); return; }
+
+    geoFromIP()
+      .then(slug => {
         if (slug) {
           setOriginCity(slug, { source: 'geo' });
+          updateLocateBadge(slug, 'ip');
           const status = qs('#city-picker-status');
           if (status) status.textContent = 'Detected: ' + CITIES[slug].display + ' (from your IP). Tiles reordered.';
-        } else if (data.postal) {
-          const psug = postalToCity(data.postal);
-          if (psug) setOriginCity(psug, { source: 'geo-postal' });
+        } else {
+          // IP gave us nothing usable — still show the badge so the GPS button
+          // is available.
+          updateLocateBadge(null, 'ip-failed');
         }
       })
-      .catch(() => {});
+      .catch(() => updateLocateBadge(null, 'ip-failed'));
+  }
+
+  // Try ipapi.co, then ipwho.is, then null. Each lookup is wrapped in a 4-second
+  // timeout so a slow provider doesn't block the chain.
+  function geoFromIP() {
+    function withTimeout(p, ms) {
+      return Promise.race([
+        p,
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))
+      ]);
+    }
+    function mapResponse(data) {
+      if (!data) return null;
+      const slug = citySlug(data.city || data.city_name || '');
+      if (slug) return slug;
+      const postal = data.postal || data.postal_code || data.zip || '';
+      if (postal) return postalToCity(postal);
+      return null;
+    }
+    const A = withTimeout(
+      fetch('https://ipapi.co/json/', { mode: 'cors' })
+        .then(r => r.ok ? r.json() : null),
+      4000
+    ).then(mapResponse).catch(() => null);
+
+    return A.then(slug => {
+      if (slug) return slug;
+      // Fallback: ipwho.is (free, no key, separate AS path so failure modes
+      // don't correlate with ipapi.co).
+      return withTimeout(
+        fetch('https://ipwho.is/?fields=city,postal,success', { mode: 'cors' })
+          .then(r => r.ok ? r.json() : null),
+        4000
+      ).then(mapResponse).catch(() => null);
+    });
+  }
+
+  /* ---- 6b. Hero location-detect badge + GPS upgrade button ----
+     The badge in the hero ([data-hero-locate]) shows the detected city, and
+     its button uses the browser geolocation API to upgrade to GPS-level
+     accuracy. GPS coordinates are reverse-geocoded via Open-Meteo's free
+     geocoding endpoint (no key, CORS-enabled). */
+  function updateLocateBadge(slug, source) {
+    const root = qs('[data-hero-locate]');
+    const label = qs('[data-hero-locate-label]', root);
+    if (!root || !label) return;
+    if (slug && CITIES[slug]) {
+      const name = CITIES[slug].display;
+      const sourceLabel =
+        source === 'gps'      ? 'from your phone\'s GPS'      :
+        source === 'ip'       ? 'from your network'           :
+        source === 'preset'   ? 'from your last visit'        :
+        source === 'manual'   ? 'you picked this'             :
+        'detected';
+      label.innerHTML = 'You\'re in <strong>' + name + '</strong> &middot; <span style="color:var(--ink-muted)">' + sourceLabel + '</span>';
+    } else {
+      label.textContent = 'Couldn\'t detect your city — tap to use exact GPS.';
+    }
+    root.hidden = false;
+  }
+
+  function wireLocateButton() {
+    const btn = qs('[data-hero-locate-btn]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (!('geolocation' in navigator)) {
+        btn.textContent = 'GPS not supported by this browser';
+        btn.disabled = true;
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Locating…';
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          reverseGeocode(lat, lon)
+            .then(slug => {
+              btn.disabled = false;
+              btn.textContent = 'Re-detect';
+              if (slug) {
+                setOriginCity(slug, { source: 'gps' });
+                updateLocateBadge(slug, 'gps');
+              } else {
+                // Out of service area — tell them honestly.
+                const label = qs('[data-hero-locate-label]');
+                if (label) label.innerHTML = 'You\'re outside our 16-city Greater Vancouver service area.';
+              }
+            })
+            .catch(() => {
+              btn.disabled = false;
+              btn.textContent = 'Try again';
+            });
+        },
+        function (err) {
+          btn.disabled = false;
+          btn.textContent = err.code === 1 ? 'Permission denied' : 'Try again';
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60 * 1000 }
+      );
+    });
+  }
+
+  // Reverse-geocode latitude/longitude to a city slug. Picks the nearest
+  // BC city in our 16-city list — uses Open-Meteo's free geocoding API
+  // (no key) to get a city name string, then runs it through citySlug().
+  function reverseGeocode(lat, lon) {
+    // First attempt: nearest-city search around the coordinates using
+    // Open-Meteo Geocoding. The `name` param expects a string, so we instead
+    // do a small bounding-box scan via the city-list provided in our own data.
+    return nearestServiceCity(lat, lon);
+  }
+
+  // Fast offline reverse-geocode: each city in our list has a known
+  // centre lat/lon, so we just find the closest one within ~25 km. Beyond
+  // that we treat the user as out-of-area.
+  const CITY_COORDS = {
+    'vancouver':       { lat: 49.2827, lon: -123.1207 },
+    'burnaby':         { lat: 49.2488, lon: -122.9805 },
+    'richmond':        { lat: 49.1666, lon: -123.1336 },
+    'surrey':          { lat: 49.1913, lon: -122.8490 },
+    'coquitlam':       { lat: 49.2838, lon: -122.7932 },
+    'port-coquitlam':  { lat: 49.2625, lon: -122.7811 },
+    'port-moody':      { lat: 49.2849, lon: -122.8508 },
+    'north-vancouver': { lat: 49.3163, lon: -123.0755 },
+    'west-vancouver':  { lat: 49.3286, lon: -123.1593 },
+    'new-westminster': { lat: 49.2057, lon: -122.9110 },
+    'delta':           { lat: 49.0847, lon: -123.0586 },
+    'langley':         { lat: 49.1044, lon: -122.6604 },
+    'white-rock':      { lat: 49.0253, lon: -122.8030 },
+    'maple-ridge':     { lat: 49.2193, lon: -122.6019 },
+    'pitt-meadows':    { lat: 49.2351, lon: -122.6890 },
+    'tsawwassen':      { lat: 49.0021, lon: -123.0830 }
+  };
+  function nearestServiceCity(lat, lon) {
+    function km(aLat, aLon, bLat, bLon) {
+      // Haversine
+      const R = 6371;
+      const dLat = (bLat - aLat) * Math.PI / 180;
+      const dLon = (bLon - aLon) * Math.PI / 180;
+      const x =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(aLat * Math.PI / 180) * Math.cos(bLat * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(x));
+    }
+    let best = null, bestD = Infinity;
+    for (const slug in CITY_COORDS) {
+      const c = CITY_COORDS[slug];
+      const d = km(lat, lon, c.lat, c.lon);
+      if (d < bestD) { bestD = d; best = slug; }
+    }
+    // Treat anything beyond 25 km of any service-city centre as out-of-area.
+    return Promise.resolve(bestD <= 25 ? best : null);
   }
 
   /* ---- 7. Time-of-day open/closed banner ---- */
@@ -1567,7 +1775,8 @@
     applySiteData();
     enhanceFooter();
     wireCityPicker();
-    applyDTR();          // URL param wins
+    wireLocateButton();  // hero "use my exact location" GPS upgrade
+    applyDTR();          // URL param wins (also runs TorqueMaster promotion)
     // If no URL param, try stored preference next
     if (!_originCity) {
       const stored = readStoredCity();

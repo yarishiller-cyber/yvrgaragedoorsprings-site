@@ -217,17 +217,13 @@ img.brand-mark {
 .btn-steel:hover { background: var(--steel-hover); border-color: var(--steel-hover); }
 
 /* ---------- Hero ----------
-   LAYOUT MODEL:
-   - Mobile (<960px): .wrap is a flex column. .hero-left uses display:contents so
-     its two children (.hero-sky + .hero-text) flow into .wrap as direct flex items
-     and can be reordered alongside .hero-photo. Order is:
-       1. .hero-photo (spring image — top)
-       2. .hero-sky   (animated weather/mountains card — middle)
-       3. .hero-text  (headline, CTAs, trust — bottom)
-   - Desktop (>=960px): .wrap is a 1fr / 1fr grid. .hero-left becomes a positioned
-     block, .hero-sky is absolute-filled inside it as the backdrop, and .hero-text
-     sits on top with a translucent scrim card for legibility. .hero-photo takes
-     the right column. */
+   LAYOUT MODEL — sky / photo / text are three direct siblings of .wrap:
+   - MOBILE (<960px):  flex column. Order is photo → sky → text.
+   - DESKTOP (>=960px): grid with template-areas:
+        "sky photo"
+        "text text"
+     Top row is a clean 50/50 split. Bottom row is the headline + CTAs,
+     full width under both panels (no overlap, no scrim). */
 .hero {
   padding-block: var(--s-6) var(--s-7);
   position: relative;
@@ -236,7 +232,6 @@ img.brand-mark {
 }
 .hero.band-warm { background: transparent; border-top: 0; border-bottom: 0; }
 .hero > .wrap { position: relative; z-index: 2; }
-.hero-left { display: contents; }
 
 /* ============================================================
    LIVE VANCOUVER SKY — sits as a backdrop behind the hero content.
@@ -246,7 +241,8 @@ img.brand-mark {
    CSS toggles the right layers based on those attributes.
    ============================================================ */
 .hero-sky {
-  /* MOBILE default: contained block, sits between the spring photo and text */
+  /* MOBILE: contained 16:7 strip between the spring photo and the text block.
+     DESKTOP: takes the top-left grid area (height matched to .hero-photo). */
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 7;
@@ -255,7 +251,6 @@ img.brand-mark {
   pointer-events: none;
   background: linear-gradient(180deg, #7cb8e6 0%, #dfeaf3 100%); /* fallback day */
   box-shadow: var(--shadow-1);
-  order: 2; /* between .hero-photo (1) and .hero-text (3) on mobile */
 }
 .hero-sky-svg {
   display: block;
@@ -445,6 +440,8 @@ img.brand-mark {
   }
   .hero-sky { margin-top: var(--s-2); }
   .hero-text { padding-top: var(--s-3); }
+  /* Mobile order: photo (1) → sky (2) → text (3). The flex `order` model is
+     set up in the base .hero .wrap rule below. */
 }
 
 
@@ -489,6 +486,41 @@ img.brand-mark {
   border-radius: 50%; background: var(--green);
 }
 
+/* Location-detect badge under the sub-headline. Hidden until JS confirms a
+   detected city (IP-derived) or completes a GPS lookup. */
+.hero-locate {
+  margin-top: var(--s-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 8px 14px;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: var(--t-small);
+  color: var(--ink-soft);
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.hero-locate[hidden] { display: none; }
+.hero-locate-text { display: inline-flex; align-items: center; gap: 6px; }
+.hero-locate-icon { color: var(--signal); flex: 0 0 auto; }
+.hero-locate-text strong { color: var(--ink); font-weight: 700; }
+.hero-locate-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--signal);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.hero-locate-btn:hover { color: var(--signal-hover); }
+.hero-locate-btn[disabled] { color: var(--ink-muted); text-decoration: none; cursor: default; }
+
 /* ---------- Hero image ---------- */
 .hero-figure {
   margin: 0;
@@ -506,13 +538,12 @@ img.brand-mark {
 .hero-figure img { object-fit: cover; }
 .hero-figure-empty { display: none !important; }
 
-/* Mobile: .wrap is a flex column. .hero-left uses display:contents so its
-   children (.hero-sky + .hero-text) act as direct flex items of .wrap and can
-   be ordered alongside .hero-photo. Final stack:
+/* Mobile base: .wrap is a flex column. Sky / photo / text are siblings and
+   their order is set explicitly here:
      1. .hero-photo  (broken-spring image, edge-to-edge)
      2. .hero-sky    (animated weather + mountains card)
      3. .hero-text   (eyebrow, headline, CTAs, trust)
-*/
+   Desktop swaps .wrap to a grid (see @media >=960px below). */
 .hero .wrap { display: flex; flex-direction: column; gap: var(--s-4); }
 .hero-photo { order: 1; }
 .hero-sky   { order: 2; }
@@ -628,7 +659,13 @@ body.state-after-hours .hero-figure::after {
   border: none; left: 2px; top: 9px; width: 8px; height: 2px; background: var(--ink-muted); transform: none;
 }
 
-/* ---------- 4th option: Wayne Dalton TorqueMaster conversion ---------- */
+/* ---------- 4th option: Wayne Dalton TorqueMaster conversion ----------
+   Default position is below the three standard tiers. When the visitor's
+   inferred intent is `torquemaster` (URL ?intent=, ?q=, or referrer search
+   query mentions Wayne Dalton / TorqueMaster), JS promotes this card to
+   render ABOVE the three tiers, AND the `promoted` modifier turns up the
+   visual weight (signal-orange accent + a "we noticed you searched for…"
+   banner injected at the top by JS). */
 .tier-special {
   margin-top: var(--s-7);
   background: white;
@@ -640,6 +677,30 @@ body.state-after-hours .hero-figure::after {
   display: grid;
   gap: var(--s-5);
 }
+.tier-special.promoted {
+  margin-top: 0;
+  margin-bottom: var(--s-7);
+  border-left-color: var(--signal);
+  border-left-width: 6px;
+  box-shadow:
+    0 0 0 4px rgba(217, 74, 43, 0.10),
+    0 8px 28px rgba(15, 26, 31, 0.10);
+}
+.tier-special-promoted-banner {
+  background: var(--signal-soft);
+  border: 1px solid #f4c8be;
+  border-left: 4px solid var(--signal);
+  border-radius: var(--r-2);
+  padding: var(--s-3) var(--s-4);
+  font-size: var(--t-small);
+  color: var(--ink);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  line-height: 1.5;
+}
+.tier-special-promoted-banner svg { color: var(--signal); flex: 0 0 auto; margin-top: 2px; }
+.tier-special-promoted-banner strong { font-weight: 700; }
 .tier-special-head { display: flex; flex-direction: column; gap: var(--s-3); }
 .tier-special-badge {
   display: inline-block; width: fit-content;
@@ -1269,55 +1330,37 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
   .section { padding-block: var(--s-8); }
   .hero { padding-block: var(--s-8) var(--s-7); }
 
-  /* Desktop hero: 50/50 split — animated sky on the left (with headline+CTAs
-     sitting on a translucent scrim card on top of it), broken-spring photo
-     on the right. .hero-left becomes a positioned container so the absolute
-     .hero-sky can fill it; .hero-text floats above with z-index. */
+  /* Desktop hero: grid with two named areas.
+     Top row = 50/50 sky | photo (matched aspect ratio so they line up cleanly).
+     Bottom row = full-width text block beneath both, no overlap with sky. */
   .hero .wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--s-6);
+    grid-template-areas:
+      "sky photo"
+      "text text";
+    gap: var(--s-5) var(--s-5);
     align-items: stretch;
   }
-  .hero-left {
-    display: block;
-    position: relative;
-    border-radius: var(--r-3);
-    overflow: hidden;
-    isolation: isolate;
-    min-height: 520px;
-    box-shadow: var(--shadow-2);
-  }
   .hero-sky {
-    position: absolute;
-    inset: 0;
-    width: auto;
-    aspect-ratio: auto;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .hero-text {
-    position: relative;
-    z-index: 2;
-    margin: var(--s-5);
-    padding: var(--s-5) var(--s-5) var(--s-5);
-    /* Translucent card so the headline always reads cleanly over any sky state */
-    background: linear-gradient(180deg, rgba(250, 250, 247, 0.94) 0%, rgba(250, 250, 247, 0.86) 100%);
-    border-radius: var(--r-3);
-    box-shadow: 0 6px 24px rgba(15, 26, 31, 0.18);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
-  .hero[data-hero-mode="dark"] .hero-text {
-    background: linear-gradient(180deg, rgba(250, 250, 247, 0.96) 0%, rgba(250, 250, 247, 0.90) 100%);
+    grid-area: sky;
+    aspect-ratio: 4 / 3;  /* matches the spring photo so both panels are same height */
+    height: 100%;
+    margin: 0;
   }
   .hero-photo {
+    grid-area: photo;
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
-    justify-content: center;
+    gap: var(--s-3);
   }
   .hero-photo .hero-figure { aspect-ratio: 4 / 3; margin: 0; }
+  .hero-text {
+    grid-area: text;
+    padding-top: var(--s-4);
+    max-width: 56rem;     /* keep text readable; don't stretch the headline across 1100px */
+  }
+  .hero-text .sub { max-width: 52ch; }
 
   .reviews { grid-template-columns: repeat(3, 1fr); }
 }
