@@ -299,8 +299,11 @@ img.brand-mark {
 .hero-sky[data-time="day"][data-weather="rain"]   .sky-sun,
 .hero-sky[data-time="day"][data-weather="storm"]  .sky-sun,
 .hero-sky[data-time="day"][data-weather="snow"]   .sky-sun { opacity: 0.35; }
-.hero-sky[data-time="dawn"] .sky-sun { transform: translate(900px, 180px); }
-.hero-sky[data-time="dusk"] .sky-sun { transform: translate(1080px, 180px); }
+/* At dawn the sun sits lower-left (rising). At dusk it slides right + lower
+   (setting toward the horizon). Default (day) position is the SVG's own
+   translate (240, 90) — upper-left, well clear of the weather readout. */
+.hero-sky[data-time="dawn"] .sky-sun { transform: translate(180px, 200px); }
+.hero-sky[data-time="dusk"] .sky-sun { transform: translate(1040px, 200px); }
 .sun-rays { transform-origin: center; animation: sunRaysSpin 60s linear infinite; }
 @keyframes sunRaysSpin { to { transform: rotate(360deg); } }
 
@@ -383,6 +386,30 @@ img.brand-mark {
 .hero-sky[data-time="dawn"]  .sky-house-window,
 .hero-sky[data-time="dusk"]  .sky-house-window { fill: #ffd97a; }
 .hero-sky[data-time="night"] .sky-house-window { fill: #ffe89a; }
+
+/* FOREGROUND YVR-customer HOME — windows light up at dusk/night.
+   Stick people on the lawn wave; the .sky-wave arm rotates back and
+   forth so it reads as a friendly hello. Each figure waves at a
+   slightly different cadence so they don't sync up. */
+.sky-home-window { transition: fill 0.6s ease; }
+.hero-sky[data-time="dawn"]  .sky-home-window,
+.hero-sky[data-time="dusk"]  .sky-home-window { fill: #ffd97a; }
+.hero-sky[data-time="night"] .sky-home-window { fill: #ffe89a; }
+
+.sky-wave {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: peopleWave 1.4s ease-in-out infinite;
+}
+.sky-person-2 .sky-wave { animation-duration: 1.1s; animation-delay: -0.3s; }
+.sky-person-3 .sky-wave { animation-duration: 1.7s; animation-delay: -0.6s; }
+@keyframes peopleWave {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-22deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-wave { animation: none; }
+}
 
 /* MID-DISTANCE PINE TREES — darker at night for atmosphere */
 .sky-trees-mid polygon { transition: fill 0.6s ease; }
