@@ -37,7 +37,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="/assets/css/main.css?v=20260524b">
+<link rel="stylesheet" href="/assets/css/main.css?v=20260524c">
 
 <!-- JSON-LD: LocalBusiness -->
 <script type="application/ld+json">
@@ -323,6 +323,84 @@
       <path class="sky-mountains"
             d="M -20 380 L 80 260 L 160 320 L 240 220 L 360 320 L 460 240 L 580 330 L 700 250 L 820 320 L 960 220 L 1080 300 L 1220 260 L 1220 400 L -20 400 Z"
             fill="rgba(15, 26, 31, 0.20)"/>
+
+      <!-- Foreground road — faint dashed centre-line for the tech truck to drive on. -->
+      <line class="sky-road" x1="-20" y1="378" x2="1220" y2="378"
+            stroke="rgba(15, 26, 31, 0.28)" stroke-width="2" stroke-dasharray="14 10"/>
+
+      <!-- YVR Garage Door Springs tech truck — Ford Maverick crew-cab silhouette,
+           wrapped in brand orange. Animated by CSS to drive slowly L→R across
+           the hero sky. Wheels rotate via transform-box/transform-origin. -->
+      <g class="sky-truck" aria-hidden="true">
+        <g class="sky-truck-pose">
+          <!-- Soft shadow on the road -->
+          <ellipse cx="65" cy="50" rx="60" ry="2.5" fill="rgba(15, 26, 31, 0.22)"/>
+
+          <!-- PICKUP BED (rear) — shorter than the cab roof, classic Maverick proportions -->
+          <rect x="78" y="24" width="40" height="18" rx="1.5" fill="#d94a2b" stroke="#0f1a1f" stroke-width="0.5"/>
+          <line x1="78" y1="24" x2="118" y2="24" stroke="#0f1a1f" stroke-width="0.6" opacity="0.35"/>
+          <line x1="118" y1="24" x2="118" y2="42" stroke="#0f1a1f" stroke-width="0.4" opacity="0.45"/>
+
+          <!-- CREW CAB body — 4-door, sloped windshield and rear glass -->
+          <path d="M 8 42 L 8 30 Q 8 24 14 21 L 28 13 L 70 13 Q 78 13 80 18 L 82 24 L 82 42 Z"
+                fill="#d94a2b" stroke="#0f1a1f" stroke-width="0.6"/>
+
+          <!-- WINDSHIELD (sloped front) -->
+          <path d="M 16 22 L 28 15 L 46 15 L 46 23 Z" fill="#cfe2ea" stroke="#0f1a1f" stroke-width="0.4"/>
+          <!-- Front side window (driver door) -->
+          <rect x="47" y="15" width="17" height="9" rx="0.5" fill="#cfe2ea" stroke="#0f1a1f" stroke-width="0.4"/>
+          <!-- Rear side window (crew-cab back door) -->
+          <rect x="65" y="15" width="14" height="9" rx="0.5" fill="#cfe2ea" stroke="#0f1a1f" stroke-width="0.4"/>
+
+          <!-- Door split lines -->
+          <line x1="46" y1="24" x2="46" y2="40" stroke="#0f1a1f" stroke-width="0.5" opacity="0.5"/>
+          <line x1="64" y1="24" x2="64" y2="40" stroke="#0f1a1f" stroke-width="0.5" opacity="0.5"/>
+
+          <!-- Side mirror -->
+          <rect x="44" y="17" width="3" height="2.5" rx="0.5" fill="#0f1a1f"/>
+
+          <!-- Front bumper + black mesh grille -->
+          <rect x="6" y="34" width="6" height="6" rx="1" fill="#0f1a1f"/>
+          <rect x="3" y="38" width="8" height="3" rx="0.6" fill="#0f1a1f"/>
+          <!-- LED headlight strip -->
+          <rect x="7" y="29" width="6" height="3" rx="0.8" fill="#fff7d0" stroke="#0f1a1f" stroke-width="0.3"/>
+
+          <!-- Rear taillight + tail bumper -->
+          <rect x="116" y="28" width="3" height="3" rx="0.5" fill="#c41e3a"/>
+          <rect x="116" y="38" width="3" height="3" rx="0.5" fill="#0f1a1f"/>
+
+          <!-- BRAND WRAP — white letterform on the side door panel -->
+          <text x="65" y="36" text-anchor="middle"
+                font-family="Arial, Helvetica, sans-serif" font-size="3.4" font-weight="800"
+                fill="#fafaf7" letter-spacing="0.06em">YVR · GARAGE DOOR SPRINGS</text>
+          <text x="65" y="40" text-anchor="middle"
+                font-family="Arial, Helvetica, sans-serif" font-size="2.6" font-weight="700"
+                fill="rgba(250, 250, 247, 0.8)" letter-spacing="0.12em">SAME-DAY · LOCAL TECH</text>
+
+          <!-- WHEEL ARCHES (drawn behind the wheels) -->
+          <path d="M 16 43 Q 16 33 25 33 Q 34 33 34 43 Z" fill="#0f1a1f" opacity="0.85"/>
+          <path d="M 91 43 Q 91 33 100 33 Q 109 33 109 43 Z" fill="#0f1a1f" opacity="0.85"/>
+
+          <!-- WHEELS — rotate via CSS (transform-box: fill-box, transform-origin: center) -->
+          <g class="sky-truck-wheel sky-truck-wheel-front">
+            <circle cx="25" cy="42" r="7" fill="#1c2329"/>
+            <circle cx="25" cy="42" r="4.2" fill="#5a6770"/>
+            <line x1="25" y1="38" x2="25" y2="46" stroke="#1c2329" stroke-width="1"/>
+            <line x1="21" y1="42" x2="29" y2="42" stroke="#1c2329" stroke-width="1"/>
+            <line x1="22" y1="39" x2="28" y2="45" stroke="#1c2329" stroke-width="0.8"/>
+          </g>
+          <g class="sky-truck-wheel sky-truck-wheel-rear">
+            <circle cx="100" cy="42" r="7" fill="#1c2329"/>
+            <circle cx="100" cy="42" r="4.2" fill="#5a6770"/>
+            <line x1="100" y1="38" x2="100" y2="46" stroke="#1c2329" stroke-width="1"/>
+            <line x1="96" y1="42" x2="104" y2="42" stroke="#1c2329" stroke-width="1"/>
+            <line x1="97" y1="39" x2="103" y2="45" stroke="#1c2329" stroke-width="0.8"/>
+          </g>
+
+          <!-- Headlight glow (only meaningful at dusk/night — CSS gates opacity) -->
+          <ellipse class="sky-truck-headlight" cx="-2" cy="32" rx="10" ry="5" fill="#fff4c0" opacity="0"/>
+        </g>
+      </g>
 
       <!-- STARS (night only) — densely populated so the sky reads "starry" at any width -->
       <g class="sky-stars">

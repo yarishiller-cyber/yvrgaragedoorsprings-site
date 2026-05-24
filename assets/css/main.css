@@ -360,10 +360,38 @@ img.brand-mark {
 .sky-fog { opacity: 0; transition: opacity 0.6s ease; }
 .hero-sky[data-weather="fog"] .sky-fog { opacity: 0.55; }
 
+/* ROAD line under the truck — subtle dashed centre-line, fades through the day */
+.sky-road { opacity: 0.7; transition: opacity 0.6s ease; }
+.hero-sky[data-time="night"] .sky-road { opacity: 0.45; }
+
+/* TECH TRUCK — Ford Maverick crew-cab silhouette wrapped in YVR brand orange.
+   Drives slowly L→R across the bottom of the sky panel (~42 s per pass).
+   Wheels spin via transform-box: fill-box. Headlight glows during dusk/night. */
+.sky-truck-pose {
+  animation: truckDrive 42s linear infinite;
+  transform: translate(-220px, 332px);   /* start off-screen left */
+}
+@keyframes truckDrive {
+  0%   { transform: translate(-220px, 332px); }
+  100% { transform: translate(1320px, 332px); }
+}
+.sky-truck-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: truckWheel 0.55s linear infinite;
+}
+@keyframes truckWheel { to { transform: rotate(360deg); } }
+.sky-truck-headlight { transition: opacity 0.6s ease; }
+.hero-sky[data-time="dusk"]  .sky-truck-headlight,
+.hero-sky[data-time="dawn"]  .sky-truck-headlight { opacity: 0.55; }
+.hero-sky[data-time="night"] .sky-truck-headlight { opacity: 0.85; }
+
 /* Honest accessibility: knock out all animation if the user asked for less motion */
 @media (prefers-reduced-motion: reduce) {
   .sun-rays, .cloud-a, .cloud-b, .cloud-c, .cloud-d, .cloud-e,
   .rain, .snow, .star.s1, .star.s2, .star.s3 { animation: none !important; }
+  .sky-truck-pose { animation: none; transform: translate(550px, 332px); }
+  .sky-truck-wheel { animation: none; }
 }
 
 /* Live Vancouver readout badge — sits on top of the sky in the upper-right.
