@@ -509,38 +509,44 @@ img.brand-mark {
 
 /* Mobile-first: the photo, availability strip, and sky panel all break out
    of the .wrap padding so they sit edge-to-edge with no whitespace between
-   them. Wrap gap is zeroed so the three panels physically touch. */
+   them. Wrap gap is zeroed so the three panels physically touch.
+   !important is intentional here — these rules need to win against any
+   intermediate CDN cache or any later stylesheet revision that re-introduces
+   the contained card pattern. */
 @media (max-width: 959px) {
-  .hero { padding-top: 0; padding-bottom: var(--s-5); }
-  .hero .wrap { gap: 0; }
+  .hero { padding-top: 0 !important; padding-bottom: var(--s-5); }
+  .hero > .wrap { gap: 0 !important; padding-inline: 0 !important; }
 
   .hero-photo,
   .hero-sky {
-    margin-left: calc(var(--s-4) * -1);
-    margin-right: calc(var(--s-4) * -1);
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
   }
   .hero-photo .hero-figure {
-    max-width: none;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
+    max-width: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
   }
   .hero-photo .availability {
-    margin: 0;                   /* edge-to-edge, no gap with photo above */
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
   }
   .hero-sky {
     aspect-ratio: 16 / 7;
-    border-radius: 0;
-    box-shadow: none;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
 
-  /* Text block keeps a small top breathing room so the headline doesn't
-     glue onto the sky panel — but still no horizontal padding adjustment
-     needed because .hero-text inherits .wrap padding-inline. */
-  .hero-text { padding-top: var(--s-5); }
+  /* Text block re-introduces side padding (since we removed it from .wrap)
+     so headlines and CTAs aren't pasted onto the screen edge. */
+  .hero-text {
+    padding-top: var(--s-5);
+    padding-inline: var(--s-4);
+  }
 }
 
 
