@@ -372,6 +372,22 @@ img.brand-mark {
 .hero-sky[data-time="night"] .sky-snowcaps polygon { fill: rgba(220, 230, 240, 0.6); }
 .hero-sky[data-time="dusk"]  .sky-snowcaps polygon { fill: rgba(250, 220, 200, 0.78); }
 
+/* BACKGROUND mountain layer — fade slightly at night */
+.sky-mountains-back { transition: fill 0.6s ease; }
+.hero-sky[data-time="night"] .sky-mountains-back { fill: rgba(15, 26, 31, 0.30); }
+.hero-sky[data-time="dusk"]  .sky-mountains-back { fill: rgba(15, 26, 31, 0.22); }
+
+/* DISTANT HOUSE windows glow at dusk/night */
+.sky-house-window { transition: fill 0.6s ease; }
+.hero-sky[data-time="day"]   .sky-house-window { fill: rgba(20, 32, 40, 0.6); }
+.hero-sky[data-time="dawn"]  .sky-house-window,
+.hero-sky[data-time="dusk"]  .sky-house-window { fill: #ffd97a; }
+.hero-sky[data-time="night"] .sky-house-window { fill: #ffe89a; }
+
+/* MID-DISTANCE PINE TREES — darker at night for atmosphere */
+.sky-trees-mid polygon { transition: fill 0.6s ease; }
+.hero-sky[data-time="night"] .sky-trees-mid polygon { fill: rgba(10, 25, 15, 0.85) !important; }
+
 /* BIRDS — two V-silhouettes drifting across the distant sky. Wings flap
    independently. Honors reduced-motion (no fly, no flap). */
 .sky-bird-a {
@@ -491,12 +507,15 @@ img.brand-mark {
   .sky-readout-line { font-size: 0.76rem; }
 }
 
-/* Mobile-first: the photo goes edge-to-edge and sits flush against whatever
-   block precedes the hero (cold-snap banner, header). The sky sits below it
-   as a contained widescreen card. The text block sits below the sky. */
+/* Mobile-first: the photo, availability strip, and sky panel all break out
+   of the .wrap padding so they sit edge-to-edge with no whitespace between
+   them. Wrap gap is zeroed so the three panels physically touch. */
 @media (max-width: 959px) {
-  .hero { padding-top: 0; }
-  .hero-photo {
+  .hero { padding-top: 0; padding-bottom: var(--s-5); }
+  .hero .wrap { gap: 0; }
+
+  .hero-photo,
+  .hero-sky {
     margin-left: calc(var(--s-4) * -1);
     margin-right: calc(var(--s-4) * -1);
   }
@@ -504,15 +523,24 @@ img.brand-mark {
     max-width: none;
     border-radius: 0;
     box-shadow: none;
+    margin: 0;
   }
   .hero-photo .availability {
-    margin-inline: var(--s-4);
-    margin-top: var(--s-4);
+    margin: 0;                   /* edge-to-edge, no gap with photo above */
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
-  .hero-sky { margin-top: var(--s-2); }
-  .hero-text { padding-top: var(--s-3); }
-  /* Mobile order: photo (1) → sky (2) → text (3). The flex `order` model is
-     set up in the base .hero .wrap rule below. */
+  .hero-sky {
+    aspect-ratio: 16 / 7;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Text block keeps a small top breathing room so the headline doesn't
+     glue onto the sky panel — but still no horizontal padding adjustment
+     needed because .hero-text inherits .wrap padding-inline. */
+  .hero-text { padding-top: var(--s-5); }
 }
 
 

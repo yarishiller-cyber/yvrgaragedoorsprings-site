@@ -8,8 +8,8 @@
   'use strict';
 
   /* ---- Contact constants (swap in one place) ---- */
-  const PHONE_DISPLAY = '(604) XXX-XXXX';
-  const PHONE_TEL     = '+1604XXXXXXX';
+  const PHONE_DISPLAY = '(778) 800-0769';
+  const PHONE_TEL     = '+17788000769';
   const EMAIL         = 'info@yvrgaragedoorsprings.ca';
   const SMS_BODY      = 'Hi - my garage door spring broke. Can I send a photo?';
 
