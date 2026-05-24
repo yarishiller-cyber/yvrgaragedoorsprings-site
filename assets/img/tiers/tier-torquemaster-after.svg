@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" role="img" aria-labelledby="tm-after-title tm-after-desc">
+  <title id="tm-after-title">Standard torsion spring system installed after TorqueMaster conversion</title>
+  <desc id="tm-after-desc">Editorial illustration of a standard exposed torsion spring on a steel shaft above a garage door header, with steel cable drums at each end and centre bearing plate. A green label indicates the conversion is complete and uses universal parts. Marked PLACEHOLDER — replace with photograph.</desc>
+
+  <!-- Background: warm paper -->
+  <rect width="1024" height="768" fill="#f4f0e8"/>
+
+  <!-- Garage header band -->
+  <rect x="0" y="430" width="1024" height="260" fill="#e7dccb"/>
+  <rect x="0" y="690" width="1024" height="10" fill="#cdbe9f"/>
+
+  <!-- Tracks -->
+  <rect x="60"  y="430" width="14" height="320" fill="#bfb295" opacity="0.7"/>
+  <rect x="950" y="430" width="14" height="320" fill="#bfb295" opacity="0.7"/>
+
+  <!-- End-bearing plates -->
+  <rect x="84"  y="305" width="80" height="120" rx="6" fill="#5a6770"/>
+  <rect x="860" y="305" width="80" height="120" rx="6" fill="#5a6770"/>
+  <circle cx="104" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="144" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="104" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="144" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="880" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="920" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="880" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="920" cy="400" r="4" fill="#2a333a"/>
+
+  <!-- Steel torsion shaft (1" black-oxide) running end-to-end -->
+  <rect x="124" y="362" width="776" height="10" rx="5" fill="#2a333a"/>
+  <rect x="124" y="372" width="776" height="3" fill="#000" opacity="0.45"/>
+
+  <!-- Centre bearing plate -->
+  <rect x="492" y="305" width="40" height="120" rx="4" fill="#5a6770"/>
+  <circle cx="512" cy="367" r="14" fill="#2a333a" stroke="#0f1a1f" stroke-width="1.5"/>
+  <circle cx="512" cy="367" r="6" fill="#7c8d9a"/>
+
+  <!-- TORSION SPRING (left of centre, coils visible) -->
+  <defs>
+    <linearGradient id="spring-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a52"/>
+      <stop offset="50%" stop-color="#0f1a1f"/>
+      <stop offset="100%" stop-color="#3a4a52"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <!-- Spring body — stacked vertical ellipses to simulate coils -->
+    <g fill="url(#spring-grad)">
+      <ellipse cx="172" cy="367" rx="6" ry="32"/>
+      <ellipse cx="184" cy="367" rx="6" ry="32"/>
+      <ellipse cx="196" cy="367" rx="6" ry="32"/>
+      <ellipse cx="208" cy="367" rx="6" ry="32"/>
+      <ellipse cx="220" cy="367" rx="6" ry="32"/>
+      <ellipse cx="232" cy="367" rx="6" ry="32"/>
+      <ellipse cx="244" cy="367" rx="6" ry="32"/>
+      <ellipse cx="256" cy="367" rx="6" ry="32"/>
+      <ellipse cx="268" cy="367" rx="6" ry="32"/>
+      <ellipse cx="280" cy="367" rx="6" ry="32"/>
+      <ellipse cx="292" cy="367" rx="6" ry="32"/>
+      <ellipse cx="304" cy="367" rx="6" ry="32"/>
+      <ellipse cx="316" cy="367" rx="6" ry="32"/>
+      <ellipse cx="328" cy="367" rx="6" ry="32"/>
+      <ellipse cx="340" cy="367" rx="6" ry="32"/>
+      <ellipse cx="352" cy="367" rx="6" ry="32"/>
+      <ellipse cx="364" cy="367" rx="6" ry="32"/>
+      <ellipse cx="376" cy="367" rx="6" ry="32"/>
+      <ellipse cx="388" cy="367" rx="6" ry="32"/>
+      <ellipse cx="400" cy="367" rx="6" ry="32"/>
+      <ellipse cx="412" cy="367" rx="6" ry="32"/>
+      <ellipse cx="424" cy="367" rx="6" ry="32"/>
+      <ellipse cx="436" cy="367" rx="6" ry="32"/>
+      <ellipse cx="448" cy="367" rx="6" ry="32"/>
+      <ellipse cx="460" cy="367" rx="6" ry="32"/>
+      <ellipse cx="472" cy="367" rx="6" ry="32"/>
+    </g>
+    <!-- Winding cone (red) at the left end of the spring -->
+    <rect x="160" y="345" width="14" height="44" rx="2" fill="#d94a2b"/>
+    <!-- Stationary cone (right end, against centre plate) -->
+    <rect x="478" y="345" width="14" height="44" rx="2" fill="#1f3a44"/>
+  </g>
+
+  <!-- TORSION SPRING (right of centre, second matching spring) -->
+  <g>
+    <g fill="url(#spring-grad)">
+      <ellipse cx="552" cy="367" rx="6" ry="32"/>
+      <ellipse cx="564" cy="367" rx="6" ry="32"/>
+      <ellipse cx="576" cy="367" rx="6" ry="32"/>
+      <ellipse cx="588" cy="367" rx="6" ry="32"/>
+      <ellipse cx="600" cy="367" rx="6" ry="32"/>
+      <ellipse cx="612" cy="367" rx="6" ry="32"/>
+      <ellipse cx="624" cy="367" rx="6" ry="32"/>
+      <ellipse cx="636" cy="367" rx="6" ry="32"/>
+      <ellipse cx="648" cy="367" rx="6" ry="32"/>
+      <ellipse cx="660" cy="367" rx="6" ry="32"/>
+      <ellipse cx="672" cy="367" rx="6" ry="32"/>
+      <ellipse cx="684" cy="367" rx="6" ry="32"/>
+      <ellipse cx="696" cy="367" rx="6" ry="32"/>
+      <ellipse cx="708" cy="367" rx="6" ry="32"/>
+      <ellipse cx="720" cy="367" rx="6" ry="32"/>
+      <ellipse cx="732" cy="367" rx="6" ry="32"/>
+      <ellipse cx="744" cy="367" rx="6" ry="32"/>
+      <ellipse cx="756" cy="367" rx="6" ry="32"/>
+      <ellipse cx="768" cy="367" rx="6" ry="32"/>
+      <ellipse cx="780" cy="367" rx="6" ry="32"/>
+      <ellipse cx="792" cy="367" rx="6" ry="32"/>
+      <ellipse cx="804" cy="367" rx="6" ry="32"/>
+      <ellipse cx="816" cy="367" rx="6" ry="32"/>
+      <ellipse cx="828" cy="367" rx="6" ry="32"/>
+      <ellipse cx="840" cy="367" rx="6" ry="32"/>
+      <ellipse cx="852" cy="367" rx="6" ry="32"/>
+    </g>
+    <rect x="532" y="345" width="14" height="44" rx="2" fill="#1f3a44"/>
+    <rect x="858" y="345" width="14" height="44" rx="2" fill="#d94a2b"/>
+  </g>
+
+  <!-- Steel cable drums at the end-bearing plates -->
+  <circle cx="124" cy="367" r="22" fill="#5a6770" stroke="#0f1a1f" stroke-width="2"/>
+  <circle cx="124" cy="367" r="8" fill="#2a333a"/>
+  <circle cx="900" cy="367" r="22" fill="#5a6770" stroke="#0f1a1f" stroke-width="2"/>
+  <circle cx="900" cy="367" r="8" fill="#2a333a"/>
+
+  <!-- Cables descending from the drums -->
+  <line x1="124" y1="389" x2="124" y2="700" stroke="#0f1a1f" stroke-width="2"/>
+  <line x1="900" y1="389" x2="900" y2="700" stroke="#0f1a1f" stroke-width="2"/>
+
+  <!-- Green callout label -->
+  <g>
+    <line x1="512" y1="220" x2="512" y2="316" stroke="#2f7a3e" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="512,324 504,310 520,310" fill="#2f7a3e"/>
+    <rect x="232" y="160" width="560" height="56" rx="10" fill="#2f7a3e"/>
+    <text x="512" y="196" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fafaf7" letter-spacing="0.04em">STANDARD TORSION · UNIVERSAL PARTS</text>
+  </g>
+
+  <!-- Tick marks of approval -->
+  <g transform="translate(60 720)" font-family="Arial, sans-serif" font-size="14" fill="#2f7a3e" font-weight="700">
+    <text x="0" y="0">✓ 10,000+ cycles</text>
+    <text x="160" y="0">✓ Steel drums</text>
+    <text x="300" y="0">✓ Off-the-shelf parts</text>
+    <text x="500" y="0">✓ Any tech in BC can service it</text>
+  </g>
+
+  <!-- Placeholder watermark -->
+  <g opacity="0.55">
+    <rect x="36" y="36" width="190" height="36" rx="6" fill="#0f1a1f"/>
+    <text x="131" y="61" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#fafaf7" letter-spacing="0.16em">PLACEHOLDER</text>
+  </g>
+  <text x="36" y="100" font-family="Arial, sans-serif" font-size="14" fill="#3a4a52">After — real photo to be added</text>
+</svg>

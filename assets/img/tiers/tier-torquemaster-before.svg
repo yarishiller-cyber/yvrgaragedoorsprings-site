@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" role="img" aria-labelledby="tm-before-title tm-before-desc">
+  <title id="tm-before-title">Broken Wayne Dalton TorqueMaster sealed-tube spring assembly</title>
+  <desc id="tm-before-desc">Editorial illustration of a horizontal sealed steel tube above a garage door header. A red label and arrow point at the tube to indicate a failed internal spring hidden inside. A dashed cutaway reveals plastic gears and a broken coil. Marked PLACEHOLDER — replace with photograph.</desc>
+
+  <!-- Background: warm paper -->
+  <rect width="1024" height="768" fill="#f4f0e8"/>
+
+  <!-- Garage-header band (the wood/drywall above the door) -->
+  <rect x="0" y="430" width="1024" height="260" fill="#e7dccb"/>
+  <rect x="0" y="690" width="1024" height="10" fill="#cdbe9f"/>
+
+  <!-- Door track silhouette (faint) -->
+  <rect x="60"  y="430" width="14" height="320" fill="#bfb295" opacity="0.7"/>
+  <rect x="950" y="430" width="14" height="320" fill="#bfb295" opacity="0.7"/>
+
+  <!-- Flag brackets (Wayne Dalton style, riveted plates) -->
+  <rect x="84"  y="305" width="80" height="120" rx="6" fill="#5a6770"/>
+  <rect x="860" y="305" width="80" height="120" rx="6" fill="#5a6770"/>
+  <circle cx="104" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="144" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="104" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="144" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="880" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="920" cy="330" r="4" fill="#2a333a"/>
+  <circle cx="880" cy="400" r="4" fill="#2a333a"/>
+  <circle cx="920" cy="400" r="4" fill="#2a333a"/>
+
+  <!-- TorqueMaster sealed tube (teardrop steel housing) -->
+  <defs>
+    <linearGradient id="tm-tube" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#8a98a3"/>
+      <stop offset="50%"  stop-color="#5f6e79"/>
+      <stop offset="100%" stop-color="#3d4a53"/>
+    </linearGradient>
+  </defs>
+  <rect x="164" y="338" width="696" height="56" rx="22" fill="url(#tm-tube)"/>
+  <rect x="164" y="338" width="696" height="10" rx="5" fill="#a8b4bd" opacity="0.55"/>
+  <!-- end caps -->
+  <rect x="158" y="332" width="14" height="68" rx="3" fill="#2a333a"/>
+  <rect x="852" y="332" width="14" height="68" rx="3" fill="#2a333a"/>
+
+  <!-- Cutaway showing the broken internal spring + plastic gear -->
+  <g>
+    <rect x="380" y="332" width="264" height="68" fill="#f4f0e8" stroke="#d94a2b" stroke-width="3" stroke-dasharray="6 6"/>
+    <!-- Hidden internal spring with visible gap -->
+    <g stroke="#0f1a1f" stroke-width="3" fill="none">
+      <path d="M390 366 q10 -16 20 0 q10 16 20 0 q10 -16 20 0 q10 16 20 0 q10 -16 20 0"/>
+      <!-- gap -->
+      <path d="M540 366 q10 -16 20 0 q10 16 20 0 q10 -16 20 0 q10 16 20 0 q10 -16 20 0"/>
+    </g>
+    <!-- Gap indicator -->
+    <line x1="495" y1="350" x2="535" y2="350" stroke="#d94a2b" stroke-width="2"/>
+    <line x1="495" y1="350" x2="495" y2="382" stroke="#d94a2b" stroke-width="2"/>
+    <line x1="535" y1="350" x2="535" y2="382" stroke="#d94a2b" stroke-width="2"/>
+    <line x1="495" y1="382" x2="535" y2="382" stroke="#d94a2b" stroke-width="2"/>
+    <!-- Plastic gear (brittle, stripped) -->
+    <g transform="translate(420 366)">
+      <circle r="14" fill="#c8b48a" stroke="#0f1a1f" stroke-width="1.5"/>
+      <g fill="#c8b48a" stroke="#0f1a1f" stroke-width="1">
+        <rect x="-2" y="-18" width="4" height="6"/>
+        <rect x="-2" y="12" width="4" height="6"/>
+        <rect x="-18" y="-2" width="6" height="4"/>
+        <rect x="12" y="-2" width="6" height="4"/>
+      </g>
+      <!-- stripped tooth marker -->
+      <line x1="-3" y1="-19" x2="3" y2="-13" stroke="#d94a2b" stroke-width="2"/>
+    </g>
+    <text x="512" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#d94a2b">CUTAWAY — broken inside</text>
+  </g>
+
+  <!-- Cables descending from the ends -->
+  <line x1="124" y1="425" x2="124" y2="700" stroke="#3a4a52" stroke-width="2"/>
+  <line x1="900" y1="425" x2="900" y2="700" stroke="#3a4a52" stroke-width="2"/>
+
+  <!-- Arrow + label -->
+  <g>
+    <line x1="512" y1="220" x2="512" y2="316" stroke="#d94a2b" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="512,324 504,310 520,310" fill="#d94a2b"/>
+    <rect x="288" y="160" width="448" height="56" rx="10" fill="#d94a2b"/>
+    <text x="512" y="196" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fafaf7" letter-spacing="0.04em">SEALED TORQUEMASTER TUBE · FAILED</text>
+  </g>
+
+  <!-- Placeholder watermark -->
+  <g opacity="0.55">
+    <rect x="36" y="36" width="190" height="36" rx="6" fill="#0f1a1f"/>
+    <text x="131" y="61" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#fafaf7" letter-spacing="0.16em">PLACEHOLDER</text>
+  </g>
+  <text x="36" y="100" font-family="Arial, sans-serif" font-size="14" fill="#3a4a52">Before — real photo to be added</text>
+</svg>
