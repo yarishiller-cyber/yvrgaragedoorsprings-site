@@ -786,9 +786,57 @@ body.state-after-hours .hero-figure::after {
   border-left: 2px solid var(--green); border-bottom: 2px solid var(--green);
   transform: rotate(-45deg);
 }
-.tier-features li.minus { color: var(--ink-muted); }
+.tier-features li.minus {
+  color: var(--ink-muted);
+  animation: minus-pulse 3.6s ease-in-out infinite;
+}
+/* Stagger the two minus rows so the eye registers them as separate alerts,
+   not a single block. */
+.tier-features li.minus:nth-of-type(2n) { animation-delay: 1.8s; }
 .tier-features li.minus::before {
-  border: none; left: 2px; top: 9px; width: 8px; height: 2px; background: var(--ink-muted); transform: none;
+  content: ""; position: absolute; left: 2px; top: 9px;
+  width: 8px; height: 2px;
+  border: none; background: var(--ink-muted); transform: none;
+  animation: minus-pulse-marker 3.6s ease-in-out infinite;
+}
+.tier-features li.minus:nth-of-type(2n)::before { animation-delay: 1.8s; }
+
+@keyframes minus-pulse {
+  /* Slow cycle: 75% of the time it sits at the calm grey, then a brief swell
+     to a softer warning red with a faint glow, then back. Just enough motion
+     to catch a wandering eye without being annoying on long sessions. */
+  0%, 60%, 100% {
+    color: var(--ink-muted);
+    text-shadow: none;
+  }
+  78% {
+    color: #c0392b; /* WCAG-AA red on paper */
+    text-shadow: 0 0 6px rgba(192, 57, 43, 0.45);
+  }
+  82% {
+    color: #c0392b;
+    text-shadow: 0 0 10px rgba(192, 57, 43, 0.55);
+  }
+}
+@keyframes minus-pulse-marker {
+  0%, 60%, 100% {
+    background: var(--ink-muted);
+    box-shadow: none;
+  }
+  78%, 82% {
+    background: #c0392b;
+    box-shadow: 0 0 8px rgba(192, 57, 43, 0.6);
+  }
+}
+
+/* Respect reduced-motion: hold the red state, no animation cycle. */
+@media (prefers-reduced-motion: reduce) {
+  .tier-features li.minus,
+  .tier-features li.minus::before {
+    animation: none;
+  }
+  .tier-features li.minus { color: #c0392b; }
+  .tier-features li.minus::before { background: #c0392b; }
 }
 
 /* ---------- 4th option: Wayne Dalton TorqueMaster conversion ----------
