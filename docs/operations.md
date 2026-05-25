@@ -25,18 +25,18 @@ Single reference for running the site day-to-day. Read top to bottom once. Bookm
 
 ---
 
-## 2. Phone number — swap when the real tracked line is ready
+## 2. Phone number — current and how to change it
 
-Edit two constants in **`assets/js/personalize.js`** (top of the file):
+The real tracked line is **(778) 800-0769**. It's defined in two constants at the top of **`assets/js/personalize.js`**:
 
 ```js
-const PHONE_DISPLAY = '(604) XXX-XXXX';   // shown to humans
-const PHONE_TEL     = '+1604XXXXXXX';     // E.164 for tel: hrefs (no spaces, with +)
+const PHONE_DISPLAY = '(778) 800-0769';   // shown to humans
+const PHONE_TEL     = '+17788000769';     // E.164 for tel: hrefs (no spaces, with +)
 ```
 
-Everywhere on the site that shows or links the phone reads from these constants — there's no second place to update. The friendly display can be anything (e.g., `(604) 555-1234`); the `tel:` value must be valid E.164.
+These are the runtime source of truth for any `[data-phone-display]` text or `[data-tel]` href the JS encounters. The same values are **also baked into every static HTML page** (display text and `href="tel:+17788000769"`) so that crawlers, AI bots, and no-JS clients see the real number on first paint — they don't have to wait for `personalize.js` to hydrate.
 
-If/when CallRail or another Dynamic Number Insertion service is added, the swap pattern is the same: replace these two constants with the dynamic injection snippet.
+If/when CallRail or another Dynamic Number Insertion service is added, swap these two constants for the dynamic injection snippet AND sweep the static HTML — there's no other place to update.
 
 ---
 

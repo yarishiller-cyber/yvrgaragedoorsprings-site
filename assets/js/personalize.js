@@ -1,7 +1,8 @@
 /* ========================================================================
    YVR Garage Door Springs — personalization layer
    Vanilla JS, no dependencies. Single source of truth for phone + city list.
-   Swap PHONE_DISPLAY / PHONE_TEL when the real tracked number is ready.
+   Current line: (778) 800-0769. Static HTML across the site also bakes in
+   this number directly so crawlers and no-JS users see it on first paint.
    ======================================================================== */
 
 (function () {
@@ -250,7 +251,7 @@
     qsa('[data-tel]', scope).forEach(el => el.setAttribute('href', 'tel:' + PHONE_TEL));
     qsa('[data-phone-display]', scope).forEach(el => {
       if (!el.textContent || el.textContent.match(/^\(?\d|XXX|^Call/i)) {
-        // Don't overwrite text that's already a fully-formed CTA like "Call (604)..."
+        // Don't overwrite text that's already a fully-formed CTA like "Call (778) 800-0769"
         if (el.textContent.indexOf(PHONE_DISPLAY) === -1) {
           el.textContent = PHONE_DISPLAY;
         }

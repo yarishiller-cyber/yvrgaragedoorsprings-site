@@ -31,7 +31,7 @@ Claude Code → GitHub → Hostinger auto-deploy
 
 All defined as single sources of truth — swap in one place:
 
-- **Phone:** `(604) XXX-XXXX` — placeholder. Edit `PHONE_DISPLAY` and `PHONE_TEL` in `assets/js/personalize.js`.
+- **Phone:** `(778) 800-0769`. Single source of truth: `PHONE_DISPLAY` and `PHONE_TEL` in `assets/js/personalize.js` (also baked into every page's static markup so crawlers and no-JS users see it pre-hydration).
 - **Email:** `info@yvrgaragedoorsprings.ca`
 - **Dispatch HQ:** 4321 Still Creek Drive, Burnaby, BC V5C 6C6 (placeholder)
 - **Hours:** 7 a.m. – 9 p.m. daily
