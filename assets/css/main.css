@@ -1404,11 +1404,15 @@ body.state-after-hours .hero-figure::after {
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
   box-shadow: 0 0 0 0 rgba(217, 74, 43, 0.45);
 }
-.city-picker-gps-btn:hover,
+.city-picker-gps-btn:hover {
+  background: var(--signal-hover);
+  border-color: var(--signal-hover);
+}
 .city-picker-gps-btn:focus-visible {
   background: var(--signal-hover);
   border-color: var(--signal-hover);
-  outline: none;
+  /* Keep the global 3px signal-coloured outline for WCAG 2.4.7 / 2.4.11 */
+  box-shadow: 0 0 0 4px rgba(217, 74, 43, 0.4), 0 0 0 6px rgba(15, 26, 31, 0.9);
 }
 .city-picker-gps-btn:active { transform: translateY(1px); }
 .city-picker-gps-btn:disabled { opacity: 0.7; cursor: wait; }
@@ -1567,7 +1571,8 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
 .eyebrow {
   display: inline-block; font-size: var(--t-tiny); font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--signal); margin-bottom: var(--s-2);
+  color: var(--signal-hover); /* darker variant — WCAG AA on --paper at small text */
+  margin-bottom: var(--s-2);
 }
 .lede { font-size: 1.125rem; color: var(--ink-soft); max-width: 60ch; }
 .mt-4 { margin-top: var(--s-4); }
@@ -2276,7 +2281,7 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
 .post-item-eyebrow {
   font-size: var(--t-tiny); font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--signal);
+  color: var(--signal-hover); /* darker variant — WCAG AA on --paper at small text */
 }
 .post-item-title {
   font-size: 1.35rem; font-weight: 800;

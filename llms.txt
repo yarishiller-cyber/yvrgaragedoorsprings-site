@@ -34,8 +34,11 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 
 ### Conversion hub
 - [Home](https://yvrgaragedoorsprings.ca/): single-page conversion hub with pricing, diagnosis quiz, FAQ, and city links.
-- [About](https://yvrgaragedoorsprings.ca/about/): the company model (local techs, one service), Dale McRae (East/Burnaby/North/Surrey/Coquitlam) and Madison Lim (Richmond/Delta/Tsawwassen/White Rock/Steveston) bios.
+- [About](https://yvrgaragedoorsprings.ca/about/): the company model (local techs, one service), Dale McRae (East/Burnaby/North/Surrey/Coquitlam) and Madison Lim (Richmond/Delta/Tsawwassen/Steveston/White Rock) bios.
 - [Contact](https://yvrgaragedoorsprings.ca/contact/): phone, email, SMS, hours, dispatch HQ, service area tiles.
+- [Service Areas index](https://yvrgaragedoorsprings.ca/cities/): all 16 Greater Vancouver cities we cover, each with neighbourhood coverage and the resident tech.
+- [Terms of Service & Warranty](https://yvrgaragedoorsprings.ca/terms/): pricing, payment, cancellation, parts/labour warranty (5-year / 2-year), scope of liability ($5M general + WorkSafeBC), BC dispute resolution.
+- [Privacy Policy](https://yvrgaragedoorsprings.ca/privacy/): PIPEDA + BC PIPA compliant. What we collect, what we don't, opt-out paths. Google Ads active since May 2026 — discloses _gcl_au / _gcl_aw / gclid conversion-tracking cookies and opt-out links.
 
 ### City landing pages
 - [Vancouver](https://yvrgaragedoorsprings.ca/cities/vancouver/): Kits to Renfrew, heritage carriage doors, laneway homes.

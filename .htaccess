@@ -61,7 +61,10 @@ ErrorDocument 404 /404.html
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # Allow geolocation on our own origin only (used by the "Share my location"
+  # GPS button to reverse-geocode visitors to the nearest service city). Mic
+  # and camera stay fully disabled — we never request them.
+  Header set Permissions-Policy "geolocation=(self), microphone=(), camera=()"
   Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
 </IfModule>
 
