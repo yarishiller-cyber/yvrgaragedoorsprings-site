@@ -1044,25 +1044,52 @@
     try { renderHeroMoment(); } catch (e) {}
   }
 
-  /* ---- 8. Sticky bottom call bar ---- */
+  /* ---- 8. Sticky bottom call bar ----
+     Trigger model: watch the in-flow hero CTAs. As soon as they scroll out
+     of view (i.e., the user has scrolled past the hero's Call/Text buttons),
+     show the sticky bar. Falls back to a simple 300px scroll threshold on
+     pages that don't have .hero-ctas. */
   function stickyBar() {
     const bar = qs('.sticky-cta');
     if (!bar) return;
-    let ticking = false;
-    function update() {
-      const scrolled = window.scrollY + window.innerHeight;
-      const max = document.documentElement.scrollHeight;
-      const pct = scrolled / max;
-      if (pct > 0.25) bar.classList.add('show'); else bar.classList.remove('show');
-      ticking = false;
+    const heroCtas = qs('.hero-ctas');
+
+    if (heroCtas && 'IntersectionObserver' in window) {
+      // Pages with a visible hero CTA — sticky shows when hero CTA leaves viewport
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) bar.classList.remove('show');
+          else bar.classList.add('show');
+        }
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+      io.observe(heroCtas);
+    } else {
+      // Fallback for pages with no hero CTA (privacy, terms, 404, blog index, /cities/)
+      let ticking = false;
+      function update() {
+        const sy = window.scrollY;
+        if (sy > 300) bar.classList.add('show'); else bar.classList.remove('show');
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
     }
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(update); ticking = true; }
-    }, { passive: true });
+
+    // Hide while a form field is focused so the bar doesn't cover the keyboard
     document.addEventListener('focusin', e => {
       if (e.target.matches('input, textarea, select')) bar.classList.remove('show');
     });
-    document.addEventListener('focusout', update);
+    document.addEventListener('focusout', () => {
+      // Re-evaluate after the keyboard closes
+      if (!heroCtas) {
+        if (window.scrollY > 300) bar.classList.add('show');
+      } else {
+        const r = heroCtas.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) bar.classList.add('show');
+      }
+    });
   }
 
   /* ---- 9. Diagnosis widget ---- */
