@@ -1544,6 +1544,7 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
 @media (max-width: 720px) {
   .article-figure-fullbleed-mobile {
     margin-inline: calc(-1 * var(--s-4));
+    margin-top: 0;
     padding-inline: 0;
     max-width: none;
   }
@@ -1554,9 +1555,38 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
   .article-figure-fullbleed-mobile > figcaption {
     padding-inline: var(--s-4);
   }
+  /* When a section's first content is a full-bleed-on-mobile figure, kill
+     the section's own top padding so the photo sits flush against the
+     block above. Also kill the previous section's bottom padding so the
+     two blocks meet edge-to-edge. */
+  .section:has(> .wrap > .article-figure-fullbleed-mobile:first-child),
+  .section:has(> .wrap-narrow > .article-figure-fullbleed-mobile:first-child) {
+    padding-top: 0;
+  }
+  .section:has(+ .section > .wrap > .article-figure-fullbleed-mobile:first-child),
+  .section:has(+ .section > .wrap-narrow > .article-figure-fullbleed-mobile:first-child) {
+    padding-bottom: 0;
+  }
 }
 
 /* ---------- Blog ---------- */
+
+/* Blog index hero — single centered column instead of the default
+   hero's two-column flex/grid. Lets the photo below it serve as the
+   visual right-half and keeps the eye flowing top-to-bottom. */
+.blog-hero > .wrap {
+  display: block;
+  text-align: center;
+}
+.blog-hero-text {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+.blog-hero-text .availability {
+  display: inline-flex;
+  margin-top: var(--s-5);
+}
+
 .article-head {
   padding-block: var(--s-7) var(--s-5);
 }
