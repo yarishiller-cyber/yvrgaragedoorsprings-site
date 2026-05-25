@@ -911,45 +911,87 @@
   }
 
   function wireLocateButton() {
-    const btn = qs('[data-hero-locate-btn]');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
+    const buttons = qsa('[data-hero-locate-btn]');
+    if (!buttons.length) return;
+
+    // Helper: set the visible label on any locate button. The hero badge
+    // button shows its label directly as textContent; the GPS pill button
+    // uses an inner <span data-gps-btn-label>.
+    function setBtnLabel(btn, txt) {
+      const span = btn.querySelector('[data-gps-btn-label]');
+      if (span) span.textContent = txt;
+      else btn.textContent = txt;
+    }
+
+    function runGPS(triggerBtn) {
       if (!('geolocation' in navigator)) {
-        btn.textContent = 'GPS not supported by this browser';
-        btn.disabled = true;
+        buttons.forEach(b => { setBtnLabel(b, 'GPS not supported'); b.disabled = true; });
         return;
       }
-      btn.disabled = true;
-      btn.textContent = 'Locating…';
+      buttons.forEach(b => { b.disabled = true; setBtnLabel(b, 'Locating…'); b.classList.add('is-locating'); });
+
       navigator.geolocation.getCurrentPosition(
         function (pos) {
           const lat = pos.coords.latitude;
           const lon = pos.coords.longitude;
           reverseGeocode(lat, lon)
             .then(slug => {
-              btn.disabled = false;
-              btn.textContent = 'Re-detect';
+              buttons.forEach(b => { b.disabled = false; b.classList.remove('is-locating'); });
               if (slug) {
                 setOriginCity(slug, { source: 'gps' });
                 updateLocateBadge(slug, 'gps');
+                buttons.forEach(b => setBtnLabel(b, 'GPS · re-detect'));
+                const status = qs('#city-picker-status');
+                if (status) status.textContent = 'Located: ' + (CITIES[slug] ? CITIES[slug].display : slug) + ' (GPS). Tiles reordered.';
               } else {
-                // Out of service area — tell them honestly.
+                buttons.forEach(b => setBtnLabel(b, 'Outside service area'));
                 const label = qs('[data-hero-locate-label]');
                 if (label) label.innerHTML = 'You\'re outside our 16-city Greater Vancouver service area.';
               }
             })
             .catch(() => {
-              btn.disabled = false;
-              btn.textContent = 'Try again';
+              buttons.forEach(b => { b.disabled = false; b.classList.remove('is-locating'); setBtnLabel(b, 'Try again'); });
             });
         },
         function (err) {
-          btn.disabled = false;
-          btn.textContent = err.code === 1 ? 'Permission denied' : 'Try again';
+          buttons.forEach(b => {
+            b.disabled = false;
+            b.classList.remove('is-locating');
+            setBtnLabel(b, err.code === 1 ? 'Permission denied' : 'Try again');
+          });
         },
-        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60 * 1000 }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 60 * 1000 }
       );
-    });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => runGPS(btn)));
+
+    // Auto-upgrade IP → GPS silently if the visitor has previously granted
+    // permission. No prompt, no UI change until the slug is known.
+    if ('permissions' in navigator && navigator.permissions.query) {
+      navigator.permissions.query({ name: 'geolocation' }).then(status => {
+        if (status.state === 'granted') {
+          // Silent auto-fire: don't change button labels until we have a result
+          navigator.geolocation.getCurrentPosition(
+            function (pos) {
+              reverseGeocode(pos.coords.latitude, pos.coords.longitude).then(slug => {
+                if (slug) {
+                  setOriginCity(slug, { source: 'gps' });
+                  updateLocateBadge(slug, 'gps');
+                  buttons.forEach(b => setBtnLabel(b, 'GPS · re-detect'));
+                }
+              }).catch(() => {});
+            },
+            function () { /* silent fail; user can still click the button */ },
+            { enableHighAccuracy: false, timeout: 6000, maximumAge: 5 * 60 * 1000 }
+          );
+        } else if (status.state === 'denied') {
+          // Don't hide the buttons — the user might have changed their mind
+          // about the site since the last denial. But re-label so they know.
+          buttons.forEach(b => setBtnLabel(b, 'Location blocked'));
+        }
+      }).catch(() => {});
+    }
   }
 
   // Reverse-geocode latitude/longitude to a city slug. Picks the nearest

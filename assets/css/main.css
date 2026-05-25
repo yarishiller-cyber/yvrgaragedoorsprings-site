@@ -1383,10 +1383,52 @@ body.state-after-hours .hero-figure::after {
 }
 @media (min-width: 640px) {
   .city-picker-row {
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
     align-items: end;
   }
   .city-picker-or { padding-block: 0; align-self: center; padding-bottom: 14px; }
+}
+
+/* ---------- Live-location ("Share my location") button ---------- */
+.city-picker-gps-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 14px; min-height: 48px;
+  font: inherit; font-weight: 700; font-size: 1rem;
+  color: white;
+  background: var(--signal);
+  border: 2px solid var(--signal);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 0 0 rgba(217, 74, 43, 0.45);
+}
+.city-picker-gps-btn:hover,
+.city-picker-gps-btn:focus-visible {
+  background: var(--signal-hover);
+  border-color: var(--signal-hover);
+  outline: none;
+}
+.city-picker-gps-btn:active { transform: translateY(1px); }
+.city-picker-gps-btn:disabled { opacity: 0.7; cursor: wait; }
+
+/* Pulsing GPS-ring effect — draws the eye without being loud */
+.city-picker-gps-btn svg { animation: gps-ring 2.6s ease-in-out infinite; flex: 0 0 auto; }
+.city-picker-gps-btn.is-locating svg { animation: gps-ring 0.9s ease-in-out infinite; }
+@keyframes gps-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.12); opacity: 0.78; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .city-picker-gps-btn svg, .city-picker-gps-btn.is-locating svg { animation: none; }
+}
+
+.city-picker-privacy {
+  margin: var(--s-3) 0 0;
+  font-size: var(--t-tiny);
+  color: var(--ink-muted);
+  line-height: 1.4;
 }
 
 /* ---------- Quote form ---------- */
