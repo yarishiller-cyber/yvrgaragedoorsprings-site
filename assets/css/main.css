@@ -8,7 +8,7 @@
   /* Palette */
   --ink: #0f1a1f;            /* primary text */
   --ink-soft: #3a4a52;       /* secondary text */
-  --ink-muted: #6a7a82;      /* tertiary text */
+  --ink-muted: #56666e;      /* tertiary text (WCAG AA on --paper) */
   --paper: #fafaf7;          /* page background */
   --paper-warm: #f4f0e8;     /* card / band background */
   --line: #d9d4c8;           /* hairlines */
@@ -644,13 +644,13 @@ img.brand-mark {
   border: 0;
   padding: 0;
   font: inherit;
-  color: var(--signal);
+  color: var(--signal-hover); /* darker variant — passes WCAG AA on --paper */
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 2px;
   cursor: pointer;
 }
-.hero-locate-btn:hover { color: var(--signal-hover); }
+.hero-locate-btn:hover { color: var(--signal); }
 .hero-locate-btn[disabled] { color: var(--ink-muted); text-decoration: none; cursor: default; }
 
 /* ---------- Hero image ---------- */
@@ -1400,12 +1400,19 @@ body.state-after-hours .hero-figure::after {
   display: grid; gap: var(--s-5);
   grid-template-columns: 1fr;
 }
+.footer-grid h3,
 .footer-grid h4 {
   font-size: var(--t-small); text-transform: uppercase; letter-spacing: 0.08em;
-  color: rgba(250, 250, 247, 0.6); margin-bottom: var(--s-2);
+  color: rgba(250, 250, 247, 0.75); margin-bottom: var(--s-2);
+  font-weight: 700;
 }
 .footer-grid ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.footer-meta { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(255,255,255,0.1); color: rgba(250,250,247,0.5); }
+.footer-grid a { color: rgba(250, 250, 247, 0.92); text-decoration: none; }
+.footer-grid a:hover { color: var(--signal); text-decoration: underline; }
+.footer-brand { font-weight: 800; font-size: 1.1rem; margin-bottom: var(--s-2); color: var(--paper); }
+.footer-tagline { color: rgba(250,250,247,0.78); font-size: var(--t-small); line-height: 1.55; }
+.footer-meta { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(255,255,255,0.12); color: rgba(250,250,247,0.7); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.footer-meta a { color: rgba(250,250,247,0.85); }
 
 /* ---------- Cold-snap / weather banner ---------- */
 .cold-snap {
@@ -1456,7 +1463,7 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
   .hero-ctas .btn { flex: 1 1 auto; min-width: 200px; }
   .pricing { grid-template-columns: repeat(3, 1fr); align-items: start; }
   .reviews { grid-template-columns: repeat(2, 1fr); }
-  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; }
 }
 @media (min-width: 960px) {
   .section { padding-block: var(--s-8); }
@@ -1548,9 +1555,13 @@ h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.01em; }
     padding-inline: 0;
     max-width: none;
   }
-  .article-figure-fullbleed-mobile > img {
+  .article-figure-fullbleed-mobile > img,
+  .article-figure-fullbleed-mobile > picture > img {
     border-radius: 0;
     box-shadow: none;
+  }
+  .article-figure-fullbleed-mobile > picture {
+    display: block;
   }
   .article-figure-fullbleed-mobile > figcaption {
     padding-inline: var(--s-4);
