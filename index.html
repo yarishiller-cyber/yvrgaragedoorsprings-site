@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://ipapi.co" crossorigin>
 
 <!-- Preload the LCP hero image (desktop only — figure is display:none on mobile) -->
-<link rel="preload" as="image" href="/assets/img/hero/broken-garage-door-spring-vancouver.jpg" fetchpriority="high" media="(min-width: 960px)">
+<link rel="preload" as="image" href="/assets/img/hero/broken-garage-door-spring-vancouver.webp" type="image/webp" fetchpriority="high" media="(min-width: 960px)">
 <!-- Preload the wrapped Ford Maverick used in the live hero-sky animation — same
      asset as the city tiles, so this preload warms the cache for both. -->
 <link rel="preload" as="image" href="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp" type="image/webp" fetchpriority="high">
@@ -41,7 +41,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1a1f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='800' font-size='18' fill='%23fafaf7'%3EY%3C/text%3E%3C/svg%3E">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="/assets/css/main.css?v=20260525j">
+<link rel="stylesheet" href="/assets/css/main.css?v=20260525k">
 
 <!-- JSON-LD: LocalBusiness -->
 <script type="application/ld+json">
@@ -694,10 +694,13 @@
   <div class="hero-photo">
     <!-- Hero swaps src by intent / weather / time-of-day via personalize.js -->
     <figure class="hero-figure" data-hero-image>
-      <img src="/assets/img/hero/broken-garage-door-spring-vancouver.jpg"
-           alt="Close-up of a broken residential garage door torsion spring with a visible gap in the coil"
-           width="1600" height="1200"
-           loading="eager" fetchpriority="high">
+      <picture>
+        <source srcset="/assets/img/hero/broken-garage-door-spring-vancouver.webp" type="image/webp" data-hero-source>
+        <img src="/assets/img/hero/broken-garage-door-spring-vancouver.jpg"
+             alt="Close-up of a broken residential garage door torsion spring with a visible gap in the coil"
+             width="1600" height="1200"
+             loading="eager" fetchpriority="high">
+      </picture>
     </figure>
     <div class="availability" data-availability role="status" aria-live="polite">
       <span class="dot"></span>
@@ -1333,7 +1336,7 @@
 </div>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="/assets/js/personalize.js?v=20260525j" defer></script>
+<script src="/assets/js/personalize.js?v=20260525k" defer></script>
 
 </body>
 </html>

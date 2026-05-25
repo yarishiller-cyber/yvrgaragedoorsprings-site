@@ -1315,11 +1315,21 @@
        - state-holiday     when applyAvailability finds it's a BC stat day
      Hero image swaps based on these + the data-intent attribute. */
   const HERO_VARIANTS = {
-    'default':    { src: '/assets/img/hero/broken-garage-door-spring-vancouver.jpg',       alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
-    'cold':       { src: '/assets/img/hero/hero-emergency-cold.jpg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
-    'night':      { src: '/assets/img/hero/hero-emergency-night.jpg', alt: 'Residential garage door torsion spring under a warm overhead garage light, after hours' },
-    'price':      { src: '/assets/img/hero/hero-pricing.jpg',         alt: 'Three sizes of garage door torsion spring laid out on a workbench, each tagged with its flat-rate price' },
-    'diagnostic': { src: '/assets/img/hero/hero-diagnostic.jpg',      alt: 'A garage door spring diagnostic checklist on a clipboard with three checkbox items' }
+    'default':    { src: '/assets/img/hero/broken-garage-door-spring-vancouver.jpg',
+                    webp: '/assets/img/hero/broken-garage-door-spring-vancouver.webp',
+                    alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
+    'cold':       { src: '/assets/img/hero/hero-emergency-cold.jpg',
+                    webp: '/assets/img/hero/hero-emergency-cold.webp',
+                    alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
+    'night':      { src: '/assets/img/hero/hero-emergency-night.jpg',
+                    webp: '/assets/img/hero/hero-emergency-night.webp',
+                    alt: 'Residential garage door torsion spring under a warm overhead garage light, after hours' },
+    'price':      { src: '/assets/img/hero/hero-pricing.jpg',
+                    webp: '/assets/img/hero/hero-pricing.webp',
+                    alt: 'Three sizes of garage door torsion spring laid out on a workbench, each tagged with its flat-rate price' },
+    'diagnostic': { src: '/assets/img/hero/hero-diagnostic.jpg',
+                    webp: '/assets/img/hero/hero-diagnostic.webp',
+                    alt: 'A garage door spring diagnostic checklist on a clipboard with three checkbox items' }
   };
 
   function pickHeroVariant() {
@@ -1339,6 +1349,11 @@
     const v = HERO_VARIANTS[pickHeroVariant()];
     if (!v) return;
     if (img.getAttribute('src') !== v.src) {
+      // If there's a <picture> wrapper with a WebP <source>, update its srcset
+      // first so browsers that prefer WebP get the matching variant; otherwise
+      // they'd be stuck on the original WebP while the JPG below changes.
+      const src = qs('source[data-hero-source]', fig);
+      if (src && v.webp) src.setAttribute('srcset', v.webp);
       img.setAttribute('src', v.src);
       img.setAttribute('alt', v.alt);
     }
