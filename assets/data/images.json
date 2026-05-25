@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "updated": "2026-05-18",
+  "updated": "2026-05-25",
   "notes": "Single source of truth for every image used on the site. Each image lists its filename, where it's rendered, intended alt text, dimensions in pixels (for the 1x version), an art-direction prompt for the photographer/illustrator, and any conditional variants. Variants are swapped at runtime by personalize.js based on body state classes.",
 
   "formats": {
@@ -12,7 +12,7 @@
   },
 
   "hero": {
-    "hero-emergency.webp": {
+    "broken-garage-door-spring-vancouver.webp": {
       "use": "Homepage default hero, right side of hero on desktop",
       "alt": "Broken garage door torsion spring close-up with visible coil gap, red arrow pointing to the failure",
       "dimensions": [1600, 1200],
@@ -43,19 +43,19 @@
   },
 
   "tiers": {
-    "tier-one-spring.webp": {
+    "one-torsion-spring-replacement.webp": {
       "use": "Pricing tier card — One Spring",
       "alt": "A single torsion spring on a shaft, slight wear visible",
       "dimensions": [800, 600],
       "prompt": "Single oil-tempered torsion spring on its shaft, mounted in place above a residential door. Clean catalog-style product shot but warmer, less sterile. Soft light."
     },
-    "tier-two-springs.webp": {
+    "two-torsion-springs-most-picked.webp": {
       "use": "Pricing tier card — Two Springs (featured)",
       "alt": "Two matching torsion springs on a single shaft, freshly installed",
       "dimensions": [800, 600],
       "prompt": "Two matching new oil-tempered torsion springs on the same shaft above a residential door, properly tensioned. The pair looks balanced, professional. Better lighting than the One Spring shot."
     },
-    "tier-high-cycle.webp": {
+    "high-cycle-torsion-springs-25000.webp": {
       "use": "Pricing tier card — High-Cycle",
       "alt": "A pair of larger, heavier-gauge high-cycle springs with sealed bearings on the shaft",
       "dimensions": [800, 600],
@@ -237,7 +237,7 @@
   },
 
   "social": {
-    "og-card.webp": {
+    "yvr-garage-door-springs-greater-vancouver.webp": {
       "use": "Open Graph card (shared on social/messaging)",
       "alt": "YVR Garage Door Springs — Greater Vancouver spring repair, same day",
       "dimensions": [1200, 630],

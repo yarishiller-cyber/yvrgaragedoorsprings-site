@@ -524,7 +524,7 @@
     // Springs wrap (PNG, transparent background, 480px wide thumbnail). Per-state
     // colour cues come from the tile border/badge, not from recolouring the
     // truck. Hiring/busy tiles use a CSS filter on the image to dim it.
-    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/tech-truck-sm.png" srcset="/assets/img/tech-truck-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
 
     containers.forEach(container => {
       container.innerHTML = '';
@@ -638,7 +638,7 @@
   function enhanceCityTiles(originSlug) {
     const grids = qsa('.cities-grid:not([data-city-grid])');
     if (!grids.length) return;
-    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/tech-truck-sm.png" srcset="/assets/img/tech-truck-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
     const busy = manageBusySchedule();
     const now = Date.now();
 
@@ -1245,7 +1245,7 @@
        - state-holiday     when applyAvailability finds it's a BC stat day
      Hero image swaps based on these + the data-intent attribute. */
   const HERO_VARIANTS = {
-    'default':    { src: '/assets/img/hero/hero-emergency.jpg',       alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
+    'default':    { src: '/assets/img/hero/broken-garage-door-spring-vancouver.jpg',       alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
     'cold':       { src: '/assets/img/hero/hero-emergency-cold.jpg',  alt: 'Frost on a garage door torsion spring on a sub-zero Vancouver morning' },
     'night':      { src: '/assets/img/hero/hero-emergency-night.jpg', alt: 'Residential garage door torsion spring under a warm overhead garage light, after hours' },
     'price':      { src: '/assets/img/hero/hero-pricing.jpg',         alt: 'Three sizes of garage door torsion spring laid out on a workbench, each tagged with its flat-rate price' },

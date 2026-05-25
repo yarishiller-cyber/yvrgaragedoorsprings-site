@@ -1,6 +1,6 @@
 # YVR Garage Door Springs
 
-> Emergency garage door spring repair across Greater Vancouver. Local technicians living in each of the 16 cities we serve — typically 12 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price.
+> Emergency garage door spring repair across Greater Vancouver. Local technicians living in each of the 16 cities we serve — typically 12 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price. Last updated: 2026-05-25.
 
 ## What we do
 
@@ -17,6 +17,8 @@ Vancouver, Burnaby, Richmond, Surrey, Coquitlam, Port Coquitlam, Port Moody, Nor
 - **One Spring — $784.** Rare. Other spring stays old. Cables not replaced.
 - **Two Springs (95% pick this) — $832.** 5-year parts. 2-year labour. Cables included free. 10,000-cycle springs.
 - **Two High-Cycle Springs — $1,193.** 25,000-cycle springs (2.5× standard lifespan). Sealed bearings. 7-year parts. 2-year labour.
+- **Wayne Dalton TorqueMaster like-for-like replacement — $2,104.** Same proprietary sealed-tube system going back in.
+- **Wayne Dalton TorqueMaster → standard torsion conversion — $1,217.** $887 cheaper today; future service is a $100 standard part instead of a $250 special-order one. 9 out of 10 BC homeowners pick the conversion.
 
 Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnostic fee. No surcharges on-site.
 
@@ -66,6 +68,16 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [Three generations on Lulu Island.](https://yvrgaragedoorsprings.ca/blog/three-generations-lulu-island/): Madison's family-business history, 90 years of Richmond houses, why oil-tempered + stainless is the only honest spec on Lulu Island, partnership with Steveston Garage Doors.
 - [Openers we'd buy. If we sold them.](https://yvrgaragedoorsprings.ca/blog/openers-we-recommend/): unbiased buyer's guide — LiftMaster Elite, Genie StealthDrive, Hörmann SupraMatic, Chamberlain. What to avoid. Refers customers to other contractors for the install.
 - [Why we don't sell new garage doors.](https://yvrgaragedoorsprings.ca/blog/why-we-dont-sell-doors/): brand differentiator, business-model explainer, 3 questions to ask a contractor pushing a new door, list of trusted door-install referral partners.
+- [The 60-second balance test: pull the red cord, lift to 3 feet, watch what happens.](https://yvrgaragedoorsprings.ca/blog/balance-test-60-seconds/): the single most useful DIY diagnostic; predicts the four failure outcomes (float, sag, slam, rise).
+- [It's white lithium grease. It's not WD-40.](https://yvrgaragedoorsprings.ca/blog/lithium-grease-not-wd40/): why WD-40 strips the lubricants you need; correct lubricant + four lube points.
+- [Photo-eye cleaning in fall fog season.](https://yvrgaragedoorsprings.ca/blog/photo-eye-cleaning-fall-fog/): why the door reverses on October mornings and how to fix it in 30 seconds.
+- [Never replace your own torsion spring.](https://yvrgaragedoorsprings.ca/blog/never-replace-your-own-torsion-spring/): the safety case against DIY torsion-spring replacement; 250 lbs of stored energy.
+- [Massey Tunnel and the politics of getting to Delta.](https://yvrgaragedoorsprings.ca/blog/massey-tunnel-bridge-politics/): why we have a Delta tech instead of dispatching across the tunnel.
+- [Olympic-builder-grade doors are at end-of-life.](https://yvrgaragedoorsprings.ca/blog/olympic-builder-grade-doors/): the 2008–2010 builder-grade Clopay/Garaga wave is now 15+ years old and dropping in waves.
+- [Cascadia earthquake — what happens to your garage door.](https://yvrgaragedoorsprings.ca/blog/cascadia-earthquake-garage/): seismic prep guide; emergency-release cord; manual override; battery-backup opener.
+- [10 questions every strata council should ask before approving a garage door contract.](https://yvrgaragedoorsprings.ca/blog/strata-council-10-questions/): strata buyer's guide. Insurance, warranty, cycle ratings, lien questions.
+- [Carriage doors to laneway homes — the Greater Vancouver door evolution.](https://yvrgaragedoorsprings.ca/blog/carriage-doors-to-laneway-homes/): 110 years of door styles in the Lower Mainland and how spring spec changes per era.
+- [The atmospheric river and your cables.](https://yvrgaragedoorsprings.ca/blog/atmospheric-river-and-your-cables/): why frayed cables snap during November cable-corrosion season after the first pineapple-express.
 
 ## Trust
 

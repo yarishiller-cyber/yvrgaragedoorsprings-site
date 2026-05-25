@@ -138,7 +138,7 @@ The homepage hero supports five variants that swap based on visitor state:
 
 | Variant | Path | Trigger |
 |---|---|---|
-| `default` | `/assets/img/hero/hero-emergency.webp` | normal |
+| `default` | `/assets/img/hero/broken-garage-door-spring-vancouver.webp` | normal |
 | `cold` | `/assets/img/hero/hero-emergency-cold.webp` | `/weather.php` reports cold:true |
 | `night` | `/assets/img/hero/hero-emergency-night.webp` | after 9 p.m. / before 7 a.m. |
 | `price` | `/assets/img/hero/hero-pricing.webp` | URL has `?intent=price` |
