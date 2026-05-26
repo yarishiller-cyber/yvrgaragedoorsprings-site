@@ -582,6 +582,10 @@ img.brand-mark {
   line-height: 1.05;
   letter-spacing: -0.02em;
   font-weight: 800;
+  text-wrap: balance; /* Modern browsers — clean balanced line breaks on hero h1s */
+}
+.hero .sub, .hero .lede {
+  text-wrap: pretty; /* Modern browsers — avoid orphan last lines on hero sub-copy */
 }
 .hero .sub {
   margin-top: var(--s-4);

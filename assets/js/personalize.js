@@ -1855,7 +1855,81 @@
   }
 
   /* ---- Init ---- */
+  /* ---- 0. Google Ads click-ID persistence ----
+     Captures gclid / gbraid / wbraid from the landing URL and stores them
+     in localStorage for 90 days (matches Google's default attribution
+     window). When the Google Ads conversion tag is later activated, it
+     can read these to attribute phone calls and quote-form submissions
+     back to the originating ad. Persisting the click-id BEFORE the user
+     navigates internally means we don't lose attribution on cross-page
+     visits. Failure modes: localStorage disabled (private mode) — we
+     swallow the error and continue.
+
+     Also pushes a `page_view` event to window.dataLayer so a future GTM
+     install can pick it up without any code change here. */
+  function captureAdClickId() {
+    try {
+      const params = new URLSearchParams(location.search);
+      const TTL = 90 * 24 * 60 * 60 * 1000;
+      ['gclid', 'gbraid', 'wbraid'].forEach(key => {
+        const val = params.get(key);
+        if (val) {
+          localStorage.setItem('yvr_' + key, JSON.stringify({ v: val, t: Date.now() }));
+        }
+        // Expire stale ids
+        const stored = localStorage.getItem('yvr_' + key);
+        if (stored) {
+          try {
+            const obj = JSON.parse(stored);
+            if (!obj || !obj.t || (Date.now() - obj.t) > TTL) {
+              localStorage.removeItem('yvr_' + key);
+            }
+          } catch (e) { localStorage.removeItem('yvr_' + key); }
+        }
+      });
+    } catch (e) { /* localStorage disabled — silent fail */ }
+
+    // GTM-ready dataLayer. No-op until GTM is installed.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'page_view', page_path: location.pathname });
+  }
+
+  /* Tag tel:/sms:/mailto: clicks so a future gtag/GTM install can pick
+     them up as conversion events. Currently no-op except for the
+     dataLayer push — once GTM is installed, these become trackable
+     conversions automatically. */
+  function wireContactClickTracking() {
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a');
+      if (!a || !a.href) return;
+      let event = null;
+      if (a.href.startsWith('tel:')) event = 'phone_click';
+      else if (a.href.startsWith('sms:')) event = 'sms_click';
+      else if (a.href.startsWith('mailto:')) event = 'email_click';
+      if (!event) return;
+      let click_id = null;
+      try {
+        const raw = localStorage.getItem('yvr_gclid') ||
+                    localStorage.getItem('yvr_gbraid') ||
+                    localStorage.getItem('yvr_wbraid');
+        if (raw) {
+          const obj = JSON.parse(raw);
+          if (obj && obj.v) click_id = obj.v;
+        }
+      } catch (e) {}
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: event,
+        contact_destination: a.href,
+        page_path: location.pathname,
+        gclid: click_id || undefined
+      });
+    }, { passive: true, capture: true });
+  }
+
   function init() {
+    captureAdClickId();        // run FIRST so click-id is stored before any nav
+    wireContactClickTracking();
     wireContacts();
     applySiteData();
     enhanceFooter();
