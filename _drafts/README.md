@@ -1,43 +1,76 @@
-# Draft blog posts — scheduled publishing queue
+# Draft blog posts — auto-publish queue
 
-This directory contains finished blog posts queued for staggered
-publishing. **Files in here are not served by the public site:**
+This directory holds finished blog posts queued for staggered
+auto-publishing. **Files in here are not served by the public site:**
 
-1. `_drafts/.htaccess` denies all HTTP access to this directory.
+1. `_drafts/.htaccess` denies all HTTP access to the directory.
 2. Every draft `index.html` has `<meta name="robots" content="noindex,nofollow">`.
 3. None of the draft URLs are listed in `sitemap.xml`.
 4. None of the draft posts appear in `blog/index.html` post list.
 5. `robots.txt` explicitly disallows `/_drafts/`.
 
-## Publishing cadence
+## How publishing happens (automatic — set and forget)
 
-Target: one post every 3 days at a random time between
-9:00 a.m. and 2:00 p.m. PST (Vancouver time).
+A GitHub Action at `.github/workflows/publish-next-draft.yml` runs
+**every 3 days at 17:00 UTC** (≈ 10:00 a.m. PDT in summer / 9:00 a.m.
+PST in winter). The Action runs `scripts/publish-next-draft.sh`, which:
 
-## How to publish the next post
+1. Picks the lowest-numbered draft in `_drafts/blog/`
+2. Generates a **random Vancouver-time byline timestamp** between
+   9:00 a.m. and 2:00 p.m. (random hour AND minute)
+3. Rewrites the post's `<time>`, JSON-LD dates, and visible byline
+4. Removes the `noindex` meta — post is now public
+5. Moves `_drafts/blog/NN-slug/` → `blog/slug/` (NN prefix stripped)
+6. Appends the URL to `sitemap.xml`
+7. Inserts a fresh `<a class="post-item">` card at the top of
+   `blog/index.html`
+8. Commits as "YVR Auto-Publish" and pushes to `main`
 
-Run from the repo root:
+Once `main` updates, your Hostinger (or whatever) deploy hook
+re-publishes the site. The new post is live.
 
+## How to trigger a publish manually
+
+Three ways:
+
+**A — GitHub UI (zero typing):**
+1. Go to **GitHub → Actions → "Publish next blog draft"**
+2. Click **Run workflow** → keep default branch (`main`) → **Run workflow**
+3. Wait ~30 seconds. The new post is live.
+
+**B — Local terminal:**
 ```
 ./scripts/publish-next-draft.sh
+git push origin main
 ```
 
-The script will:
-1. Pick the lowest-numbered draft directory in `_drafts/blog/`
-2. Generate a random Vancouver-time timestamp between 9 a.m. and 2 p.m.
-3. Rewrite the post's `<time datetime=...>` + visible byline date
-4. Move `_drafts/blog/NN-slug/` → `blog/slug/` (drops the NN prefix)
-5. Append the new URL to `sitemap.xml`
-6. Insert a new `<a class="post-item">` card at the top of `blog/index.html`
-7. Git add + commit (push is left to you so you can review)
-
-## Automation
-
-If your host supports cron, schedule:
+**C — Specific draft out of order:**
 ```
-# Every 3 days at random minute past 9 a.m. PST
-0 17 */3 * *  cd /path/to/repo && ./scripts/publish-next-draft.sh && git push origin main
+./scripts/publish-next-draft.sh --slug tsawwassen-salt-air-torquemaster
+git push origin main
 ```
-(17:00 UTC ≈ 9:00 a.m. PST during DST; 18:00 UTC during PST.)
 
-Or run manually every 3 days.
+## Queue state — current order
+
+The script publishes in numeric order. Today's queue:
+
+```
+01-westwood-plateau-torquemaster-coquitlam        (Coquitlam, Dale)
+02-walnut-grove-langley-torquemaster-1990s        (Langley,   Dale)
+03-tsawwassen-salt-air-torquemaster               (Tsawwassen,Madison)
+04-cloverdale-clayton-surrey-torquemaster-country (Surrey,    Dale)
+05-silver-valley-albion-maple-ridge-torquemaster-plus (Maple Ridge, Dale)
+06-richmond-lulu-island-delta-silt-torquemaster   (Richmond,  Madison)
+```
+
+To reorder, just rename the directories (e.g. `mv 03- 01-` to bump
+one to the front).
+
+## When the queue runs out
+
+The Action checks the queue at the top of each run. If `_drafts/blog/`
+is empty, it logs "No drafts queued" and exits cleanly — no broken
+state, no error noise.
+
+To add more, ask Claude to write another batch from a research doc.
+The pattern is in `scripts/build-drafts.py`.

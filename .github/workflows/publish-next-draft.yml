@@ -1,0 +1,95 @@
+name: Publish next blog draft
+
+# Fires automatically every 3 days at 17:00 UTC
+# (= 10:00 a.m. PDT in summer, 9:00 a.m. PST in winter).
+# The publish script itself generates a *random* byline timestamp
+# between 9:00 a.m. and 2:00 p.m. Vancouver time on the day it runs,
+# so each post appears with a plausible-looking publish hour even
+# though cron itself fires at a fixed moment.
+
+on:
+  schedule:
+    - cron: '0 17 */3 * *'   # every 3 days at 17:00 UTC
+  workflow_dispatch: {}      # also lets you fire it manually from
+                             # the Actions tab when you want to test
+
+permissions:
+  contents: write            # required so the action can push the
+                             # publish commit back to main
+
+concurrency:
+  group: publish-blog-draft
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Configure git identity for the auto-publish commit
+        run: |
+          git config user.name  "YVR Auto-Publish"
+          git config user.email "auto-publish@yvrgaragedoorsprings.ca"
+
+      - name: Check if any drafts are queued
+        id: queue
+        run: |
+          if [ -z "$(ls -A _drafts/blog/ 2>/dev/null)" ]; then
+            echo "Queue is empty — nothing to publish."
+            echo "queue_empty=true" >> "$GITHUB_OUTPUT"
+          else
+            COUNT=$(ls _drafts/blog/ | wc -l)
+            echo "queue_empty=false" >> "$GITHUB_OUTPUT"
+            echo "Drafts queued: $COUNT"
+            ls _drafts/blog/ | sort
+          fi
+
+      - name: Publish the next queued draft
+        if: steps.queue.outputs.queue_empty == 'false'
+        run: |
+          chmod +x scripts/publish-next-draft.sh
+          ./scripts/publish-next-draft.sh
+
+      - name: Push the new commit to main
+        if: steps.queue.outputs.queue_empty == 'false'
+        run: git push origin main
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Auto-publish run summary"
+            echo ""
+            if [ "${{ steps.queue.outputs.queue_empty }}" = "true" ]; then
+              echo "**No drafts queued.** Nothing was published."
+              echo ""
+              echo "When you want to queue more posts, add directories to"
+              echo "\`_drafts/blog/NN-slug/\` and the next cron run will"
+              echo "pick up the lowest-numbered one."
+            else
+              echo "**Published one draft.**"
+              echo ""
+              echo "Latest commit:"
+              echo '```'
+              git log --pretty=format:'%h  %s%n%n%b' -1 || true
+              echo '```'
+              echo ""
+              echo "Remaining drafts:"
+              echo '```'
+              ls _drafts/blog/ 2>/dev/null || echo "(queue is now empty)"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
