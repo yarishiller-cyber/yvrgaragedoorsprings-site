@@ -1,0 +1,30 @@
+{
+  "name": "YVR Garage Door Springs",
+  "short_name": "YVR Springs",
+  "description": "Same-day residential garage door spring repair across 16 Greater Vancouver cities.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#fafaf7",
+  "theme_color": "#0f1a1f",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
