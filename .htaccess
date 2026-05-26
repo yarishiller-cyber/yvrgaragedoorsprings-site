@@ -11,13 +11,13 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # www → apex
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+  # Canonical host enforcement — single 301 hop to https://yvrgaragedoorsprings.ca
+  # regardless of whether the visitor arrived via http://, www., or both.
+  # Combining these into one rule avoids a 2-hop redirect chain
+  # (which Google Search Console occasionally flags as "Redirect error").
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\.yvrgaragedoorsprings\.ca$ [NC]
+  RewriteRule ^(.*)$ https://yvrgaragedoorsprings.ca/$1 [L,R=301]
 
   # Clean URLs: /cities/burnaby → /cities/burnaby/index.html
   RewriteCond %{REQUEST_FILENAME} !-f
