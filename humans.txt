@@ -1,0 +1,12 @@
+/* TEAM */
+   YVR Garage Door Springs
+   Residential garage door spring repair across 16 Greater Vancouver cities
+   Phone: (778) 800-0769
+   Email: info@yvrgaragedoorsprings.ca
+   Dispatch HQ: 4321 Still Creek Drive, Burnaby, BC V5C 6C6, Canada
+
+/* SITE */
+   Last update: 2026-05-26
+   Language: English
+   Doctype: HTML5
+   Standards: WCAG 2.1 AA

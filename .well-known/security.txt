@@ -1,0 +1,10 @@
+# RFC 9116 — Security contact for YVR Garage Door Springs
+# This file signals to corporate URL filters and security scanners that
+# this is a legitimate operating business with a reachable security contact.
+
+Contact: mailto:info@yvrgaragedoorsprings.ca
+Contact: tel:+1-778-800-0769
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://yvrgaragedoorsprings.ca/.well-known/security.txt
+Policy: https://yvrgaragedoorsprings.ca/privacy/
