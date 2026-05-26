@@ -1,3 +1,7 @@
+# Drafts: queued blog posts, blocked at .htaccess level + here for belt-and-suspenders.
+User-agent: *
+Disallow: /_drafts/
+
 User-agent: Googlebot
 Allow: /
 

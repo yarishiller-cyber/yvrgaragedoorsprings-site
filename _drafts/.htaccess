@@ -1,0 +1,5 @@
+# Block all access to draft blog posts. These are tracked in git but
+# served by nobody until scripts/publish-next-draft.sh moves them
+# out to /blog/. Belt-and-suspenders: every draft post also carries
+# <meta name="robots" content="noindex,nofollow">.
+Require all denied
