@@ -446,7 +446,7 @@ for p in POSTS:
                 '@type': 'Organization',
                 'name': 'YVR Garage Door Springs',
                 'url': 'https://yvrgaragedoorsprings.ca/',
-                'logo': {'@type': 'ImageObject', 'url': 'https://yvrgaragedoorsprings.ca/assets/img/logo.svg'}
+                'logo': {'@type': 'ImageObject', 'url': 'https://yvrgaragedoorsprings.ca/assets/img/logo-mark-512.png'}
             }
         },
         'publisher': {'@type': 'Organization', 'name': 'YVR Garage Door Springs'},
