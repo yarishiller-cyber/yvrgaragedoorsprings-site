@@ -839,6 +839,54 @@ body.state-after-hours .hero-figure::after {
   .tier-features li.minus::before { background: #c0392b; }
 }
 
+/* The mirror of .minus: a "freebie" line on the Two-Spring tier that pulses
+   green to draw the eye to a positive feature (free $120 cable replacement). */
+.tier-features li.freebie {
+  color: var(--green);
+  font-weight: 700;
+  animation: freebie-pulse 3.6s ease-in-out infinite;
+}
+.tier-features li.freebie strong { color: #1a7a3a; font-weight: 800; }
+.tier-features li.freebie::before {
+  /* Keep the green checkmark but give it a synchronized glow */
+  animation: freebie-pulse-marker 3.6s ease-in-out infinite;
+}
+
+@keyframes freebie-pulse {
+  /* Same timing as minus-pulse so they read as siblings on competing tiers.
+     ~60% calm, then a brief swell with a soft green glow, then back. */
+  0%, 60%, 100% {
+    color: var(--green);
+    text-shadow: none;
+  }
+  78% {
+    color: #1a7a3a;
+    text-shadow: 0 0 6px rgba(38, 159, 79, 0.50);
+  }
+  82% {
+    color: #1a7a3a;
+    text-shadow: 0 0 10px rgba(38, 159, 79, 0.65);
+  }
+}
+@keyframes freebie-pulse-marker {
+  0%, 60%, 100% {
+    border-color: var(--green);
+    box-shadow: none;
+  }
+  78%, 82% {
+    border-color: #1a7a3a;
+    box-shadow: 0 0 8px rgba(38, 159, 79, 0.70);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-features li.freebie,
+  .tier-features li.freebie::before {
+    animation: none;
+  }
+  .tier-features li.freebie { color: #1a7a3a; }
+}
+
 /* ---------- 4th option: Wayne Dalton TorqueMaster conversion ----------
    Default position is below the three standard tiers. When the visitor's
    inferred intent is `torquemaster` (URL ?intent=, ?q=, or referrer search
