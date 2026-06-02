@@ -1324,9 +1324,12 @@
     'night':      { src: '/assets/img/hero/hero-emergency-night.jpg',
                     webp: '/assets/img/hero/hero-emergency-night.webp',
                     alt: 'Residential garage door torsion spring under a warm overhead garage light, after hours' },
-    'price':      { src: '/assets/img/hero/hero-pricing.jpg',
-                    webp: '/assets/img/hero/hero-pricing.webp',
-                    alt: 'Three sizes of garage door torsion spring laid out on a workbench, each tagged with its flat-rate price' },
+    /* Pricing trial: the hero-pricing image has the dollar figures hand-lettered
+       on it, so the 'price' intent temporarily reuses the default broken-spring
+       hero. Restore the hero-pricing.jpg/webp paths here when prices return. */
+    'price':      { src: '/assets/img/hero/broken-garage-door-spring-vancouver.jpg',
+                    webp: '/assets/img/hero/broken-garage-door-spring-vancouver.webp',
+                    alt: 'Close-up of a broken residential garage door torsion spring with a visible gap in the coil' },
     'diagnostic': { src: '/assets/img/hero/hero-diagnostic.jpg',
                     webp: '/assets/img/hero/hero-diagnostic.webp',
                     alt: 'A garage door spring diagnostic checklist on a clipboard with three checkbox items' }
@@ -1423,7 +1426,7 @@
     { when: ctx => ctx.intent === 'emergency',
       copy: '<strong>Stay back from the spring.</strong> A wound torsion stores 200–400 lb of force. If it just snapped: leave the door closed, pull the red opener cord, then call us.' },
     { when: ctx => ctx.intent === 'price',
-      copy: 'You came in looking for a number. <strong>$784 / $832 / $1,193</strong>, all-in, plus GST. The middle tier is what 95% of customers pick.' },
+      copy: 'You came in looking for a number. We keep it simple — <strong>one flat, all-in rate per tier</strong>, quoted before we dispatch, no diagnostic fee. The middle tier is what 95% of customers pick. Call or text and we\'ll give you yours.' },
     { when: ctx => ctx.intent === 'diagnostic',
       copy: 'Run the 30-second test: pull the red opener cord, lift the door by hand to about 3 feet. Heavy in your hand = spring. Light = opener.' },
     { when: ctx => ctx.intent === 'coastal',
