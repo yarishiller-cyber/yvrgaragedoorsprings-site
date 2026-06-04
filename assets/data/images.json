@@ -30,9 +30,9 @@
     },
     "hero-pricing.webp": {
       "use": "Homepage hero when ?intent=price",
-      "alt": "Three garage door spring tiers shown as price cards on a workbench, hand-lettered tags",
+      "alt": "Three garage door spring tiers shown as cards on a workbench, hand-lettered tags",
       "dimensions": [1600, 1200],
-      "prompt": "Workbench overhead shot. Three coiled torsion springs of different sizes laid out left-to-right with small hand-lettered price tags reading $784, $832 (★ 95% pick this), $1,193. Natural diffuse light. No people."
+      "prompt": "Workbench overhead shot. Three coiled torsion springs of different sizes laid out left-to-right with small hand-lettered tags reading One Spring, Two Springs (★ 95% pick this), Two High-Cycle. Natural diffuse light. No people."
     },
     "hero-diagnostic.webp": {
       "use": "Homepage hero when ?intent=diagnostic",
