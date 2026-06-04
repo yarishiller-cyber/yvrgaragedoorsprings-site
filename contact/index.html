@@ -174,7 +174,11 @@
       <h2>Three fields. We'll text you back in under 5 minutes.</h2>
     </div>
 
-    <form class="quote-form" id="quote-form" novalidate>
+    <form class="quote-form" id="quote-form" action="/quote.php" method="post" novalidate>
+      <div class="qf-hp" aria-hidden="true">
+        <label for="company">Company (leave this blank)</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
       <div class="field">
         <label for="postal">Your postal code</label>
         <input id="postal" name="postal" type="text" inputmode="text" autocomplete="postal-code" placeholder="V5C 6C6" required>

@@ -1512,6 +1512,22 @@ body.state-after-hours .hero-figure::after {
   outline: 2px solid var(--steel); outline-offset: 1px;
 }
 
+/* Honeypot — hidden from humans, available to bots */
+.qf-hp {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  overflow: hidden; opacity: 0; pointer-events: none;
+}
+
+/* Inline confirmation shown after the quote form sends */
+.quote-success {
+  background: white; padding: var(--s-5);
+  border: 1px solid var(--line); border-left: 4px solid var(--green);
+  border-radius: var(--r-3); box-shadow: var(--shadow-1);
+}
+.quote-success strong { font-size: 1.15rem; }
+.quote-success p { color: var(--ink-muted); margin-top: var(--s-2); }
+.quote-success a { color: var(--signal); font-weight: 700; }
+
 /* ---------- Sticky mobile contact bar (2 buttons: Call + Text) ---------- */
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;

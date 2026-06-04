@@ -1183,20 +1183,67 @@
     showStep(0);
   }
 
-  /* ---- 10. Quote form (mailto fallback) ---- */
+  /* ---- 10. Quote form → server-side email (quote.php), mailto fallback ---- */
   function quoteForm() {
     qsa('form#quote-form').forEach(form => {
       form.addEventListener('submit', e => {
         e.preventDefault();
+        const btn = qs('button[type="submit"]', form);
+
         const fd = new FormData(form);
-        const body = encodeURIComponent(
-          'Postal code: ' + (fd.get('postal') || '') + '\n' +
-          'Phone: ' + (fd.get('phone') || '') + '\n' +
-          'What broke: ' + (fd.get('what') || '')
-        );
-        window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('New spring repair request') + '&body=' + body;
+        fd.append('page', location.pathname);
+        if (_originCity) fd.append('city', _originCity);
+
+        // A phone number is the one thing we genuinely need.
+        const phone = String(fd.get('phone') || '').trim();
+        if (phone.replace(/\D+/g, '').length < 7) {
+          const ph = qs('#phone', form);
+          if (ph) ph.focus();
+          return;
+        }
+
+        const original = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+        const mailtoFallback = () => {
+          const body = encodeURIComponent(
+            'Postal code: ' + (fd.get('postal') || '') + '\n' +
+            'Phone: ' + (fd.get('phone') || '') + '\n' +
+            'What broke: ' + (fd.get('what') || '')
+          );
+          window.location.href = 'mailto:' + EMAIL +
+            '?subject=' + encodeURIComponent('New spring repair request') +
+            '&body=' + body;
+        };
+
+        fetch('/quote.php', { method: 'POST', body: fd })
+          .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+          .then(res => {
+            if (res && res.ok) {
+              showQuoteSuccess(form);
+            } else {
+              return Promise.reject('not-ok');
+            }
+          })
+          .catch(() => {
+            // Server send failed — don't lose the lead, hand off to email client.
+            if (btn) { btn.disabled = false; btn.textContent = original; }
+            mailtoFallback();
+          });
       });
     });
+  }
+
+  /* Replace the form with an inline confirmation once dispatch has the request. */
+  function showQuoteSuccess(form) {
+    const ok = document.createElement('div');
+    ok.className = 'quote-success';
+    ok.setAttribute('role', 'status');
+    ok.innerHTML =
+      '<strong>Got it — sent to dispatch.</strong>' +
+      '<p>We’ll text you back shortly. Need it sooner? ' +
+      '<a href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a>.</p>';
+    form.replaceWith(ok);
   }
 
   /* ---- 10a. Reviews loader ----
