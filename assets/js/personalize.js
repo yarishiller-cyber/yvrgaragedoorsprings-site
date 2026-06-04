@@ -60,10 +60,10 @@
 
   const TECH_STATUS = {
     'tsawwassen': {
-      hiring: true,
+      hiring: false,
       coverCity: 'delta',
       coverEta: 18,
-      hiringMessage: 'Hiring local tech — Delta crew covers in the meantime'
+      hiringMessage: 'Delta crew covers'
     }
   };
 
