@@ -68,7 +68,7 @@ Tsawwassen (~18 min) — Madison's territory. English Bluff, Beach Grove, Pebble
 - **DASMA colour code** identifies winding direction (left-wind black cone, right-wind red cone)
 
 ### Wayne Dalton TorqueMaster
-A sealed-tube torsion system from the early 1990s. Original TorqueMaster (TM One) parts discontinued by manufacturer. TorqueMaster Plus uses plastic internal gears that fail. Industry consensus and our recommendation: convert to standard torsion when the system fails. Conversion cost ≈ replacement cost; next replacement after conversion drops from ~$250 to ~$100 in parts.
+A sealed-tube torsion system from the early 1990s. Original TorqueMaster (TM One) parts discontinued by manufacturer. TorqueMaster Plus uses plastic internal gears that fail. Industry consensus and our recommendation: convert to standard torsion when the system fails. Conversion cost ≈ replacement cost; after converting, future service uses standard off-the-shelf parts instead of proprietary special-order ones.
 
 ### Coatings
 - **Oil-tempered** (industry standard, black coating) — longest lifespan, fatigue-tolerant, no annual re-tensioning needed.
