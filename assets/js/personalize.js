@@ -1246,6 +1246,69 @@
     form.replaceWith(ok);
   }
 
+  /* ---- 10b. Partner application form → partner.php ---- */
+  function partnerForm() {
+    qsa('form#partner-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = qs('button[type="submit"]', form);
+        const fd  = new FormData(form);
+
+        // Required fields — focus the first one that's empty/invalid.
+        const required = ['name', 'business', 'email', 'phone', 'city'];
+        for (const key of required) {
+          const val = String(fd.get(key) || '').trim();
+          const bad = !val ||
+            (key === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) ||
+            (key === 'phone' && val.replace(/\D+/g, '').length < 7);
+          if (bad) { const el = qs('#' + key, form); if (el) el.focus(); return; }
+        }
+
+        const original = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+        fetch('/partner.php', { method: 'POST', body: fd })
+          .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+          .then(res => {
+            if (res && res.ok) { showPartnerSuccess(form); }
+            else { return Promise.reject('not-ok'); }
+          })
+          .catch(() => {
+            if (btn) { btn.disabled = false; btn.textContent = original; }
+            showPartnerError(form);
+          });
+      });
+    });
+  }
+
+  function showPartnerSuccess(form) {
+    const ok = document.createElement('div');
+    ok.className = 'quote-success';
+    ok.setAttribute('role', 'status');
+    ok.innerHTML =
+      '<strong>Application received — thank you!</strong>' +
+      '<p>We’ve emailed you a confirmation and a real person will review your ' +
+      'application within a few business days. Questions in the meantime? ' +
+      '<a href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a>.</p>';
+    form.replaceWith(ok);
+    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function showPartnerError(form) {
+    let note = qs('.form-error', form);
+    if (!note) {
+      note = document.createElement('p');
+      note.className = 'form-error';
+      note.setAttribute('role', 'alert');
+      const btn = qs('button[type="submit"]', form);
+      if (btn) btn.insertAdjacentElement('afterend', note); else form.appendChild(note);
+    }
+    note.innerHTML =
+      'Sorry — something went wrong submitting your application. Please email us ' +
+      'directly at <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> or call ' +
+      '<a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a> and we’ll get you set up.';
+  }
+
   /* ---- 10a. Reviews loader ----
      Fetch /assets/data/reviews.json and render the 3 best for this visitor.
      If user has an origin city, prefer reviews from that city. Otherwise
@@ -2001,6 +2064,7 @@
     stickyBar();
     diagnosis();
     quoteForm();
+    partnerForm();
     coldSnap();
     renderHeroMoment();   // first pass — uses whatever state we have synchronously
     updateSky();          // live Vancouver sky behind the hero
