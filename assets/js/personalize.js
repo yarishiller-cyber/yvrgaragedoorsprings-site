@@ -1309,6 +1309,44 @@
       '<a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a> and we’ll get you set up.';
   }
 
+  /* ---- 10c. Pricing toggle ----
+     Footer "Pricing" button reveals the all-in tier prices. Default page text
+     stays price-free (each element carries its priced version in data-priced);
+     clicking swaps the text in, clicking again reverts. Prices live only in
+     data-attributes and appear on user action, so the indexed/default page
+     remains price-free and there is no structured-data price to mismatch. */
+  function pricingToggle() {
+    const btn = qs('#pricing-toggle');
+    if (!btn) return;
+    const els = qsa('[data-priced]');
+    if (!els.length) return;
+    let on = false;
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      on = !on;
+      els.forEach(el => {
+        if (!el.hasAttribute('data-flat')) {
+          el.setAttribute('data-flat', el.innerHTML);
+          el.setAttribute('data-hadquote', el.classList.contains('tier-price-quote') ? '1' : '0');
+        }
+        if (on) {
+          el.innerHTML = el.getAttribute('data-priced');
+          el.classList.remove('tier-price-quote');
+        } else {
+          el.innerHTML = el.getAttribute('data-flat');
+          if (el.getAttribute('data-hadquote') === '1') el.classList.add('tier-price-quote');
+        }
+      });
+      btn.textContent = on ? 'Hide pricing' : 'Pricing';
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) {
+        const target = document.getElementById('pricing') ||
+          (qs('.tier') && qs('.tier').closest('section'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   /* ---- 10a. Reviews loader ----
      Fetch /assets/data/reviews.json and render the 3 best for this visitor.
      If user has an origin city, prefer reviews from that city. Otherwise
@@ -2065,6 +2103,7 @@
     diagnosis();
     quoteForm();
     partnerForm();
+    pricingToggle();
     coldSnap();
     renderHeroMoment();   // first pass — uses whatever state we have synchronously
     updateSky();          // live Vancouver sky behind the hero

@@ -1660,6 +1660,18 @@ body.state-after-hours .hero-figure::after {
 .footer-meta { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(255,255,255,0.12); color: rgba(250,250,247,0.7); display: flex; flex-wrap: wrap; gap: 6px 14px; }
 .footer-meta a { color: rgba(250,250,247,0.85); }
 
+/* Footer pricing toggle button */
+.footer-pricing-row { margin-top: var(--s-5); }
+.footer-pricing-btn {
+  font: inherit; font-weight: 700; cursor: pointer;
+  color: rgba(250,250,247,0.92); background: transparent;
+  border: 1px solid rgba(255,255,255,0.28); border-radius: var(--r-2);
+  padding: 8px 18px; transition: background .15s, border-color .15s;
+}
+.footer-pricing-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+.footer-pricing-btn[aria-pressed="true"] { background: var(--signal); border-color: var(--signal); color: #fff; }
+.footer-pricing-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
 /* ---------- Cold-snap / weather banner ---------- */
 .cold-snap {
   background: var(--amber-soft); border-bottom: 1px solid #e7d4a1;
