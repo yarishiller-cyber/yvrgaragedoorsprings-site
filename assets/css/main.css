@@ -1528,6 +1528,35 @@ body.state-after-hours .hero-figure::after {
 .quote-success p { color: var(--ink-muted); margin-top: var(--s-2); }
 .quote-success a { color: var(--signal); font-weight: 700; }
 
+/* ---------- Partner application form ---------- */
+.req { color: var(--signal); }
+.field-row { display: grid; grid-template-columns: 1fr; gap: var(--s-3); }
+@media (min-width: 560px) { .field-row { grid-template-columns: 1fr 1fr; } }
+
+.field-group { border: 0; padding: 0; margin: 0; }
+.field-group > legend { font-size: var(--t-small); font-weight: 700; color: var(--ink-soft); padding: 0; margin-bottom: 6px; }
+
+.check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 560px) { .check-grid { grid-template-columns: 1fr 1fr; } }
+.check-option {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-2);
+  background: var(--paper); color: var(--ink); cursor: pointer;
+  font-size: var(--t-small); line-height: 1.35;
+}
+.check-option:hover { border-color: var(--steel); }
+.check-option input {
+  width: 18px; height: 18px; min-height: 0; margin: 1px 0 0; flex-shrink: 0;
+  accent-color: var(--signal); cursor: pointer;
+}
+
+.form-error {
+  margin-top: var(--s-3); padding: 12px 14px;
+  background: #fdeaea; border: 1px solid #e6b3b3; border-radius: var(--r-2);
+  color: #8a1f1f; font-size: var(--t-small);
+}
+.form-error a { color: #8a1f1f; font-weight: 700; }
+
 /* ---------- Sticky mobile contact bar (2 buttons: Call + Text) ---------- */
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
