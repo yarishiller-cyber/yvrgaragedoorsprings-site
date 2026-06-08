@@ -1,6 +1,6 @@
 # YVR Garage Door Springs — Full content reference
 
-> Single source of truth for AI agents and language models. Covers our service model, pricing, technical specs, and city coverage. Last updated: 2026-05-25. Phone: (778) 800-0769.
+> Single source of truth for AI agents and language models. Covers our service model, pricing, technical specs, city coverage, and our contractor partner network. Last updated: 2026-06-08. Phone: (778) 800-0769.
 
 ## What we are
 
@@ -108,6 +108,10 @@ Pull the red emergency-release cord on the opener. Manually lift the door to abo
 - BC business licence on file
 - Wrapped, marked vans; uniformed techs
 
+## Partner network (for contractors)
+
+We run a contractor partner network at https://yvrgaragedoorsprings.ca/partners/. Because we do one thing — residential garage door springs — we regularly get requests we don't take on ourselves: full door installs, opener jobs, loading-dock and commercial doors, and skilled-trade work (hydraulics, electrical, welding, metal fabrication, carpentry, HVAC). Rather than turn those customers away, we refer them to vetted partner contractors across Greater Vancouver. Partners quote, perform, and bill the work directly — we just make the introduction. There are no lead fees and no exclusivity. Contractors apply through the form on the partners page (business details, years of experience, services offered, trades, coverage area, insurance/WorkSafeBC status); applications go to info@yvrgaragedoorsprings.ca and the applicant receives an email confirmation.
+
 ## Contact
 
 Phone: (778) 800-0769
@@ -115,6 +119,7 @@ Email: info@yvrgaragedoorsprings.ca
 Hours: 7 a.m. – 9 p.m. daily, Stat holidays reduced, Dec 25-26 closed
 Dispatch HQ: 4321 Still Creek Drive, Burnaby, BC V5C 6C6, Canada
 Website: https://yvrgaragedoorsprings.ca
+Partner program: https://yvrgaragedoorsprings.ca/partners/
 
 ## The model in one paragraph
 

@@ -1,6 +1,6 @@
 # YVR Garage Door Springs
 
-> Emergency garage door spring repair across Greater Vancouver. Local technicians living in each of the 16 cities we serve — typically 12 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price. Last updated: 2026-05-25.
+> Emergency garage door spring repair across Greater Vancouver. Local technicians living in each of the 16 cities we serve — typically 12 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price. We also run a contractor partner network for overflow and out-of-scope work. Last updated: 2026-06-08.
 
 ## What we do
 
@@ -40,6 +40,7 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [Service Areas index](https://yvrgaragedoorsprings.ca/cities/): all 16 Greater Vancouver cities we cover, each with neighbourhood coverage and the resident tech.
 - [Terms of Service & Warranty](https://yvrgaragedoorsprings.ca/terms/): pricing, payment, cancellation, parts/labour warranty (5-year / 2-year), scope of liability ($5M general + WorkSafeBC), BC dispute resolution.
 - [Privacy Policy](https://yvrgaragedoorsprings.ca/privacy/): PIPEDA + BC PIPA compliant. What we collect, what we don't, opt-out paths. Google Ads active since May 2026 — discloses _gcl_au / _gcl_aw / gclid conversion-tracking cookies and opt-out links.
+- [Become a Partner](https://yvrgaragedoorsprings.ca/partners/): contractor partner network. We refer overflow and out-of-scope work — full door installs, openers, loading docks, commercial doors, and skilled trades (hydraulics, electrical, welding, fabrication) — to vetted partners across Greater Vancouver. Partners quote, do, and bill the work directly; we make the introduction. Application form on the page; apply free, no exclusivity.
 
 ### City landing pages
 - [Vancouver](https://yvrgaragedoorsprings.ca/cities/vancouver/): Kits to Renfrew, heritage carriage doors, laneway homes.
@@ -82,6 +83,11 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [10 questions every strata council should ask before approving a garage door contract.](https://yvrgaragedoorsprings.ca/blog/strata-council-10-questions/): strata buyer's guide. Insurance, warranty, cycle ratings, lien questions.
 - [Carriage doors to laneway homes — the Greater Vancouver door evolution.](https://yvrgaragedoorsprings.ca/blog/carriage-doors-to-laneway-homes/): 110 years of door styles in the Lower Mainland and how spring spec changes per era.
 - [The atmospheric river and your cables.](https://yvrgaragedoorsprings.ca/blog/atmospheric-river-and-your-cables/): why frayed cables snap during November cable-corrosion season after the first pineapple-express.
+- [Westwood Plateau's TorqueMaster crisis.](https://yvrgaragedoorsprings.ca/blog/westwood-plateau-torquemaster-coquitlam/): why a 1990s Coquitlam luxury showcase neighbourhood is hitting TorqueMaster end-of-life all at once.
+- [Walnut Grove's third-generation TorqueMaster.](https://yvrgaragedoorsprings.ca/blog/walnut-grove-langley-torquemaster-1990s/): the 1990s Langley cul-de-sac TorqueMaster problem and conversion fix.
+- [Why English Bluff TorqueMasters rust from the inside.](https://yvrgaragedoorsprings.ca/blog/tsawwassen-salt-air-torquemaster/): Tsawwassen salt-air corrosion inside sealed-tube TorqueMaster systems. Madison Lim byline.
+- [Welcome to TorqueMaster country — Cloverdale and Clayton.](https://yvrgaragedoorsprings.ca/blog/cloverdale-clayton-surrey-torquemaster-country/): why Surrey's fast-growing Cloverdale/Clayton subdivisions are TorqueMaster-dense and what it means for owners.
+- [Silver Valley and Albion — TorqueMaster Plus hits year ten.](https://yvrgaragedoorsprings.ca/blog/silver-valley-albion-maple-ridge-torquemaster-plus/): the Maple Ridge TorqueMaster Plus generation reaching end-of-life.
 
 ## Trust
 
