@@ -555,7 +555,7 @@
         } else if (status.hiring) {
           const pin = document.createElement('span');
           pin.className = 'city-tile-hiring-pin';
-          pin.setAttribute('aria-label', 'Hiring local tech');
+          pin.setAttribute('aria-label', 'Covered by the Delta crew');
           pin.textContent = '+';
           a.appendChild(pin);
         }
@@ -573,7 +573,7 @@
         if (status.hiring) {
           const hb = document.createElement('span');
           hb.className = 'city-tile-hiring-badge';
-          hb.textContent = 'Hiring local tech';
+          hb.textContent = '✓ Delta crew covers';
           a.appendChild(hb);
         } else if (isOrigin && !isBusyCandidate) {
           const ob = document.createElement('span');
@@ -676,7 +676,7 @@
         } else if (status.hiring) {
           const pin = document.createElement('span');
           pin.className = 'city-tile-hiring-pin';
-          pin.setAttribute('aria-label', 'Hiring local tech');
+          pin.setAttribute('aria-label', 'Covered by the Delta crew');
           pin.textContent = '+';
           tile.appendChild(pin);
         }
@@ -686,7 +686,7 @@
         if (status.hiring) {
           const hb = document.createElement('span');
           hb.className = 'city-tile-hiring-badge';
-          hb.textContent = 'Hiring local tech';
+          hb.textContent = '✓ Delta crew covers';
           tile.appendChild(hb);
         } else if (isOrigin && !isBusyCandidate) {
           const ob = document.createElement('span');
