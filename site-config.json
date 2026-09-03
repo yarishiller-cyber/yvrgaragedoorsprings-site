@@ -1,0 +1,124 @@
+{
+  "name": "YVR Garage Door Springs",
+  "domain": "yvrgaragedoorsprings.ca",
+  "coverage": "single-service",
+  "service": "garage-door-spring-repair",
+  "region": "Greater Vancouver, BC",
+  "phone": "+1-778-800-0769",
+  "email": "info@yvrgaragedoorsprings.ca",
+  "address": {
+    "street": "4321 Still Creek Drive",
+    "city": "Burnaby",
+    "province": "BC",
+    "postalCode": "V5C 6C6",
+    "country": "CA"
+  },
+  "coordinates": {
+    "latitude": 49.2660,
+    "longitude": -123.0080
+  },
+  "palette": {
+    "ink": "#0f1a1f",
+    "ink-soft": "#3a4a52",
+    "ink-muted": "#56666e",
+    "paper": "#fafaf7",
+    "paper-warm": "#f4f0e8",
+    "line": "#d9d4c8",
+    "steel": "#22303C",
+    "steel-hover": "#2d3f4c",
+    "signal": "#C74A2E",
+    "signal-hover": "#a83a21",
+    "signal-soft": "#f5d9cd",
+    "emergency-red": "#B91C1C",
+    "gold": "#c8932a",
+    "green": "#2f7a3e",
+    "green-soft": "#e0efe2",
+    "amber": "#b27a00",
+    "amber-soft": "#fbf1d8"
+  },
+  "typography": {
+    "headings": {
+      "family": "Oswald",
+      "weight": "600",
+      "source": "Google Fonts"
+    },
+    "body": {
+      "family": "Public Sans",
+      "weight": "400",
+      "source": "Google Fonts"
+    }
+  },
+  "pricing": {
+    "currency": "CAD",
+    "canonical-floor": {
+      "spring-single": 739,
+      "spring-two": 851,
+      "spring-high-cycle": 1274,
+      "opener-2220l": 1311,
+      "opener-2420l": 1384,
+      "opener-6580l": 1448,
+      "opener-4690": 1466,
+      "opener-6690l": 1523,
+      "opener-98032": 1939,
+      "opener-98022": 2155,
+      "door-new-from": 3647,
+      "door-new-mid": 4558,
+      "door-new-premium": 7268
+    },
+    "torquemaster-conversion": {
+      "replace-new": 1438,
+      "convert-to-torsion": 917
+    },
+    "note": "All-in + GST/PST. Prices hidden by default, revealed by footer 'Pricing' toggle."
+  },
+  "service-cities": [
+    "Vancouver",
+    "Burnaby",
+    "Richmond",
+    "Surrey",
+    "Coquitlam",
+    "Port Coquitlam",
+    "Port Moody",
+    "North Vancouver",
+    "West Vancouver",
+    "New Westminster",
+    "Delta",
+    "Langley",
+    "White Rock",
+    "Maple Ridge",
+    "Pitt Meadows",
+    "Tsawwassen"
+  ],
+  "hours": {
+    "monday": "07:00-21:00",
+    "tuesday": "07:00-21:00",
+    "wednesday": "07:00-21:00",
+    "thursday": "07:00-21:00",
+    "friday": "07:00-21:00",
+    "saturday": "07:00-21:00",
+    "sunday": "07:00-21:00",
+    "note": "Same flat price every hour, 7 a.m. to 9 p.m."
+  },
+  "features": {
+    "pricing-toggle": true,
+    "city-picker": true,
+    "gps-location-detect": true,
+    "live-sky-animation": true,
+    "availability-strip": true,
+    "sticky-mobile-bar": true,
+    "faq-schema": true,
+    "howto-schema": true,
+    "torquemaster-special": true
+  },
+  "fleet-directives": {
+    "clean-urls": true,
+    "no-html-extension": true,
+    "no-announcement-bar": true,
+    "stars-horizontal": true,
+    "no-review-schema": true,
+    "responsive-hero": true,
+    "pricing-floor-plus-10-30": true,
+    "canonical-price-table": true,
+    "data-px-toggle": true
+  }
+}

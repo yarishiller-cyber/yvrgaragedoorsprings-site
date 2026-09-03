@@ -768,7 +768,7 @@
         </div>
         <span class="tier-name">One Spring</span>
         <div>
-          <div class="tier-price tier-price-quote" data-priced="$784">Flat&#8209;rate</div>
+          <div class="tier-price tier-price-quote" data-px="$739 · oil-tempered torsion">Flat&#8209;rate</div>
           <div class="tier-price-note">all-in · plus GST/PST</div>
         </div>
         <ul class="tier-features">
@@ -795,7 +795,7 @@
         <span class="tier-badge">★ 95% pick this</span>
         <span class="tier-name">Two Springs <span style="color:var(--ink-muted);font-weight:400">(the smart one)</span></span>
         <div>
-          <div class="tier-price tier-price-quote" data-priced="$832">Flat&#8209;rate</div>
+          <div class="tier-price tier-price-quote" data-px="$851 · free cables included">Flat&#8209;rate</div>
           <div class="tier-price-note">all-in · plus GST/PST</div>
         </div>
         <ul class="tier-features">
@@ -821,7 +821,7 @@
         </div>
         <span class="tier-name">Two High-Cycle</span>
         <div>
-          <div class="tier-price tier-price-quote" data-priced="$1,193">Flat&#8209;rate</div>
+          <div class="tier-price tier-price-quote" data-px="$1,274 · 25,000-cycle springs">Flat&#8209;rate</div>
           <div class="tier-price-note">all-in · plus GST/PST</div>
         </div>
         <ul class="tier-features">
@@ -852,7 +852,7 @@
         <span class="tier-special-badge">Have a Wayne Dalton TorqueMaster?</span>
         <h3 id="tm-heading">Convert it. Don't replace it.</h3>
         <p class="lede">
-          Sealed-tube system from the '90s and 2000s. Proprietary parts, plastic gears, and roughly 7,000 cycles before failure. We swap it for standard torsion in the same visit — <strong data-priced="$887 cheaper than buying another TorqueMaster">cheaper than buying another TorqueMaster</strong>, and every shop in BC can service it from then on.
+          Sealed-tube system from the '90s and 2000s. Proprietary parts, plastic gears, and roughly 7,000 cycles before failure. We swap it for standard torsion in the same visit — <strong data-px="$521 cheaper than buying another TorqueMaster">cheaper than buying another TorqueMaster</strong>, and every shop in BC can service it from then on.
         </p>
       </header>
 
@@ -898,16 +898,16 @@
               <strong>Replace with new TorqueMaster</strong>
               <span class="tier-special-row-sub">Like-for-like. Same proprietary system, same problem in 5 years.</span>
             </div>
-            <div class="tier-special-row-price tier-price-quote" data-priced="&lt;s&gt;$2,104&lt;/s&gt;">Flat&#8209;rate</div>
+            <div class="tier-special-row-price tier-price-quote" data-px="$1,438 · like-for-like replacement">Flat&#8209;rate</div>
           </div>
           <div class="tier-special-row tier-special-row-convert">
             <div class="tier-special-row-label">
               <strong>Convert to standard torsion</strong>
               <span class="tier-special-row-sub">Universal parts. Any shop can service it from now on.</span>
             </div>
-            <div class="tier-special-row-price tier-price-quote" data-priced="$1,217">Flat&#8209;rate</div>
+            <div class="tier-special-row-price tier-price-quote" data-px="$917 · convert to standard torsion">Flat&#8209;rate</div>
           </div>
-          <div class="tier-special-savings" data-priced="&lt;strong&gt;You save $887&lt;/strong&gt; today — and roughly $150 every future service call.">
+          <div class="tier-special-savings" data-px="&lt;strong&gt;You save $521&lt;/strong&gt; today — and roughly $150 every future service call.">
             <strong>The conversion costs less today</strong> — and less on every future service call, because the parts are standard instead of proprietary.
           </div>
           <div class="tier-special-ctas">
@@ -1339,6 +1339,16 @@
 </div>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<!-- Pricing toggle: data-px attribute reveals actual prices on click -->
+<script>(function(){var btn=document.getElementById('pricing-toggle');if(!btn)return;
+var els=[].slice.call(document.querySelectorAll('[data-px]'));var saved=new Array(els.length);var on=false;
+btn.addEventListener('click',function(){on=!on;els.forEach(function(el,i){
+if(on){if(saved[i]==null)saved[i]=el.innerHTML;el.innerHTML=el.getAttribute('data-px');}
+else{if(saved[i]!=null)el.innerHTML=saved[i];}});
+document.body.classList.toggle('show-pricing',on);
+btn.textContent=on?'Hide pricing':'Pricing';btn.setAttribute('aria-pressed',on?'true':'false');});})();</script>
+
 <script src="/assets/js/personalize.js?v=20260607b" defer></script>
 
 </body>

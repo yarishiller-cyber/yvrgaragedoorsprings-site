@@ -3,6 +3,9 @@
    Mobile-first. No framework. Vanilla CSS.
    ======================================================================== */
 
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Public+Sans:wght@400;500&display=swap');
+
 /* ---------- Design tokens ---------- */
 :root {
   /* Palette */
@@ -12,11 +15,12 @@
   --paper: #fafaf7;          /* page background */
   --paper-warm: #f4f0e8;     /* card / band background */
   --line: #d9d4c8;           /* hairlines */
-  --steel: #1f3a44;          /* deep accent */
-  --steel-hover: #2a4f5d;
-  --signal: #d94a2b;         /* primary CTA — industrial orange-red */
-  --signal-hover: #b73d22;
-  --signal-soft: #fce8e2;
+  --steel: #22303C;          /* deep accent (UPDATED) */
+  --steel-hover: #2d3f4c;    /* steel hover (updated) */
+  --signal: #C74A2E;         /* primary CTA — brick-coral (UPDATED) */
+  --signal-hover: #a83a21;   /* brick-coral hover (updated) */
+  --signal-soft: #f5d9cd;    /* lighter brick-coral background (updated) */
+  --emergency-red: #B91C1C;  /* distinct emergency red (NEW) */
   --gold: #c8932a;           /* accent / star / badge */
   --green: #2f7a3e;          /* live / open status */
   --green-soft: #e0efe2;
@@ -64,13 +68,22 @@
 * { margin: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: var(--t-body);
   line-height: 1.55;
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Headings use Oswald */
+h1, h2, h3, h4, h5, h6,
+.hero h1,
+.tier-name,
+.tier-special-head h3 {
+  font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
 }
 img, svg { display: block; max-width: 100%; height: auto; }
 a { color: var(--steel); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
