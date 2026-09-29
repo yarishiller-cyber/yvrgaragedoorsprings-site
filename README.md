@@ -38,7 +38,7 @@ All defined as single sources of truth — swap in one place:
 
 ## Positioning
 
-Local technicians live in each of the 16 served cities. Typical drive time to your door: **~12 minutes** (vs. 25–55 min for downtown-dispatched competitors). This is the headline trust differentiator.
+Technicians are based across all 16 served cities; every call goes to the closest one. Typical drive time to your door: **~12 minutes** (vs. 25–55 min for downtown-dispatched competitors). This is the headline trust differentiator.
 
 ## Pending (Pass 2, after Part 3 research lands)
 

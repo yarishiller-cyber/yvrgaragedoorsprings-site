@@ -42,7 +42,7 @@ Prices are hidden by default behind footer "Pricing" toggle (data-px toggle scri
 5. ✓ Sticky mobile bar: Call + Text CTAs
 6. ✓ City picker: Dropdown + GPS location detect
 7. ✓ Live Vancouver sky: Time-of-day + weather animation (via personalize.js)
-8. ✓ Proof stack: "16 cities", "$5M liability", "WorkSafeBC covered", "Licensed in BC"
+8. ✓ Proof stack: "16 cities", "$5M liability", "WorkSafeBC covered", "BC business licence"
 9. ✓ Hero: Personalized by location + availability strip
 
 ## Content structure (pillar + clusters)

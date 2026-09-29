@@ -44,32 +44,32 @@
 
   <!-- Labels (radial, on right side) -->
   <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
-    <g transform="translate(1180, 450)">
+    <g transform="translate(1180, 730)">
       <line x1="-60" y1="0" x2="0" y2="0" stroke="#0f1a1f" stroke-width="1.5" opacity=".4"/>
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 1</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~1,000 cycles</text>
     </g>
-    <g transform="translate(1180, 410)">
+    <g transform="translate(1180, 650)">
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 3</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~3,000 cycles</text>
     </g>
-    <g transform="translate(1180, 370)">
+    <g transform="translate(1180, 570)">
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 5</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~5,000 cycles · standard 50%</text>
     </g>
-    <g transform="translate(1180, 330)">
+    <g transform="translate(1180, 490)">
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800">Year 7</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".6">~7,000 cycles</text>
     </g>
-    <g transform="translate(1180, 290)">
+    <g transform="translate(1180, 410)">
       <text x="10" y="-4" fill="#d94a2b" font-size="20" font-weight="800">Year 10</text>
       <text x="10" y="22" fill="#d94a2b" font-size="14" font-weight="700">label rating · standard end-of-life</text>
     </g>
-    <g transform="translate(1180, 250)">
+    <g transform="translate(1180, 330)">
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800" opacity=".7">Year 12</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".5">~12,000 · high-cycle territory</text>
     </g>
-    <g transform="translate(1180, 210)">
+    <g transform="translate(1180, 250)">
       <text x="10" y="-4" fill="#0f1a1f" font-size="18" font-weight="800" opacity=".7">Year 15+</text>
       <text x="10" y="20" fill="#0f1a1f" font-size="14" font-weight="600" opacity=".5">high-cycle pair, oil-tempered</text>
     </g>

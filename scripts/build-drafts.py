@@ -324,7 +324,7 @@ TEMPLATE = '''<!DOCTYPE html>
   <div class="wrap wrap-narrow text-center">
     <span class="eyebrow">Same-day · Flat-rate · Local tech</span>
     <h2>Broken TorqueMaster? We do the conversion.</h2>
-    <p class="lede" style="margin-inline:auto;margin-top:var(--s-3);max-width:48ch">$1,217 all-in plus GST/PST — $887 cheaper than another TorqueMaster. Every shop in BC can service it from then on.</p>
+    <p class="lede" style="margin-inline:auto;margin-top:var(--s-3);max-width:48ch" data-priced="$917 all-in plus GST/PST — $521 cheaper than another TorqueMaster. Every shop in BC can service it from then on.">Costs less than another TorqueMaster — and every shop in BC can service it from then on. Exact all-in price quoted before we dispatch.</p>
     <div style="display:flex;flex-direction:column;gap:var(--s-3);max-width:380px;margin:var(--s-5) auto 0">
       <a class="btn btn-block" data-tel href="tel:+17789009701"><span data-phone-display>(778) 900-9701</span></a>
       <a class="btn btn-ghost btn-block" data-sms href="sms:+17789009701?&amp;body=Hi%20-%20I%20have%20a%20Wayne%20Dalton%20TorqueMaster.%20Sending%20a%20photo%20now.">Text a photo</a>
@@ -340,7 +340,7 @@ TEMPLATE = '''<!DOCTYPE html>
     <div class="footer-grid">
       <div>
         <div class="footer-brand">YVR Garage Door Springs</div>
-        <p class="footer-tagline">Same-day residential garage door spring repair across 16 Greater Vancouver cities. Local technician in each community — not dispatched from downtown. One flat price, quoted on the phone, paid at the door.</p>
+        <p class="footer-tagline">Same-day residential garage door spring repair across 16 Greater Vancouver cities. Local technicians across the region — the closest one comes to you, not a truck from downtown. One flat price, quoted on the phone, paid at the door.</p>
       </div>
       <nav class="footer-nav" aria-label="Site">
         <h3>Site</h3>
@@ -389,7 +389,7 @@ TEMPLATE = '''<!DOCTYPE html>
       <span>·</span>
       <span>WorkSafeBC covered</span>
       <span>·</span>
-      <span>Licensed in BC</span>
+      <span>BC business licence</span>
     </div>
   </div>
 </footer>

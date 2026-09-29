@@ -55,14 +55,14 @@
     'white-rock':      { display: 'White Rock',      localEta: 10, centerAddr: 'City Hall, 15322 Buena Vista Ave' },
     'maple-ridge':     { display: 'Maple Ridge',     localEta:  8, centerAddr: 'City Hall, 11995 Haney Pl' },
     'pitt-meadows':    { display: 'Pitt Meadows',    localEta:  8, centerAddr: 'City Hall, 12007 Harris Rd' },
-    'tsawwassen':      { display: 'Tsawwassen',      localEta: 22, centerAddr: '56th St & 12th Ave (English Bluff)' }
+    'tsawwassen':      { display: 'Tsawwassen',      localEta: 25, centerAddr: '56th St & 12th Ave (English Bluff)' }
   };
 
   const TECH_STATUS = {
     'tsawwassen': {
-      hiring: false,
+      hiring: true,          // no resident tech — the South Delta crew covers the peninsula
       coverCity: 'delta',
-      coverEta: 18,
+      coverEta: 25,
       hiringMessage: 'Delta crew covers'
     }
   };
@@ -89,7 +89,7 @@
       'maple-ridge': 35, 'pitt-meadows': 35, 'tsawwassen': 35, 'white-rock': 40
     },
     'richmond': {
-      'richmond': 15, 'delta': 15, 'tsawwassen': 20, 'vancouver': 22,
+      'richmond': 15, 'delta': 15, 'tsawwassen': 25, 'vancouver': 22,
       'burnaby': 25, 'surrey': 25, 'new-westminster': 28, 'north-vancouver': 30,
       'white-rock': 30, 'coquitlam': 35, 'west-vancouver': 35, 'langley': 35,
       'port-moody': 38, 'port-coquitlam': 40, 'pitt-meadows': 45, 'maple-ridge': 50
@@ -137,7 +137,7 @@
       'pitt-meadows': 28, 'white-rock': 30, 'west-vancouver': 32, 'tsawwassen': 35
     },
     'delta': {
-      'delta': 12, 'tsawwassen': 12, 'richmond': 15, 'surrey': 22,
+      'delta': 12, 'richmond': 15, 'tsawwassen': 25, 'surrey': 22,
       'white-rock': 22, 'new-westminster': 28, 'burnaby': 30, 'langley': 30,
       'vancouver': 32, 'coquitlam': 35, 'port-moody': 38, 'port-coquitlam': 38,
       'north-vancouver': 40, 'maple-ridge': 42, 'pitt-meadows': 42, 'west-vancouver': 45
@@ -149,7 +149,7 @@
       'tsawwassen': 32, 'vancouver': 48, 'north-vancouver': 50, 'west-vancouver': 55
     },
     'white-rock': {
-      'white-rock': 10, 'surrey': 18, 'delta': 22, 'langley': 22, 'tsawwassen': 22,
+      'white-rock': 10, 'surrey': 18, 'delta': 22, 'langley': 22, 'tsawwassen': 25,
       'new-westminster': 30, 'richmond': 30, 'maple-ridge': 38, 'pitt-meadows': 38,
       'coquitlam': 38, 'burnaby': 40, 'port-coquitlam': 40, 'port-moody': 42,
       'vancouver': 48, 'north-vancouver': 55, 'west-vancouver': 55
@@ -167,7 +167,7 @@
       'north-vancouver': 48, 'tsawwassen': 50, 'west-vancouver': 55
     },
     'tsawwassen': {
-      'tsawwassen': 22, 'delta': 12, 'richmond': 20, 'white-rock': 22,
+      'tsawwassen': 25, 'delta': 25, 'richmond': 25, 'white-rock': 25,
       'surrey': 28, 'new-westminster': 35, 'burnaby': 35, 'langley': 32,
       'vancouver': 38, 'coquitlam': 42, 'port-moody': 42, 'port-coquitlam': 45,
       'north-vancouver': 45, 'west-vancouver': 50, 'maple-ridge': 50, 'pitt-meadows': 50
@@ -184,7 +184,7 @@
     'V6A':'vancouver','V6B':'vancouver','V6C':'vancouver','V6E':'vancouver','V6G':'vancouver',
     'V6H':'vancouver','V6J':'vancouver','V6K':'vancouver','V6L':'vancouver','V6M':'vancouver',
     'V6N':'vancouver','V6P':'vancouver','V6R':'vancouver','V6S':'vancouver','V6T':'vancouver',
-    'V6U':'vancouver','V6Z':'vancouver',
+    'V6U':'vancouver','V6Z':'vancouver','V7X':'vancouver','V7Y':'vancouver',
     // Burnaby
     'V5A':'burnaby','V5B':'burnaby','V5C':'burnaby','V5E':'burnaby','V5G':'burnaby',
     'V5H':'burnaby','V5J':'burnaby',
@@ -198,7 +198,8 @@
     // West Vancouver
     'V7S':'west-vancouver','V7T':'west-vancouver','V7V':'west-vancouver','V7W':'west-vancouver',
     // New Westminster
-    'V3L':'new-westminster','V3M':'new-westminster','V3N':'new-westminster',
+    'V3L':'new-westminster','V3M':'new-westminster',
+    'V3N':'burnaby', // SE Burnaby (Edmonds / Big Bend)
     // Coquitlam
     'V3E':'coquitlam','V3J':'coquitlam','V3K':'coquitlam',
     // Port Coquitlam
@@ -209,7 +210,7 @@
     'V3R':'surrey','V3S':'surrey','V3T':'surrey','V3V':'surrey','V3W':'surrey','V3X':'surrey',
     'V4N':'surrey','V4P':'surrey','V4A':'surrey',
     // Langley
-    'V2Y':'langley','V2Z':'langley','V3A':'langley','V4W':'langley',
+    'V2Y':'langley','V2Z':'langley','V3A':'langley','V4W':'langley','V1M':'langley', // V1M = Walnut Grove / Fort Langley
     // White Rock
     'V4B':'white-rock','V3Z':'white-rock',
     // Delta / Ladner / Tsawwassen — V4K is mostly Ladner; V4L+V4M are Tsawwassen
@@ -452,7 +453,7 @@
   function manageBusySchedule() {
     const schedule = _busyLoad();
     const now = Date.now();
-    const hour = new Date().getHours();
+    const hour = vanParts().hour;
     const target = _busyTargetCount(hour);
     // Drop any prior busy assignment on the user's origin city — their tile
     // stays gold ("your city") no matter what the carousel says.
@@ -525,7 +526,7 @@
     // Springs wrap (PNG, transparent background, 480px wide thumbnail). Per-state
     // colour cues come from the tile border/badge, not from recolouring the
     // truck. Hiring/busy tiles use a CSS filter on the image to dim it.
-    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png?v=20260929" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp?v=20260929 1x" alt="" loading="lazy" width="480" height="180">';
 
     containers.forEach(container => {
       container.innerHTML = '';
@@ -639,7 +640,7 @@
   function enhanceCityTiles(originSlug) {
     const grids = qsa('.cities-grid:not([data-city-grid])');
     if (!grids.length) return;
-    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp 1x" alt="" loading="lazy" width="480" height="180">';
+    const TRUCK_HTML = '<img class="city-tile-truck-img" src="/assets/img/yvr-garage-door-springs-ford-maverick-sm.png?v=20260929" srcset="/assets/img/yvr-garage-door-springs-ford-maverick-sm.webp?v=20260929 1x" alt="" loading="lazy" width="480" height="180">';
     const busy = manageBusySchedule();
     const now = Date.now();
 
@@ -1052,17 +1053,25 @@
     '2026-01-01','2026-02-16','2026-04-03','2026-05-18','2026-07-01','2026-08-03',
     '2026-09-07','2026-09-30','2026-10-12','2026-11-11','2026-12-25','2026-12-26'
   ];
+  /* Business hours are Vancouver time, whatever the visitor's device clock says. */
+  function vanParts() {
+    try {
+      const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver',
+        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false });
+      const o = {}; f.formatToParts(new Date()).forEach(x => { o[x.type] = x.value; });
+      return { hour: parseInt(o.hour, 10) % 24, iso: o.year + '-' + o.month + '-' + o.day };
+    } catch (e) {
+      const d = new Date();
+      return { hour: d.getHours(), iso: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') };
+    }
+  }
+
   function isHolidayToday() {
-    const now = new Date();
-    const iso = now.getFullYear() + '-' +
-      String(now.getMonth() + 1).padStart(2, '0') + '-' +
-      String(now.getDate()).padStart(2, '0');
-    return BC_HOLIDAYS_2026.indexOf(iso) !== -1;
+    return BC_HOLIDAYS_2026.indexOf(vanParts().iso) !== -1;
   }
   function applyAvailability() {
     const banner = qs('[data-availability]');
-    const now = new Date();
-    const h = now.getHours();
+    const h = vanParts().hour;
     const isHoliday = isHolidayToday();
     const isOpen = !isHoliday && h >= 7 && h < 21;
 
@@ -1098,12 +1107,14 @@
 
     if (heroCtas && 'IntersectionObserver' in window) {
       // Pages with a visible hero CTA — sticky shows when hero CTA leaves viewport
+      // Hide only while the hero Call/Text pair is essentially fully on screen;
+      // a sliver of it peeking in must not remove the bar.
       const io = new IntersectionObserver((entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) bar.classList.remove('show');
+          if (e.intersectionRatio >= 0.9) bar.classList.remove('show');
           else bar.classList.add('show');
         }
-      }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+      }, { threshold: [0, 0.25, 0.5, 0.75, 0.9, 1] });
       io.observe(heroCtas);
     } else {
       // Fallback for pages with no hero CTA (privacy, terms, 404, blog index, /cities/)
@@ -1129,7 +1140,7 @@
         if (window.scrollY > 300) bar.classList.add('show');
       } else {
         const r = heroCtas.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > window.innerHeight) bar.classList.add('show');
+        if (r.top < 0 || r.bottom > window.innerHeight) bar.classList.add('show');
       }
     });
   }
@@ -1632,7 +1643,11 @@
   function renderHeroMoment() {
     const el = qs('[data-hero-moment]');
     if (!el) return;
-    const now = new Date();
+    // Date whose local getters read Vancouver wall-clock time (for day/time copy).
+    let now;
+    try { now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Vancouver' })); }
+    catch (e) { now = new Date(); }
+    if (isNaN(now.getTime())) now = new Date();
     const hour = now.getHours();
     const pageCity = document.body.getAttribute('data-city'); // set on city pages only
     const onCityPage = pageCity && CITIES[pageCity];

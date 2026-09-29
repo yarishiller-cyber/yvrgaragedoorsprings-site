@@ -48,7 +48,7 @@
     <circle r="30" cx="0" cy="0" fill="#0f1a1f"/>
     <text x="0" y="9" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="800">2</text>
     <text x="50" y="-2" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800">Wipe both lenses</text>
-    <text x="50" y="22" fill="#3a4a52" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Dry microfibre. No window cleaner, no spray on the lens.</text>
+    <text x="50" y="22" fill="#3a4a52" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Soft, dry microfibre. No spray.</text>
   </g>
   <g transform="translate(680, 240)">
     <!-- Sensor close-up -->
@@ -73,9 +73,9 @@
     <polygon points="80,22 70,16 70,28" fill="#d94a2b"/>
   </g>
   <g transform="translate(620, 480)">
-    <rect width="360" height="80" rx="6" fill="#fbf1d8" stroke="#b27a00" stroke-width="1.5"/>
+    <rect width="440" height="80" rx="6" fill="#fbf1d8" stroke="#b27a00" stroke-width="1.5"/>
     <text x="16" y="28" fill="#b27a00" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".08em">DO NOT</text>
-    <text x="16" y="52" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Spray cleaner directly. Wipe the lens with a wet cloth — the housing isn't sealed.</text>
+    <text x="16" y="52" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Spray cleaner on the sensor — the housing isn't sealed.</text>
   </g>
 
   <!-- Step 3 — alignment -->
@@ -83,7 +83,7 @@
     <circle r="30" cx="0" cy="0" fill="#0f1a1f"/>
     <text x="0" y="9" text-anchor="middle" fill="#fafaf7" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="800">3</text>
     <text x="50" y="-2" fill="#0f1a1f" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800">Check the LEDs</text>
-    <text x="50" y="22" fill="#3a4a52" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Both should be solid (not blinking). If green blinks, they're misaligned.</text>
+    <text x="50" y="22" fill="#3a4a52" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="14">Solid = aligned. Blinking = misaligned.</text>
   </g>
   <g transform="translate(1100, 240)">
     <!-- Two LED status indicators stacked -->
@@ -107,6 +107,6 @@
   <!-- Bottom note -->
   <g transform="translate(80, 800)">
     <rect width="1440" height="64" rx="8" fill="#1f3a44"/>
-    <text x="40" y="40" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">Vancouver fog season (Oct–Feb) is when this becomes a weekly job. Dirty lenses mimic an obstacle and the opener auto-reverses every time you try to close it.</text>
+    <text x="40" y="40" fill="#fff" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">Fog season (Oct–Feb): a dirty lens looks like an obstacle, so the door reverses. Wipe weekly.</text>
   </g>
 </svg>

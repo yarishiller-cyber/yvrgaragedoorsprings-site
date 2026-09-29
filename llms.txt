@@ -1,6 +1,6 @@
 # YVR Garage Door Springs
 
-> Emergency garage door spring repair across Greater Vancouver. Local technicians living in each of the 16 cities we serve — typically 12 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price. We also run a contractor partner network for overflow and out-of-scope work. Last updated: 2026-09-29.
+> Emergency garage door spring repair across Greater Vancouver. Local technicians across all 16 Greater Vancouver cities we serve — every call goes to the closest one, typically 12–18 minutes from your home. One service, three flat-rate tiers, no diagnostic fee, no after-hours surcharge. Quoted price = paid price. We also run a contractor partner network for overflow and out-of-scope work. Last updated: 2026-09-29.
 
 ## What we do
 
@@ -8,7 +8,7 @@ We replace broken residential garage door springs (torsion and extension). One s
 
 ## Service area
 
-We serve 16 Greater Vancouver cities, with a local technician living in each one. Average drive time from call to your door: ~12 minutes (12–18 depending on city):
+We serve 16 Greater Vancouver cities, with technicians based across the region. Every call is dispatched to the closest tech. Average drive time from call to your door: ~12–18 minutes (12–18 depending on city):
 
 Vancouver, Burnaby, Richmond, Surrey, Coquitlam, Port Coquitlam, Port Moody, North Vancouver, West Vancouver, New Westminster, Delta, Langley, White Rock, Maple Ridge, Pitt Meadows, Tsawwassen.
 
@@ -37,7 +37,7 @@ Same price 7 a.m. or 9 p.m. Tuesday or Saturday. No after-hours rate. No diagnos
 - [Home](https://yvrgaragedoorsprings.ca/): single-page conversion hub with pricing, diagnosis quiz, FAQ, and city links.
 - [About](https://yvrgaragedoorsprings.ca/about/): the company model (local techs, one service), Dale McRae (East/Burnaby/North/Surrey/Coquitlam) and Madison Lim (Richmond/Delta/Tsawwassen/Steveston/White Rock) bios.
 - [Contact](https://yvrgaragedoorsprings.ca/contact/): phone, email, SMS, hours, dispatch HQ, service area tiles.
-- [Service Areas index](https://yvrgaragedoorsprings.ca/cities/): all 16 Greater Vancouver cities we cover, each with neighbourhood coverage and the resident tech.
+- [Service Areas index](https://yvrgaragedoorsprings.ca/cities/): all 16 Greater Vancouver cities we cover, each with neighbourhood coverage and typical response times.
 - [Terms of Service & Warranty](https://yvrgaragedoorsprings.ca/terms/): pricing, payment, cancellation, parts/labour warranty (5-year / 2-year), scope of liability ($5M general + WorkSafeBC), BC dispute resolution.
 - [Privacy Policy](https://yvrgaragedoorsprings.ca/privacy/): PIPEDA + BC PIPA compliant. What we collect, what we don't, opt-out paths. Google Ads active since May 2026 — discloses _gcl_au / _gcl_aw / gclid conversion-tracking cookies and opt-out links.
 - [Become a Partner](https://yvrgaragedoorsprings.ca/partners/): contractor partner network. We refer overflow and out-of-scope work — full door installs, openers, loading docks, commercial doors, and skilled trades (hydraulics, electrical, welding, fabrication) — to vetted partners across Greater Vancouver. Partners quote, do, and bill the work directly; we make the introduction. Application form on the page; apply free, no exclusivity.
