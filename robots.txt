@@ -4,54 +4,71 @@ Disallow: /_drafts/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /_drafts/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Amazonbot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Meta-ExternalAgent
 Allow: /
+Disallow: /_drafts/
 
 User-agent: YouBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: CCBot
 Allow: /
+Disallow: /_drafts/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /_drafts/
 
 User-agent: Bytespider
 Disallow: /

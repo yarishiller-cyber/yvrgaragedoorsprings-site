@@ -23,6 +23,11 @@ DirectoryIndex index.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^([^.]+)$ $1.html [L]
+
+  # Retired image URLs (showed a previous phone number) — 410 Gone so search
+  # engines and social caches drop them fast. Replacements live under new names.
+  RewriteRule ^assets/img/about/yvr-garage-door-springs-techs-holding-torsion-springs-vancouver\.(jpg|webp)$ - [G,L]
+  RewriteRule ^assets/img/social/yvr-garage-door-springs-greater-vancouver\.(jpg|webp)$ - [G,L]
 </IfModule>
 
 # ----------------------------------------------------------------------

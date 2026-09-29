@@ -7,7 +7,7 @@
 - **Town/Region**: Greater Vancouver, BC
 - **Service**: Garage door spring repair (torsion & TorqueMaster conversion)
 - **Hero concept**: Live Vancouver sky + personalized city detection + local-tech messaging
-- **Phone**: +1-778-800-0769
+- **Phone**: +1-778-900-9701
 - **Email**: info@yvrgaragedoorsprings.ca
 - **Address**: 4321 Still Creek Drive, Burnaby, BC V5C 6C6
 

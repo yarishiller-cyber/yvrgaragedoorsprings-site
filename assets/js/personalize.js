@@ -1,7 +1,7 @@
 /* ========================================================================
    YVR Garage Door Springs — personalization layer
    Vanilla JS, no dependencies. Single source of truth for phone + city list.
-   Current line: (778) 800-0769. Static HTML across the site also bakes in
+   Current line: (778) 900-9701. Static HTML across the site also bakes in
    this number directly so crawlers and no-JS users see it on first paint.
    ======================================================================== */
 
@@ -9,8 +9,8 @@
   'use strict';
 
   /* ---- Contact constants (swap in one place) ---- */
-  const PHONE_DISPLAY = '(778) 800-0769';
-  const PHONE_TEL     = '+17788000769';
+  const PHONE_DISPLAY = '(778) 900-9701';
+  const PHONE_TEL     = '+17789009701';
   const EMAIL         = 'info@yvrgaragedoorsprings.ca';
   const SMS_BODY      = 'Hi - my garage door spring broke. Can I send a photo?';
 
@@ -251,7 +251,7 @@
     qsa('[data-tel]', scope).forEach(el => el.setAttribute('href', 'tel:' + PHONE_TEL));
     qsa('[data-phone-display]', scope).forEach(el => {
       if (!el.textContent || el.textContent.match(/^\(?\d|XXX|^Call/i)) {
-        // Don't overwrite text that's already a fully-formed CTA like "Call (778) 800-0769"
+        // Don't overwrite text that's already a fully-formed CTA like "Call (778) 900-9701"
         if (el.textContent.indexOf(PHONE_DISPLAY) === -1) {
           el.textContent = PHONE_DISPLAY;
         }

@@ -146,11 +146,11 @@ $replyBody = implode("\n", [
     '     work directly. We just make the introduction.',
     '',
     'If anything changes or you\'d like to add details, just reply to this email',
-    'or call us at (778) 800-0769.',
+    'or call us at (778) 900-9701.',
     '',
     'Talk soon,',
     'The ' . $brand . ' team',
-    'info@yvrgaragedoorsprings.ca · (778) 800-0769',
+    'info@yvrgaragedoorsprings.ca · (778) 900-9701',
     'https://yvrgaragedoorsprings.ca/',
 ]);
 $replyHeaders = implode("\r\n", [

@@ -27,14 +27,14 @@ Single reference for running the site day-to-day. Read top to bottom once. Bookm
 
 ## 2. Phone number — current and how to change it
 
-The real tracked line is **(778) 800-0769**. It's defined in two constants at the top of **`assets/js/personalize.js`**:
+The real tracked line is **(778) 900-9701**. It's defined in two constants at the top of **`assets/js/personalize.js`**:
 
 ```js
-const PHONE_DISPLAY = '(778) 800-0769';   // shown to humans
-const PHONE_TEL     = '+17788000769';     // E.164 for tel: hrefs (no spaces, with +)
+const PHONE_DISPLAY = '(778) 900-9701';   // shown to humans
+const PHONE_TEL     = '+17789009701';     // E.164 for tel: hrefs (no spaces, with +)
 ```
 
-These are the runtime source of truth for any `[data-phone-display]` text or `[data-tel]` href the JS encounters. The same values are **also baked into every static HTML page** (display text and `href="tel:+17788000769"`) so that crawlers, AI bots, and no-JS clients see the real number on first paint — they don't have to wait for `personalize.js` to hydrate.
+These are the runtime source of truth for any `[data-phone-display]` text or `[data-tel]` href the JS encounters. The same values are **also baked into every static HTML page** (display text and `href="tel:+17789009701"`) so that crawlers, AI bots, and no-JS clients see the real number on first paint — they don't have to wait for `personalize.js` to hydrate.
 
 If/when CallRail or another Dynamic Number Insertion service is added, swap these two constants for the dynamic injection snippet AND sweep the static HTML — there's no other place to update.
 
