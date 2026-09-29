@@ -266,7 +266,7 @@ TEMPLATE = '''<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/assets/css/main.css?v=20260525n">
+<link rel="stylesheet" href="/assets/css/main.css?v=20260929">
 
 <script type="application/ld+json">
 {json_ld}
@@ -278,7 +278,7 @@ TEMPLATE = '''<!DOCTYPE html>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap"><a class="brand" href="/" aria-label="YVR Garage Door Springs home"><img class="brand-mark" src="/assets/img/logo-anim-96.gif?v=20260520f" alt="" width="36" height="36" aria-hidden="true"><span>YVR Garage Door Springs</span></a><nav class="nav" aria-label="Primary"><a href="/blog/" aria-current="page">Blog</a><a href="/about/">About</a><a class="btn-mini" data-tel href="tel:+17789009701">Call</a></nav></div></header>
+<header class="site-header"><div class="wrap"><a class="brand" href="/" aria-label="YVR Garage Door Springs home"><img class="brand-mark" src="/assets/img/logo-anim-96.gif?v=20260520f" alt="" width="36" height="36" aria-hidden="true"><span>YVR Garage Door Springs</span></a><nav class="nav" aria-label="Primary"><a href="/blog/" aria-current="page">Blog</a><a href="/about/">About</a><a class="btn-mini" data-tel href="tel:+17789009701">Call</a><a class="btn-mini btn-mini-text" data-sms href="sms:+17789009701?&amp;body=Hi%20-%20my%20garage%20door%20spring%20broke.%20Can%20I%20send%20a%20photo%3F">Text</a></nav></div></header>
 
 <main id="main" tabindex="-1">
 
@@ -405,7 +405,7 @@ TEMPLATE = '''<!DOCTYPE html>
   </a>
 </div>
 
-<script src="/assets/js/personalize.js?v=20260525n" defer></script>
+<script src="/assets/js/personalize.js?v=20260929" defer></script>
 </body>
 </html>
 '''

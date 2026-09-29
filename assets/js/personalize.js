@@ -261,7 +261,7 @@
     });
     qsa('[data-email]', scope).forEach(el => el.setAttribute('href', 'mailto:' + EMAIL));
     qsa('[data-email-display]', scope).forEach(el => el.textContent = EMAIL);
-    qsa('[data-sms]', scope).forEach(el => el.setAttribute('href', 'sms:' + PHONE_TEL + '?body=' + encodeURIComponent(SMS_BODY)));
+    qsa('[data-sms]', scope).forEach(el => el.setAttribute('href', 'sms:' + PHONE_TEL + '?&body=' + encodeURIComponent(SMS_BODY)));
   }
 
   /* ---- 2. URL-param DTR ----

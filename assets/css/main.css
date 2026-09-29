@@ -205,6 +205,14 @@ img.brand-mark {
   padding: 6px 12px; border-radius: var(--r-pill); background: var(--signal); color: white;
   font-weight: 700; font-size: var(--t-small); text-decoration: none;
 }
+.nav .btn-mini-text {
+  background: transparent; color: var(--signal);
+  box-shadow: inset 0 0 0 2px var(--signal);
+}
+.nav .btn-mini-text:hover { background: var(--signal); color: white; }
+@media (max-width: 420px) {
+  .nav { gap: var(--s-3); }
+}
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -226,6 +234,11 @@ img.brand-mark {
   background: transparent; color: var(--ink); border-color: var(--ink);
 }
 .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+/* Outlined "Text us" button for dark bands, paired with the solid Call button. */
+.btn-text-light {
+  background: transparent; color: white; border-color: rgba(250, 250, 247, 0.7); box-shadow: none;
+}
+.btn-text-light:hover { background: rgba(250, 250, 247, 0.12); border-color: var(--paper); color: white; }
 .btn-steel { background: var(--steel); border-color: var(--steel); }
 .btn-steel:hover { background: var(--steel-hover); border-color: var(--steel-hover); }
 
